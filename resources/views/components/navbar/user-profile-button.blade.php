@@ -17,5 +17,13 @@
         <a href="#" class="block p-4 text-sm hover:text-gray-100 hover:bg-blue-900">
             {{ __('Settings') }}
         </a>
+        <a href="{{ route('logout') }}"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+            class="block p-4 text-sm hover:text-gray-100 hover:bg-blue-900">
+            {{ __('Logout') }}
+        </a>
+        <form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">
+            @csrf
+        </form>
     </div>
 </div>

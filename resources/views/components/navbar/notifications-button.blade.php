@@ -2,7 +2,7 @@
     <button
         {{ $attributes->merge(['class' => 'relative hidden mr-6 text-gray-600 md:block hover:text-gray-800 focus:text-gray-800 focus:outline-none selected:border-gray-800']) }}
         aria-label="Show notifications" x-on:click="open = true">
-        <svg class="w-5 h-5" viewBox="0 0 16 16" class="bi bi-bell" fill="currentColor"
+        <svg class="w-5 h-5 " viewBox="0 0 16 16" class="bi bi-bell" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
             <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z" />
             <path fill-rule="evenodd"

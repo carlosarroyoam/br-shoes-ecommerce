@@ -20,7 +20,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" />
 </head>
 
-<body>
+<body class="antialiased bg-gray-200">
 
     @include('layouts.navbar')
 

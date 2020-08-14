@@ -11,9 +11,11 @@ return [
     |
     */
 
+    'home' => 'Home',
     'products' => 'Products',
     'categories' => 'Categories',
     'collections' => 'Collections',
+    'newest' => 'Newest',
     'offers' => 'Offers',
     'bag' => 'Shopping bag',
     'about_us' => 'About us',

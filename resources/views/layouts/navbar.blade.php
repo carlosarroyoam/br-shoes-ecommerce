@@ -1,4 +1,4 @@
-<nav class="fixed top-0 w-full py-3 bg-gray-100 shadow ">
+<header class="fixed top-0 w-full py-3 bg-gray-100 shadow ">
     <div class="container md:flex md:items-center md:justify-between">
         <div class="flex items-center justify-between">
             <a href="{{ route('home') }}" class="text-xl font-medium text-gray-800 hover:text-gray-700 md:text-2xl">
@@ -20,7 +20,7 @@
 
         <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
         <div class="flex-1 md:flex md:items-center md:justify-between">
-            <div class="flex flex-col md:ml-10 md:flex md:flex-row md:items-center md:justify-start">
+            <nav class="flex flex-col md:ml-10 md:flex md:flex-row md:items-center md:justify-start">
                 <x-navbar.nav-item href="{{ route('home') }}">
                     <x-slot name="title">
                         Catalogo
@@ -38,33 +38,19 @@
                         Ofertas
                     </x-slot>
                 </x-navbar.nav-item>
-            </div>
+            </nav>
 
-            <ul class="flex-1 md:flex md:items-center md:justify-end">
+            <div class="flex-1 md:flex md:items-center md:justify-end">
                 <!-- Authentication Links -->
+                @guest
                 <div class="flex flex-col md:flex-row md:items-center">
-                    @auth
-                    <div class="mt-4 mr-4 md:mt-0" aria-labelledby="">
-                        <a class="px-4 py-2 mt-2 text-sm font-medium text-gray-700 rounded-sm md:mt-0 hover:text-gray-600"
-                            href="
-                                {{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
-                    @else
                     <a href="{{ route('login') }}"
                         class="px-4 py-2 mt-2 text-sm font-medium text-gray-700 rounded-sm md:mt-0 hover:text-gray-600">{{ __('Login') }}</a>
                     <a href="{{ route('register') }}"
                         class="px-4 py-2 mt-2 text-sm font-medium text-gray-700 rounded-sm md:mt-0 hover:text-gray-600">{{ __('Register') }}</a>
-                    @endauth
                 </div>
-
-                @auth
+                @else
                 <div class="flex items-center mt-4 md:mt-0">
                     <x-navbar.notifications-button />
 
@@ -73,7 +59,7 @@
                     <x-navbar.user-profile-button />
                 </div>
                 @endauth
-            </ul>
+            </div>
         </div>
     </div>
-</nav>
+</header>

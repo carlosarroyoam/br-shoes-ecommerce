@@ -8,8 +8,6 @@
                 d="M14 5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5zM1 4v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4H1z" />
             <path d="M8 1.5A2.5 2.5 0 0 0 5.5 4h-1a3.5 3.5 0 1 1 7 0h-1A2.5 2.5 0 0 0 8 1.5z" />
         </svg>
-
-        <span class="absolute top-0 right-0 p-1 text-xs text-white bg-indigo-500 rounded-full"></span>
     </button>
 
     <div class="absolute right-0 w-64 mt-3 mr-4 overflow-hidden bg-gray-100 border border-gray-300 rounded-md shadow-md"
