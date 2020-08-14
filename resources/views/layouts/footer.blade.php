@@ -1,78 +1,75 @@
 <footer class="text-gray-700 bg-gray-100 body-font footer">
-    <div class="container px-5 py-16 mx-auto">
-        <div class="flex flex-wrap order-first text-center md:text-left">
-            <div class="w-full px-4 lg:w-1/4 md:w-1/2">
-                <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">CATEGORIES</h2>
-                <nav class="mb-10 list-none md:mb-0">
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">First Link</a>
-                    </li>
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">Second Link</a>
-                    </li>
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">Third Link</a>
-                    </li>
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
-                    </li>
-                </nav>
+    <div class="container flex flex-wrap order-first py-16 text-center md:text-left">
+        <div class="w-full lg:w-1/4 md:w-1/2">
+            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">CATEGORIES</h2>
+            <nav class="mb-10 list-none md:mb-0">
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800">First Link</a>
+                </li>
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+                </li>
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+                </li>
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                </li>
+            </nav>
+        </div>
+        <div class="w-full lg:w-1/4 md:w-1/2">
+            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">CATEGORIES</h2>
+            <nav class="mb-10 list-none md:mb-0">
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800">First Link</a>
+                </li>
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+                </li>
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+                </li>
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                </li>
+            </nav>
+        </div>
+        <div class="w-full lg:w-1/4 md:w-1/2">
+            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">CATEGORIES</h2>
+            <nav class="mb-10 list-none md:mb-0">
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800">First Link</a>
+                </li>
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+                </li>
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+                </li>
+                <li>
+                    <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                </li>
+            </nav>
+        </div>
+        <div class="w-full lg:w-1/4 md:w-1/2">
+            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">SUBSCRIBE</h2>
+            <div class="flex flex-wrap justify-center xl:flex-no-wrap md:flex-no-wrap lg:flex-wrap md:justify-start">
+                <input
+                    class="px-4 py-2 mr-2 text-base bg-gray-100 border border-gray-400 rounded sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 focus:outline-none focus:border-indigo-500"
+                    placeholder="Placeholder" type="text">
+                <x-button>
+                    <x-slot name="title">
+                        Button
+                    </x-slot>
+                </x-button>
             </div>
-            <div class="w-full px-4 lg:w-1/4 md:w-1/2">
-                <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">CATEGORIES</h2>
-                <nav class="mb-10 list-none md:mb-0">
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">First Link</a>
-                    </li>
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">Second Link</a>
-                    </li>
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">Third Link</a>
-                    </li>
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
-                    </li>
-                </nav>
-            </div>
-            <div class="w-full px-4 lg:w-1/4 md:w-1/2">
-                <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">CATEGORIES</h2>
-                <nav class="mb-10 list-none md:mb-0">
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">First Link</a>
-                    </li>
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">Second Link</a>
-                    </li>
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">Third Link</a>
-                    </li>
-                    <li>
-                        <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
-                    </li>
-                </nav>
-            </div>
-            <div class="w-full px-4 lg:w-1/4 md:w-1/2">
-                <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">SUBSCRIBE</h2>
-                <div
-                    class="flex flex-wrap justify-center xl:flex-no-wrap md:flex-no-wrap lg:flex-wrap md:justify-start">
-                    <input
-                        class="w-40 px-4 py-2 mr-2 text-base bg-gray-100 border border-gray-400 rounded sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 focus:outline-none focus:border-indigo-500"
-                        placeholder="Placeholder" type="text">
-                    <x-button>
-                        <x-slot name="title">
-                            Button
-                        </x-slot>
-                    </x-button>
-                </div>
-                <p class="mt-2 text-sm text-center text-gray-500 md:text-left">Bitters chicharrones fanny pack
-                    <br class="hidden lg:block">waistcoat green juice
-                </p>
-            </div>
+            <p class="mt-2 text-sm text-center text-gray-500 md:text-left">Bitters chicharrones fanny pack
+                <br class="hidden lg:block">waistcoat green juice
+            </p>
         </div>
     </div>
     <div class="bg-gray-200">
-        <div class="container flex flex-col items-center px-5 py-6 mx-auto sm:flex-row">
+        <div class="container flex flex-col items-center py-6 sm:flex-row">
             <a class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
                     stroke-linejoin="round" stroke-width="2" class="w-10 h-10 p-2 text-white bg-indigo-500 rounded-full"
