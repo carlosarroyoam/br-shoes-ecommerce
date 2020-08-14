@@ -5,16 +5,14 @@ window._ = require('lodash');
  * like Vue or React at a much lower cost. You get to keep your DOM, and sprinkle
  * in behavior as you see fit.
  */
-import 'alpinejs'
+import 'alpinejs';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
-
 window.axios = require('axios');
-
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**

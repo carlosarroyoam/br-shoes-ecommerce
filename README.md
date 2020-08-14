@@ -1,2 +1,2 @@
 # br-shoes-ecommerce
-Br Shoes e-commerce app
+BR SHOES e-commerce app

@@ -2,15 +2,12 @@
 //
 //
 html {
+    @apply bg-gray-200;
+
+    position: relative;
 	font-size: $font-size-base;
 	font-family: $font-family-sans-serif;
-	min-height: 100vh;
-}
-
-////
-//
-//
-body {
-	height: 100%;
-	margin-bottom: $footer-height; //1
+    min-height: 100vh;
+    padding-top: $navbar-height; //1
+	padding-bottom: $footer-height; //2
 }

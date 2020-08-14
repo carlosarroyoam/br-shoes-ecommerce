@@ -18034,21 +18034,21 @@ video {
 }
 
 html {
+  --bg-opacity: 1;
+  background-color: #edf2f7;
+  background-color: rgba(237, 242, 247, var(--bg-opacity));
+  position: relative;
   font-size: 15px;
   font-family: "Montserrat", sans-serif;
   min-height: 100vh;
-}
-
-body {
-  height: 100%;
-  margin-bottom: 17em;
+  padding-top: 5em;
+  padding-bottom: 22.5em;
 }
 
 .footer {
   position: absolute;
   bottom: 0;
-  right: 0;
-  left: 0;
+  width: 100%;
 }
 
 .shame-example {
