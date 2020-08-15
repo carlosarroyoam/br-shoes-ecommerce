@@ -3,7 +3,7 @@
 @section('title', __('Login'))
 
 @section('main-content')
-<div class="w-4/12 mx-auto">
+<div class="mx-auto md:w-6/12">
     <h1 class="text-2xl text-gray-900 uppercase">{{ __('Login') }}</h1>
 
     <form method="POST" action="{{ route('login') }}">
@@ -57,9 +57,11 @@
 
         <div class="mt-4">
             <div class="flex flex-col">
-                <button type="submit" class="px-4 py-2 text-blue-100 bg-blue-700 rounded-md">
-                    {{ __('Login') }}
-                </button>
+                <x-button type="submit">
+                    <x-slot name="title">
+                        {{ __('Login') }}
+                    </x-slot>
+                </x-button>
 
                 @if (Route::has('password.request'))
                 <a class="mt-4" href="{{ route('password.request') }}">

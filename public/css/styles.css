@@ -18038,21 +18038,7 @@ video {
 }
 
 html {
-  position: relative;
   font-size: 15px;
-  min-height: 100vh;
-  padding-top: 5.5em;
-  padding-bottom: 23em;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
-.shame-example {
-  color: #BADA55 !important;
 }
 
 @media (min-width: 640px){

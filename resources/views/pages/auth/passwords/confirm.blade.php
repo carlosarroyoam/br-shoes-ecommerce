@@ -3,7 +3,7 @@
 @section('title', __('Confirm Password'))
 
 @section('content')
-<div class="w-4/12 mx-auto">
+<div class="mx-auto md:w-6/12">
     <h1 class="text-2xl text-gray-900 uppercase">{{ __('Confirm Password') }}</h1>
 
     <p>

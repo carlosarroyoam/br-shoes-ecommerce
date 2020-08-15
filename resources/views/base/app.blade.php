@@ -11,16 +11,16 @@
     <meta name="robots" content="all">
 
     <!-- Favicon/App icons -->
-    {{-- <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}"> --}}
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
 
+    <livewire:styles />
     <!-- Styles -->
-    <livewire:styles>
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" />
 </head>
 
-<body class="antialiased bg-gray-200">
+<body class="flex flex-col min-h-screen pt-20 antialiased bg-gray-200">
 
     @include('layouts.navbar')
 
@@ -28,9 +28,9 @@
 
     @include('layouts.footer')
 
+    <livewire:scripts />
     <!-- Scripts -->
-    <livewire:scripts>
-        <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 
 </html>

@@ -2,7 +2,8 @@
 
 @section('title', __('Verify Your Email Address'))
 
-@section('main-content')<div class="w-4/12 mx-auto">
+@section('main-content')
+<div class="mx-auto md:w-6/12">
     <h1 class="text-2xl text-gray-900 uppercase">{{ __('Verify Your Email Address') }}</h1>
 
     @if (session('resent'))
