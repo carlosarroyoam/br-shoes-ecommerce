@@ -1,7 +1,9 @@
 <footer class="text-gray-700 bg-gray-100 body-font footer">
+    {{-- Upper footer section --}}
     <div class="container flex flex-wrap order-first py-16 text-center md:text-left">
+        {{-- Categories section --}}
         <div class="w-full lg:w-1/4 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">CATEGORIES</h2>
+            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font">CATEGORIES</h2>
             <nav class="mb-10 list-none md:mb-0">
                 <li>
                     <a class="text-gray-600 hover:text-gray-800">First Link</a>
@@ -17,8 +19,10 @@
                 </li>
             </nav>
         </div>
+
+        {{-- Navigation section --}}
         <div class="w-full lg:w-1/4 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">CATEGORIES</h2>
+            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font">Navigation</h2>
             <nav class="mb-10 list-none md:mb-0">
                 <li>
                     <a class="text-gray-600 hover:text-gray-800">First Link</a>
@@ -34,8 +38,10 @@
                 </li>
             </nav>
         </div>
+
+        {{-- Categories section --}}
         <div class="w-full lg:w-1/4 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">CATEGORIES</h2>
+            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font">CATEGORIES</h2>
             <nav class="mb-10 list-none md:mb-0">
                 <li>
                     <a class="text-gray-600 hover:text-gray-800">First Link</a>
@@ -51,6 +57,8 @@
                 </li>
             </nav>
         </div>
+
+        {{-- Newsletter section --}}
         <div class="w-full lg:w-1/4 md:w-1/2">
             <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">SUBSCRIBE</h2>
             <div class="flex flex-wrap justify-center xl:flex-no-wrap md:flex-no-wrap lg:flex-wrap md:justify-start">
@@ -59,7 +67,7 @@
                     placeholder="Placeholder" type="text">
                 <x-button>
                     <x-slot name="title">
-                        Button
+                        SUBSCRIBE
                     </x-slot>
                 </x-button>
             </div>
@@ -67,20 +75,23 @@
                 <br class="hidden lg:block">waistcoat green juice
             </p>
         </div>
+
     </div>
+
+    {{-- Lower footer section --}}
     <div class="bg-gray-200">
         <div class="container flex flex-col items-center py-6 sm:flex-row">
-            <a class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
-                    stroke-linejoin="round" stroke-width="2" class="w-10 h-10 p-2 text-white bg-indigo-500 rounded-full"
-                    viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg>
-                <span class="ml-3 text-xl font-medium">
+            <a href="{{ route('home') }}"
+                class="flex flex-col items-start justify-center text-gray-800 uppercase md:justify-start">
+                <span class="text-xl font-medium">
                     {{ config('global_constants.app_name', 'BR Shoes') }}
                 </span>
+                <span class="text-xs text-gray-500">
+                    {{ config('global_constants.slogan', 'Ama tu estilo') }}
+                </span>
             </a>
-            <p class="mt-4 text-sm text-gray-500 sm:ml-6 sm:mt-0">
+
+            <p class="mt-4 text-sm text-gray-500 sm:ml-8 sm:mt-0">
                 © {{ now()->year }}
                 {{ config('global_constants.app_name', 'BR Shoes') }}
                 —

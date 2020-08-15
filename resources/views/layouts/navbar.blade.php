@@ -1,7 +1,8 @@
 <header class="fixed top-0 w-full py-3 bg-gray-100 shadow ">
     <div class="container md:flex md:items-center md:justify-between" x-data="{ open: false }">
         <div class="flex items-center justify-between ">
-            <a href=" {{ route('home') }}" class="text-xl font-medium text-gray-800 hover:text-gray-700 md:text-2xl">
+            <a href=" {{ route('home') }}"
+                class="text-xl font-medium text-gray-800 uppercase hover:text-gray-700 md:text-2xl">
                 {{ config('global_constants.app_name', 'BR Shoes') }}
             </a>
 
