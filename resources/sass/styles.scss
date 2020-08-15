@@ -1,26 +1,11 @@
-// TailwindCSS
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
 // Abstracts
 @import 'abstracts/variables';
-
-// Vendors
 
 // Base
 @import 'base/base';
 @import 'base/typography';
 
-// Layout
-
-// Components
-// @import 'layout/navbar';
-// @import 'layout/footer';
-
-// Pages
-
-// Themes
-
-// Shame
-// @import 'abstracts/shame';
+// Vendors
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
