@@ -1,25 +1,23 @@
 @extends('layouts.main')
-
 @section('title', __('Login'))
 
 @section('main-content')
 <div class="mx-auto md:w-6/12">
-    <h1 class="text-2xl text-gray-900 uppercase">{{ __('Login') }}</h1>
+    <h1 class="text-2xl uppercase text-header">{{ __('Login') }}</h1>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <div class="mt-4">
-            <label for="email" class="text-sm text-gray-700 uppercase">{{ __('E-Mail Address') }}</label>
+            <label for="email" class="text-sm uppercase text-body-secondary">{{ __('E-Mail Address') }}</label>
 
             <div class="flex flex-col">
                 <input id="email"
-                    class="px-3 py-2 bg-white border border-gray-500 rounded-md outline-none focus:shadow-outline focus:bg-blue-100"
-                    type="email" class="@error('email') text-red-600 @enderror" name="email" value="{{ old('email') }}"
-                    required autocomplete="email" autofocus>
+                    class="px-3 py-2 border border-gray-400 rounded-md outline-none focus:shadow-outline @error('email') border-red-600 @enderror"
+                    type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                 @error('email')
-                <span class="mt-2 text-sm text-red-600 uppercase" role="alert">
+                <span class="mt-2 text-xs text-red-600 uppercase" role="alert">
                     {{ $message }}
                 </span>
                 @enderror
@@ -27,15 +25,15 @@
         </div>
 
         <div class="mt-2">
-            <label for="password" class="text-sm text-gray-700 uppercase">{{ __('Password') }}</label>
+            <label for="password" class="text-sm uppercase text-body-secondary">{{ __('Password') }}</label>
 
             <div class="flex flex-col">
                 <input id="password" type="password"
-                    class="outline-none focus:shadow-outline focus:bg-blue-100 px-3 py-2 bg-white border border-gray-500 rounded-md @error('password') text-red-600 @enderror"
+                    class="px-3 py-2 border border-gray-400 rounded-md outline-none focus:shadow-outline @error('email') border-red-600 @enderror"
                     name="password" required autocomplete="current-password">
 
                 @error('password')
-                <span class="mt-2 text-sm text-red-600 uppercase" role="alert">
+                <span class="mt-2 text-xs text-red-600 uppercase" role="alert">
                     {{ $message }}
                 </span>
                 @enderror
@@ -44,11 +42,11 @@
 
         <div class="mt-3">
             <div class="">
-                <div class="">
+                <div class="flex items-center">
                     <input class="" type="checkbox" name="remember" id="remember"
                         {{ old('remember') ? 'checked' : '' }}>
 
-                    <label class="" for="remember">
+                    <label class="ml-2 text-sm uppercase text-body-secondary" for="remember">
                         {{ __('Remember Me') }}
                     </label>
                 </div>
@@ -64,7 +62,8 @@
                 </x-button>
 
                 @if (Route::has('password.request'))
-                <a class="mt-4" href="{{ route('password.request') }}">
+                <a class="mt-4 text-sm text-center text-body-secondary hover:text-body"
+                    href="{{ route('password.request') }}">
                     {{ __('Forgot Your Password?') }}
                 </a>
                 @endif

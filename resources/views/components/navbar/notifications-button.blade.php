@@ -12,8 +12,10 @@
         <span class="absolute top-0 right-0 p-1 text-white bg-indigo-500 rounded-full"></span>
     </button>
 
-    <div class="absolute right-0 w-64 mt-3 mr-4 overflow-hidden bg-gray-100 border border-gray-300 rounded-md shadow-md"
+    <div class="absolute right-0 w-64 mt-3 mr-4 overflow-hidden border border-gray-300 rounded-md shadow-md bg-background"
         x-show="open" x-on:click.away="open = false">
-        {{ __('navigation.notifications') }}
+        <p class="p-4">
+            {{ __('navigation.notifications') }}
+        </p>
     </div>
 </div>

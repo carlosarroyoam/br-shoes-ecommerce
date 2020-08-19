@@ -6,7 +6,7 @@
             class="object-cover w-full h-full" alt="{{ __('User profile picture') }}">
     </button>
 
-    <div class="absolute right-0 w-64 mt-2 overflow-hidden bg-gray-100 border border-gray-300 rounded-md shadow-md"
+    <div class="absolute right-0 w-64 mt-2 overflow-hidden border border-gray-300 rounded-md shadow-md bg-background"
         x-show="open" x-on:click.away="open = false">
         <a href="#" class="block p-4 text-sm hover:text-gray-100 hover:bg-blue-900">
             {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}

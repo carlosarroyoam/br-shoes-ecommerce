@@ -10,8 +10,10 @@
         </svg>
     </button>
 
-    <div class="absolute right-0 w-64 mt-3 mr-4 overflow-hidden bg-gray-100 border border-gray-300 rounded-md shadow-md"
+    <div class="absolute right-0 w-64 mt-3 mr-4 overflow-hidden border border-gray-300 rounded-md shadow-md bg-background"
         x-show="open" x-on:click.away="open = false">
-        {{ __('navigation.bag') }}
+        <p class="p-4">
+            {{ __('navigation.bag') }}
+        </p>
     </div>
 </div>

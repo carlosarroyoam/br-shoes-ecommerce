@@ -1,77 +1,89 @@
-<footer class="text-gray-700 bg-gray-100 body-font footer">
+<footer class="text-gray-700 bg-background footer">
     {{-- Upper footer section --}}
     <div class="container flex flex-wrap order-first py-16 text-center md:text-left">
         {{-- Categories section --}}
         <div class="w-full lg:w-1/4 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font">CATEGORIES</h2>
+            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">CATEGORIES</h2>
             <nav class="mb-10 list-none md:mb-0">
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800">First Link</a>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">First Link</a>
                 </li>
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Second Link</a>
                 </li>
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Third Link</a>
                 </li>
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Fourth Link</a>
                 </li>
             </nav>
         </div>
 
         {{-- Navigation section --}}
         <div class="w-full lg:w-1/4 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font">Navigation</h2>
+            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">Navigation</h2>
             <nav class="mb-10 list-none md:mb-0">
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800">First Link</a>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">First Link</a>
                 </li>
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Second Link</a>
                 </li>
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Third Link</a>
                 </li>
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Fourth Link</a>
                 </li>
             </nav>
         </div>
 
         {{-- Categories section --}}
         <div class="w-full lg:w-1/4 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font">CATEGORIES</h2>
+            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">CATEGORIES</h2>
             <nav class="mb-10 list-none md:mb-0">
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800">First Link</a>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">First Link</a>
                 </li>
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800">Second Link</a>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Second Link</a>
                 </li>
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800">Third Link</a>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Third Link</a>
                 </li>
                 <li>
-                    <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Fourth Link</a>
                 </li>
             </nav>
         </div>
 
         {{-- Newsletter section --}}
-        <div class="w-full lg:w-1/4 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">SUBSCRIBE</h2>
+        <div class="w-full lg:w-1/4 lg:-ml-16 md:w-1/2">
+            <h2 class="mb-3 text-sm font-medium tracking-widest text-header">SUBSCRIBE</h2>
             <div class="flex flex-wrap justify-center xl:flex-no-wrap md:flex-no-wrap lg:flex-wrap md:justify-start">
                 <input
-                    class="px-4 py-2 mr-2 text-base bg-gray-100 border border-gray-400 rounded sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4 focus:outline-none focus:border-indigo-500"
-                    placeholder="Placeholder" type="text">
-                <x-button>
+                    class="px-4 py-2 mr-2 text-base border border-gray-400 rounded xl:mr-4 lg:mr-0 sm:mr-4 focus:outline-none focus:shadow-outline"
+                    placeholder="email@example.com" type="email">
+                <x-button class="">
                     <x-slot name="title">
                         SUBSCRIBE
                     </x-slot>
                 </x-button>
             </div>
-            <p class="mt-2 text-sm text-center text-gray-500 md:text-left">Bitters chicharrones fanny pack
+            <p class="mt-2 text-sm text-center text-body-secondary md:text-left">Bitters chicharrones fanny pack
                 <br class="hidden lg:block">waistcoat green juice
             </p>
         </div>
@@ -79,19 +91,19 @@
     </div>
 
     {{-- Lower footer section --}}
-    <div class="bg-gray-200">
+    <div class="bg-background-secondary">
         <div class="container flex flex-col items-center py-6 sm:flex-row">
-            <a href="{{ route('home') }}"
-                class="flex flex-col items-start justify-center text-gray-800 uppercase md:justify-start">
-                <span class="text-xl font-medium">
+            <a href="{{ route('home') }}" class="flex flex-col items-start justify-center uppercase md:justify-start">
+                <span
+                    class="text-xl font-medium text-header-secondary hover:text-header focus:outline-none focus:text-body">
                     {{ config('global_constants.app_name', 'BR Shoes') }}
                 </span>
-                <span class="text-xs text-gray-500">
+                <span class="text-xs text-body-secondary">
                     {{ config('global_constants.slogan', 'Ama tu estilo') }}
                 </span>
             </a>
 
-            <p class="mt-4 text-sm text-gray-500 sm:ml-8 sm:mt-0">
+            <p class="mt-4 text-sm text-body-secondary sm:ml-8 sm:mt-0">
                 © {{ now()->year }}
                 {{ config('global_constants.app_name', 'BR Shoes') }}
                 —
@@ -99,7 +111,8 @@
             </p>
 
             <span class="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start">
-                <a class="mr-3 text-gray-500">
+                <a href="{{ route('home') }}"
+                    class="mr-3 text-body-secondary hover:text-body focus:outline-none focus:text-body">
                     <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         class="w-5 h-5" viewBox="0 0 24 24">
                         <path
@@ -107,14 +120,16 @@
                         </path>
                     </svg>
                 </a>
-                <a class="mr-3 text-gray-500">
+                <a href="{{ route('home') }}"
+                    class="mr-3 text-body-secondary hover:text-body focus:outline-none focus:text-body">
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
                         <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
                         <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
                     </svg>
                 </a>
-                <a class="text-gray-500">
+                <a href="{{ route('home') }}"
+                    class="text-body-secondary hover:text-body focus:outline-none focus:text-body">
                     <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
                         <path stroke="none"
