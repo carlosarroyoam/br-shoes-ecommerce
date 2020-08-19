@@ -3,7 +3,14 @@
 @section('title', __('Home'))
 
 @section('main-content')
-<x-flash type="success">
-    Message
-</x-flash>
+
+<h1 class="text-2xl uppercase text-header">Todos los productos</h1>
+
+<div class="grid grid-cols-1 gap-5 mt-4 md:grid-cols-3 lg:grid-cols-5">
+    <x-products.product-card></x-products.product-card>
+    <x-products.product-card></x-products.product-card>
+    <x-products.product-card></x-products.product-card>
+    <x-products.product-card></x-products.product-card>
+    <x-products.product-card></x-products.product-card>
+</div>
 @endsection

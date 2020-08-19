@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" />
 </head>
 
-<body class="flex flex-col min-h-screen pt-20 antialiased theme-light bg-background-secondary text-header">
+<body class="flex flex-col min-h-screen antialiased pt-22 theme-light bg-background-secondary text-header">
 
     @include('layouts.navbar')
 

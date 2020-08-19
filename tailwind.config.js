@@ -138,7 +138,7 @@ module.exports = {
             header: 'var(--color-text-header)',
             'header-secondary': 'var(--color-text-header-secondary)',
             body: 'var(--color-text-body)',
-            'body-secondary': 'var(--color-text-body-secondary)',
+            'body-secondary': 'var(--color-text-body-secondary)'
         },
         spacing: {
             px: '1px',
@@ -154,6 +154,7 @@ module.exports = {
             '12': '3rem',
             '16': '4rem',
             '20': '5rem',
+            '22': '5.5rem',
             '24': '6rem',
             '32': '8rem',
             '40': '10rem',

@@ -1,4 +1,4 @@
-<header class="fixed top-0 w-full py-3 shadow bg-background">
+<header class="fixed top-0 z-50 w-full py-3 border-b-2 shadow bg-background border-primary">
     <div class="container md:flex md:items-center md:justify-between" x-data="{ open: false }">
         <div class="flex items-center justify-between ">
             <a href=" {{ route('home') }}"
