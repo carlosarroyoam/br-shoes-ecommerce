@@ -4,6 +4,7 @@
 @section('main-content')
 <div class="mx-auto md:w-6/12">
     <h1 class="text-2xl uppercase text-header">{{ __('Login') }}</h1>
+    <p class="text-base text-header-secondary">Inicia sesion y comienza a comprar tus zapatos favoritos...</p>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf

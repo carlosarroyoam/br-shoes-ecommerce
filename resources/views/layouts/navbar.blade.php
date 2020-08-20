@@ -23,19 +23,19 @@
         <div class="flex-1 md:flex md:items-center md:justify-between" x-bind:class="{ 'block': open, 'hidden': !open }"
             x-on:click.away="open = false">
             <nav class="flex flex-col md:ml-10 md:flex md:flex-row md:items-center">
-                <x-navbar.nav-item route="home">
+                <x-navbar.nav-item route="catalog">
                     <x-slot name="title">
                         Catalogo
                     </x-slot>
                 </x-navbar.nav-item>
 
-                <x-navbar.nav-item route="home">
+                <x-navbar.nav-item route="newest">
                     <x-slot name="title">
                         Lo mas nuevo
                     </x-slot>
                 </x-navbar.nav-item>
 
-                <x-navbar.nav-item route="home">
+                <x-navbar.nav-item route="offers">
                     <x-slot name="title">
                         Ofertas
                     </x-slot>
