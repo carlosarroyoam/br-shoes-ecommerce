@@ -4,7 +4,7 @@
         {{-- Categories section --}}
         <div class="w-full lg:w-1/4 md:w-1/2">
             <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">CATEGORIES</h2>
-            <nav class="mb-10 list-none md:mb-0">
+            <nav class="mb-10 list-none lg:mb-0">
                 <li>
                     <a href="{{ route('home') }}"
                         class="text-body-secondary hover:text-body focus:outline-none focus:text-body">First Link</a>
@@ -27,7 +27,7 @@
         {{-- Navigation section --}}
         <div class="w-full lg:w-1/4 md:w-1/2">
             <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">Navigation</h2>
-            <nav class="mb-10 list-none md:mb-0">
+            <nav class="mb-10 list-none lg:mb-0">
                 <li>
                     <a href="{{ route('home') }}"
                         class="text-body-secondary hover:text-body focus:outline-none focus:text-body">First Link</a>
@@ -75,16 +75,16 @@
             <h2 class="mb-3 text-sm font-medium tracking-widest text-header">SUBSCRIBE</h2>
             <div class="flex flex-wrap justify-center xl:flex-no-wrap md:flex-no-wrap lg:flex-wrap md:justify-start">
                 <input
-                    class="px-4 py-2 mr-2 text-base border border-gray-400 rounded xl:mr-4 lg:mr-0 sm:mr-4 focus:outline-none focus:shadow-outline"
+                    class="px-4 py-2 mr-2 text-base border border-gray-400 rounded xl:mr-4 lg:mr-0 sm:mr-4 focus:outline-none focus:shadow-outline lg:w-full xl:w-auto"
                     placeholder="email@example.com" type="email">
-                <x-button class="">
+                <x-button class="mt-0 lg:w-full lg:mt-2 xl:mt-0">
                     <x-slot name="title">
                         SUBSCRIBE
                     </x-slot>
                 </x-button>
             </div>
             <p class="mt-2 text-sm text-center text-body-secondary md:text-left">Bitters chicharrones fanny pack
-                <br class="hidden lg:block">waistcoat green juice
+                <br class="hidden xl:block">waistcoat green juice
             </p>
         </div>
 

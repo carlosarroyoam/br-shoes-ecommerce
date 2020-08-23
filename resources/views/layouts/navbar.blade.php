@@ -52,7 +52,7 @@
                         </x-slot>
                     </x-navbar.nav-item>
 
-                    <x-navbar.nav-item route="register">
+                    <x-navbar.nav-item route="register" class="pr-0">
                         <x-slot name="title">
                             {{ __('Register') }}
                         </x-slot>

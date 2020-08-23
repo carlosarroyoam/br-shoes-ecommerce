@@ -19,3 +19,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/catalog', 'HomeController@index')->name('catalog');
 Route::get('/newest', 'HomeController@index')->name('newest');
 Route::get('/offers', 'HomeController@index')->name('offers');
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::get('/', 'DashboardController@index')->name('admin.dashboard');
+});
