@@ -16,14 +16,17 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('', 'Pages\HomeController@index')->name('home');
-Route::get('catalog', 'Pages\HomeController@index')->name('catalog');
-Route::get('newest', 'Pages\HomeController@index')->name('newest');
-Route::get('offers', 'Pages\HomeController@index')->name('offers');
 Route::view('tank-you', 'pages.home')->name('tank-you');
 
 Route::resource('shopping-bag', 'Pages\ShoppingBagController')->except([
     'create', 'show', 'edit'
 ]);
+Route::resource('favourites', 'Pages\ShoppingBagController')->except([
+    'create', 'show', 'edit'
+]);
+
+Route::get('products/newest', 'ProductController@newest')->name('products.newest');
+Route::get('products/offers', 'ProductController@offers')->name('products.offers');
 Route::resource('products', 'ProductController');
 Route::resource('products.categories', 'ProductCategoryController')->shallow();
 Route::resource('products.pictures', 'ProductPictureController')->shallow();
