@@ -15,11 +15,25 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/catalog', 'HomeController@index')->name('catalog');
-Route::get('/newest', 'HomeController@index')->name('newest');
-Route::get('/offers', 'HomeController@index')->name('offers');
+Route::get('', 'Pages\HomeController@index')->name('home');
+Route::get('catalog', 'Pages\HomeController@index')->name('catalog');
+Route::get('newest', 'Pages\HomeController@index')->name('newest');
+Route::get('offers', 'Pages\HomeController@index')->name('offers');
+Route::view('tank-you', 'pages.home')->name('tank-you');
+
+Route::resource('shopping-bag', 'Pages\ShoppingBagController')->except([
+    'create', 'show', 'edit'
+]);
+Route::resource('products', 'ProductController');
+Route::resource('products.categories', 'ProductCategoryController')->shallow();
+Route::resource('products.pictures', 'ProductPictureController')->shallow();
+Route::resource('categories', 'CategoryController');
+Route::resource('orders', 'OrderController');
+Route::resource('users', 'UserController')->except([
+    'create', 'store'
+]);
+Route::resource('users.profile-pictures', 'UserProfilePictureController')->shallow();
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', 'DashboardController@index')->name('admin.dashboard');
+    Route::get('', 'Pages\DashboardController@index')->name('admin.dashboard');
 });

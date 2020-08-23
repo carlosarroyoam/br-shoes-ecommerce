@@ -8,18 +8,18 @@
 
     <div class="absolute right-0 w-64 mt-2 overflow-hidden border border-gray-300 rounded-md shadow-md bg-background"
         x-show="open" x-on:click.away="open = false">
-        <a href="#" class="block p-4 text-sm hover:text-gray-100 hover:bg-blue-900">
-            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}
+        <a href="#" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
+            {{ Auth::user()->fullName }}
         </a>
-        <a href="#" class="block p-4 text-sm hover:text-gray-100 hover:bg-blue-900">
+        <a href="#" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ __('Shopping Bag') }}
         </a>
-        <a href="#" class="block p-4 text-sm hover:text-gray-100 hover:bg-blue-900">
+        <a href="#" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ __('Settings') }}
         </a>
         <a href="{{ route('logout') }}"
             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-            class="block p-4 text-sm hover:text-gray-100 hover:bg-blue-900">
+            class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ __('Logout') }}
         </a>
         <form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">

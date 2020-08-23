@@ -10,6 +10,6 @@ return [
     |
     */
 
-    'welcome'   => 'Welcome',
-    'welcome_back'   => 'Welcome back, :Name.',
+    'welcome'   => 'Bienvenido',
+    'welcome_back'   => 'Bienvenido de nuevo, :Name.',
 ];

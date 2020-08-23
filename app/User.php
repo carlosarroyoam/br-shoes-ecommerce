@@ -37,4 +37,22 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'is_admin' => 'boolean',
     ];
+
+    /**
+     * Get the user's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    /**
+     * Get the profile picture record associated with the user.
+     */
+    public function profilePicture()
+    {
+        return $this->hasOne('App\ProfilePicture');
+    }
 }
