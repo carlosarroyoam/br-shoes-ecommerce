@@ -15,28 +15,31 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('', 'Pages\HomeController@index')->name('home');
+Route::get('', 'HomeController@index')->name('home');
 Route::view('tank-you', 'pages.home')->name('tank-you');
 
-Route::resource('shopping-bag', 'Pages\ShoppingBagController')->except([
+Route::resource('shopping-bag', 'ShoppingBagController')->except([
     'create', 'show', 'edit'
 ]);
-Route::resource('favourites', 'Pages\ShoppingBagController')->except([
+Route::resource('wish-list', 'WishListController')->except([
     'create', 'show', 'edit'
 ]);
 
-Route::get('products/newest', 'ProductController@newest')->name('products.newest');
-Route::get('products/offers', 'ProductController@offers')->name('products.offers');
-Route::resource('products', 'ProductController');
-Route::resource('products.categories', 'ProductCategoryController')->shallow();
-Route::resource('products.pictures', 'ProductPictureController')->shallow();
-Route::resource('categories', 'CategoryController');
+Route::get('products/newest', 'Products\ProductController@newest')->name('products.newest');
+Route::get('products/offers', 'Products\ProductController@offers')->name('products.offers');
+Route::resource('products', 'Products\ProductController');
+Route::resource('products.categories', 'Products\ProductCategoryController')->shallow();
+Route::resource('products.pictures', 'Products\ProductPictureController')->shallow();
+Route::resource('categories', 'Products\CategoryController');
 Route::resource('orders', 'OrderController');
-Route::resource('users', 'UserController')->except([
+
+Route::get('user/profile', 'Users\UserProfileController@show')->name('user.profile');
+Route::get('user/account-settings', 'Users\AccountController@show')->name('user.account-settings');
+Route::resource('users', 'Users\UserController')->except([
     'create', 'store'
 ]);
-Route::resource('users.profile-pictures', 'UserProfilePictureController')->shallow();
+Route::resource('users.profile-pictures', 'Users\UserProfilePictureController')->shallow();
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('', 'Pages\DashboardController@index')->name('admin.dashboard');
+    Route::get('', 'Admin\DashboardController@index')->name('admin.dashboard');
 });

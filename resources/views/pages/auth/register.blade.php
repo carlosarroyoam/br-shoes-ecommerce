@@ -1,8 +1,8 @@
-@extends('layouts.main')
+@extends('base.app')
 
 @section('title', __('Register'))
 
-@section('main-content')
+@section('content')
 <div class="mx-auto md:w-6/12">
     <h1 class="text-2xl text-gray-900 uppercase">{{ __('Register') }}</h1>
     <p class="text-base text-header-secondary">Registrate y comienza a comprar tus zapatos favoritos...</p>

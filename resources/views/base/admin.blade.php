@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', config('app.name'))</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="BR SHOES, Ama tu estilo">
-    <meta name="keywords" content="Zapatos, Zapateria, BR Shoes, Guanajuato, Calzado, Zapatos de Leon, Hecho en Mexico">
-    <meta name="robots" content="all">
+
+    <meta name="robots" content="noindex, nofollow, noarchive">
 
     <!-- Favicon/App icons -->
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
@@ -20,15 +19,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" />
 </head>
 
-<body class="flex flex-col min-h-screen pt-24 antialiased theme-light bg-background-secondary text-header">
+<body class="flex flex-col min-h-screen pt-12 antialiased theme-light bg-background-secondary text-header">
 
-    @include('layouts.navbar')
-
-    <main class="container flex-grow pb-10">
+    <main class="container flex-grow">
         @yield('content')
     </main>
-
-    @include('layouts.footer')
 
     <livewire:scripts />
     <!-- Scripts -->

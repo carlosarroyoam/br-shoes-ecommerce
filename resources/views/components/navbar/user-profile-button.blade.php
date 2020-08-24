@@ -8,14 +8,17 @@
 
     <div class="absolute right-0 w-64 mt-2 overflow-hidden border border-gray-300 rounded-md shadow-md bg-background"
         x-show="open" x-on:click.away="open = false">
-        <a href="#" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
+        <a href="{{ route('user.profile') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ Auth::user()->fullName }}
         </a>
-        <a href="#" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
-            {{ __('Shopping Bag') }}
+        <a href="{{ route('shopping-bag.index') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
+            {{ __('navigation.shopping_bag') }}
         </a>
-        <a href="#" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
-            {{ __('Settings') }}
+        <a href="{{ route('wish-list.index') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
+            {{ __('navigation.wish_list') }}
+        </a>
+        <a href="{{ route('user.account-settings') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
+            {{ __('navigation.account_settings') }}
         </a>
         <a href="{{ route('logout') }}"
             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"

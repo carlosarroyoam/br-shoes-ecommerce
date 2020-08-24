@@ -1,8 +1,8 @@
-@extends('layouts.main')
+@extends('base.app')
 
 @section('title', __('Home'))
 
-@section('main-content')
+@section('content')
 
 <article>
     <h1 class="text-2xl uppercase text-header">Todos los productos</h1>

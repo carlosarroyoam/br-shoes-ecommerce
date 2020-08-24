@@ -13,7 +13,7 @@
     <div class="absolute right-0 w-64 mt-3 mr-4 overflow-hidden border border-gray-300 rounded-md shadow-md bg-background"
         x-show="open" x-on:click.away="open = false">
         <p class="p-4">
-            {{ __('navigation.bag') }}
+            {{ __('navigation.shopping_bag') }}
         </p>
     </div>
 </div>

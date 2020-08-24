@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class CheckIfNotAnAdmin
+class RedirectIfNotAdmin
 {
     /**
      * Handle an incoming request, checks if a User is not an

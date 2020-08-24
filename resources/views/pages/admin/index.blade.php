@@ -1,8 +1,8 @@
-@extends('layouts.main')
+@extends('base.admin')
 
 @section('title', __('Dashboard'))
 
-@section('main-content')
+@section('content')
 
 <h1 class="text-2xl uppercase text-header">{{ __('Dashboard') }}</h1>
 <p class="text-base text-header-secondary">
