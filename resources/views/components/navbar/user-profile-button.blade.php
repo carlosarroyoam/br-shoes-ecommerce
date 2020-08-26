@@ -17,6 +17,9 @@
         <a href="{{ route('wish-list.index') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ __('navigation.wish_list') }}
         </a>
+        <a href="{{ route('orders.index') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
+            {{ __('navigation.orders') }}
+        </a>
         <a href="{{ route('user.account-settings') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ __('navigation.account_settings') }}
         </a>

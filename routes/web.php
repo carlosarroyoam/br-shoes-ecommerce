@@ -32,6 +32,8 @@ Route::resource('products.categories', 'Products\ProductCategoryController')->sh
 Route::resource('products.pictures', 'Products\ProductPictureController')->shallow();
 Route::resource('categories', 'Products\CategoryController');
 Route::resource('orders', 'OrderController');
+Route::resource('shipments', 'ShipmentController');
+Route::resource('notifications', 'NotificationsController');
 
 Route::get('user/profile', 'Users\UserProfileController@show')->name('user.profile');
 Route::get('user/account-settings', 'Users\AccountController@show')->name('user.account-settings');

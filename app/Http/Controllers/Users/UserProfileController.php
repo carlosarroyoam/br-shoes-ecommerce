@@ -16,11 +16,7 @@ class UserProfileController extends Controller
      */
     public function show()
     {
-        return response()
-        ->json([
-            'name' => Auth::user()->fullName,
-            'email' => Auth::user()->email
-        ]);
+        return view('pages/users/profile');
     }
 
 }

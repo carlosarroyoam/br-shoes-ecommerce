@@ -14,10 +14,7 @@ class ShoppingBagController extends Controller
      */
     public function index()
     {
-        return response()
-        ->json([
-            'name' => 'Shopping Bag'
-        ]);
+        return view('pages/shopping-bag');
     }
 
     /**

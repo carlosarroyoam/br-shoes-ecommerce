@@ -14,10 +14,7 @@ class WishListController extends Controller
      */
     public function index()
     {
-        return response()
-        ->json([
-            'name' => 'Wish List'
-        ]);
+        return view('pages/wish-list');
     }
 
     /**

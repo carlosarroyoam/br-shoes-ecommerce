@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Products;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class NotificationsController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -15,27 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('pages/products/products');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function newest()
-    {
-        return view('pages/products/products', ['name' => __('navigation.newest')]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function offers()
-    {
-        return view('pages/products/products', ['name' => __('navigation.offers')]);
+        return view('pages/notifications');
     }
 
     /**

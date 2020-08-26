@@ -16,10 +16,8 @@ class AccountController extends Controller
      */
     public function show()
     {
-        return response()
-        ->json([
-            'name' => 'Account Settings'
-        ]);
+        return view('pages/users/account');
+
     }
 
 }
