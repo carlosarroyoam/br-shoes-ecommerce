@@ -10,90 +10,42 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <div class="mt-4">
-            <label for="first_name" class="text-sm uppercase text-body-secondary">{{ __('First Name') }}</label>
+        <x-form-elements.text-field class="mt-4" name="first_name" autocomplete="first_name" autofocus required>
+            <x-slot name="label">
+                {{ __('First Name') }}
+            </x-slot>
+        </x-form-elements.text-field>
 
-            <div class="flex flex-col">
-                <input id="first_name" type="text"
-                    class="@epx-3 py-2 border border-gray-400 rounded-md outline-none focus:shadow-outline @error('first_name') is-invalid @enderror"
-                    name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+        <x-form-elements.text-field class="mt-2" name="last_name" autocomplete="last_name" required>
+            <x-slot name="label">
+                {{ __('Last Name') }}
+            </x-slot>
+        </x-form-elements.text-field>
 
-                @error('first_name')
-                <span class="" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
+        <x-form-elements.text-field class="mt-2" name="email" autocomplete="email" required>
+            <x-slot name="label">
+                {{ __('E-Mail Address') }}
+            </x-slot>
+        </x-form-elements.text-field>
 
-        <div class="mt-2">
-            <label for="last_name" class="text-sm uppercase text-body-secondary">{{ __('Last Name') }}</label>
+        <x-form-elements.text-field class="mt-2" name="password" autocomplete="new-password" required>
+            <x-slot name="label">
+                {{ __('Password') }}
+            </x-slot>
+        </x-form-elements.text-field>
 
-            <div class="flex flex-col">
-                <input id="last_name" type="text"
-                    class="@erpx-3 py-2 border border-gray-400 rounded-md outline-none focus:shadow-outline @error('last_name') is-invalid @enderror"
-                    name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
+        <x-form-elements.text-field class="mt-2" name="password-confirm" autocomplete="new-password" required>
+            <x-slot name="label">
+                {{ __('Confirm Password') }}
+            </x-slot>
+        </x-form-elements.text-field>
 
-                @error('last_name')
-                <span class="" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="mt-2">
-            <label for="email" class="text-sm uppercase text-body-secondary">{{ __('E-Mail Address') }}</label>
-
-            <div class="flex flex-col">
-                <input id="email" type="email"
-                    class="@errorpx-3 py-2 border border-gray-400 rounded-md outline-none focus:shadow-outline @error('email') is-invalid @enderror"
-                    name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                @error('email')
-                <span class="" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="mt-2">
-            <label for="password" class="text-sm uppercase text-body-secondary">{{ __('Password') }}</label>
-
-            <div class="flex flex-col">
-                <input id="password" type="password"
-                    class="px-3 py-2 border border-gray-400 rounded-md outline-none focus:shadow-outline @error('password') is-invalid @enderror"
-                    name="password" required autocomplete="new-password">
-
-                @error('password')
-                <span class="" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="mt-2">
-            <label for="password-confirm"
-                class="text-sm uppercase text-body-secondary">{{ __('Confirm Password') }}</label>
-
-            <div class="flex flex-col">
-                <input id="password-confirm" type="password"
-                    class="px-3 py-2 border border-gray-400 rounded-md outline-none focus:shadow-outline @error('password_confirmation') is-invalid @enderror"
-                    name="password_confirmation" required autocomplete="new-password">
-            </div>
-        </div>
-
-        <div class="mt-4">
-            <div class="flex flex-col">
-                <x-button type="submit">
-                    <x-slot name="title">
-                        {{ __('Register') }}
-                    </x-slot>
-                </x-button>
-            </div>
-        </div>
-    </form>
+        <x-button class="mt-4" type="submit">
+            <x-slot name="title">
+                {{ __('Register') }}
+            </x-slot>
+        </x-button>
+</div>
+</form>
 </div>
 @endsection

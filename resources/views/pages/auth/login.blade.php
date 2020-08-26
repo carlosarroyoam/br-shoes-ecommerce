@@ -10,67 +10,44 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <div class="mt-4">
-            <label for="email" class="text-sm uppercase text-body-secondary">{{ __('E-Mail Address') }}</label>
+        <x-form-elements.text-field class="mt-4" name="email" type="email" autocomplete="email" autofocus required>
+            <x-slot name="label">
+                {{ __('E-Mail Address') }}
+            </x-slot>
+        </x-form-elements.text-field>
 
-            <div class="flex flex-col">
-                <input id="email"
-                    class="px-3 py-2 border border-gray-400 rounded-md outline-none focus:shadow-outline @error('email') border-red-600 @enderror"
-                    type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                @error('email')
-                <span class="mt-2 text-xs text-red-600 uppercase" role="alert">
-                    {{ $message }}
-                </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="mt-2">
-            <label for="password" class="text-sm uppercase text-body-secondary">{{ __('Password') }}</label>
-
-            <div class="flex flex-col">
-                <input id="password" type="password"
-                    class="px-3 py-2 border border-gray-400 rounded-md outline-none focus:shadow-outline @error('email') border-red-600 @enderror"
-                    name="password" required autocomplete="current-password">
-
-                @error('password')
-                <span class="mt-2 text-xs text-red-600 uppercase" role="alert">
-                    {{ $message }}
-                </span>
-                @enderror
-            </div>
-        </div>
+        <x-form-elements.text-field class="mt-2" name="password" type="password" autocomplete="current-password"
+            required>
+            <x-slot name="label">
+                {{ __('Password') }}
+            </x-slot>
+        </x-form-elements.text-field>
 
         <div class="mt-3">
-            <div class="">
-                <div class="flex items-center">
-                    <input class="" type="checkbox" name="remember" id="remember"
-                        {{ old('remember') ? 'checked' : '' }}>
+            <div class="flex items-center">
+                <input class="" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                    <label class="ml-2 text-sm uppercase text-body-secondary" for="remember">
-                        {{ __('Remember Me') }}
-                    </label>
-                </div>
+                <label class="ml-2 text-sm uppercase text-body-secondary" for="remember">
+                    {{ __('Remember Me') }}
+                </label>
             </div>
         </div>
 
-        <div class="mt-4">
-            <div class="flex flex-col">
-                <x-button type="submit">
-                    <x-slot name="title">
-                        {{ __('Login') }}
-                    </x-slot>
-                </x-button>
+        <x-button class="mt-4" type="submit">
+            <x-slot name="title">
+                {{ __('Login') }}
+            </x-slot>
+        </x-button>
 
-                @if (Route::has('password.request'))
-                <a class="mt-4 text-sm text-center text-body-secondary hover:text-body"
-                    href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
-                </a>
-                @endif
-            </div>
+        @if (Route::has('password.request'))
+        <div class="flex flex-col">
+            <a class="mt-4 text-sm text-center text-body-secondary hover:text-body"
+                href="{{ route('password.request') }}">
+                {{ __('Forgot Your Password?') }}
+            </a>
         </div>
+        @endif
+
     </form>
 </div>
 @endsection
