@@ -5,6 +5,7 @@
 @section('content')
 <div class="mx-auto md:w-6/12">
     <h1 class="text-2xl text-gray-900 uppercase">{{ __('Reset Password') }}</h1>
+    <p class="text-base text-header-secondary">Inicia sesion y comienza a comprar tus zapatos favoritos...</p>
 
     @if (session('status'))
     <div class="" role="alert">
@@ -15,28 +16,17 @@
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
 
-        <div class="">
-            <label for="email" class="">{{ __('E-Mail Address') }}</label>
+        <x-form-elements.text-field class="mt-4" name="email" type="email" autocomplete="email" autofocus required>
+            <x-slot name="label">
+                {{ __('E-Mail Address') }}
+            </x-slot>
+        </x-form-elements.text-field>
 
-            <div class="">
-                <input id="email" type="email" class="@error('email') is-invalid @enderror" name="email"
-                    value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                @error('email')
-                <span class="" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
-        </div>
-
-        <div class="">
-            <div class="">
-                <button type="submit" class="">
-                    {{ __('Send Password Reset Link') }}
-                </button>
-            </div>
-        </div>
+        <x-button class="mt-4" type="submit">
+            <x-slot name="title">
+                {{ __('Send Password Reset Link') }}
+            </x-slot>
+        </x-button>
     </form>
 </div>
 @endsection
