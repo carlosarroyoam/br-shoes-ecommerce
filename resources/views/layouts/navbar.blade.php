@@ -6,7 +6,7 @@
                 {{ config('global_constants.app_name', 'BR Shoes') }}
             </a>
 
-            <!-- Mobile menu button -->
+            {{-- Mobile menu button --}}
             <div class="flex lg:hidden">
                 <button type="button" class="text-body-secondary hover:text-body focus:outline-none focus:text-body"
                     aria-label="toggle menu" x-on:click="open = true">
@@ -19,10 +19,11 @@
             </div>
         </div>
 
-        <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-        <div class="flex-1 lg:flex lg:items-center lg:justify-between" x-bind:class="{ 'block': open, 'hidden': !open }"
+        {{-- Mobile Menu open: "block", Menu closed: "hidden" --}}
+        <nav class="flex-1 lg:flex lg:items-center lg:justify-between" x-bind:class="{ 'block': open, 'hidden': !open }"
             x-on:click.away="open = false">
-            <nav class="flex flex-col lg:ml-10 lg:flex lg:flex-row lg:items-center">
+            {{-- Navigation Links --}}
+            <ul class="flex flex-col list-none lg:ml-10 lg:flex lg:flex-row lg:items-center">
                 <x-navbar.categories-dropdown>
                     <x-slot name="title">
                         Categorías
@@ -46,12 +47,12 @@
                         Ofertas
                     </x-slot>
                 </x-navbar.nav-item>
-            </nav>
+            </ul>
 
             <div class="flex-1 lg:flex lg:items-center lg:justify-end">
-                <!-- Authentication Links -->
+                {{-- Guest Links --}}
                 @guest
-                <div class="flex flex-col lg:flex-row lg:items-center">
+                <ul class="flex flex-col list-none lg:flex-row lg:items-center">
                     <x-navbar.nav-item route="login">
                         <x-slot name="title">
                             {{ __('Login') }}
@@ -63,7 +64,8 @@
                             {{ __('Register') }}
                         </x-slot>
                     </x-navbar.nav-item>
-                </div>
+                </ul>
+                {{-- Authentication Links --}}
                 @else
                 <div class="flex items-center mt-4 md:mt-0">
                     <x-navbar.notifications-button />
@@ -74,6 +76,7 @@
                 </div>
                 @endauth
             </div>
-        </div>
+        </nav>
+
     </div>
 </header>
