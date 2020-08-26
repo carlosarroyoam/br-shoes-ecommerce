@@ -74,9 +74,13 @@
         <div class="w-full lg:w-1/4 lg:-ml-16 md:w-1/2">
             <h2 class="mb-3 text-sm font-medium tracking-widest text-header">SUBSCRIBE</h2>
             <div class="flex flex-wrap justify-center xl:flex-no-wrap md:flex-no-wrap lg:flex-wrap md:justify-start">
-                <input
-                    class="px-4 py-2 mr-2 text-base border border-gray-400 rounded xl:mr-4 lg:mr-0 sm:mr-4 focus:outline-none focus:shadow-outline lg:w-full xl:w-auto"
-                    placeholder="email@example.com" type="email">
+                {{-- <input
+                    class="px-4 py-2 mr-2 text-base border border-gray-400 rounded xl:mr-4 lg:mr-0 sm:mr-4 focus:outline-none focus:shadow-outline "
+                     type="email"> --}}
+                <x-form-elements.text-field class="mr-2 xl:mr-4 lg:mr-0 sm:mr-4 lg:w-full xl:w-auto"
+                    name="newsletter-subscribe-mail" type="email" placeholder="email@example.com"
+                    autocomplete="email" />
+
                 <x-button class="mt-0 lg:w-full lg:mt-2 xl:mt-0">
                     <x-slot name="title">
                         SUBSCRIBE
