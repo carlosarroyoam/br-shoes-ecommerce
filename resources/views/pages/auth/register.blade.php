@@ -28,13 +28,14 @@
             </x-slot>
         </x-form-elements.text-field>
 
-        <x-form-elements.text-field class="mt-2" name="password" autocomplete="new-password" required>
+        <x-form-elements.text-field class="mt-2" name="password" type="password" autocomplete="new-password" required>
             <x-slot name="label">
                 {{ __('Password') }}
             </x-slot>
         </x-form-elements.text-field>
 
-        <x-form-elements.text-field class="mt-2" name="password-confirm" autocomplete="new-password" required>
+        <x-form-elements.text-field class="mt-2" name="password_confirmation" type="password"
+            autocomplete="new-password" required>
             <x-slot name="label">
                 {{ __('Confirm Password') }}
             </x-slot>
