@@ -49,10 +49,27 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the profile picture record associated with the user.
+     * Get the addresess records associated with the user.
+     */
+    public function addresess()
+    {
+        return $this->hasMany('App\Addresses');
+    }
+
+    /**
+     * Get the contact details record associated with the user.
+     */
+    public function contactDetails()
+    {
+        return $this->hasOne('App\ContactDetails');
+    }
+
+    /**
+     * Get all of the user's profile picture.
      */
     public function profilePicture()
     {
-        return $this->hasOne('App\ProfilePicture');
+        return $this->morphOne('App\Image', 'imageable');
     }
+
 }

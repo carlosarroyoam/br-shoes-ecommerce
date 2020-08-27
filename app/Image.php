@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProfilePicture extends Model
+class Image extends Model
 {
 
     /**
@@ -13,15 +13,15 @@ class ProfilePicture extends Model
      * @var array
      */
     protected $fillable = [
-        'path', 'user_id'
+        'url', 'imageable_id', 'imageable_type',
     ];
 
     /**
-     * Get the user that owns the profile picture.
+     * Get the owning imageable model.
      */
-    public function user()
+    public function imageable()
     {
-        return $this->belongsTo('App\User');
+        return $this->morphTo();
     }
 
 }

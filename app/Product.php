@@ -17,10 +17,19 @@ class Product extends Model
     ];
 
     /**
-     * Get the pictures for the product.
+     * Get all of the product's pictures.
      */
     public function pictures()
     {
-        return $this->hasMany('App\Pictures');
+        return $this->morphMany('App\Image', 'imageable');
     }
+
+    /**
+     * Get all of the categories for the product.
+     */
+    public function tags()
+    {
+        return $this->morphToMany('App\Categories', 'categorizable');
+    }
+
 }
