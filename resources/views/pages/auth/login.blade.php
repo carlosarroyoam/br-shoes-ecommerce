@@ -23,15 +23,11 @@
             </x-slot>
         </x-form-elements.text-field>
 
-        <div class="mt-3">
-            <div class="flex items-center">
-                <input class="" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                <label class="ml-2 text-sm uppercase text-body-secondary" for="remember">
-                    {{ __('Remember Me') }}
-                </label>
-            </div>
-        </div>
+        <x-form-elements.check-box class="mt-3" name="remember">
+            <x-slot name="label">
+                {{ __('Remember Me') }}
+            </x-slot>
+        </x-form-elements.check-box>
 
         <x-button class="mt-4" type="submit">
             <x-slot name="title">

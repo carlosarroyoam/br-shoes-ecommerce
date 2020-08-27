@@ -41,6 +41,12 @@
             </x-slot>
         </x-form-elements.text-field>
 
+        <x-form-elements.check-box class="mt-3" name="agree-terms">
+            <x-slot name="label">
+                {{ __('I agree to the terms and conditions') }}
+            </x-slot>
+        </x-form-elements.check-box>
+
         <x-button class="mt-4" type="submit">
             <x-slot name="title">
                 {{ __('Register') }}
