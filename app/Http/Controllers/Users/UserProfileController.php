@@ -10,6 +10,16 @@ class UserProfileController extends Controller
 {
 
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @return \Illuminate\Http\Response

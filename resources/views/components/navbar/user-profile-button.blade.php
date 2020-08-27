@@ -8,7 +8,7 @@
 
     <div class="absolute right-0 w-64 mt-2 overflow-hidden border border-gray-300 rounded-md shadow-md bg-background"
         x-show="open" x-on:click.away="open = false">
-        <a href="{{ route('user.profile') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
+        <a href="{{ route('users.profile') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ Auth::user()->fullName }}
         </a>
         <a href="{{ route('shopping-bag.index') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
@@ -20,7 +20,7 @@
         <a href="{{ route('orders.index') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ __('navigation.orders') }}
         </a>
-        <a href="{{ route('user.account-settings') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
+        <a href="{{ route('users.account-settings') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ __('navigation.account_settings') }}
         </a>
         <a href="{{ route('logout') }}"
