@@ -3,7 +3,7 @@
 @section('title', __('Confirm Password'))
 
 @section('content')
-<div class="mx-auto md:w-6/12">
+<article class="mx-auto md:w-6/12">
     <h1 class="text-2xl text-gray-900 uppercase">{{ __('Confirm Password') }}</h1>
     <p class="text-base text-header-secondary">
         {{ __('Please confirm your password before continuing.') }}
@@ -19,11 +19,11 @@
             </x-slot>
         </x-form-elements.text-field>
 
-        <x-button class="mt-4" type="submit">
+        <x-form-elements.button class="mt-4" type="submit">
             <x-slot name="title">
                 {{ __('Confirm Password') }}
             </x-slot>
-        </x-button>
+        </x-form-elements.button>
 
         @if (Route::has('password.request'))
         <div class="flex flex-col">
@@ -35,5 +35,5 @@
         @endif
 
     </form>
-</div>
+</article>
 @endsection

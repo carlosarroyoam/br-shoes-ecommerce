@@ -3,7 +3,7 @@
 @section('title', __('Reset Password'))
 
 @section('content')
-<div class="mx-auto md:w-6/12">
+<article class="mx-auto md:w-6/12">
     <h1 class="text-2xl text-gray-900 uppercase">{{ __('Reset Password') }}</h1>
     <p class="text-base text-header-secondary">Inicia sesion y comienza a comprar tus zapatos favoritos...</p>
 
@@ -30,11 +30,11 @@
             </x-slot>
         </x-form-elements.text-field>
 
-        <x-button class="mt-4" type="submit">
+        <x-form-elements.button class="mt-4" type="submit">
             <x-slot name="title">
                 {{ __('Reset Password') }}
             </x-slot>
-        </x-button>
+        </x-form-elements.button>
     </form>
-</div>
+</article>
 @endsection

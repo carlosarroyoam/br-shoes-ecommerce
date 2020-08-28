@@ -3,7 +3,6 @@
 @section('title', __('Home'))
 
 @section('content')
-
 <article>
     <h1 class="text-2xl uppercase text-header">Todos los productos</h1>
 
@@ -15,5 +14,4 @@
         <x-products.product-card></x-products.product-card>
     </section>
 </article>
-
 @endsection

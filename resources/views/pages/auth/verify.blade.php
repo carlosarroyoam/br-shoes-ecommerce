@@ -3,7 +3,7 @@
 @section('title', __('Verify Your Email Address'))
 
 @section('content')
-<div class="mx-auto md:w-6/12">
+<article class="mx-auto md:w-6/12">
     <h1 class="text-2xl text-gray-900 uppercase">{{ __('Verify Your Email Address') }}</h1>
     <p class="text-base text-header-secondary">Inicia sesion y comienza a comprar tus zapatos favoritos...</p>
 
@@ -17,11 +17,11 @@
     {{ __('If you did not receive the email') }},
     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
         @csrf
-        <x-button class="mt-4" type="submit">
+        <x-form-elements.button class="mt-4" type="submit">
             <x-slot name="title">
                 {{ __('click here to request another') }}
             </x-slot>
-        </x-button>
+        </x-form-elements.button>
     </form>
-</div>
+</article>
 @endsection

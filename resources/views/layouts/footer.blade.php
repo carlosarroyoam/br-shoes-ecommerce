@@ -81,11 +81,11 @@
                     name="newsletter-subscribe-mail" type="email" placeholder="email@example.com"
                     autocomplete="email" />
 
-                <x-button class="mt-0 lg:w-full lg:mt-2 xl:mt-0">
+                <x-form-elements.button class="mt-0 lg:w-full lg:mt-2 xl:mt-0">
                     <x-slot name="title">
                         SUBSCRIBE
                     </x-slot>
-                </x-button>
+                </x-form-elements.button>
             </div>
             <p class="mt-2 text-sm text-center text-body-secondary md:text-left">Bitters chicharrones fanny pack
                 <br class="hidden xl:block">waistcoat green juice
