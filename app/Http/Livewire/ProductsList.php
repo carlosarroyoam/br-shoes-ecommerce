@@ -2,22 +2,25 @@
 
 namespace App\Http\Livewire;
 
+use App\Product;
 use Livewire\Component;
 
 class ProductsList extends Component
 {
     public $title;
-    public $products;
+    public $seeAllRoute;
+    public $seeAllMessage;
 
-    public function mount()
+    public function mount($title, $seeAllRoute, $seeAllMessage)
     {
-        $this->title = 'Products List';
-        $this->products = ['1', '2', '2', '2', '2', '2', '2'];
+        $this->title = $title;
+        $this->seeAllRoute = $seeAllRoute;
+        $this->seeAllMessage = $seeAllMessage;
     }
 
     public function render()
     {
-        return view('livewire.products-list');
+        return view('livewire.products-list', ['products' => ['a','a','a','a','a',]]);
     }
 
     public function addToWishList()

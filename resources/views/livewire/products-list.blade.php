@@ -1,5 +1,7 @@
 <section>
-    <h1 class="text-2xl uppercase text-header">{{ $title }}</h1>
+    <a href="{{ route($seeAllRoute) }}">
+        <h1 class="text-2xl uppercase text-header">{{ $title }}</h1>
+    </a>
 
     {{-- if products > 0 --}}
     <div class="grid grid-cols-1 gap-5 mt-4 md:grid-cols-3 lg:grid-cols-5">
@@ -34,6 +36,13 @@
         </a>
         @endforeach
     </div>
+
+    <div class="flex flex-row justify-end mt-4">
+        <a href="{{ route($seeAllRoute) }}" class="text-lg uppercase text-header">
+            {{ $seeAllMessage }}
+        </a>
+    </div>
+
 
     {{-- if products == 0 render and empty state --}}
 
