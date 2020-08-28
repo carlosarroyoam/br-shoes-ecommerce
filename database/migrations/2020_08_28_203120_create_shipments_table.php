@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserContactDetailsTable extends Migration
+class CreateShipmentStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateUserContactDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_contact_details', function (Blueprint $table) {
+        Schema::create('shipment_statuses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->string('phone_number')->unique();
+            $table->unsignedBigInteger('shipment_status_id');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on("users")->onDelete('cascade');
+            $table->foreign('shipment_status_id')->references('id')->on('shipment_statuses')->onDelete('cascade');
         });
     }
 
@@ -30,6 +29,6 @@ class CreateUserContactDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_contact_details');
+        Schema::dropIfExists('shipment_statuses');
     }
 }

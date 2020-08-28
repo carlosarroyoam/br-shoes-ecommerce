@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserContactDetailsTable extends Migration
+class CreateProductPropertyTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateUserContactDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_contact_details', function (Blueprint $table) {
+        Schema::create('product_property_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->string('phone_number')->unique();
+            $table->string('name')->unique();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on("users")->onDelete('cascade');
         });
     }
 
@@ -30,6 +27,6 @@ class CreateUserContactDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_contact_details');
+        Schema::dropIfExists('product_properties');
     }
 }
