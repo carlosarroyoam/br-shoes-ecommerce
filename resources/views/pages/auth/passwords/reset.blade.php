@@ -5,7 +5,7 @@
 @section('content')
 <article class="mx-auto md:w-6/12">
     <h1 class="text-2xl text-gray-900 uppercase">{{ __('Reset Password') }}</h1>
-    <p class="text-base text-header-secondary">Inicia sesion y comienza a comprar tus zapatos favoritos...</p>
+    <p class="text-base text-body-secondary">Inicia sesion y comienza a comprar tus zapatos favoritos...</p>
 
     <form method="POST" action="{{ route('password.update') }}">
         @csrf

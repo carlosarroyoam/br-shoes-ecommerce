@@ -38,7 +38,7 @@
     </div>
 
     <div class="flex flex-row justify-end mt-4">
-        <a href="{{ route($seeAllRoute) }}" class="text-lg uppercase text-header">
+        <a href="{{ route($seeAllRoute) }}" class="text-base uppercase text-body-secondary">
             {{ $seeAllMessage }}
         </a>
     </div>

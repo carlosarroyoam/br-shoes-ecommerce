@@ -21216,25 +21216,6 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! ./app/index */ "./resources/js/app/index.js");
-
-/***/ }),
-
-/***/ "./resources/js/app/index.js":
-/*!***********************************!*\
-  !*** ./resources/js/app/index.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function addToWhishList() {
-  console.log('added');
-}
-
-function addToShoppingBag() {
-  console.log('added');
-}
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

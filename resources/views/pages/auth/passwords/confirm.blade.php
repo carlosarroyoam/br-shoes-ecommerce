@@ -5,7 +5,7 @@
 @section('content')
 <article class="mx-auto md:w-6/12">
     <h1 class="text-2xl text-gray-900 uppercase">{{ __('Confirm Password') }}</h1>
-    <p class="text-base text-header-secondary">
+    <p class="text-base text-body-secondary">
         {{ __('Please confirm your password before continuing.') }}
     </p>
 

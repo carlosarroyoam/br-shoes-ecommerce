@@ -20,11 +20,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" />
 </head>
 
-<body class="flex flex-col min-h-screen pt-24 antialiased theme-light bg-background-secondary text-header">
+<body class="flex flex-col min-h-screen antialiased pt-26 theme-light bg-background-secondary text-header">
 
     @include('layouts.navbar')
 
-    <main class="container flex-grow pb-10">
+    <main class="container flex-grow pb-12">
         @yield('content')
     </main>
 

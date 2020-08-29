@@ -5,7 +5,7 @@
 @section('content')
 <article class="mx-auto md:w-6/12">
     <h1 class="text-2xl text-gray-900 uppercase">{{ __('Verify Your Email Address') }}</h1>
-    <p class="text-base text-header-secondary">Inicia sesion y comienza a comprar tus zapatos favoritos...</p>
+    <p class="text-base text-body-secondary">Inicia sesion y comienza a comprar tus zapatos favoritos...</p>
 
     @if (session('resent'))
     <div class="alert alert-success" role="alert">

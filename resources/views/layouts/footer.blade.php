@@ -78,8 +78,8 @@
                 @csrf
 
                 <x-form-elements.text-field class="mr-2 xl:mr-4 lg:mr-0 sm:mr-4 lg:w-full xl:w-auto"
-                    name="newsletter-subscribe-mail" type="email" placeholder="email@example.com" autocomplete="email"
-                    required />
+                    name="newsletter-subscribe-mail" type="email" placeholder="{{ __('input-placeholders.email') }}"
+                    autocomplete="email" required />
 
                 <x-form-elements.button type="submit" class="mt-0 lg:w-full lg:mt-2 xl:mt-0">
                     <x-slot name="title">
