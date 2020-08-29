@@ -15,7 +15,7 @@
                 <p class="mt-2 text-sm text-body-secondary">$ 349.00</p>
 
                 @auth
-                <x-products.icon-button class="top-0 right-0 mt-4 mr-4" onClickAction="addToWishList"
+                <x-products.icon-button class="mr-12" onClickAction="addToWishList"
                     ariaLabel="Add product to wish list">
                     <x-slot name="svgPath">
                         <path fill-rule="evenodd"
@@ -24,7 +24,7 @@
                 </x-products.icon-button>
                 @endauth
 
-                <x-products.icon-button class="bottom-0 right-0 mb-4 mr-4 " onClickAction="addToWishList"
+                <x-products.icon-button class="mr-4" onClickAction="addToWishList"
                     ariaLabel="Add product to shopping bag">
                     <x-slot name="svgPath">
                         <path fill-rule="evenodd"
