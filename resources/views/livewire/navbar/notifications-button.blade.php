@@ -1,6 +1,7 @@
 <div class="relative" x-data="{ open: false }">
+    {{--Notifications button --}}
     <button
-        {{ $attributes->merge(['class' => 'relative hidden mr-6 text-gray-600 md:block hover:text-gray-800 focus:text-gray-800 focus:outline-none selected:border-gray-800']) }}
+        class="relative hidden mr-6 text-gray-600 md:block hover:text-gray-800 focus:text-gray-800 focus:outline-none selected:border-gray-800"
         aria-label="Show notifications" x-on:click="open = true">
         <svg class="w-5 h-5 " viewBox="0 0 16 16" class="bi bi-bell" fill="currentColor"
             xmlns="http://www.w3.org/2000/svg">
@@ -12,6 +13,7 @@
         <span class="absolute top-0 right-0 p-1 text-white rounded-full bg-primary animate-ping"></span>
     </button>
 
+    {{--Notifications dropdown --}}
     <div class="absolute right-0 w-64 mt-3 mr-4 overflow-hidden border border-gray-300 rounded-md shadow-md bg-background"
         x-show="open" x-on:click.away="open = false">
         <p class="p-4">

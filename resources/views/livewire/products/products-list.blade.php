@@ -7,15 +7,15 @@
     <div class="grid grid-cols-1 gap-5 mt-4 md:grid-cols-3 lg:grid-cols-5">
         @foreach ($products as $product)
         <a href="{{ route('home') }}"
-            class="flex flex-col w-full overflow-hidden rounded-sm shadow md-w-1/2 bg-background">
+            class="relative flex flex-col w-full overflow-hidden rounded-sm shadow md-w-1/2 bg-background">
             <img class="w-full bg-cover" src="{{ asset('/img/product.jpg') }}" alt="">
-            <div class="relative p-4">
+            <div class="p-4 ">
                 <p class="text-xs uppercase text-header-secondary">BR SHOES</p>
                 <h3 class="text-header">Sneaker Snake</h3>
                 <p class="mt-2 text-sm text-body-secondary">$ 349.00</p>
 
                 @auth
-                <x-products.icon-button class="mr-12" onClickAction="addToWishList"
+                <x-products.icon-button class="top-0 right-0 mt-4 mr-4" onClickAction="addToWishList"
                     ariaLabel="Add product to wish list">
                     <x-slot name="svgPath">
                         <path fill-rule="evenodd"
@@ -24,7 +24,7 @@
                 </x-products.icon-button>
                 @endauth
 
-                <x-products.icon-button class="mr-4" onClickAction="addToWishList"
+                <x-products.icon-button class="bottom-0 right-0 mb-4 mr-4 " onClickAction="addToWishList"
                     ariaLabel="Add product to shopping bag">
                     <x-slot name="svgPath">
                         <path fill-rule="evenodd"

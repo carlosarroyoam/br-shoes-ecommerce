@@ -68,9 +68,9 @@
                 {{-- Authentication Links --}}
                 @else
                 <div class="flex items-center mt-4 md:mt-0">
-                    <x-navbar.notifications-button />
+                    <livewire:navbar.notifications-button />
 
-                    <x-navbar.shopping-bag-button />
+                    <livewire:navbar.shopping-bag-button />
 
                     <x-navbar.user-profile-button />
                 </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Products;
 
 use App\Product;
 use Livewire\Component;
@@ -18,15 +18,28 @@ class ProductsList extends Component
         $this->seeAllMessage = $seeAllMessage;
     }
 
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\View\View|string
+     */
     public function render()
     {
-        return view('livewire.products-list', ['products' => ['a','a','a','a','a',]]);
+        return view('livewire.products.products-list', ['products' => ['a','a','a','a','a',]]);
     }
 
+    /**
+     * Get the view / contents that represent the component.
+     *
+     */
     public function addToWishList()
     {
     }
 
+    /**
+     * Get the view / contents that represent the component.
+     *
+     */
     public function addToShoppingBag()
     {
     }
