@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('shipment_id')->nullable();
-            $table->unsignedBigInteger('order_status_id');
+            $table->unsignedTinyInteger('order_status_id');
             $table->text('comments')->nullable();
             $table->timestamps();
 

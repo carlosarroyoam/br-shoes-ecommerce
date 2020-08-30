@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShipmentStatusesTable extends Migration
+class CreateShipmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateShipmentStatusesTable extends Migration
      */
     public function up()
     {
-        Schema::create('shipment_statuses', function (Blueprint $table) {
+        Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shipment_status_id');
+            $table->unsignedTinyInteger('shipment_status_id');
             $table->timestamps();
 
             $table->foreign('shipment_status_id')->references('id')->on('shipment_statuses')->onDelete('cascade');
@@ -29,6 +29,6 @@ class CreateShipmentStatusesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shipment_statuses');
+        Schema::dropIfExists('shipments');
     }
 }

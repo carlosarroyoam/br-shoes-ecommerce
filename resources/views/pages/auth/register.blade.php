@@ -13,7 +13,7 @@
         <x-forms.fieldset class="mt-6">
             <x-slot name="legend">{{ __('Personal Information') }}</x-slot>
 
-            <x-forms.text-field class="mt-3" name="first_name" placeholder="{{ __('input-placeholders.given-name') }}"
+            <x-forms.text-field class="mt-4" name="first_name" placeholder="{{ __('input-placeholders.given-name') }}"
                 autocomplete="given-name" autofocus required withRequiredIndicator>
                 <x-slot name="label">
                     {{ __('First Name') }}
@@ -29,10 +29,10 @@
         </x-forms.fieldset>
 
 
-        <x-forms.fieldset class="mt-4">
+        <x-forms.fieldset class="mt-6">
             <x-slot name="legend">{{ __('Account Information') }}</x-slot>
 
-            <x-forms.text-field class="mt-3" name="email" placeholder="{{ __('input-placeholders.email') }}"
+            <x-forms.text-field class="mt-4" name="email" placeholder="{{ __('input-placeholders.email') }}"
                 autocomplete="email" required withRequiredIndicator>
                 <x-slot name="label">
                     {{ __('E-Mail Address') }}
