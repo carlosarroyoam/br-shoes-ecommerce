@@ -19,7 +19,7 @@ class CreateUserAddressesTable extends Migration
             $table->string('address');
             $table->string('city');
             $table->string('state');
-            $table->string('postal_code');
+            $table->unsignedSmallInteger('postal_code');
             $table->string('country')->default('México');
             $table->timestamps();
 

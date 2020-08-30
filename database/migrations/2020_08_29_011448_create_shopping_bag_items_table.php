@@ -17,7 +17,7 @@ class CreateShoppingBagItemsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('variant_id');
             $table->unsignedBigInteger('shopping_bag_id');
-            $table->smallInteger('quantity');
+            $table->unsignedSmallInteger('quantity');
             $table->timestamps();
 
             $table->foreign('variant_id')->references('id')->on('variants');

@@ -16,7 +16,7 @@ class CreateProductPropertiesTable extends Migration
         Schema::create('product_properties', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('property_type_id')->unique();
+            $table->unsignedBigInteger('property_type_id');
             $table->string('value');
             $table->timestamps();
 
