@@ -16,17 +16,17 @@
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
 
-        <x-form-elements.text-field class="mt-4" name="email" type="email" autocomplete="email" autofocus required>
+        <x-forms.text-field class="mt-4" name="email" type="email" autocomplete="email" autofocus required>
             <x-slot name="label">
                 {{ __('E-Mail Address') }}
             </x-slot>
-        </x-form-elements.text-field>
+        </x-forms.text-field>
 
-        <x-form-elements.button class="mt-4" type="submit">
+        <x-forms.button class="mt-4" type="submit">
             <x-slot name="title">
                 {{ __('Send Password Reset Link') }}
             </x-slot>
-        </x-form-elements.button>
+        </x-forms.button>
     </form>
 </article>
 @endsection

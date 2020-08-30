@@ -12,18 +12,17 @@
     <form method="POST" action="{{ route('password.confirm') }}">
         @csrf
 
-        <x-form-elements.text-field class="mt-2" name="password" type="password" autocomplete="current-password"
-            required>
+        <x-forms.text-field class="mt-2" name="password" type="password" autocomplete="current-password" required>
             <x-slot name="label">
                 {{ __('Password') }}
             </x-slot>
-        </x-form-elements.text-field>
+        </x-forms.text-field>
 
-        <x-form-elements.button class="mt-4" type="submit">
+        <x-forms.button class="mt-4" type="submit">
             <x-slot name="title">
                 {{ __('Confirm Password') }}
             </x-slot>
-        </x-form-elements.button>
+        </x-forms.button>
 
         @if (Route::has('password.request'))
         <div class="flex flex-col">

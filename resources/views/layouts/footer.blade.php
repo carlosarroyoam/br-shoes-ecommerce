@@ -77,15 +77,15 @@
                 class="flex flex-wrap justify-center xl:flex-no-wrap md:flex-no-wrap lg:flex-wrap md:justify-start">
                 @csrf
 
-                <x-form-elements.text-field class="mr-2 xl:mr-4 lg:mr-0 sm:mr-4 lg:w-full xl:w-auto"
+                <x-forms.text-field class="mr-2 xl:mr-4 lg:mr-0 sm:mr-4 lg:w-full xl:w-auto"
                     name="newsletter-subscribe-mail" type="email" placeholder="{{ __('input-placeholders.email') }}"
                     autocomplete="email" required />
 
-                <x-form-elements.button type="submit" class="mt-0 lg:w-full lg:mt-2 xl:mt-0">
+                <x-forms.button type="submit" class="mt-0 lg:w-full lg:mt-2 xl:mt-0">
                     <x-slot name="title">
                         SUBSCRIBE
                     </x-slot>
-                </x-form-elements.button>
+                </x-forms.button>
             </form>
             <p class="mt-2 text-sm text-center text-body-secondary md:text-left">Bitters chicharrones fanny pack
                 <br class="hidden xl:block">waistcoat green juice

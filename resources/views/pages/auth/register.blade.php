@@ -10,65 +10,62 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <x-form-elements.fieldset class="mt-6">
+        <x-forms.fieldset class="mt-6">
             <x-slot name="legend">{{ __('Personal Information') }}</x-slot>
 
-            <x-form-elements.text-field class="mt-3" name="first_name"
-                placeholder="{{ __('input-placeholders.given-name') }}" autocomplete="given-name" autofocus required
-                withRequiredIndicator>
+            <x-forms.text-field class="mt-3" name="first_name" placeholder="{{ __('input-placeholders.given-name') }}"
+                autocomplete="given-name" autofocus required withRequiredIndicator>
                 <x-slot name="label">
                     {{ __('First Name') }}
                 </x-slot>
-            </x-form-elements.text-field>
+            </x-forms.text-field>
 
-            <x-form-elements.text-field class="mt-3" name="last_name"
-                placeholder="{{ __('input-placeholders.family-name') }}" autocomplete="family-name" required
-                withRequiredIndicator>
+            <x-forms.text-field class="mt-3" name="last_name" placeholder="{{ __('input-placeholders.family-name') }}"
+                autocomplete="family-name" required withRequiredIndicator>
                 <x-slot name="label">
                     {{ __('Last Name') }}
                 </x-slot>
-            </x-form-elements.text-field>
-        </x-form-elements.fieldset>
+            </x-forms.text-field>
+        </x-forms.fieldset>
 
 
-        <x-form-elements.fieldset class="mt-4">
+        <x-forms.fieldset class="mt-4">
             <x-slot name="legend">{{ __('Account Information') }}</x-slot>
 
-            <x-form-elements.text-field class="mt-3" name="email" placeholder="{{ __('input-placeholders.email') }}"
+            <x-forms.text-field class="mt-3" name="email" placeholder="{{ __('input-placeholders.email') }}"
                 autocomplete="email" required withRequiredIndicator>
                 <x-slot name="label">
                     {{ __('E-Mail Address') }}
                 </x-slot>
-            </x-form-elements.text-field>
+            </x-forms.text-field>
 
-            <x-form-elements.text-field class="mt-3" name="password"
-                placeholder="{{ __('input-placeholders.new-password') }}" type="password" autocomplete="new-password"
-                required withRequiredIndicator>
+            <x-forms.text-field class="mt-3" name="password" placeholder="{{ __('input-placeholders.new-password') }}"
+                type="password" autocomplete="new-password" required withRequiredIndicator>
                 <x-slot name="label">
                     {{ __('Password') }}
                 </x-slot>
-            </x-form-elements.text-field>
+            </x-forms.text-field>
 
-            <x-form-elements.text-field class="mt-3" name="password_confirmation"
+            <x-forms.text-field class="mt-3" name="password_confirmation"
                 placeholder="{{ __('input-placeholders.confirm-password') }}" type="password"
                 autocomplete="new-password" required withRequiredIndicator>
                 <x-slot name="label">
                     {{ __('Confirm Password') }}
                 </x-slot>
-            </x-form-elements.text-field>
-        </x-form-elements.fieldset>
+            </x-forms.text-field>
+        </x-forms.fieldset>
 
-        <x-form-elements.check-box class="mt-4" name="agree-terms">
+        <x-forms.check-box class="mt-4" name="agree-terms">
             <x-slot name="label">
                 {{ __('I agree to the terms and conditions') }}
             </x-slot>
-        </x-form-elements.check-box>
+        </x-forms.check-box>
 
-        <x-form-elements.button class="mt-5" type="submit">
+        <x-forms.button class="mt-5" type="submit">
             <x-slot name="title">
                 {{ __('Register') }}
             </x-slot>
-        </x-form-elements.button>
+        </x-forms.button>
     </form>
 </article>
 @endsection

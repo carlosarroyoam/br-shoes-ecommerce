@@ -11,31 +11,31 @@
         @csrf
 
 
-        <x-form-elements.text-field class="mt-5" name="email" type="email"
-            placeholder="{{ __('input-placeholders.email') }}" autocomplete="email" autofocus required>
+        <x-forms.text-field class="mt-5" name="email" type="email" placeholder="{{ __('input-placeholders.email') }}"
+            autocomplete="email" autofocus required>
             <x-slot name="label">
                 {{ __('E-Mail Address') }}
             </x-slot>
-        </x-form-elements.text-field>
+        </x-forms.text-field>
 
-        <x-form-elements.text-field class="mt-3" name="password" type="password"
+        <x-forms.text-field class="mt-3" name="password" type="password"
             placeholder="{{ __('input-placeholders.current-password') }}" autocomplete="current-password" required>
             <x-slot name="label">
                 {{ __('Password') }}
             </x-slot>
-        </x-form-elements.text-field>
+        </x-forms.text-field>
 
-        <x-form-elements.check-box class="mt-4" name="remember">
+        <x-forms.check-box class="mt-4" name="remember">
             <x-slot name="label">
                 {{ __('Remember Me') }}
             </x-slot>
-        </x-form-elements.check-box>
+        </x-forms.check-box>
 
-        <x-form-elements.button class="mt-5" type="submit">
+        <x-forms.button class="mt-5" type="submit">
             <x-slot name="title">
                 {{ __('Login') }}
             </x-slot>
-        </x-form-elements.button>
+        </x-forms.button>
 
         @if (Route::has('password.request'))
         <div class="flex flex-col">

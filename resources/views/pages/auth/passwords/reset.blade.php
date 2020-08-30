@@ -11,30 +11,30 @@
         @csrf
         <input type="hidden" name="token" value="{{ $token }}">
 
-        <x-form-elements.text-field class="mt-4" name="email" type="email" autocomplete="email" autofocus required>
+        <x-forms.text-field class="mt-4" name="email" type="email" autocomplete="email" autofocus required>
             <x-slot name="label">
                 {{ __('E-Mail Address') }}
             </x-slot>
-        </x-form-elements.text-field>
+        </x-forms.text-field>
 
-        <x-form-elements.text-field class="mt-2" name="password" type="password" autocomplete="new-password" required>
+        <x-forms.text-field class="mt-2" name="password" type="password" autocomplete="new-password" required>
             <x-slot name="label">
                 {{ __('Password') }}
             </x-slot>
-        </x-form-elements.text-field>
+        </x-forms.text-field>
 
-        <x-form-elements.text-field class="mt-2" name="password_confirmation" type="password"
-            autocomplete="new-password" required>
+        <x-forms.text-field class="mt-2" name="password_confirmation" type="password" autocomplete="new-password"
+            required>
             <x-slot name="label">
                 {{ __('Confirm Password') }}
             </x-slot>
-        </x-form-elements.text-field>
+        </x-forms.text-field>
 
-        <x-form-elements.button class="mt-4" type="submit">
+        <x-forms.button class="mt-4" type="submit">
             <x-slot name="title">
                 {{ __('Reset Password') }}
             </x-slot>
-        </x-form-elements.button>
+        </x-forms.button>
     </form>
 </article>
 @endsection

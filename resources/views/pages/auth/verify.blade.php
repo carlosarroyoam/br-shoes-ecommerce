@@ -17,11 +17,11 @@
     {{ __('If you did not receive the email') }},
     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
         @csrf
-        <x-form-elements.button class="mt-4" type="submit">
+        <x-forms.button class="mt-4" type="submit">
             <x-slot name="title">
                 {{ __('click here to request another') }}
             </x-slot>
-        </x-form-elements.button>
+        </x-forms.button>
     </form>
 </article>
 @endsection
