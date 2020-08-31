@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Products;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Categories\StoreCategory;
+use App\Http\Requests\Categories\UpdateCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -15,7 +18,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('pages/products/categories');
+        $categories = Category::all();
+        return view('pages.categories.index', compact('categories'));
     }
 
     /**
@@ -34,29 +38,32 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategory $request)
     {
-        //
+        $validated = $request->validated();
+        $validated['slug'] = Str::slug($validated['name']);
+
+        Category::create($validated);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return view('pages.categories.show', compact('category'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
         //
     }
@@ -65,22 +72,27 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCategory $request, Category $category)
     {
-        //
+        $validated = $request->validated();
+
+        $category->name = $validated['name'];
+        $category->slug = Str::slug($validated['name']);
+
+        $category->save();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        Category::destroy($category->id);
     }
 }

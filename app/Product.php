@@ -32,4 +32,14 @@ class Product extends Model
         return $this->morphToMany('App\Categories', 'categorizable');
     }
 
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
 }

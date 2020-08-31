@@ -26,6 +26,15 @@ Route::get('account-settings', 'Users\AccountController@show')->name('users.acco
 Route::get('products/newest', 'Products\ProductController@newest')->name('products.newest');
 Route::get('products/offers', 'Products\ProductController@offers')->name('products.offers');
 
+Route::resource('products.categories', 'Products\ProductCategoryController')->shallow();
+Route::resource('products.pictures', 'Products\ProductPictureController')->shallow();
+Route::resource('users.profile-pictures', 'Users\UserProfilePictureController')->shallow();
+Route::resource('shopping-bag', 'ShoppingBagController')->except([
+    'create', 'show', 'edit'
+]);
+Route::resource('wish-list', 'WishListController')->except([
+    'create', 'show', 'edit'
+]);
 Route::resources([
     'products' =>'Products\ProductController',
     'categories' =>'Products\CategoryController',
@@ -35,16 +44,6 @@ Route::resources([
     'users' => 'Users\UserController',
     'users.conctact-details' =>'Users\UserProfilePictureController',
     'users.shipping-addresses' =>'Users\UserProfilePictureController'
-]);
-
-Route::resource('products.categories', 'Products\ProductCategoryController')->shallow();
-Route::resource('products.pictures', 'Products\ProductPictureController')->shallow();
-Route::resource('users.profile-pictures', 'Users\UserProfilePictureController')->shallow();
-Route::resource('shopping-bag', 'ShoppingBagController')->except([
-    'create', 'show', 'edit'
-]);
-Route::resource('wish-list', 'WishListController')->except([
-    'create', 'show', 'edit'
 ]);
 
 Route::group(['prefix' => 'admin'], function () {
