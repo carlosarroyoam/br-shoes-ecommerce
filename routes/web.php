@@ -37,7 +37,7 @@ Route::resource('wish-list', 'WishListController')->except([
 ]);
 Route::resources([
     'products' =>'Products\ProductController',
-    'categories' =>'Products\CategoryController',
+    'categories' =>'CategoryController',
     'orders' =>'OrderController',
     'shipments' =>'ShipmentController',
     'notifications' =>'NotificationsController',

@@ -73,5 +73,4 @@ class User extends Authenticatable
     {
         return $this->morphOne('App\Image', 'imageable');
     }
-
 }

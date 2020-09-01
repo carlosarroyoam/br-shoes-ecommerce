@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactDetail extends Model
 {
-
     /**
      * Get the user that owns the contact details.
      */
@@ -14,5 +13,4 @@ class ContactDetail extends Model
     {
         return $this->belongsTo('App\User');
     }
-
 }

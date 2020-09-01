@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
-
     /**
      * Get the user that owns the contact details.
      */
@@ -14,5 +13,4 @@ class Address extends Model
     {
         return $this->belongsTo('App\User');
     }
-
 }
