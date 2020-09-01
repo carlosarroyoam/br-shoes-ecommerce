@@ -6,6 +6,7 @@ use App\Category;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
@@ -26,7 +27,7 @@ class CategoryControllerTest extends TestCase
 
         $response = $this->get(route('categories.index'));
 
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.categories.index');
         $response->assertViewHas('categories', $categories);
     }
@@ -46,7 +47,7 @@ class CategoryControllerTest extends TestCase
 
         $category = Category::first();
 
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.categories.show');
         $response->assertViewHas('category', $category);
     }
@@ -72,11 +73,56 @@ class CategoryControllerTest extends TestCase
                 'name' => $expected['name']
             ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
         $this->assertDatabaseHas('categories', [
             'name' => $expected['name'],
             'slug' => $expected['slug'],
         ]);
+    }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function testATagNameShouldBeValidated()
+    {
+        $expected = [
+            'name' => '',
+            'slug' => 'snake-sneakers'
+        ];
+
+        $user = factory(User::class)->states('admin')->make();
+
+        $response = $this->actingAs($user)
+            ->postJson(route('categories.store'), [
+                'name' => $expected['name']
+            ]);
+
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+        $response->assertJsonValidationErrors(['name']);
+    }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function testACategoryCanBeStoredOnlyByAdmins()
+    {
+        $expected = [
+            'name' => 'Sneaker Snake',
+            'slug' => 'snake-sneakers'
+        ];
+
+        $user = factory(User::class)->make();
+
+        $response = $this->actingAs($user)
+            ->postJson(route('categories.store'), [
+                'name' => $expected['name']
+            ]);
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /**
@@ -101,7 +147,7 @@ class CategoryControllerTest extends TestCase
                 'name' => $expected['name']
             ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
         $this->assertDatabaseHas('categories', [
             'name' => $expected['name'],
             'slug' => $expected['slug'],
@@ -122,7 +168,7 @@ class CategoryControllerTest extends TestCase
 
         $response = $this->actingAs($user)->deleteJson(route('categories.destroy', $category->slug));
 
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
         $this->assertDeleted('categories', [
             'id' => $category->id,
             'name' => $category->name,

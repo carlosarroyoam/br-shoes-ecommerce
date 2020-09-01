@@ -11,24 +11,55 @@ class AddressPolicy
     use HandlesAuthorization;
 
     /**
-     * Create a new policy instance.
+     * Determine when the user can perform any action.
      *
-     * @return void
+     * @param  \App\User  $user
+     * @param  $ability
+     * @return bool
      */
-    public function __construct()
+    public function before(?User $user, $ability)
     {
-        //
-    }
-
-    public function before($user, $ability)
-    {
-        if ($user->is_admin) {
-            return true;
+        if (optional($user)->is_admin) {
+            return false;
         }
     }
 
     /**
-     * Determine if the given address can be updated by the user.
+     * Determine whether the user can view any model.
+     *
+     * @param  \App\User  $user
+     * @return bool
+     */
+    public function viewAny(?User $user)
+    {
+        return true;
+    }
+
+    /**
+     * Determine if the given model can be viewed by the user.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Address  $address
+     * @return bool
+     */
+    public function view(User $user, Address $address)
+    {
+        return $user->id === $address->user_id;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function create(User $user)
+    {
+        return true;
+    }
+
+    /**
+     * Determine if the given model can be updated by the user.
      *
      * @param  \App\User  $user
      * @param  \App\Address  $address
@@ -40,7 +71,7 @@ class AddressPolicy
     }
 
     /**
-     * Determine if the given address can be deleted by the user.
+     * Determine if the given model can be deleted by the user.
      *
      * @param  \App\User  $user
      * @param  \App\Address  $address

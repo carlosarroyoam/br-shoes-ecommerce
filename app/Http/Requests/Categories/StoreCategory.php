@@ -7,15 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class StoreCategory extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return Auth::user()->is_admin;
-    }
 
     /**
      * Get the validation rules that apply to the request.
