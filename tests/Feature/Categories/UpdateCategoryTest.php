@@ -97,8 +97,8 @@ class UpdateCategoryTest extends TestCase
         ];
 
         $response = $this->putJson(route('categories.update', $category), [
-                'name' => $expected['name']
-            ]);
+            'name' => $expected['name']
+        ]);
 
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
         $response->assertJsonValidationErrors(['name']);
