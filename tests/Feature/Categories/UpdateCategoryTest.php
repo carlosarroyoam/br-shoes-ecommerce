@@ -61,7 +61,6 @@ class UpdateCategoryTest extends TestCase
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
-
     /**
      * A basic feature test example.
      *

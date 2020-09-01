@@ -12,7 +12,7 @@ use Tests\TestCase;
 class DeleteCategoryTest extends TestCase
 {
     use RefreshDatabase;
-
+a
     /**
      * A basic feature test example.
      *

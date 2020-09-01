@@ -38,7 +38,6 @@ class CreateCategoryTest extends TestCase
         ]);
     }
 
-
     /**
      * A basic feature test example.
      *
