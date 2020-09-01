@@ -18,7 +18,7 @@ class DeleteCategoryTest extends TestCase
      *
      * @return void
      */
-    public function test_a_admin_can_delete_categories()
+    public function test_an_admin_can_delete_categories()
     {
         $user = factory(User::class)->states('admin')->make();
         $this->actingAs($user);
@@ -26,7 +26,7 @@ class DeleteCategoryTest extends TestCase
 
         $response = $this->deleteJson(route('categories.destroy', $category));
 
-        $response->assertStatus(Response::HTTP_OK);
+        $response->assertRedirect(route('categories.index'));
         $this->assertDeleted('categories', [
             'id' => $category->id,
             'name' => $category->name,
@@ -39,7 +39,7 @@ class DeleteCategoryTest extends TestCase
      *
      * @return void
      */
-    public function test_a_user_can_not_delete_categories()
+    public function test_an_user_can_not_delete_categories()
     {
         $user = factory(User::class)->make();
         $this->actingAs($user);

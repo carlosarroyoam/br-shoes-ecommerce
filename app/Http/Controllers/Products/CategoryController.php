@@ -54,7 +54,9 @@ class CategoryController extends Controller
         $validated = $request->validated();
         $validated['slug'] = Str::slug($validated['name']);
 
-        Category::create($validated);
+        $createdCategory = Category::create($validated);
+
+        return redirect()->route('categories.show', $createdCategory);
     }
 
     /**
@@ -92,8 +94,9 @@ class CategoryController extends Controller
 
         $category->name = $validated['name'];
         $category->slug = Str::slug($validated['name']);
-
         $category->save();
+
+        return redirect()->route('categories.show', $category);
     }
 
     /**
@@ -105,5 +108,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         Category::destroy($category->id);
+
+        return redirect()->route('categories.index');
     }
 }

@@ -18,7 +18,7 @@ class UpdateCategoryTest extends TestCase
      *
      * @return void
      */
-    public function test_a_admin_can_update_categories()
+    public function test_an_admin_can_update_categories()
     {
         $user = factory(User::class)->states('admin')->make();
         $this->actingAs($user);
@@ -32,7 +32,7 @@ class UpdateCategoryTest extends TestCase
             'name' => $expected['name']
         ]);
 
-        $response->assertStatus(Response::HTTP_OK);
+        $response->assertRedirect(route('categories.show', $expected['slug']));
         $this->assertDatabaseHas('categories', [
             'name' => $expected['name'],
             'slug' => $expected['slug'],
@@ -44,7 +44,7 @@ class UpdateCategoryTest extends TestCase
      *
      * @return void
      */
-    public function test_a_user_can_not_update_categories()
+    public function test_an_user_can_not_update_categories()
     {
         $user = factory(User::class)->make();
         $this->actingAs($user);

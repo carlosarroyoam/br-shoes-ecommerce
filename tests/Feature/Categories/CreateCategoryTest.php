@@ -18,7 +18,7 @@ class CreateCategoryTest extends TestCase
      *
      * @return void
      */
-    public function test_a_admin_can_create_categories()
+    public function test_an_admin_can_create_categories()
     {
         $user = factory(User::class)->states('admin')->make();
         $this->actingAs($user);
@@ -28,10 +28,10 @@ class CreateCategoryTest extends TestCase
         ];
 
         $response = $this->postJson(route('categories.store'), [
-                'name' => $expected['name']
-            ]);
+            'name' => $expected['name']
+        ]);
 
-        $response->assertStatus(Response::HTTP_OK);
+        $response->assertRedirect(route('categories.show', $expected['slug']));
         $this->assertDatabaseHas('categories', [
             'name' => $expected['name'],
             'slug' => $expected['slug'],
@@ -43,7 +43,7 @@ class CreateCategoryTest extends TestCase
      *
      * @return void
      */
-    public function test_a_user_can_not_create_categories()
+    public function test_an_user_can_not_create_categories()
     {
         $user = factory(User::class)->make();
         $this->actingAs($user);
