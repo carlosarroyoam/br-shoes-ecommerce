@@ -18,10 +18,8 @@ class CategoryControllerTest extends TestCase
      *
      * @return void
      */
-    public function testRetrievesListOfCategories()
+    public function testAListOfCategoriesCanBeRetrieved()
     {
-        $this->withoutExceptionHandling();
-
         factory(Category::class, 5)->create();
         $categories = Category::all();
 
@@ -37,10 +35,8 @@ class CategoryControllerTest extends TestCase
      *
      * @return void
      */
-    public function testRetrievesACategory()
+    public function testACategoryCanBeRetrieved()
     {
-        $this->withoutExceptionHandling();
-
         $category = factory(Category::class)->create();
 
         $response = $this->get(route('categories.show', $category->slug));
@@ -59,8 +55,6 @@ class CategoryControllerTest extends TestCase
      */
     public function testATagCanBeCreated()
     {
-        $this->withoutExceptionHandling();
-
         $expected = [
             'name' => 'Snake Sneakers',
             'slug' => 'snake-sneakers'
@@ -85,7 +79,7 @@ class CategoryControllerTest extends TestCase
      *
      * @return void
      */
-    public function testATagNameShouldBeValidated()
+    public function testATagNameShouldNotBeEmpty()
     {
         $expected = [
             'name' => '',
@@ -108,7 +102,7 @@ class CategoryControllerTest extends TestCase
      *
      * @return void
      */
-    public function testACategoryCanBeStoredOnlyByAdmins()
+    public function testACategoryCanOnlyBeCreatedByAdmins()
     {
         $expected = [
             'name' => 'Sneaker Snake',
@@ -132,8 +126,6 @@ class CategoryControllerTest extends TestCase
      */
     public function testATagCanBeUpdated()
     {
-        $this->withoutExceptionHandling();
-
         $expected = [
             'name' => 'Snake Sneakers',
             'slug' => 'snake-sneakers'
@@ -159,10 +151,31 @@ class CategoryControllerTest extends TestCase
      *
      * @return void
      */
+    public function testACategoryCanOnlyBeUpdatedByAdmins()
+    {
+        $expected = [
+            'name' => 'Sneaker Snake',
+            'slug' => 'snake-sneakers'
+        ];
+
+        $user = factory(User::class)->make();
+        $category = factory(Category::class)->create();
+
+        $response = $this->actingAs($user)
+            ->putJson(route('categories.update', $category), [
+                'name' => $expected['name']
+            ]);
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
+    }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
     public function testATagCanBeDeleted()
     {
-        $this->withoutExceptionHandling();
-
         $user = factory(User::class)->states('admin')->make();
         $category = factory(Category::class)->create();
 
@@ -174,6 +187,21 @@ class CategoryControllerTest extends TestCase
             'name' => $category->name,
             'slug' => $category->slug,
         ]);
+    }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function testACategoryCanOnlyBeDeletedByAdmins()
+    {
+        $user = factory(User::class)->make();
+        $category = factory(Category::class)->create();
+
+        $response = $this->actingAs($user)->deleteJson(route('categories.destroy', $category->slug));
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
 }
