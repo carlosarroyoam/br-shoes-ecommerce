@@ -64,6 +64,25 @@ class CreateCategoryTest extends TestCase
      *
      * @return void
      */
+    public function test_an_unauthenticated_user_can_not_create_categories()
+    {
+        $expected = [
+            'name' => 'Sneaker Snake',
+            'slug' => 'snake-sneakers'
+        ];
+
+        $response = $this->postJson(route('categories.store'), [
+                'name' => $expected['name']
+            ]);
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
+    }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
     public function test_a_category_name_should_not_be_empty()
     {
         $user = factory(User::class)->states('admin')->make();

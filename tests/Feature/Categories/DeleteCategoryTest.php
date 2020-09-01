@@ -50,4 +50,18 @@ class DeleteCategoryTest extends TestCase
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_an_unauthenticated_user_can_not_delete_categories()
+    {
+        $category = factory(Category::class)->create();
+
+        $response = $this->deleteJson(route('categories.destroy', $category));
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
+    }
+
 }
