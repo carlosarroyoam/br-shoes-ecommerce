@@ -20,6 +20,8 @@ class ListCategoriesTest extends TestCase
      */
     public function test_a_user_can_list_categories()
     {
+        $this->withoutExceptionHandling();
+
         factory(Category::class, 5)->create();
         $categories = Category::all();
 
@@ -29,5 +31,4 @@ class ListCategoriesTest extends TestCase
         $response->assertViewIs('pages.categories.index');
         $response->assertViewHas('categories', $categories);
     }
-
 }

@@ -3,23 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Services\CategoryService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Categories\StoreCategory;
 use App\Http\Requests\Categories\UpdateCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+    /**
+     * The category service instance.
+     */
+    protected $categoryService;
 
     /**
      * Create a new controller instance.
      *
+     * @param  CategoryService  $categoryService
      * @return void
      */
-    public function __construct()
+    public function __construct(CategoryService $categoryService)
     {
         $this->authorizeResource(Category::class, 'category');
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -29,7 +35,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = $this->categoryService->getAll();
+
         return view('pages.categories.index', compact('categories'));
     }
 
@@ -51,12 +58,9 @@ class CategoryController extends Controller
      */
     public function store(StoreCategory $request)
     {
-        $validated = $request->validated();
-        $validated['slug'] = Str::slug($validated['name']);
+        $category = $this->categoryService->create($request->validated());
 
-        $createdCategory = Category::create($validated);
-
-        return redirect()->route('categories.show', $createdCategory);
+        return redirect()->route('categories.show', $category);
     }
 
     /**
@@ -67,6 +71,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
+        // $categoryById = $this->categoryService->getById($category);
         return view('pages.categories.show', compact('category'));
     }
 
@@ -90,13 +95,9 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategory $request, Category $category)
     {
-        $validated = $request->validated();
+        $updatedCategory = $this->categoryService->update($request->validated(), $category);
 
-        $category->name = $validated['name'];
-        $category->slug = Str::slug($validated['name']);
-        $category->save();
-
-        return redirect()->route('categories.show', $category);
+        return redirect()->route('categories.show', $updatedCategory);
     }
 
     /**
@@ -107,7 +108,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        Category::destroy($category->id);
+        $this->categoryService->delete($category);
 
         return redirect()->route('categories.index');
     }
