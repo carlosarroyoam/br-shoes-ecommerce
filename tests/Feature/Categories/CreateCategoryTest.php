@@ -99,5 +99,4 @@ class CreateCategoryTest extends TestCase
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
         $response->assertJsonValidationErrors(['name']);
     }
-
 }

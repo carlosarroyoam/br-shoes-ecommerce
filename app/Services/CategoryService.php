@@ -42,9 +42,10 @@ class CategoryService
         DB::beginTransaction();
 
         try {
-            $validated['slug'] = Str::slug($validated['name']);
-
-            $category = Category::create($validated);
+            $category = new Category;
+            $category->name = $validated['name'];
+            $category->slug = Str::slug($validated['name']);
+            $category->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -96,7 +97,7 @@ class CategoryService
         DB::beginTransaction();
 
         try {
-            Category::destroy($category->id);
+            $category->delete();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
