@@ -14,14 +14,12 @@ class ListCategoriesTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic test example.
+     * An user can retrieve the list of categories.
      *
      * @return void
      */
     public function test_a_user_can_list_categories()
     {
-        $this->withoutExceptionHandling();
-
         factory(Category::class, 5)->create();
         $categories = Category::all();
 

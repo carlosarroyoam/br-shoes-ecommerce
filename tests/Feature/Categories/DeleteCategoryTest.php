@@ -14,7 +14,7 @@ class DeleteCategoryTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic feature test example.
+     * An admin can delete categories.
      *
      * @return void
      */
@@ -35,11 +35,11 @@ class DeleteCategoryTest extends TestCase
     }
 
     /**
-     * A basic feature test example.
+     * An authenticated non admin user cannot delete categories.
      *
      * @return void
      */
-    public function test_an_user_can_not_delete_categories()
+    public function test_an_user_cannot_delete_categories()
     {
         $user = factory(User::class)->make();
         $this->actingAs($user);
@@ -51,11 +51,11 @@ class DeleteCategoryTest extends TestCase
     }
 
     /**
-     * A basic feature test example.
+     * An unauthenticated user cannot delete categories.
      *
      * @return void
      */
-    public function test_an_unauthenticated_user_can_not_delete_categories()
+    public function test_an_unauthenticated_user_cannot_delete_categories()
     {
         $category = factory(Category::class)->create();
 
@@ -63,5 +63,4 @@ class DeleteCategoryTest extends TestCase
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
-
 }

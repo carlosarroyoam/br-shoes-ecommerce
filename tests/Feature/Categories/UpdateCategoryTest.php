@@ -14,7 +14,7 @@ class UpdateCategoryTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic feature test example.
+     * An admin can update categories.
      *
      * @return void
      */
@@ -40,11 +40,11 @@ class UpdateCategoryTest extends TestCase
     }
 
     /**
-     * A basic feature test example.
+     * An authenticated non admin user cannot update categories.
      *
      * @return void
      */
-    public function test_an_user_can_not_update_categories()
+    public function test_an_user_cannot_update_categories()
     {
         $user = factory(User::class)->make();
         $this->actingAs($user);
@@ -62,11 +62,11 @@ class UpdateCategoryTest extends TestCase
     }
 
     /**
-     * A basic feature test example.
+     * An unauthenticated user cannot update categories.
      *
      * @return void
      */
-    public function test_an_unauthenticated_user_can_not_update_categories()
+    public function test_an_unauthenticated_user_cannot_update_categories()
     {
         $category = factory(Category::class)->create();
         $expected = [
@@ -82,7 +82,7 @@ class UpdateCategoryTest extends TestCase
     }
 
     /**
-     * A basic feature test example.
+     * The attribute name of a category cannot be empty.
      *
      * @return void
      */
@@ -103,5 +103,4 @@ class UpdateCategoryTest extends TestCase
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
         $response->assertJsonValidationErrors(['name']);
     }
-
 }

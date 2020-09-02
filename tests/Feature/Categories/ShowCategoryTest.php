@@ -14,7 +14,7 @@ class ShowCategoryTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic test example.
+     * An user can retrieve a specified category.
      *
      * @return void
      */
@@ -32,11 +32,11 @@ class ShowCategoryTest extends TestCase
     }
 
     /**
-     * A basic test example.
+     * An user cannot retrieve a specified category if the category doesn't exist.
      *
      * @return void
      */
-    public function test_an_user_can_not_get_a_category_if_doesnt_exists()
+    public function test_an_user_cannot_get_a_category_if_doesnt_exists()
     {
         $nonExistingSlug = 'snake-sneaker';
 
@@ -44,5 +44,4 @@ class ShowCategoryTest extends TestCase
 
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }
-
 }

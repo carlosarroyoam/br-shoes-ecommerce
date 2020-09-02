@@ -14,7 +14,7 @@ class CreateCategoryTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic feature test example.
+     * An admin can create categories.
      *
      * @return void
      */
@@ -39,11 +39,11 @@ class CreateCategoryTest extends TestCase
     }
 
     /**
-     * A basic feature test example.
+     * An authenticated non admin user cannot create categories.
      *
      * @return void
      */
-    public function test_an_user_can_not_create_categories()
+    public function test_an_user_cannot_create_categories()
     {
         $user = factory(User::class)->make();
         $this->actingAs($user);
@@ -60,11 +60,11 @@ class CreateCategoryTest extends TestCase
     }
 
     /**
-     * A basic feature test example.
+     * An unauthenticated user cannot create categories.
      *
      * @return void
      */
-    public function test_an_unauthenticated_user_can_not_create_categories()
+    public function test_an_unauthenticated_user_cannot_create_categories()
     {
         $expected = [
             'name' => 'Sneaker Snake',
@@ -79,7 +79,7 @@ class CreateCategoryTest extends TestCase
     }
 
     /**
-     * A basic feature test example.
+     * The attribute name of a category cannot be empty.
      *
      * @return void
      */

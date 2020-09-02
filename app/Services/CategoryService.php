@@ -49,7 +49,7 @@ class CategoryService
             DB::rollBack();
             Log::info($e->getMessage());
 
-            throw new InvalidArgumentException('Unable to update category data');
+            throw new InvalidArgumentException('An exception occurred when trying to insert the model in the database.');
         }
 
         DB::commit();
@@ -76,7 +76,7 @@ class CategoryService
             DB::rollBack();
             Log::info($e->getMessage());
 
-            throw new InvalidArgumentException('Unable to update category data');
+            throw new InvalidArgumentException('An exception occurred when trying to update the model in the database.');
         }
 
         DB::commit();
@@ -100,7 +100,7 @@ class CategoryService
             DB::rollBack();
             Log::info($e->getMessage());
 
-            throw new InvalidArgumentException('Unable to delete category data');
+            throw new InvalidArgumentException('An exception occurred when trying to delete the model in the database.');
         }
 
         DB::commit();
