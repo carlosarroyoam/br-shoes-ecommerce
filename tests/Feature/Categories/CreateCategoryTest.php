@@ -39,11 +39,11 @@ class CreateCategoryTest extends TestCase
     }
 
     /**
-     * An authenticated non admin user cannot create categories.
+     * An authenticated non-admin user cannot create categories.
      *
      * @return void
      */
-    public function test_an_user_cannot_create_categories()
+    public function test_a_user_cannot_create_categories()
     {
         $user = factory(User::class)->make();
         $this->actingAs($user);

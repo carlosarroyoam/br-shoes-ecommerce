@@ -14,7 +14,7 @@ class ListCategoriesTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * An user can retrieve the list of categories.
+     * A user can retrieve the list of categories.
      *
      * @return void
      */

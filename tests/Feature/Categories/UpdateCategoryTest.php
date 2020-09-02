@@ -40,11 +40,11 @@ class UpdateCategoryTest extends TestCase
     }
 
     /**
-     * An authenticated non admin user cannot update categories.
+     * An authenticated non-admin user cannot update categories.
      *
      * @return void
      */
-    public function test_an_user_cannot_update_categories()
+    public function test_a_user_cannot_update_categories()
     {
         $user = factory(User::class)->make();
         $this->actingAs($user);

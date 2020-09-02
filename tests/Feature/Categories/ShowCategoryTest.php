@@ -14,11 +14,11 @@ class ShowCategoryTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * An user can retrieve a specified category.
+     * A user can retrieve a specified category.
      *
      * @return void
      */
-    public function test_an_user_can_get_a_category()
+    public function test_a_user_can_get_a_category()
     {
         $category = factory(Category::class)->create();
 
@@ -32,11 +32,11 @@ class ShowCategoryTest extends TestCase
     }
 
     /**
-     * An user cannot retrieve a specified category if the category doesn't exist.
+     * A user cannot retrieve a specified category if the category doesn't exist.
      *
      * @return void
      */
-    public function test_an_user_cannot_get_a_category_if_doesnt_exists()
+    public function test_a_user_cannot_get_a_category_if_doesnt_exists()
     {
         $nonExistingSlug = 'snake-sneaker';
 

@@ -35,11 +35,11 @@ class DeleteCategoryTest extends TestCase
     }
 
     /**
-     * An authenticated non admin user cannot delete categories.
+     * An authenticated non-admin user cannot delete categories.
      *
      * @return void
      */
-    public function test_an_user_cannot_delete_categories()
+    public function test_a_user_cannot_delete_categories()
     {
         $user = factory(User::class)->make();
         $this->actingAs($user);
