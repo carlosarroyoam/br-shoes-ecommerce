@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class CategoryService
 {
     /**
-     * Get all category.
+     * Get a listing of the models.
      *
      * @return Illuminate\Database\Eloquent\Collection
      */
@@ -20,7 +20,7 @@ class CategoryService
     }
 
     /**
-     * Get category by id.
+     * Get the specified model by its id.
      *
      * @param $categoryId
      * @return \App\Category
@@ -31,8 +31,7 @@ class CategoryService
     }
 
     /**
-     * Update category data
-     * Store to DB if there are no errors.
+     * Create the specified model in storage.
      *
      * @param array $validated
      * @return \App\Category
@@ -59,8 +58,7 @@ class CategoryService
     }
 
     /**
-     * Update category data
-     * Store to DB if there are no errors.
+      * Update the specified model in storage.
      *
      * @param array $validated
      * @param \App\Category $category
@@ -87,7 +85,7 @@ class CategoryService
     }
 
     /**
-     * Delete category by id.
+     * Delete the specified model from storage.
      *
      * @param \App\Category $category
      * @return void
