@@ -26,7 +26,7 @@ class CategoryService
      */
     public function getById($categoryId)
     {
-        return $category->where('id', '=', $categoryId)->firstOrFail();
+        return $category->where('id', $categoryId)->firstOrFail();
     }
 
     /**
