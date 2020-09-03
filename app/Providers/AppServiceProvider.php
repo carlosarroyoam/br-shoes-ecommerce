@@ -13,6 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->singleton('App\Services\ProductService', function ($app) {
+            return new \App\Services\ProductService();
+        });
+
         $this->app->singleton('App\Services\CategoryService', function ($app) {
             return new \App\Services\CategoryService();
         });

@@ -6,15 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'price', 'description', 'featured',
+        'name', 'slug', 'description', 'featured',
     ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'featured' => 'boolean',
+    ];
+
+    /**
+     * Get all of the product's variants.
+     */
+    public function variants()
+    {
+        return $this->hasMany('App\ProductVariant');
+    }
 
     /**
      * Get all of the product's pictures.
@@ -41,5 +57,4 @@ class Product extends Model
     {
         return 'slug';
     }
-
 }

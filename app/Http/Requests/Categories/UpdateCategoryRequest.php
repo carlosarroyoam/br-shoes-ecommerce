@@ -4,8 +4,9 @@ namespace App\Http\Requests\Categories;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
-class StoreCategory extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
 
     /**
@@ -17,7 +18,19 @@ class StoreCategory extends FormRequest
     {
         return [
             'name' => 'required|string',
+            'slug' => 'nullable|string',
         ];
     }
 
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'slug' => Str::slug($this->name),
+        ]);
+    }
 }
