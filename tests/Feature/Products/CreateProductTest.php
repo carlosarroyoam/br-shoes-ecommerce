@@ -190,6 +190,6 @@ class CreateProductTest extends TestCase
         ]);
 
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
-        $response->assertJsonValidationErrors(['description']);
+        $response->assertJsonValidationErrors(['price_in_cents']);
     }
 }
