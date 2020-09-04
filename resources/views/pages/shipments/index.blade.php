@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('base.app')
 
 @section('title', __('navigation.shipments'))
 

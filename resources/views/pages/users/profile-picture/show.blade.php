@@ -1,5 +1,5 @@
-@extends('layouts.app')
+@extends('base.app')
 
 @section('content')
-    userProfilePicture.show template
+userProfilePicture.show template
 @endsection

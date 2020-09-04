@@ -1,5 +1,5 @@
-@extends('layouts.app')
+@extends('base.app')
 
 @section('content')
-    user.edit template
+user.edit template
 @endsection

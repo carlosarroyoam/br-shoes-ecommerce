@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Products\ProductPropertyStoreRequest;
-use App\Http\Requests\Products\ProductPropertyUpdateRequest;
+use App\Http\Requests\Products\Properties\ProductPropertyStoreRequest;
+use App\Http\Requests\Products\Properties\ProductPropertyUpdateRequest;
 use App\ProductProperty;
 use Illuminate\Http\Request;
 
@@ -18,7 +18,7 @@ class ProductPropertyController extends Controller
     {
         $productProperties = ProductProperty::all();
 
-        return view('productProperty.index', compact('productProperties'));
+        return view('pages.products.properties.index', compact('productProperties'));
     }
 
     /**
@@ -27,7 +27,7 @@ class ProductPropertyController extends Controller
      */
     public function create(Request $request)
     {
-        return view('productProperty.create');
+        return view('pages.products.properties.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class ProductPropertyController extends Controller
 
         $request->session()->flash('productProperty.id', $productProperty->id);
 
-        return redirect()->route('productProperty.index');
+        return redirect()->route('product-properties.index');
     }
 
     /**
@@ -50,7 +50,7 @@ class ProductPropertyController extends Controller
      */
     public function show(Request $request, ProductProperty $productProperty)
     {
-        return view('productProperty.show', compact('productProperty'));
+        return view('pages.products.properties.show', compact('productProperty'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ProductPropertyController extends Controller
      */
     public function edit(Request $request, ProductProperty $productProperty)
     {
-        return view('productProperty.edit', compact('productProperty'));
+        return view('pages.products.properties.edit', compact('productProperty'));
     }
 
     /**
@@ -74,7 +74,7 @@ class ProductPropertyController extends Controller
 
         $request->session()->flash('productProperty.id', $productProperty->id);
 
-        return redirect()->route('productProperty.index');
+        return redirect()->route('product-properties.index');
     }
 
     /**
@@ -86,6 +86,6 @@ class ProductPropertyController extends Controller
     {
         $productProperty->delete();
 
-        return redirect()->route('productProperty.index');
+        return redirect()->route('product-properties.index');
     }
 }

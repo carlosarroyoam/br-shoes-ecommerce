@@ -18,7 +18,7 @@ class UserShippingAddressController extends Controller
     {
         $userShippingAddresses = UserShippingAddress::all();
 
-        return view('userShippingAddress.index', compact('userShippingAddresses'));
+        return view('pages.users.shipping-addresses.index', compact('userShippingAddresses'));
     }
 
     /**
@@ -27,7 +27,7 @@ class UserShippingAddressController extends Controller
      */
     public function create(Request $request)
     {
-        return view('userShippingAddress.create');
+        return view('pages.users.shipping-addresses.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class UserShippingAddressController extends Controller
 
         $request->session()->flash('userShippingAddress.id', $userShippingAddress->id);
 
-        return redirect()->route('userShippingAddress.index');
+        return redirect()->route('users-shipping-addresses.index');
     }
 
     /**
@@ -50,7 +50,7 @@ class UserShippingAddressController extends Controller
      */
     public function show(Request $request, UserShippingAddress $userShippingAddress)
     {
-        return view('userShippingAddress.show', compact('userShippingAddress'));
+        return view('pages.users.shipping-addresses.show', compact('userShippingAddress'));
     }
 
     /**
@@ -60,7 +60,7 @@ class UserShippingAddressController extends Controller
      */
     public function edit(Request $request, UserShippingAddress $userShippingAddress)
     {
-        return view('userShippingAddress.edit', compact('userShippingAddress'));
+        return view('pages.users.shipping-addresses.edit', compact('userShippingAddress'));
     }
 
     /**
@@ -74,7 +74,7 @@ class UserShippingAddressController extends Controller
 
         $request->session()->flash('userShippingAddress.id', $userShippingAddress->id);
 
-        return redirect()->route('userShippingAddress.index');
+        return redirect()->route('users-shipping-addresses.index');
     }
 
     /**
@@ -86,6 +86,6 @@ class UserShippingAddressController extends Controller
     {
         $userShippingAddress->delete();
 
-        return redirect()->route('userShippingAddress.index');
+        return redirect()->route('users-shipping-addresses.index');
     }
 }

@@ -1,5 +1,5 @@
-@extends('layouts.app')
+@extends('base.app')
 
 @section('content')
-    userContactDetail.index template
+userContactDetail.index template
 @endsection

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Products\ProductPropertyTypeStoreRequest;
-use App\Http\Requests\Products\ProductPropertyTypeUpdateRequest;
+use App\Http\Requests\Products\PropertyTypes\ProductPropertyTypeStoreRequest;
+use App\Http\Requests\Products\PropertyTypes\ProductPropertyTypeUpdateRequest;
 use App\ProductPropertyType;
 use Illuminate\Http\Request;
 
@@ -18,7 +18,7 @@ class ProductPropertyTypeController extends Controller
     {
         $productPropertyTypes = ProductPropertyType::all();
 
-        return view('productPropertyType.index', compact('productPropertyTypes'));
+        return view('pages.products.property-types.index', compact('productPropertyTypes'));
     }
 
     /**
@@ -27,7 +27,7 @@ class ProductPropertyTypeController extends Controller
      */
     public function create(Request $request)
     {
-        return view('productPropertyType.create');
+        return view('pages.products.property-types.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class ProductPropertyTypeController extends Controller
 
         $request->session()->flash('productPropertyType.id', $productPropertyType->id);
 
-        return redirect()->route('productPropertyType.index');
+        return redirect()->route('product-property-types.index');
     }
 
     /**
@@ -50,7 +50,7 @@ class ProductPropertyTypeController extends Controller
      */
     public function show(Request $request, ProductPropertyType $productPropertyType)
     {
-        return view('productPropertyType.show', compact('productPropertyType'));
+        return view('pages.products.property-types.show', compact('productPropertyType'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ProductPropertyTypeController extends Controller
      */
     public function edit(Request $request, ProductPropertyType $productPropertyType)
     {
-        return view('productPropertyType.edit', compact('productPropertyType'));
+        return view('pages.products.property-types.edit', compact('productPropertyType'));
     }
 
     /**
@@ -74,7 +74,7 @@ class ProductPropertyTypeController extends Controller
 
         $request->session()->flash('productPropertyType.id', $productPropertyType->id);
 
-        return redirect()->route('productPropertyType.index');
+        return redirect()->route('product-property-types.index');
     }
 
     /**
@@ -86,6 +86,6 @@ class ProductPropertyTypeController extends Controller
     {
         $productPropertyType->delete();
 
-        return redirect()->route('productPropertyType.index');
+        return redirect()->route('product-property-types.index');
     }
 }

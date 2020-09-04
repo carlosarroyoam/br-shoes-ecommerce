@@ -20,7 +20,7 @@ class ShoppingBagController extends Controller
 
         $request->session()->flash('shoppingBag.id', $shoppingBag->id);
 
-        return redirect()->route('shoppingBag.index');
+        return redirect()->route('shopping-bag.index');
     }
 
     /**
@@ -44,7 +44,7 @@ class ShoppingBagController extends Controller
 
         $request->session()->flash('shoppingBag.id', $shoppingBag->id);
 
-        return redirect()->route('shoppingBag.index');
+        return redirect()->route('shopping-bag.index');
     }
 
     /**
@@ -56,6 +56,6 @@ class ShoppingBagController extends Controller
     {
         $shoppingBag->delete();
 
-        return redirect()->route('shoppingBag.index');
+        return redirect()->route('shopping-bag.index');
     }
 }

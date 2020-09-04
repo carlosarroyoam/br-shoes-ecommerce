@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        return view('user.index', compact('users'));
+        return view('pages.users.index', compact('users'));
     }
 
     /**
@@ -27,7 +27,7 @@ class UserController extends Controller
      */
     public function show(Request $request, User $user)
     {
-        return view('user.show', compact('user'));
+        return view('pages.users.show', compact('user'));
     }
 
     /**
@@ -37,7 +37,7 @@ class UserController extends Controller
      */
     public function edit(Request $request, User $user)
     {
-        return view('user.edit', compact('user'));
+        return view('pages.users.edit', compact('user'));
     }
 
     /**
@@ -51,7 +51,7 @@ class UserController extends Controller
 
         $request->session()->flash('user.id', $user->id);
 
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -63,6 +63,6 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('user.index');
+        return redirect()->route('users.index');
     }
 }

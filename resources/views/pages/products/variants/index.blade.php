@@ -1,5 +1,5 @@
-@extends('layouts.app')
+@extends('base.app')
 
 @section('content')
-    productVariant.index template
+productVariant.index template
 @endsection

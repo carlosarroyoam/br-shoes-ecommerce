@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Orders;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Orders\OrderDetailStoreRequest;
-use App\Http\Requests\Orders\OrderDetailUpdateRequest;
+use App\Http\Requests\Orders\OrderDetails\OrderDetailStoreRequest;
+use App\Http\Requests\Orders\OrderDetails\OrderDetailUpdateRequest;
 use App\OrderDetail;
 use Illuminate\Http\Request;
 
@@ -18,7 +18,7 @@ class OrderDetailController extends Controller
     {
         $orderDetails = OrderDetail::all();
 
-        return view('orderDetail.index', compact('orderDetails'));
+        return view('pages.orders.order-details.index', compact('orderDetails'));
     }
 
     /**
@@ -27,7 +27,7 @@ class OrderDetailController extends Controller
      */
     public function create(Request $request)
     {
-        return view('orderDetail.create');
+        return view('pages.orders.order-details.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class OrderDetailController extends Controller
 
         $request->session()->flash('orderDetail.id', $orderDetail->id);
 
-        return redirect()->route('orderDetail.index');
+        return redirect()->route('order-details.index');
     }
 
     /**
@@ -50,7 +50,7 @@ class OrderDetailController extends Controller
      */
     public function show(Request $request, OrderDetail $orderDetail)
     {
-        return view('orderDetail.show', compact('orderDetail'));
+        return view('pages.orders.order-details.show', compact('orderDetail'));
     }
 
     /**
@@ -60,7 +60,7 @@ class OrderDetailController extends Controller
      */
     public function edit(Request $request, OrderDetail $orderDetail)
     {
-        return view('orderDetail.edit', compact('orderDetail'));
+        return view('pages.orders.order-details.edit', compact('orderDetail'));
     }
 
     /**
@@ -74,7 +74,7 @@ class OrderDetailController extends Controller
 
         $request->session()->flash('orderDetail.id', $orderDetail->id);
 
-        return redirect()->route('orderDetail.index');
+        return redirect()->route('order-details.index');
     }
 
     /**
@@ -86,6 +86,6 @@ class OrderDetailController extends Controller
     {
         $orderDetail->delete();
 
-        return redirect()->route('orderDetail.index');
+        return redirect()->route('order-details.index');
     }
 }

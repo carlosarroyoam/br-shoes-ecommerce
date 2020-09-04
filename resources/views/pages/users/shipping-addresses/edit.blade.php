@@ -1,5 +1,5 @@
-@extends('layouts.app')
+@extends('base.app')
 
 @section('content')
-    userShippingAddress.edit template
+userShippingAddress.edit template
 @endsection

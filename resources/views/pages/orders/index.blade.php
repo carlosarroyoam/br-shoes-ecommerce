@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('base.app')
 
 @section('title', __('navigation.orders'))
 
@@ -11,7 +11,7 @@
 
     <a href="{{ route('shipments.index') }}"
         class="w-full mt-4 text-sm font-medium rounded-sm focus:outline-none focus:shadow-outline focus:text-body hover:text-body">
-        {{ __('navigation.shipments') }}
+        go to {{ __('navigation.shipments') }}
     </a>
 
 </article>

@@ -22,7 +22,7 @@ Route::view('how-to-buy', 'pages.home')->name('how-to-buy');
 Route::view('faq', 'pages.home')->name('faq');
 
 Route::get('profile', 'Users\UserProfileController@show')->name('users.profile');
-Route::get('account-settings', 'Users\AccountController@show')->name('users.account-settings');
+Route::get('account-settings', 'Users\UserAccountController@show')->name('users.account-settings');
 Route::get('products/newest', 'Products\ProductController@newest')->name('products.newest');
 Route::get('products/offers', 'Products\ProductController@offers')->name('products.offers');
 
@@ -30,16 +30,16 @@ Route::resource('user', 'Users\UserController')->except('create', 'store');
 Route::resource('shopping-bag', 'ShoppingBag\ShoppingBagController')->except('index', 'create', 'edit');
 Route::resource('wish-list', 'WishList\WishListController')->except('index', 'create', 'edit');
 Route::resources([
-    'user-contact-detail' => 'Users\UserContactDetailController',
-    'user-shipping-address' => 'Users\UserShippingAddressController',
+    'user-contact-details' => 'Users\UserContactDetailController',
+    'user-shipping-addresses' => 'Users\UserShippingAddressController',
     'products' =>'Products\ProductController',
-    'product-variant' => 'Products\ProductVariantController',
-    'product-property' => 'Products\ProductPropertyController',
-    'product-property-type' => 'Products\ProductPropertyTypeController',
+    'product-variants' => 'Products\ProductVariantController',
+    'product-properties' => 'Products\ProductPropertyController',
+    'product-property-types' => 'Products\ProductPropertyTypeController',
     'categories' =>'Categories\CategoryController',
-    'order' => 'Orders\OrderController',
-    'order-detail' => 'Orders\OrderDetailController',
-    'shipment' => 'Shipments\ShipmentController',
+    'orders' => 'Orders\OrderController',
+    'order-details' => 'Orders\OrderDetailController',
+    'shipments' => 'Shipments\ShipmentController',
 ]);
 
 Route::group(['prefix' => 'admin'], function () {

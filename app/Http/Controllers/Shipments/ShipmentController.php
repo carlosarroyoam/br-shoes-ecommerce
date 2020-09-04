@@ -18,7 +18,7 @@ class ShipmentController extends Controller
     {
         $shipments = Shipment::all();
 
-        return view('shipment.index', compact('shipments'));
+        return view('pages.shipments.index', compact('shipments'));
     }
 
     /**
@@ -27,7 +27,7 @@ class ShipmentController extends Controller
      */
     public function create(Request $request)
     {
-        return view('shipment.create');
+        return view('pages.shipments.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class ShipmentController extends Controller
 
         $request->session()->flash('shipment.id', $shipment->id);
 
-        return redirect()->route('shipment.index');
+        return redirect()->route('shipments.index');
     }
 
     /**
@@ -50,7 +50,7 @@ class ShipmentController extends Controller
      */
     public function show(Request $request, Shipment $shipment)
     {
-        return view('shipment.show', compact('shipment'));
+        return view('pages.shipments.show', compact('shipment'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ShipmentController extends Controller
      */
     public function edit(Request $request, Shipment $shipment)
     {
-        return view('shipment.edit', compact('shipment'));
+        return view('pages.shipments.edit', compact('shipment'));
     }
 
     /**
@@ -74,7 +74,7 @@ class ShipmentController extends Controller
 
         $request->session()->flash('shipment.id', $shipment->id);
 
-        return redirect()->route('shipment.index');
+        return redirect()->route('shipments.index');
     }
 
     /**
@@ -86,6 +86,6 @@ class ShipmentController extends Controller
     {
         $shipment->delete();
 
-        return redirect()->route('shipment.index');
+        return redirect()->route('shipments.index');
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Users\UserContactDetailStoreRequest;
-use App\Http\Requests\Users\UserContactDetailUpdateRequest;
+use App\Http\Requests\Users\ContactDetails\UserContactDetailStoreRequest;
+use App\Http\Requests\Users\ContactDetails\UserContactDetailUpdateRequest;
 use App\UserContactDetail;
 use Illuminate\Http\Request;
 
@@ -18,7 +18,7 @@ class UserContactDetailController extends Controller
     {
         $userContactDetails = UserContactDetail::all();
 
-        return view('userContactDetail.index', compact('userContactDetails'));
+        return view('pages.users.contact-details.index', compact('userContactDetails'));
     }
 
     /**
@@ -27,7 +27,7 @@ class UserContactDetailController extends Controller
      */
     public function create(Request $request)
     {
-        return view('userContactDetail.create');
+        return view('pages.users.contact-details.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class UserContactDetailController extends Controller
 
         $request->session()->flash('userContactDetail.id', $userContactDetail->id);
 
-        return redirect()->route('userContactDetail.index');
+        return redirect()->route('users-contact-details.index');
     }
 
     /**
@@ -50,7 +50,7 @@ class UserContactDetailController extends Controller
      */
     public function show(Request $request, UserContactDetail $userContactDetail)
     {
-        return view('userContactDetail.show', compact('userContactDetail'));
+        return view('pages.users.contact-details.show', compact('userContactDetail'));
     }
 
     /**
@@ -60,7 +60,7 @@ class UserContactDetailController extends Controller
      */
     public function edit(Request $request, UserContactDetail $userContactDetail)
     {
-        return view('userContactDetail.edit', compact('userContactDetail'));
+        return view('pages.users.contact-details.edit', compact('userContactDetail'));
     }
 
     /**
@@ -74,7 +74,7 @@ class UserContactDetailController extends Controller
 
         $request->session()->flash('userContactDetail.id', $userContactDetail->id);
 
-        return redirect()->route('userContactDetail.index');
+        return redirect()->route('pages.users.contact-details.index');
     }
 
     /**
@@ -86,6 +86,6 @@ class UserContactDetailController extends Controller
     {
         $userContactDetail->delete();
 
-        return redirect()->route('userContactDetail.index');
+        return redirect()->route('pages.users.contact-details.index');
     }
 }

@@ -18,7 +18,7 @@ class ProductVariantController extends Controller
     {
         $productVariants = ProductVariant::all();
 
-        return view('productVariant.index', compact('productVariants'));
+        return view('pages.products.variants.index', compact('productVariants'));
     }
 
     /**
@@ -27,7 +27,7 @@ class ProductVariantController extends Controller
      */
     public function create(Request $request)
     {
-        return view('productVariant.create');
+        return view('pages.products.variants.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class ProductVariantController extends Controller
 
         $request->session()->flash('productVariant.id', $productVariant->id);
 
-        return redirect()->route('productVariant.index');
+        return redirect()->route('product-variants.index');
     }
 
     /**
@@ -50,7 +50,7 @@ class ProductVariantController extends Controller
      */
     public function show(Request $request, ProductVariant $productVariant)
     {
-        return view('productVariant.show', compact('productVariant'));
+        return view('pages.products.variants.show', compact('productVariant'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ProductVariantController extends Controller
      */
     public function edit(Request $request, ProductVariant $productVariant)
     {
-        return view('productVariant.edit', compact('productVariant'));
+        return view('pages.products.variants.edit', compact('productVariant'));
     }
 
     /**
@@ -74,7 +74,7 @@ class ProductVariantController extends Controller
 
         $request->session()->flash('productVariant.id', $productVariant->id);
 
-        return redirect()->route('productVariant.index');
+        return redirect()->route('product-variants.index');
     }
 
     /**
@@ -86,6 +86,6 @@ class ProductVariantController extends Controller
     {
         $productVariant->delete();
 
-        return redirect()->route('productVariant.index');
+        return redirect()->route('product-variants.index');
     }
 }

@@ -18,7 +18,7 @@ class OrderController extends Controller
     {
         $orders = Order::all();
 
-        return view('order.index', compact('orders'));
+        return view('pages.orders.index', compact('orders'));
     }
 
     /**
@@ -27,7 +27,7 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
-        return view('order.create');
+        return view('pages.orders.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class OrderController extends Controller
 
         $request->session()->flash('order.id', $order->id);
 
-        return redirect()->route('order.index');
+        return redirect()->route('orders.index');
     }
 
     /**
@@ -50,7 +50,7 @@ class OrderController extends Controller
      */
     public function show(Request $request, Order $order)
     {
-        return view('order.show', compact('order'));
+        return view('pages.orders.show', compact('order'));
     }
 
     /**
@@ -60,7 +60,7 @@ class OrderController extends Controller
      */
     public function edit(Request $request, Order $order)
     {
-        return view('order.edit', compact('order'));
+        return view('pages.orders.edit', compact('order'));
     }
 
     /**
@@ -74,7 +74,7 @@ class OrderController extends Controller
 
         $request->session()->flash('order.id', $order->id);
 
-        return redirect()->route('order.index');
+        return redirect()->route('orders.index');
     }
 
     /**
@@ -86,6 +86,6 @@ class OrderController extends Controller
     {
         $order->delete();
 
-        return redirect()->route('order.index');
+        return redirect()->route('orders.index');
     }
 }

@@ -1,5 +1,5 @@
-@extends('layouts.app')
+@extends('base.app')
 
 @section('content')
-    productPropertyType.edit template
+productPropertyType.edit template
 @endsection
