@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('', 'HomeController@index')->name('home');
+Route::view('', 'pages.home')->name('home');
 Route::view('tank-you', 'pages.home')->name('tank-you');
 Route::view('sizes-guide', 'pages.home')->name('sizes-guide');
 Route::view('how-to-buy', 'pages.home')->name('how-to-buy');
@@ -26,26 +26,91 @@ Route::get('account-settings', 'Users\AccountController@show')->name('users.acco
 Route::get('products/newest', 'Products\ProductController@newest')->name('products.newest');
 Route::get('products/offers', 'Products\ProductController@offers')->name('products.offers');
 
-Route::resource('products.categories', 'Products\ProductCategoryController')->shallow();
-Route::resource('products.pictures', 'Products\ProductPictureController')->shallow();
-Route::resource('users.profile-pictures', 'Users\UserProfilePictureController')->shallow();
-Route::resource('shopping-bag', 'ShoppingBagController')->except([
-    'create', 'show', 'edit'
-]);
-Route::resource('wish-list', 'WishListController')->except([
-    'create', 'show', 'edit'
-]);
-Route::resources([
-    'products' =>'Products\ProductController',
-    'categories' =>'CategoryController',
-    'orders' =>'OrderController',
-    'shipments' =>'ShipmentController',
-    'notifications' =>'NotificationsController',
-    'users' => 'Users\UserController',
-    'users.conctact-details' =>'Users\UserProfilePictureController',
-    'users.shipping-addresses' =>'Users\UserProfilePictureController'
-]);
-
 Route::group(['prefix' => 'admin'], function () {
     Route::get('', 'Admin\DashboardController@index')->name('admin.dashboard');
 });
+
+Route::resources([
+    'products' =>'Products\ProductController',
+    'categories' =>'Categories\CategoryController',
+]);
+
+
+Route::resource('user', 'Users\UserController')->except('create', 'store');
+
+Route::resource('user-contact-detail', 'Users\UserContactDetailController');
+
+Route::resource('user-shipping-address', 'Users\UserShippingAddressController');
+
+Route::resource('user-profile-pictures', 'Users\UserProfilePicturesController')->except('index');
+
+Route::resource('order', 'Orders\OrderController');
+
+Route::resource('order-detail', 'Orders\OrderDetailController');
+
+Route::resource('shipment', 'Shipments\ShipmentController');
+
+Route::resource('product-pictures', 'Products\ProductPicturesController');
+
+Route::resource('shopping-bag', 'ShoppingBag\ShoppingBagController')->except('index', 'create', 'edit');
+
+Route::resource('wish-list', 'WishList\WishListController')->except('index', 'create', 'edit');
+
+
+Route::resource('user', 'Users\UserController')->except('create', 'store');
+
+Route::resource('user-contact-detail', 'Users\UserContactDetailController');
+
+Route::resource('user-shipping-address', 'Users\UserShippingAddressController');
+
+Route::resource('order', 'Orders\OrderController');
+
+Route::resource('order-detail', 'Orders\OrderDetailController');
+
+Route::resource('shipment', 'Shipments\ShipmentController');
+
+Route::resource('product-pictures', 'Products\ProductPicturesController');
+
+Route::resource('shopping-bag', 'ShoppingBag\ShoppingBagController')->except('index', 'create', 'edit');
+
+Route::resource('wish-list', 'WishList\WishListController')->except('index', 'create', 'edit');
+
+
+Route::resource('user', 'Users\UserController')->except('create', 'store');
+
+Route::resource('user-contact-detail', 'Users\UserContactDetailController');
+
+Route::resource('user-shipping-address', 'Users\UserShippingAddressController');
+
+Route::resource('order', 'Orders\OrderController');
+
+Route::resource('order-detail', 'Orders\OrderDetailController');
+
+Route::resource('shipment', 'Shipments\ShipmentController');
+
+Route::resource('shopping-bag', 'ShoppingBag\ShoppingBagController')->except('index', 'create', 'edit');
+
+Route::resource('wish-list', 'WishList\WishListController')->except('index', 'create', 'edit');
+
+
+Route::resource('user', 'Users\UserController')->except('create', 'store');
+
+Route::resource('user-contact-detail', 'Users\UserContactDetailController');
+
+Route::resource('user-shipping-address', 'Users\UserShippingAddressController');
+
+Route::resource('product-variant', 'Products\ProductVariantController');
+
+Route::resource('product-property', 'Products\ProductPropertyController');
+
+Route::resource('product-property-type', 'Products\ProductPropertyTypeController');
+
+Route::resource('order', 'Orders\OrderController');
+
+Route::resource('order-detail', 'Orders\OrderDetailController');
+
+Route::resource('shipment', 'Shipments\ShipmentController');
+
+Route::resource('shopping-bag', 'ShoppingBag\ShoppingBagController')->except('index', 'create', 'edit');
+
+Route::resource('wish-list', 'WishList\WishListController')->except('index', 'create', 'edit');

@@ -3,62 +3,66 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Users\UserUpdateRequest;
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $users = User::all();
+
+        return view('user.index', compact('users'));
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, User $user)
     {
-        //
+        return view('user.show', compact('user'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, User $user)
     {
-        //
+        return view('user.edit', compact('user'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \App\Http\Requests\Users\UserUpdateRequest $request
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        //
+        $user->update($request->validated());
+
+        $request->session()->flash('user.id', $user->id);
+
+        return redirect()->route('user.index');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('user.index');
     }
 }

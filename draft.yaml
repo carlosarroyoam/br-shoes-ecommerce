@@ -3,7 +3,7 @@ models:
     user_id: unsignedBigInteger foreign:users.id unique
     phone_number: string:10 unique
 
-  UserShipmentAddress:
+  UserShippingAddress:
     user_id: unsignedBigInteger foreign:users.id
     address: string
     city: string
@@ -96,4 +96,36 @@ models:
     wish_list_id: unsignedBigInteger unique foreign:wish_lists.id
     product_id: unsignedBigInteger foreign:products.id
 
+controllers:
+  Users\User:
+    resource: index, show, edit, update, destroy
 
+  Users\UserContactDetail:
+    resource
+
+  Users\UserShippingAddress:
+    resource
+
+  Products\ProductVariant:
+    resource
+
+  Products\ProductProperty:
+    resource
+
+  Products\ProductPropertyType:
+    resource
+
+  Orders\Order:
+    resource
+
+  Orders\OrderDetail:
+    resource
+
+  Shipments\Shipment:
+    resource
+
+  ShoppingBag\ShoppingBag:
+    resource: show, store, update, destroy
+
+  WishList\WishList:
+    resource: show, store, update, destroy
