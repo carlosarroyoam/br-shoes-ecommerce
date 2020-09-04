@@ -7,7 +7,7 @@ use App\ProductVariant;
 use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
-    $productName = $faker->unique();
+    $productName = $faker->sentence;
     return [
         'name' => $productName,
         'slug' => Str::slug($productName),

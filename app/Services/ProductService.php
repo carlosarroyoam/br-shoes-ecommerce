@@ -72,16 +72,22 @@ class ProductService
      * @param \App\Product $product
      * @return \App\Product
      */
-    public function update(array $validated, Category $product)
+    public function update(array $validated, Product $product)
     {
         DB::beginTransaction();
 
         try {
+            $variant = $product->variants()->where('is_master', true)->first();
+
             $product->name = $validated['name'];
             $product->slug = $validated['slug'];
             $product->description = $validated['description'];
             $product->featured = $validated['featured'];
+
+            $variant->price_in_cents = $validated['price_in_cents'];
+
             $product->save();
+            $variant->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -100,7 +106,7 @@ class ProductService
      * @param \App\Product $product
      * @return void
      */
-    public function delete(Category $product)
+    public function delete(Product $product)
     {
         DB::beginTransaction();
 

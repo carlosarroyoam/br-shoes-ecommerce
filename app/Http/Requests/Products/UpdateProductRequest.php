@@ -15,9 +15,12 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-                'name' => 'required|string',
-                'slug' => 'nullable|string',
-            ];
+            'name' => 'required|string',
+            'slug' => 'nullable|string',
+            'description' => 'required|string',
+            'featured' => 'nullable|boolean',
+            'price_in_cents' => 'required|numeric',
+        ];
     }
 
     /**
