@@ -42,7 +42,7 @@ class ProductService
 
         try {
             $product = new Product;
-            $variant = new ProductVariant;
+            $product_variant = new ProductVariant;
 
             $product->name = $validated['name'];
             $product->slug = $validated['slug'];
@@ -50,9 +50,9 @@ class ProductService
             $product->featured = $validated['featured'];
             $product->save();
 
-            $variant->price_in_cents = $validated['price_in_cents'];
-            $variant->is_master = true;
-            $product->variants()->save($variant);
+            $product_variant->price_in_cents = $validated['price_in_cents'];
+            $product_variant->is_master = true;
+            $product->variants()->save($product_variant);
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -77,17 +77,17 @@ class ProductService
         DB::beginTransaction();
 
         try {
-            $variant = $product->variants()->where('is_master', true)->first();
+            $product_variant = $product->variants()->where('is_master', true)->first();
 
             $product->name = $validated['name'];
             $product->slug = $validated['slug'];
             $product->description = $validated['description'];
             $product->featured = $validated['featured'];
 
-            $variant->price_in_cents = $validated['price_in_cents'];
+            $product_variant->price_in_cents = $validated['price_in_cents'];
 
             $product->save();
-            $variant->save();
+            $product_variant->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());

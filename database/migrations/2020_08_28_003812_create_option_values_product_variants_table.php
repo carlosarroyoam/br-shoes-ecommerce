@@ -19,7 +19,7 @@ class CreateOptionValuesProductVariantsTable extends Migration
             $table->timestamps();
 
             $table->foreign('option_value_id')->references('id')->on('option_values')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('product_variant_id')->references('id')->on('variants')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('product_variant_id')->references('id')->on('product_variants')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

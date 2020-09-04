@@ -15,12 +15,12 @@ class CreateShoppingBagItemsTable extends Migration
     {
         Schema::create('shopping_bag_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('variant_id');
+            $table->unsignedBigInteger('product_variant_id');
             $table->unsignedBigInteger('shopping_bag_id');
             $table->unsignedSmallInteger('quantity');
             $table->timestamps();
 
-            $table->foreign('variant_id')->references('id')->on('variants');
+            $table->foreign('product_variant_id')->references('id')->on('product_variants');
             $table->foreign('shopping_bag_id')->references('id')->on('shopping_bag');
         });
     }

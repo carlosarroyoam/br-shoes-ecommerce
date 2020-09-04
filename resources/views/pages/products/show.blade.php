@@ -1,11 +1,11 @@
 @extends('base.app')
 
-@section('title', __('navigation.products', 'Details'))
+@section('title', __('navigation.products'))
 
 @section('content')
 <article>
     <h1 class="text-2xl uppercase text-header">
-        Details
+        {{ __('navigation.products') }}
     </h1>
 </article>
 @endsection

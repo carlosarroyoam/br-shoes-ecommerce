@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Products;
 
 use App\Product;
 use App\Http\Controllers\Controller;
-use App\Services\ProductService;
 use App\Http\Requests\Products\StoreProductRequest;
 use App\Http\Requests\Products\UpdateProductRequest;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -35,7 +35,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('pages/products/products');
+        $products = $this->productService->getAll();
+
+        return view('pages.products.index', compact('products'));
     }
 
     /**
@@ -89,7 +91,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('pages.products.show', compact('product'));
     }
 
     /**
@@ -125,6 +127,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $this->productService->delete($product);
+
+        return redirect()->route('products.index');
     }
 }
