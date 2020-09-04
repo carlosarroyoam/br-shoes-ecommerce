@@ -7,11 +7,11 @@ use Faker\Generator as Faker;
 
 $factory->define(ProductVariant::class, function (Faker $faker) {
     return [
-        'price_in_cents' => $faker->numberBetween(15000, 85000),
-        'is_master' => false,
+        'price_in_cents' => $faker->randomNumber(),
+        'is_master' => $faker->boolean,
     ];
 });
 
 $factory->state(ProductVariant::class, 'is_master', [
-    'is_master' => true,
+    'is_master' => 1,
 ]);

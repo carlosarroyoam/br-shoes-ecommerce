@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(WishList::class, function (Faker $faker) {
     return [
-        //
+        'user_id' => factory(\App\User::class),
     ];
 });

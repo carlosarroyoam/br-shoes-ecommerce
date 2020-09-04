@@ -7,6 +7,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Shipment::class, function (Faker $faker) {
     return [
-        //
+        'shipment_status_id' => factory(\App\ShipmentStatus::class),
     ];
 });

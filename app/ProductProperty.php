@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $user_id
+ * @property int $product_id
+ * @property int $property_type_id
+ * @property string $value
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class ShoppingBag extends Model
+class ProductProperty extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,7 +20,9 @@ class ShoppingBag extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
+        'product_id',
+        'property_type_id',
+        'value',
     ];
 
     /**
@@ -28,15 +32,24 @@ class ShoppingBag extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'user_id' => 'integer',
+        'product_id' => 'integer',
+        'property_type_id' => 'integer',
     ];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function product()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(\App\Product::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function propertyType()
+    {
+        return $this->belongsTo(\App\ProductPropertyType::class);
     }
 }

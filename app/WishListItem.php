@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $user_id
+ * @property int $wish_list_id
+ * @property int $product_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class ShoppingBag extends Model
+class WishListItem extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,7 +19,8 @@ class ShoppingBag extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
+        'wish_list_id',
+        'product_id',
     ];
 
     /**
@@ -28,15 +30,24 @@ class ShoppingBag extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'user_id' => 'integer',
+        'wish_list_id' => 'integer',
+        'product_id' => 'integer',
     ];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function wishList()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(\App\WishList::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function product()
+    {
+        return $this->belongsTo(\App\Product::class);
     }
 }

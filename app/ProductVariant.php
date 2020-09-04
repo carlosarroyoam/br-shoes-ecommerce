@@ -4,6 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property int $product_id
+ * @property int $price_in_cents
+ * @property bool $is_master
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ */
 class ProductVariant extends Model
 {
     /**
@@ -12,7 +20,9 @@ class ProductVariant extends Model
      * @var array
      */
     protected $fillable = [
-        'price_in_cents', 'is_master',
+        'product_id',
+        'price_in_cents',
+        'is_master',
     ];
 
     /**
@@ -21,14 +31,18 @@ class ProductVariant extends Model
      * @var array
      */
     protected $casts = [
+        'id' => 'integer',
+        'product_id' => 'integer',
+        'price_in_cents' => 'integer',
         'is_master' => 'boolean',
     ];
 
+
     /**
-     * Get the product that owns the variant.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo(\App\Product::class);
     }
 }

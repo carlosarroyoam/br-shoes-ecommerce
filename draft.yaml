@@ -1,0 +1,99 @@
+models:
+  UserContactDetail:
+    user_id: unsignedBigInteger foreign:users.id unique
+    phone_number: string:10 unique
+
+  UserShipmentAddress:
+    user_id: unsignedBigInteger foreign:users.id
+    address: string
+    city: string
+    state: string
+    zip_code: unsignedSmallInteger
+    country: string default:'México'
+
+  Product:
+      name: string:64
+      slug: string:64
+      description: text:254
+      featured: boolean default:false
+      relationships:
+        hasMany: ProductVariant
+        belongsTo: Category
+
+  ProductVariant:
+      product_id: unsignedBigInteger foreign:products.id
+      price_in_cents: unsignedInteger default:0
+      is_master: boolean default:false
+
+  ProductPropertyType:
+    name: string unique
+
+  ProductProperty:
+    product_id: unsignedBigInteger foreign:products.id
+    property_type_id: unsignedBigInteger foreign:product_property_types.id
+    value: string
+
+  VariantOptionType:
+    product_id: unsignedBigInteger foreign:products.id
+    name: string
+
+  VariantOptionValue:
+    option_type_id: unsignedBigInteger foreign:variant_option_types.id
+    value: string
+
+  ProductVariantsOptionValues:
+    variant_option_value_id: unsignedBigInteger foreign:variant_option_values.id
+    product_variant_id: unsignedBigInteger foreign:product_variants.id
+
+  Category:
+    id: tinyIncrements
+    name: string:64
+    slug: string:64 unique
+    relationships:
+      hasMany: Product
+
+  Photo:
+    url: string
+    photoable_id: unsignedBigInteger
+    photoable_type: string
+
+  ShipmentStatus:
+    id: tinyIncrements
+    status: string unique
+    description: string
+
+  Shipment:
+    shipment_status_id: unsignedTinyInteger foreign:shipment_statuses.id
+
+  OrderStatus:
+    id: tinyIncrements
+    status: string unique
+    description: string
+
+  Order:
+    user_id: unsignedBigInteger foreign:users.id
+    shipment_id: unsignedBigInteger foreign:shipments.id
+    order_status_id: unsignedTinyInteger foreign:order_statuses.id
+    comments: text nullable
+
+  OrderDetail:
+    order_id: unsignedBigInteger foreign:orders.id
+    product_variant_id: unsignedBigInteger foreign:product_variants.id
+    quantity: unsignedSmallInteger
+
+  ShoppingBag:
+    user_id: unsignedBigInteger unique foreign:users.id
+
+  ShoppingBagItem:
+    shopping_bag_id: unsignedBigInteger unique foreign:shopping_bags.id
+    product_variant_id: unsignedBigInteger foreign:product_variants.id
+    quantity: unsignedSmallInteger
+
+  WishList:
+    user_id: unsignedBigInteger unique foreign:users.id
+
+  WishListItem:
+    wish_list_id: unsignedBigInteger unique foreign:wish_lists.id
+    product_id: unsignedBigInteger foreign:products.id
+
+

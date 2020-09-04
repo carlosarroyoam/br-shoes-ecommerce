@@ -7,21 +7,20 @@ use App\ProductVariant;
 use Faker\Generator as Faker;
 
 $factory->define(Product::class, function (Faker $faker) {
-    $productName = $faker->sentence;
     return [
-        'name' => $productName,
-        'slug' => Str::slug($productName),
-        'description' => $faker->paragraph,
-        'featured' => false,
+        'name' => $faker->name,
+        'slug' => $faker->slug,
+        'description' => $faker->text,
+        'featured' => $faker->boolean,
     ];
 });
 
 $factory->afterCreating(Product::class, function ($product, $faker) {
-    $product->variants()->save(
+    $product->productVariants()->save(
         factory(ProductVariant::class)->states('is_master')->make()
     );
 });
 
-$factory->state(Product::class, 'featured', [
-    'featured' => true,
+$factory->state(ProductVariant::class, 'featured', [
+    'featured' => 1,
 ]);

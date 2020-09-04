@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $user_id
+ * @property string $phone_number
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class ShoppingBag extends Model
+class UserContactDetail extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -19,6 +20,7 @@ class ShoppingBag extends Model
      */
     protected $fillable = [
         'user_id',
+        'phone_number',
     ];
 
     /**

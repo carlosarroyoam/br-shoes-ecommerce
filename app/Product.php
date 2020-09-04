@@ -4,6 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property string $description
+ * @property bool $featured
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ */
 class Product extends Model
 {
     /**
@@ -12,7 +21,10 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'description', 'featured',
+        'name',
+        'slug',
+        'description',
+        'featured',
     ];
 
     /**
@@ -21,32 +33,9 @@ class Product extends Model
      * @var array
      */
     protected $casts = [
+        'id' => 'integer',
         'featured' => 'boolean',
     ];
-
-    /**
-     * Get all of the product's variants.
-     */
-    public function variants()
-    {
-        return $this->hasMany('App\ProductVariant');
-    }
-
-    /**
-     * Get all of the product's pictures.
-     */
-    public function pictures()
-    {
-        return $this->morphMany('App\Image', 'imageable');
-    }
-
-    /**
-     * Get all of the categories for the product.
-     */
-    public function tags()
-    {
-        return $this->morphToMany('App\Categories', 'categorizable');
-    }
 
     /**
      * Get the route key for the model.
@@ -56,5 +45,22 @@ class Product extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productVariants()
+    {
+        return $this->hasMany(\App\ProductVariant::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(\App\Category::class);
     }
 }

@@ -47,7 +47,7 @@ class ProductController extends Controller
      */
     public function newest()
     {
-        return view('pages/products/products', ['name' => __('navigation.newest')]);
+        return view('pages.products.index', ['name' => __('navigation.newest')]);
     }
 
     /**
@@ -57,7 +57,7 @@ class ProductController extends Controller
      */
     public function offers()
     {
-        return view('pages/products/products', ['name' => __('navigation.offers')]);
+        return view('pages.products.index', ['name' => __('navigation.offers')]);
     }
 
     /**

@@ -2,12 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\OrderDetail;
+use App\ShoppingBagItem;
 use Faker\Generator as Faker;
 
-$factory->define(OrderDetail::class, function (Faker $faker) {
+$factory->define(ShoppingBagItem::class, function (Faker $faker) {
     return [
-        'order_id' => factory(\App\Order::class),
+        'shopping_bag_id' => factory(\App\ShoppingBag::class),
         'product_variant_id' => factory(\App\ProductVariant::class),
         'quantity' => $faker->randomNumber(),
     ];

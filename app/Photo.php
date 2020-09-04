@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $user_id
+ * @property string $url
+ * @property int $photoable_id
+ * @property string $photoable_type
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class ShoppingBag extends Model
+class Photo extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,7 +20,9 @@ class ShoppingBag extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
+        'url',
+        'photoable_id',
+        'photoable_type',
     ];
 
     /**
@@ -28,15 +32,6 @@ class ShoppingBag extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'user_id' => 'integer',
+        'photoable_id' => 'integer',
     ];
-
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(\App\User::class);
-    }
 }

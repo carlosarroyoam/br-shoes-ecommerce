@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $user_id
+ * @property int $shipment_status_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class ShoppingBag extends Model
+class Shipment extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,7 +18,7 @@ class ShoppingBag extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
+        'shipment_status_id',
     ];
 
     /**
@@ -28,15 +28,15 @@ class ShoppingBag extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'user_id' => 'integer',
+        'shipment_status_id' => 'integer',
     ];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function shipmentStatus()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(\App\ShipmentStatus::class);
     }
 }

@@ -53,9 +53,9 @@ class User extends Authenticatable
     /**
      * Get the addresess records associated with the user.
      */
-    public function addresess()
+    public function shipmentAddresses()
     {
-        return $this->hasMany('App\Addresses');
+        return $this->hasMany('App\UserShipmentAddress');
     }
 
     /**
@@ -63,7 +63,7 @@ class User extends Authenticatable
      */
     public function contactDetails()
     {
-        return $this->hasOne('App\ContactDetails');
+        return $this->hasOne('App\UserContactDetails');
     }
 
     /**

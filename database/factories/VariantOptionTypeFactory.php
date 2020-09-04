@@ -2,12 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Category;
+use App\VariantOptionType;
 use Faker\Generator as Faker;
 
-$factory->define(Category::class, function (Faker $faker) {
+$factory->define(VariantOptionType::class, function (Faker $faker) {
     return [
+        'product_id' => factory(\App\Product::class),
         'name' => $faker->name,
-        'slug' => $faker->slug,
     ];
 });

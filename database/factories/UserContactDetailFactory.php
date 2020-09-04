@@ -2,11 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\ShoppingBag;
+use App\UserContactDetail;
 use Faker\Generator as Faker;
 
-$factory->define(ShoppingBag::class, function (Faker $faker) {
+$factory->define(UserContactDetail::class, function (Faker $faker) {
     return [
         'user_id' => factory(\App\User::class),
+        'phone_number' => $faker->phoneNumber,
     ];
 });

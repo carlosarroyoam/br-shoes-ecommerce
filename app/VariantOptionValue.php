@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $user_id
+ * @property int $option_type_id
+ * @property string $value
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class ShoppingBag extends Model
+class VariantOptionValue extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,7 +19,8 @@ class ShoppingBag extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
+        'option_type_id',
+        'value',
     ];
 
     /**
@@ -28,15 +30,15 @@ class ShoppingBag extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'user_id' => 'integer',
+        'option_type_id' => 'integer',
     ];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function optionType()
     {
-        return $this->belongsTo(\App\User::class);
+        return $this->belongsTo(\App\VariantOptionType::class);
     }
 }
