@@ -12,3 +12,7 @@ $factory->define(ProductVariant::class, function (Faker $faker) {
         'is_master' => $faker->boolean,
     ];
 });
+
+$factory->state(ProductVariant::class, 'is_master', [
+    'is_master' => 1,
+]);

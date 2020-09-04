@@ -13,3 +13,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'featured' => $faker->boolean,
     ];
 });
+
+$factory->state(Product::class, 'featured', [
+    'featured' => 1,
+]);

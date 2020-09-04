@@ -37,11 +37,20 @@ class Product extends Model
         'featured' => 'boolean',
     ];
 
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function productVariants()
+    public function variants()
     {
         return $this->hasMany(\App\ProductVariant::class);
     }

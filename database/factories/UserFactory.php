@@ -28,6 +28,6 @@ $factory->define(User::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(User::class, 'admin', [
+$factory->state(User::class, 'is_admin', [
     'is_admin' => 1,
 ]);

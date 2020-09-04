@@ -1,12 +1,12 @@
-@extends('base.app')
+@extends('layouts.app')
 
-@section('title', __('navigation.wish_list'))
+@section('title', __('navigation.shipments'))
 
 @section('content')
 
 <article>
     <h1 class="text-2xl uppercase text-header">
-        {{ __('navigation.wish_list') }}
+        {{ __('navigation.shipments') }}
     </h1>
 </article>
 
