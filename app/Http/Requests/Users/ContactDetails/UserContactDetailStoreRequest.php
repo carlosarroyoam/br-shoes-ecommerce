@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Orders;
+namespace App\Http\Requests\Users\ContactDetails;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrderDetailStoreRequest extends FormRequest
+class UserContactDetailStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,8 @@ class OrderDetailStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'order_id' => ['required', 'integer', 'gt:0'],
-            'product_variant_id' => ['required', 'integer', 'gt:0'],
-            'quantity' => ['required', 'integer', 'gt:0'],
+            'user_id' => ['required', 'integer', 'gt:0', 'unique:user_contact_details,user_id'],
+            'phone_number' => ['required', 'string', 'max:10', 'unique:user_contact_details,phone_number'],
         ];
     }
 }

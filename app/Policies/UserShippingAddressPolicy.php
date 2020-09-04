@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\User;
-use App\Address;
+use App\UserShippingAddress;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class AddressPolicy
+class UserShippingAddressPolicy
 {
     use HandlesAuthorization;
 
@@ -39,12 +39,12 @@ class AddressPolicy
      * Determine if the given model can be viewed by the user.
      *
      * @param  \App\User  $user
-     * @param  \App\Address  $address
+     * @param  \App\UserShippingAddress  $userShippingAddress
      * @return bool
      */
-    public function view(User $user, Address $address)
+    public function view(User $user, UserShippingAddress $userShippingAddress)
     {
-        return $user->id === $address->user_id;
+        return $user->id === $userShippingAddress->user_id;
     }
 
     /**
@@ -62,24 +62,23 @@ class AddressPolicy
      * Determine if the given model can be updated by the user.
      *
      * @param  \App\User  $user
-     * @param  \App\Address  $address
+     * @param  \App\UserShippingAddress  $userShippingAddress
      * @return bool
      */
-    public function update(User $user, Address $address)
+    public function update(User $user, UserShippingAddress $userShippingAddress)
     {
-        return $user->id === $address->user_id;
+        return $user->id === $userShippingAddress->user_id;
     }
 
     /**
      * Determine if the given model can be deleted by the user.
      *
      * @param  \App\User  $user
-     * @param  \App\Address  $address
+     * @param  \App\UserShippingAddress  $userShippingAddress
      * @return bool
      */
-    public function delete(User $user, Address $address)
+    public function delete(User $user, UserShippingAddress $userShippingAddress)
     {
-        return $user->id === $address->user_id;
+        return $user->id === $userShippingAddress->user_id;
     }
-
 }

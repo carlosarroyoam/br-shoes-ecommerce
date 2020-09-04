@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Users;
+namespace App\Http\Requests\Products\Variants;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserContactDetailUpdateRequest extends FormRequest
+class ProductVariantUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class UserContactDetailUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'integer', 'gt:0', 'unique:user_contact_details,user_id'],
-            'phone_number' => ['required', 'string', 'max:10', 'unique:user_contact_details,phone_number'],
+            'product_id' => ['required', 'integer', 'gt:0'],
+            'price_in_cents' => ['required', 'integer', 'gt:0'],
+            'is_master' => ['required'],
         ];
     }
 }

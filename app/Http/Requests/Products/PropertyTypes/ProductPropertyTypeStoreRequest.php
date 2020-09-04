@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Products;
+namespace App\Http\Requests\Products\PropertyTypes;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductPropertyTypeUpdateRequest extends FormRequest
+class ProductPropertyTypeStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Products;
+namespace App\Http\Requests\Products\Properties;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductVariantUpdateRequest extends FormRequest
+class ProductPropertyUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class ProductVariantUpdateRequest extends FormRequest
     {
         return [
             'product_id' => ['required', 'integer', 'gt:0'],
-            'price_in_cents' => ['required', 'integer', 'gt:0'],
-            'is_master' => ['required'],
+            'property_type_id' => ['required', 'integer', 'gt:0'],
+            'value' => ['required', 'string'],
         ];
     }
 }
