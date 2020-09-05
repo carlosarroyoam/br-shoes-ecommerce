@@ -6,39 +6,38 @@ use App\Category;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ShowCategoryTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     /**
-     * A user can retrieve a specified category.
+     * The route displays the view.
      *
      * @return void
      */
-    public function test_a_user_can_get_a_category()
+    public function test_show_displays_view()
     {
         $category = factory(Category::class)->create();
 
-        $response = $this->get(route('categories.show', $category->slug));
-
-        $category = Category::first();
+        $response = $this->get(route('categories.show', $category));
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.categories.show');
-        $response->assertViewHas('category', $category);
+        $response->assertViewHas('category');
     }
 
     /**
-     * A user cannot retrieve a specified category if the category doesn't exist.
+     * The route doesn't display the view when the resource doesn't exist.
      *
      * @return void
      */
-    public function test_a_user_cannot_get_a_category_if_doesnt_exists()
+    public function test_show_doesnt_display_view_if_resource_doesnt_exist()
     {
-        $nonExistingSlug = 'snake-sneaker';
+        $nonExistingSlug = Str::slug($this->faker->name);
 
         $response = $this->get(route('categories.show', $nonExistingSlug));
 
