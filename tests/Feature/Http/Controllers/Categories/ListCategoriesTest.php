@@ -14,19 +14,18 @@ class ListCategoriesTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A user can retrieve the list of categories.
+     * The route displays the view.
      *
      * @return void
      */
-    public function test_a_user_can_list_categories()
+    public function test_index_displays_view()
     {
-        factory(Category::class, 5)->create();
-        $categories = Category::all();
+        $categories = factory(Category::class, 3)->create();
 
         $response = $this->get(route('categories.index'));
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.categories.index');
-        $response->assertViewHas('categories', $categories);
+        $response->assertViewHas('categories');
     }
 }
