@@ -14,21 +14,18 @@ class ListProductsTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A user can retrieve the list of products.
+     * The route displays the view.
      *
      * @return void
      */
-    public function test_a_user_can_list_products()
+    public function test_index_displays_view()
     {
-        $this->withoutExceptionHandling();
-
-        factory(Product::class, 10)->create();
-        $products = Product::all();
+        $products = factory(Product::class, 3)->create();
 
         $response = $this->get(route('products.index'));
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.products.index');
-        $response->assertViewHas('products', $products);
+        $response->assertViewHas('products');
     }
 }

@@ -5,13 +5,12 @@ namespace Tests\Feature;
 use App\Category;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use JMac\Testing\Traits\AdditionalAssertions;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class DeleteCategoryTest extends TestCase
 {
-    use RefreshDatabase, AdditionalAssertions;
+    use RefreshDatabase;
 
     /**
      * Destroy action deletes and redirects to index for an admin user.

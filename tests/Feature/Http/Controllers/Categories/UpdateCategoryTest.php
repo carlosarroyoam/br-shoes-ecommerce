@@ -24,7 +24,7 @@ class UpdateCategoryTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('is_admin')->make();
+        $user = factory(User::class)->states('is_admin')->create();
         $this->actingAs($user);
         $category = factory(Category::class)->create();
 

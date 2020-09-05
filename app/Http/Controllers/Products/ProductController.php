@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Products;
 
 use App\Product;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Products\StoreProductRequest;
-use App\Http\Requests\Products\UpdateProductRequest;
+use App\Http\Requests\Products\ProductStoreRequest;
+use App\Http\Requests\Products\ProductUpdateRequest;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
@@ -65,9 +65,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Product $product)
     {
-        //
+        return view('pages.products.create', compact('product'));
     }
 
     /**
@@ -76,7 +76,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductRequest $request)
+    public function store(ProductStoreRequest $request)
     {
         $product = $this->productService->create($request->validated());
 
@@ -102,7 +102,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('pages.products.edit', compact('product'));
     }
 
     /**
@@ -112,11 +112,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(ProductUpdateRequest $request, Product $product)
     {
         $updatedProduct = $this->productService->update($request->validated(), $product);
 
-        return redirect()->route('products.show', $updatedProduct);
+        return redirect()->route('products.index');
     }
 
     /**

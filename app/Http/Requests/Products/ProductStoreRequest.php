@@ -5,7 +5,7 @@ namespace App\Http\Requests\Products;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 
-class UpdateProductRequest extends FormRequest
+class ProductStoreRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -31,7 +31,7 @@ class UpdateProductRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-                'slug' => Str::slug($this->name),
-            ]);
+            'slug' => Str::slug($this->name),
+        ]);
     }
 }
