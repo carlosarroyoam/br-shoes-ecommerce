@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Categories;
 use App\Category;
 use App\Services\CategoryService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Categories\StoreCategoryRequest;
-use App\Http\Requests\Categories\UpdateCategoryRequest;
+use App\Http\Requests\Categories\CategoryStoreRequest;
+use App\Http\Requests\Categories\CategoryUpdateRequest;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -47,7 +47,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.categories.create');
     }
 
     /**
@@ -56,11 +56,11 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(CategoryStoreRequest $request)
     {
         $category = $this->categoryService->create($request->validated());
 
-        return redirect()->route('categories.show', $category);
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -83,7 +83,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('pages.categories.edit');
     }
 
     /**
@@ -93,7 +93,7 @@ class CategoryController extends Controller
      * @param  App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
         $updatedCategory = $this->categoryService->update($request->validated(), $category);
 

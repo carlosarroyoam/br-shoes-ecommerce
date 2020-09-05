@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class StoreCategoryRequest extends FormRequest
+class CategoryUpdateRequest extends FormRequest
 {
 
     /**
@@ -17,8 +17,8 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'slug' => 'nullable|string',
+            'name' => ['required', 'string'],
+            'slug' => ['nullable', 'string'],
         ];
     }
 

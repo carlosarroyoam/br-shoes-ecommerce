@@ -13,10 +13,12 @@
         <a href="{{ route('users.profile') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ Auth::user()->fullName }}
         </a>
-        <a href="{{ route('shopping-bag.index') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
+        <a href="{{ route('shopping-bag.show', Auth::user()->shoppingBag()->get()) }}"
+            class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ __('navigation.shopping_bag') }}
         </a>
-        <a href="{{ route('wish-list.index') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
+        <a href="{{ route('wish-list.show', Auth::user()->wishList()->get()) }}"
+            class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ __('navigation.wish_list') }}
         </a>
         <a href="{{ route('orders.index') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">

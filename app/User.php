@@ -67,6 +67,22 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the addresess records associated with the user.
+     */
+    public function shoppingBag()
+    {
+        return $this->hasOne('App\ShoppingBag');
+    }
+
+    /**
+     * Get the addresess records associated with the user.
+     */
+    public function wishList()
+    {
+        return $this->hasOne('App\WishList');
+    }
+
+    /**
      * Get all of the user's profile picture.
      */
     public function profilePicture()
