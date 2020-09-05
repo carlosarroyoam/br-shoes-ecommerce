@@ -64,7 +64,7 @@ class UserShippingAddressControllerTest extends TestCase
         $address = $this->faker->word;
         $city = $this->faker->city;
         $state = $this->faker->word;
-        $zip_code = $this->faker->randomNumber();
+        $zip_code = '12345';
         $country = $this->faker->country;
 
         $response = $this->post(route('user-shipping-addresses.store'), [
@@ -139,16 +139,18 @@ class UserShippingAddressControllerTest extends TestCase
      */
     public function update_redirects()
     {
+        $this->withoutExceptionHandling();
+
         $userShippingAddress = factory(UserShippingAddress::class)->create();
-        $user_id = $this->faker->randomNumber();
+        $user = User::first();
         $address = $this->faker->word;
         $city = $this->faker->city;
         $state = $this->faker->word;
-        $zip_code = $this->faker->randomNumber();
+        $zip_code = '12345';
         $country = $this->faker->country;
 
         $response = $this->put(route('user-shipping-addresses.update', $userShippingAddress), [
-            'user_id' => $user_id,
+            'user_id' => $user->id,
             'address' => $address,
             'city' => $city,
             'state' => $state,
@@ -161,7 +163,7 @@ class UserShippingAddressControllerTest extends TestCase
         $response->assertRedirect(route('user-shipping-addresses.index'));
         $response->assertSessionHas('userShippingAddress.id', $userShippingAddress->id);
 
-        $this->assertEquals($user_id, $userShippingAddress->user_id);
+        $this->assertEquals($user->id, $userShippingAddress->user_id);
         $this->assertEquals($address, $userShippingAddress->address);
         $this->assertEquals($city, $userShippingAddress->city);
         $this->assertEquals($state, $userShippingAddress->state);

@@ -129,6 +129,8 @@ class UserContactDetailControllerTest extends TestCase
      */
     public function update_redirects()
     {
+        $this->withoutExceptionHandling();
+
         $userContactDetail = factory(UserContactDetail::class)->create();
         $newPhoneNumber = '4131092978';
 

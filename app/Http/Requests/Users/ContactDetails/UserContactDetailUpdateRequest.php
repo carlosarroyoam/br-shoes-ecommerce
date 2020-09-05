@@ -14,7 +14,6 @@ class UserContactDetailUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'integer', 'gt:0', 'unique:user_contact_details,user_id'],
             'phone_number' => ['required', 'string', 'max:10', 'unique:user_contact_details'],
         ];
     }

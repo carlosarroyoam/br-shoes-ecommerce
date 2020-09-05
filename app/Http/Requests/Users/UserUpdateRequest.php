@@ -7,16 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class UserUpdateRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -27,10 +17,10 @@ class UserUpdateRequest extends FormRequest
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
             'email' => ['required', 'email'],
-            'email_verified_at' => [''],
+            'email_verified_at' => ['nullable'],
             'password' => ['required', 'password'],
-            'is_admin' => ['required'],
-            'remember_token' => ['string', 'max:100'],
+            'is_admin' => ['nullable', 'boolean'],
+            'remember_token' => ['nullable', 'string', 'max:100'],
         ];
     }
 }

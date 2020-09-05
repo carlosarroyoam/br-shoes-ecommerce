@@ -77,22 +77,22 @@ class UserControllerTest extends TestCase
      */
     public function update_redirects()
     {
-        $user = factory(User::class)->states('is_admin')->make();
-        $this->actingAs($user);
+        $this->withoutExceptionHandling();
+
+        $authUser = factory(User::class)->states('is_admin')->make();
+        $this->actingAs($authUser);
 
         $user = factory(User::class)->create();
-        $first_name = $this->faker->firstName;
-        $last_name = $this->faker->lastName;
-        $email = $this->faker->safeEmail;
-        $password = $this->faker->password;
-        $is_admin = $this->faker->boolean;
+        $first_name = 'Carlos';
+        $last_name = 'Arroyo';
+        $email = 'carlosarroyo@gmail.com';
+        $password = 'secret';
 
         $response = $this->put(route('users.update', $user), [
             'first_name' => $first_name,
             'last_name' => $last_name,
             'email' => $email,
             'password' => $password,
-            'is_admin' => $is_admin,
         ]);
 
         $user->refresh();
@@ -104,7 +104,6 @@ class UserControllerTest extends TestCase
         $this->assertEquals($last_name, $user->last_name);
         $this->assertEquals($email, $user->email);
         $this->assertEquals($password, $user->password);
-        $this->assertEquals($is_admin, $user->is_admin);
     }
 
 
@@ -122,6 +121,9 @@ class UserControllerTest extends TestCase
 
         $response->assertRedirect(route('users.index'));
 
-        $this->assertSoftDeleted('users', $user);
+        $this->assertSoftDeleted('users', [
+            'id' => $user->id,
+            'email' => $user->email,
+        ]);
     }
 }

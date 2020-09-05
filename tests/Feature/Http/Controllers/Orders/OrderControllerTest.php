@@ -3,6 +3,9 @@
 namespace Tests\Feature\Http\Controllers\Orders;
 
 use App\Order;
+use App\OrderStatus;
+use App\Shipment;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
@@ -59,20 +62,20 @@ class OrderControllerTest extends TestCase
      */
     public function store_saves_and_redirects()
     {
-        $user_id = $this->faker->randomNumber();
-        $shipment_id = $this->faker->randomNumber();
-        $order_status_id = $this->faker->randomDigitNotNull;
+        $user = factory(User::class)->create();
+        $shipment = factory(Shipment::class)->create();
+        $order_status = factory(OrderStatus::class)->create();
 
         $response = $this->post(route('orders.store'), [
-            'user_id' => $user_id,
-            'shipment_id' => $shipment_id,
-            'order_status_id' => $order_status_id,
+            'user_id' => $user->id,
+            'shipment_id' => $shipment->id,
+            'order_status_id' => $order_status->id,
         ]);
 
         $orders = Order::query()
-            ->where('user_id', $user_id)
-            ->where('shipment_id', $shipment_id)
-            ->where('order_status_id', $order_status_id)
+            ->where('user_id', $user->id)
+            ->where('shipment_id', $shipment->id)
+            ->where('order_status_id', $order_status->id)
             ->get();
         $this->assertCount(1, $orders);
         $order = $orders->first();
@@ -130,14 +133,14 @@ class OrderControllerTest extends TestCase
     public function update_redirects()
     {
         $order = factory(Order::class)->create();
-        $user_id = $this->faker->randomNumber();
-        $shipment_id = $this->faker->randomNumber();
-        $order_status_id = $this->faker->randomDigitNotNull;
+        $user = User::first();
+        $shipment = Shipment::first();
+        $order_status = OrderStatus::first();
 
         $response = $this->put(route('orders.update', $order), [
-            'user_id' => $user_id,
-            'shipment_id' => $shipment_id,
-            'order_status_id' => $order_status_id,
+            'user_id' => $user->id,
+            'shipment_id' => $shipment->id,
+            'order_status_id' => $order_status->id,
         ]);
 
         $order->refresh();
@@ -145,9 +148,9 @@ class OrderControllerTest extends TestCase
         $response->assertRedirect(route('orders.index'));
         $response->assertSessionHas('order.id', $order->id);
 
-        $this->assertEquals($user_id, $order->user_id);
-        $this->assertEquals($shipment_id, $order->shipment_id);
-        $this->assertEquals($order_status_id, $order->order_status_id);
+        $this->assertEquals($user->id, $order->user_id);
+        $this->assertEquals($shipment->id, $order->shipment_id);
+        $this->assertEquals($order_status->id, $order->order_status_id);
     }
 
 

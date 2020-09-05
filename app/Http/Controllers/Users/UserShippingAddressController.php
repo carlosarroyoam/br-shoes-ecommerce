@@ -40,7 +40,7 @@ class UserShippingAddressController extends Controller
 
         $request->session()->flash('userShippingAddress.id', $userShippingAddress->id);
 
-        return redirect()->route('users-shipping-addresses.index');
+        return redirect()->route('user-shipping-addresses.index');
     }
 
     /**
@@ -74,7 +74,7 @@ class UserShippingAddressController extends Controller
 
         $request->session()->flash('userShippingAddress.id', $userShippingAddress->id);
 
-        return redirect()->route('users-shipping-addresses.index');
+        return redirect()->route('user-shipping-addresses.index');
     }
 
     /**
@@ -86,6 +86,6 @@ class UserShippingAddressController extends Controller
     {
         $userShippingAddress->delete();
 
-        return redirect()->route('users-shipping-addresses.index');
+        return redirect()->route('user-shipping-addresses.index');
     }
 }
