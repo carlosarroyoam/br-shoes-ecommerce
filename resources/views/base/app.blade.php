@@ -22,13 +22,13 @@
 
 <body class="flex flex-col min-h-screen antialiased pt-26 theme-light bg-background-secondary text-header">
 
-    @include('layouts.navbar')
+    <x-layouts.header />
 
-    <main class="container flex-grow pb-12">
+    <x-layouts.main>
         @yield('content')
-    </main>
+    </x-layouts.main>
 
-    @include('layouts.footer')
+    <x-layouts.footer />
 
     <livewire:scripts />
     <!-- Scripts -->
