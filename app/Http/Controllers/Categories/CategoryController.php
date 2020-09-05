@@ -97,7 +97,7 @@ class CategoryController extends Controller
     {
         $updatedCategory = $this->categoryService->update($request->validated(), $category);
 
-        return redirect()->route('categories.show', $updatedCategory);
+        return redirect()->route('categories.index');
     }
 
     /**

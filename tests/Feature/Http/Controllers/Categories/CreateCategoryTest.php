@@ -85,7 +85,7 @@ class CreateCategoryTest extends TestCase
      *
      * @return void
      */
-    public function test_store_dont_saves_for_non_admin_users()
+    public function test_store_doesnt_saves_for_non_admin_users()
     {
         $user = factory(User::class)->create();
         $this->actingAs($user);
@@ -101,7 +101,7 @@ class CreateCategoryTest extends TestCase
      *
      * @return void
      */
-    public function test_store_dont_saves_for_non_authenticated_users()
+    public function test_store_doesnt_saves_for_non_authenticated_users()
     {
         $response = $this->post(route('categories.store'), []);
 
@@ -119,7 +119,9 @@ class CreateCategoryTest extends TestCase
         $user = factory(User::class)->states('is_admin')->create();
         $this->actingAs($user);
 
-        $response = $this->post(route('categories.store'), ['name' => '']);
+        $response = $this->post(route('categories.store'), [
+            'name' => ''
+        ]);
 
         $response->assertSessionHasErrors(['name']);
     }
