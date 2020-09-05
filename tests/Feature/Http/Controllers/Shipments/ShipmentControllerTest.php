@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers\Shipments;
 
 use App\Shipment;
+use App\ShipmentStatus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
@@ -22,10 +23,10 @@ class ShipmentControllerTest extends TestCase
     {
         $shipments = factory(Shipment::class, 3)->create();
 
-        $response = $this->get(route('shipment.index'));
+        $response = $this->get(route('shipments.index'));
 
         $response->assertOk();
-        $response->assertViewIs('shipment.index');
+        $response->assertViewIs('pages.shipments.index');
         $response->assertViewHas('shipments');
     }
 
@@ -35,10 +36,10 @@ class ShipmentControllerTest extends TestCase
      */
     public function create_displays_view()
     {
-        $response = $this->get(route('shipment.create'));
+        $response = $this->get(route('shipments.create'));
 
         $response->assertOk();
-        $response->assertViewIs('shipment.create');
+        $response->assertViewIs('pages.shipments.create');
     }
 
 
@@ -59,19 +60,19 @@ class ShipmentControllerTest extends TestCase
      */
     public function store_saves_and_redirects()
     {
-        $shipment_status_id = $this->faker->randomDigitNotNull;
+        $shipmentStatus = factory(ShipmentStatus::class)->create();
 
-        $response = $this->post(route('shipment.store'), [
-            'shipment_status_id' => $shipment_status_id,
+        $response = $this->post(route('shipments.store'), [
+            'shipment_status_id' => $shipmentStatus->id,
         ]);
 
         $shipments = Shipment::query()
-            ->where('shipment_status_id', $shipment_status_id)
+            ->where('shipment_status_id', $shipmentStatus->id)
             ->get();
         $this->assertCount(1, $shipments);
         $shipment = $shipments->first();
 
-        $response->assertRedirect(route('shipment.index'));
+        $response->assertRedirect(route('shipments.index'));
         $response->assertSessionHas('shipment.id', $shipment->id);
     }
 
@@ -83,10 +84,10 @@ class ShipmentControllerTest extends TestCase
     {
         $shipment = factory(Shipment::class)->create();
 
-        $response = $this->get(route('shipment.show', $shipment));
+        $response = $this->get(route('shipments.show', $shipment));
 
         $response->assertOk();
-        $response->assertViewIs('shipment.show');
+        $response->assertViewIs('pages.shipments.show');
         $response->assertViewHas('shipment');
     }
 
@@ -98,10 +99,10 @@ class ShipmentControllerTest extends TestCase
     {
         $shipment = factory(Shipment::class)->create();
 
-        $response = $this->get(route('shipment.edit', $shipment));
+        $response = $this->get(route('shipments.edit', $shipment));
 
         $response->assertOk();
-        $response->assertViewIs('shipment.edit');
+        $response->assertViewIs('pages.shipments.edit');
         $response->assertViewHas('shipment');
     }
 
@@ -123,19 +124,19 @@ class ShipmentControllerTest extends TestCase
      */
     public function update_redirects()
     {
+        $newShipmentStatus = factory(ShipmentStatus::class)->create();
         $shipment = factory(Shipment::class)->create();
-        $shipment_status_id = $this->faker->randomDigitNotNull;
 
-        $response = $this->put(route('shipment.update', $shipment), [
-            'shipment_status_id' => $shipment_status_id,
+        $response = $this->put(route('shipments.update', $shipment), [
+            'shipment_status_id' => $newShipmentStatus->id,
         ]);
 
         $shipment->refresh();
 
-        $response->assertRedirect(route('shipment.index'));
+        $response->assertRedirect(route('shipments.index'));
         $response->assertSessionHas('shipment.id', $shipment->id);
 
-        $this->assertEquals($shipment_status_id, $shipment->shipment_status_id);
+        $this->assertEquals($newShipmentStatus->id, $shipment->shipment_status_id);
     }
 
 
@@ -146,9 +147,9 @@ class ShipmentControllerTest extends TestCase
     {
         $shipment = factory(Shipment::class)->create();
 
-        $response = $this->delete(route('shipment.destroy', $shipment));
+        $response = $this->delete(route('shipments.destroy', $shipment));
 
-        $response->assertRedirect(route('shipment.index'));
+        $response->assertRedirect(route('shipments.index'));
 
         $this->assertDeleted($shipment);
     }

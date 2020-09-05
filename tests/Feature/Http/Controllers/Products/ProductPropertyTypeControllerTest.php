@@ -22,10 +22,10 @@ class ProductPropertyTypeControllerTest extends TestCase
     {
         $productPropertyTypes = factory(ProductPropertyType::class, 3)->create();
 
-        $response = $this->get(route('product-property-type.index'));
+        $response = $this->get(route('product-property-types.index'));
 
         $response->assertOk();
-        $response->assertViewIs('productPropertyType.index');
+        $response->assertViewIs('pages.products.property-types.index');
         $response->assertViewHas('productPropertyTypes');
     }
 
@@ -35,10 +35,10 @@ class ProductPropertyTypeControllerTest extends TestCase
      */
     public function create_displays_view()
     {
-        $response = $this->get(route('product-property-type.create'));
+        $response = $this->get(route('product-property-types.create'));
 
         $response->assertOk();
-        $response->assertViewIs('productPropertyType.create');
+        $response->assertViewIs('pages.products.property-types.create');
     }
 
 
@@ -50,7 +50,7 @@ class ProductPropertyTypeControllerTest extends TestCase
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Products\ProductPropertyTypeController::class,
             'store',
-            \App\Http\Requests\Products\ProductPropertyTypeStoreRequest::class
+            \App\Http\Requests\Products\PropertyTypes\ProductPropertyTypeStoreRequest::class
         );
     }
 
@@ -61,7 +61,7 @@ class ProductPropertyTypeControllerTest extends TestCase
     {
         $name = $this->faker->name;
 
-        $response = $this->post(route('product-property-type.store'), [
+        $response = $this->post(route('product-property-types.store'), [
             'name' => $name,
         ]);
 
@@ -71,7 +71,7 @@ class ProductPropertyTypeControllerTest extends TestCase
         $this->assertCount(1, $productPropertyTypes);
         $productPropertyType = $productPropertyTypes->first();
 
-        $response->assertRedirect(route('productPropertyType.index'));
+        $response->assertRedirect(route('product-property-types.index'));
         $response->assertSessionHas('productPropertyType.id', $productPropertyType->id);
     }
 
@@ -83,10 +83,10 @@ class ProductPropertyTypeControllerTest extends TestCase
     {
         $productPropertyType = factory(ProductPropertyType::class)->create();
 
-        $response = $this->get(route('product-property-type.show', $productPropertyType));
+        $response = $this->get(route('product-property-types.show', $productPropertyType));
 
         $response->assertOk();
-        $response->assertViewIs('productPropertyType.show');
+        $response->assertViewIs('pages.products.property-types.show');
         $response->assertViewHas('productPropertyType');
     }
 
@@ -98,10 +98,10 @@ class ProductPropertyTypeControllerTest extends TestCase
     {
         $productPropertyType = factory(ProductPropertyType::class)->create();
 
-        $response = $this->get(route('product-property-type.edit', $productPropertyType));
+        $response = $this->get(route('product-property-types.edit', $productPropertyType));
 
         $response->assertOk();
-        $response->assertViewIs('productPropertyType.edit');
+        $response->assertViewIs('pages.products.property-types.edit');
         $response->assertViewHas('productPropertyType');
     }
 
@@ -114,7 +114,7 @@ class ProductPropertyTypeControllerTest extends TestCase
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Products\ProductPropertyTypeController::class,
             'update',
-            \App\Http\Requests\Products\ProductPropertyTypeUpdateRequest::class
+            \App\Http\Requests\Products\PropertyTypes\ProductPropertyTypeUpdateRequest::class
         );
     }
 
@@ -126,13 +126,13 @@ class ProductPropertyTypeControllerTest extends TestCase
         $productPropertyType = factory(ProductPropertyType::class)->create();
         $name = $this->faker->name;
 
-        $response = $this->put(route('product-property-type.update', $productPropertyType), [
+        $response = $this->put(route('product-property-types.update', $productPropertyType), [
             'name' => $name,
         ]);
 
         $productPropertyType->refresh();
 
-        $response->assertRedirect(route('productPropertyType.index'));
+        $response->assertRedirect(route('product-property-types.index'));
         $response->assertSessionHas('productPropertyType.id', $productPropertyType->id);
 
         $this->assertEquals($name, $productPropertyType->name);
@@ -146,9 +146,9 @@ class ProductPropertyTypeControllerTest extends TestCase
     {
         $productPropertyType = factory(ProductPropertyType::class)->create();
 
-        $response = $this->delete(route('product-property-type.destroy', $productPropertyType));
+        $response = $this->delete(route('product-property-types.destroy', $productPropertyType));
 
-        $response->assertRedirect(route('productPropertyType.index'));
+        $response->assertRedirect(route('product-property-types.index'));
 
         $this->assertDeleted($productPropertyType);
     }

@@ -26,7 +26,7 @@ Route::get('account-settings', 'Users\UserAccountController@show')->name('users.
 Route::get('products/newest', 'Products\ProductController@newest')->name('products.newest');
 Route::get('products/offers', 'Products\ProductController@offers')->name('products.offers');
 
-Route::resource('user', 'Users\UserController')->except('create', 'store');
+Route::resource('users', 'Users\UserController')->except('create', 'store');
 Route::resource('shopping-bag', 'ShoppingBag\ShoppingBagController')->except('index', 'create', 'edit');
 Route::resource('wish-list', 'WishList\WishListController')->except('index', 'create', 'edit');
 Route::resources([

@@ -20,7 +20,7 @@ class UpdateCategoryTest extends TestCase
      */
     public function test_an_admin_can_update_categories()
     {
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
         $category = factory(Category::class)->create();
         $expected = [
@@ -88,7 +88,7 @@ class UpdateCategoryTest extends TestCase
      */
     public function test_a_category_name_should_not_be_empty()
     {
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
         $category = factory(Category::class)->create();
         $expected = [

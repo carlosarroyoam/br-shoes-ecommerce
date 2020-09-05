@@ -20,7 +20,7 @@ class WishListController extends Controller
 
         $request->session()->flash('wishList.id', $wishList->id);
 
-        return redirect()->route('wish-list.index');
+        return redirect()->route('wish-list.show', $wishList);
     }
 
     /**
@@ -44,7 +44,7 @@ class WishListController extends Controller
 
         $request->session()->flash('wishList.id', $wishList->id);
 
-        return redirect()->route('wish-list.index');
+        return redirect()->route('wish-list.show', $wishList);
     }
 
     /**
@@ -56,6 +56,6 @@ class WishListController extends Controller
     {
         $wishList->delete();
 
-        return redirect()->route('wish-list.index');
+        return redirect()->route('wish-list.show', $wishList);
     }
 }

@@ -22,10 +22,10 @@ class OrderControllerTest extends TestCase
     {
         $orders = factory(Order::class, 3)->create();
 
-        $response = $this->get(route('order.index'));
+        $response = $this->get(route('orders.index'));
 
         $response->assertOk();
-        $response->assertViewIs('order.index');
+        $response->assertViewIs('pages.orders.index');
         $response->assertViewHas('orders');
     }
 
@@ -35,10 +35,10 @@ class OrderControllerTest extends TestCase
      */
     public function create_displays_view()
     {
-        $response = $this->get(route('order.create'));
+        $response = $this->get(route('orders.create'));
 
         $response->assertOk();
-        $response->assertViewIs('order.create');
+        $response->assertViewIs('pages.orders.create');
     }
 
 
@@ -63,7 +63,7 @@ class OrderControllerTest extends TestCase
         $shipment_id = $this->faker->randomNumber();
         $order_status_id = $this->faker->randomDigitNotNull;
 
-        $response = $this->post(route('order.store'), [
+        $response = $this->post(route('orders.store'), [
             'user_id' => $user_id,
             'shipment_id' => $shipment_id,
             'order_status_id' => $order_status_id,
@@ -77,7 +77,7 @@ class OrderControllerTest extends TestCase
         $this->assertCount(1, $orders);
         $order = $orders->first();
 
-        $response->assertRedirect(route('order.index'));
+        $response->assertRedirect(route('orders.index'));
         $response->assertSessionHas('order.id', $order->id);
     }
 
@@ -89,10 +89,10 @@ class OrderControllerTest extends TestCase
     {
         $order = factory(Order::class)->create();
 
-        $response = $this->get(route('order.show', $order));
+        $response = $this->get(route('orders.show', $order));
 
         $response->assertOk();
-        $response->assertViewIs('order.show');
+        $response->assertViewIs('pages.orders.show');
         $response->assertViewHas('order');
     }
 
@@ -104,10 +104,10 @@ class OrderControllerTest extends TestCase
     {
         $order = factory(Order::class)->create();
 
-        $response = $this->get(route('order.edit', $order));
+        $response = $this->get(route('orders.edit', $order));
 
         $response->assertOk();
-        $response->assertViewIs('order.edit');
+        $response->assertViewIs('pages.orders.edit');
         $response->assertViewHas('order');
     }
 
@@ -134,7 +134,7 @@ class OrderControllerTest extends TestCase
         $shipment_id = $this->faker->randomNumber();
         $order_status_id = $this->faker->randomDigitNotNull;
 
-        $response = $this->put(route('order.update', $order), [
+        $response = $this->put(route('orders.update', $order), [
             'user_id' => $user_id,
             'shipment_id' => $shipment_id,
             'order_status_id' => $order_status_id,
@@ -142,7 +142,7 @@ class OrderControllerTest extends TestCase
 
         $order->refresh();
 
-        $response->assertRedirect(route('order.index'));
+        $response->assertRedirect(route('orders.index'));
         $response->assertSessionHas('order.id', $order->id);
 
         $this->assertEquals($user_id, $order->user_id);
@@ -158,9 +158,9 @@ class OrderControllerTest extends TestCase
     {
         $order = factory(Order::class)->create();
 
-        $response = $this->delete(route('order.destroy', $order));
+        $response = $this->delete(route('orders.destroy', $order));
 
-        $response->assertRedirect(route('order.index'));
+        $response->assertRedirect(route('orders.index'));
 
         $this->assertDeleted($order);
     }

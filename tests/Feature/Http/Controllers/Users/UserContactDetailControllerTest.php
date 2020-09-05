@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Users;
 
+use App\User;
 use App\UserContactDetail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -20,12 +21,14 @@ class UserContactDetailControllerTest extends TestCase
      */
     public function index_displays_view()
     {
+        $this->withoutExceptionHandling();
+
         $userContactDetails = factory(UserContactDetail::class, 3)->create();
 
-        $response = $this->get(route('user-contact-detail.index'));
+        $response = $this->get(route('user-contact-details.index'));
 
         $response->assertOk();
-        $response->assertViewIs('userContactDetail.index');
+        $response->assertViewIs('pages.users.contact-details.index');
         $response->assertViewHas('userContactDetails');
     }
 
@@ -35,10 +38,10 @@ class UserContactDetailControllerTest extends TestCase
      */
     public function create_displays_view()
     {
-        $response = $this->get(route('user-contact-detail.create'));
+        $response = $this->get(route('user-contact-details.create'));
 
         $response->assertOk();
-        $response->assertViewIs('userContactDetail.create');
+        $response->assertViewIs('pages.users.contact-details.create');
     }
 
 
@@ -50,7 +53,7 @@ class UserContactDetailControllerTest extends TestCase
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Users\UserContactDetailController::class,
             'store',
-            \App\Http\Requests\Users\UserContactDetailStoreRequest::class
+            \App\Http\Requests\Users\ContactDetails\UserContactDetailStoreRequest::class
         );
     }
 
@@ -59,22 +62,22 @@ class UserContactDetailControllerTest extends TestCase
      */
     public function store_saves_and_redirects()
     {
-        $user_id = $this->faker->randomNumber();
-        $phone_number = $this->faker->phoneNumber;
+        $user = factory(User::class)->create();
+        $phone_number = '4131092978';
 
-        $response = $this->post(route('user-contact-detail.store'), [
-            'user_id' => $user_id,
+        $response = $this->post(route('user-contact-details.store'), [
+            'user_id' => $user->id,
             'phone_number' => $phone_number,
         ]);
 
         $userContactDetails = UserContactDetail::query()
-            ->where('user_id', $user_id)
+            ->where('user_id', $user->id)
             ->where('phone_number', $phone_number)
             ->get();
         $this->assertCount(1, $userContactDetails);
         $userContactDetail = $userContactDetails->first();
 
-        $response->assertRedirect(route('userContactDetail.index'));
+        $response->assertRedirect(route('user-contact-details.index'));
         $response->assertSessionHas('userContactDetail.id', $userContactDetail->id);
     }
 
@@ -86,10 +89,10 @@ class UserContactDetailControllerTest extends TestCase
     {
         $userContactDetail = factory(UserContactDetail::class)->create();
 
-        $response = $this->get(route('user-contact-detail.show', $userContactDetail));
+        $response = $this->get(route('user-contact-details.show', $userContactDetail));
 
         $response->assertOk();
-        $response->assertViewIs('userContactDetail.show');
+        $response->assertViewIs('pages.users.contact-details.show');
         $response->assertViewHas('userContactDetail');
     }
 
@@ -101,10 +104,10 @@ class UserContactDetailControllerTest extends TestCase
     {
         $userContactDetail = factory(UserContactDetail::class)->create();
 
-        $response = $this->get(route('user-contact-detail.edit', $userContactDetail));
+        $response = $this->get(route('user-contact-details.edit', $userContactDetail));
 
         $response->assertOk();
-        $response->assertViewIs('userContactDetail.edit');
+        $response->assertViewIs('pages.users.contact-details.edit');
         $response->assertViewHas('userContactDetail');
     }
 
@@ -117,7 +120,7 @@ class UserContactDetailControllerTest extends TestCase
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Users\UserContactDetailController::class,
             'update',
-            \App\Http\Requests\Users\UserContactDetailUpdateRequest::class
+            \App\Http\Requests\Users\ContactDetails\UserContactDetailUpdateRequest::class
         );
     }
 
@@ -127,21 +130,18 @@ class UserContactDetailControllerTest extends TestCase
     public function update_redirects()
     {
         $userContactDetail = factory(UserContactDetail::class)->create();
-        $user_id = $this->faker->randomNumber();
-        $phone_number = $this->faker->phoneNumber;
+        $newPhoneNumber = '4131092978';
 
-        $response = $this->put(route('user-contact-detail.update', $userContactDetail), [
-            'user_id' => $user_id,
-            'phone_number' => $phone_number,
+        $response = $this->put(route('user-contact-details.update', $userContactDetail), [
+            'phone_number' => $newPhoneNumber,
         ]);
 
         $userContactDetail->refresh();
 
-        $response->assertRedirect(route('userContactDetail.index'));
+        $response->assertRedirect(route('user-contact-details.index'));
         $response->assertSessionHas('userContactDetail.id', $userContactDetail->id);
 
-        $this->assertEquals($user_id, $userContactDetail->user_id);
-        $this->assertEquals($phone_number, $userContactDetail->phone_number);
+        $this->assertEquals($newPhoneNumber, $userContactDetail->phone_number);
     }
 
 
@@ -152,9 +152,9 @@ class UserContactDetailControllerTest extends TestCase
     {
         $userContactDetail = factory(UserContactDetail::class)->create();
 
-        $response = $this->delete(route('user-contact-detail.destroy', $userContactDetail));
+        $response = $this->delete(route('user-contact-details.destroy', $userContactDetail));
 
-        $response->assertRedirect(route('userContactDetail.index'));
+        $response->assertRedirect(route('user-contact-details.index'));
 
         $this->assertDeleted($userContactDetail);
     }

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Product;
+use App\ProductVariant;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -22,9 +23,9 @@ class UpdateProductTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
-        $product = factory(Product::class)->create();
+        $variant = factory(ProductVariant::class)->states('is_master')->create();
         $expected = [
             'name' => 'Snake Sneakers',
             'slug' => 'snake-sneakers',
@@ -34,7 +35,7 @@ class UpdateProductTest extends TestCase
             'variants.is_master' => true,
         ];
 
-        $response = $this->putJson(route('products.update', $product), [
+        $response = $this->putJson(route('products.update', Product::first()), [
             'name' => $expected['name'],
             'description' => $expected['description'],
             'featured' => $expected['featured'],
@@ -64,7 +65,7 @@ class UpdateProductTest extends TestCase
     {
         $user = factory(User::class)->make();
         $this->actingAs($user);
-        $product = factory(Product::class)->create();
+        $variant = factory(ProductVariant::class)->states('is_master')->create();
         $expected = [
             'name' => 'Snake Sneakers',
             'slug' => 'snake-sneakers',
@@ -73,7 +74,7 @@ class UpdateProductTest extends TestCase
             'variants.price_in_cents' => 36000,
         ];
 
-        $response = $this->putJson(route('products.update', $product), [
+        $response = $this->putJson(route('products.update', Product::first()), [
             'name' => $expected['name'],
             'description' => $expected['description'],
             'featured' => $expected['featured'],
@@ -90,7 +91,7 @@ class UpdateProductTest extends TestCase
      */
     public function test_an_unauthenticated_user_cannot_update_products()
     {
-        $product = factory(Product::class)->create();
+        $variant = factory(ProductVariant::class)->states('is_master')->create();
         $expected = [
             'name' => 'Snake Sneakers',
             'slug' => 'snake-sneakers',
@@ -99,7 +100,7 @@ class UpdateProductTest extends TestCase
             'variants.price_in_cents' => 36000,
         ];
 
-        $response = $this->putJson(route('products.update', $product), [
+        $response = $this->putJson(route('products.update', Product::first()), [
             'name' => $expected['name'],
             'description' => $expected['description'],
             'featured' => $expected['featured'],
@@ -116,9 +117,9 @@ class UpdateProductTest extends TestCase
      */
     public function test_a_product_name_should_not_be_empty()
     {
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
-        $product = factory(Product::class)->create();
+        $variant = factory(ProductVariant::class)->states('is_master')->create();
         $expected = [
             'name' => '',
             'slug' => 'snake-sneakers',
@@ -127,7 +128,7 @@ class UpdateProductTest extends TestCase
             'variants.price_in_cents' => 36000,
         ];
 
-        $response = $this->putJson(route('products.update', $product), [
+        $response = $this->putJson(route('products.update', Product::first()), [
             'name' => $expected['name'],
             'description' => $expected['description'],
             'featured' => $expected['featured'],
@@ -145,9 +146,9 @@ class UpdateProductTest extends TestCase
      */
     public function test_a_description_name_should_not_be_empty()
     {
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
-        $product = factory(Product::class)->create();
+        $variant = factory(ProductVariant::class)->states('is_master')->create();
         $expected = [
             'name' => 'Snake Sneakers',
             'slug' => 'snake-sneakers',
@@ -156,7 +157,7 @@ class UpdateProductTest extends TestCase
             'variants.price_in_cents' => 36000,
         ];
 
-        $response = $this->putJson(route('products.update', $product), [
+        $response = $this->putJson(route('products.update', Product::first()), [
             'name' => $expected['name'],
             'description' => $expected['description'],
             'featured' => $expected['featured'],
@@ -175,7 +176,7 @@ class UpdateProductTest extends TestCase
      */
     public function test_a_product_price_in_cents_should_not_be_empty()
     {
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
         $expected = [
             'name' => 'Snake Sneakers',

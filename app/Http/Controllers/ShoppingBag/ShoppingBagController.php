@@ -20,7 +20,7 @@ class ShoppingBagController extends Controller
 
         $request->session()->flash('shoppingBag.id', $shoppingBag->id);
 
-        return redirect()->route('shopping-bag.index');
+        return redirect()->route('shopping-bag.show', $shoppingBag);
     }
 
     /**
@@ -30,7 +30,7 @@ class ShoppingBagController extends Controller
      */
     public function show(Request $request, ShoppingBag $shoppingBag)
     {
-        return view('shoppingBag.show', compact('shoppingBag'));
+        return view('pages.shopping-bag.show', compact('shoppingBag'));
     }
 
     /**
@@ -44,7 +44,7 @@ class ShoppingBagController extends Controller
 
         $request->session()->flash('shoppingBag.id', $shoppingBag->id);
 
-        return redirect()->route('shopping-bag.index');
+        return redirect()->route('shopping-bag.show', $shoppingBag);
     }
 
     /**
@@ -56,6 +56,6 @@ class ShoppingBagController extends Controller
     {
         $shoppingBag->delete();
 
-        return redirect()->route('shopping-bag.index');
+        return redirect()->route('shopping-bag.show', $shoppingBag);
     }
 }

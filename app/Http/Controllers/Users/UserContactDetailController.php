@@ -40,7 +40,7 @@ class UserContactDetailController extends Controller
 
         $request->session()->flash('userContactDetail.id', $userContactDetail->id);
 
-        return redirect()->route('users-contact-details.index');
+        return redirect()->route('user-contact-details.index');
     }
 
     /**
@@ -74,7 +74,7 @@ class UserContactDetailController extends Controller
 
         $request->session()->flash('userContactDetail.id', $userContactDetail->id);
 
-        return redirect()->route('pages.users.contact-details.index');
+        return redirect()->route('user-contact-details.index');
     }
 
     /**
@@ -86,6 +86,6 @@ class UserContactDetailController extends Controller
     {
         $userContactDetail->delete();
 
-        return redirect()->route('pages.users.contact-details.index');
+        return redirect()->route('user-contact-details.index');
     }
 }

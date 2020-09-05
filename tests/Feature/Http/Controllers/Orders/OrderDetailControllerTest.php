@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\Http\Controllers\Orders;
 
+use App\Order;
 use App\OrderDetail;
+use App\ProductVariant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
@@ -22,10 +24,10 @@ class OrderDetailControllerTest extends TestCase
     {
         $orderDetails = factory(OrderDetail::class, 3)->create();
 
-        $response = $this->get(route('order-detail.index'));
+        $response = $this->get(route('order-details.index'));
 
         $response->assertOk();
-        $response->assertViewIs('orderDetail.index');
+        $response->assertViewIs('pages.orders.order-details.index');
         $response->assertViewHas('orderDetails');
     }
 
@@ -35,10 +37,10 @@ class OrderDetailControllerTest extends TestCase
      */
     public function create_displays_view()
     {
-        $response = $this->get(route('order-detail.create'));
+        $response = $this->get(route('order-details.create'));
 
         $response->assertOk();
-        $response->assertViewIs('orderDetail.create');
+        $response->assertViewIs('pages.orders.order-details.create');
     }
 
 
@@ -50,7 +52,7 @@ class OrderDetailControllerTest extends TestCase
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Orders\OrderDetailController::class,
             'store',
-            \App\Http\Requests\Orders\OrderDetailStoreRequest::class
+            \App\Http\Requests\Orders\OrderDetails\OrderDetailStoreRequest::class
         );
     }
 
@@ -59,26 +61,30 @@ class OrderDetailControllerTest extends TestCase
      */
     public function store_saves_and_redirects()
     {
-        $order_id = $this->faker->randomNumber();
-        $product_variant_id = $this->faker->randomNumber();
-        $quantity = $this->faker->randomNumber();
+        $this->withoutExceptionHandling();
 
-        $response = $this->post(route('order-detail.store'), [
-            'order_id' => $order_id,
-            'product_variant_id' => $product_variant_id,
+        $order = factory(Order::class)->create();
+        $product_variant = factory(ProductVariant::class)->create();
+        $quantity = 10;
+
+        $response = $this->post(route('order-details.store'), [
+            'order_id' => $order->id,
+            'product_variant_id' => $product_variant->id,
             'quantity' => $quantity,
         ]);
 
         $orderDetails = OrderDetail::query()
-            ->where('order_id', $order_id)
-            ->where('product_variant_id', $product_variant_id)
+            ->where('order_id', $order->id)
+            ->where('product_variant_id', $product_variant->id)
             ->where('quantity', $quantity)
             ->get();
-        $this->assertCount(1, $orderDetails);
         $orderDetail = $orderDetails->first();
 
-        $response->assertRedirect(route('orderDetail.index'));
+        $response->assertRedirect(route('order-details.index'));
         $response->assertSessionHas('orderDetail.id', $orderDetail->id);
+        $this->assertDatabaseHas('order_details', [
+            'order_id' => $order->id,
+        ]);
     }
 
 
@@ -89,10 +95,10 @@ class OrderDetailControllerTest extends TestCase
     {
         $orderDetail = factory(OrderDetail::class)->create();
 
-        $response = $this->get(route('order-detail.show', $orderDetail));
+        $response = $this->get(route('order-details.show', $orderDetail));
 
         $response->assertOk();
-        $response->assertViewIs('orderDetail.show');
+        $response->assertViewIs('pages.orders.order-details.show');
         $response->assertViewHas('orderDetail');
     }
 
@@ -104,10 +110,10 @@ class OrderDetailControllerTest extends TestCase
     {
         $orderDetail = factory(OrderDetail::class)->create();
 
-        $response = $this->get(route('order-detail.edit', $orderDetail));
+        $response = $this->get(route('order-details.edit', $orderDetail));
 
         $response->assertOk();
-        $response->assertViewIs('orderDetail.edit');
+        $response->assertViewIs('pages.orders.order-details.edit');
         $response->assertViewHas('orderDetail');
     }
 
@@ -120,7 +126,7 @@ class OrderDetailControllerTest extends TestCase
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Orders\OrderDetailController::class,
             'update',
-            \App\Http\Requests\Orders\OrderDetailUpdateRequest::class
+            \App\Http\Requests\Orders\OrderDetails\OrderDetailUpdateRequest::class
         );
     }
 
@@ -129,24 +135,25 @@ class OrderDetailControllerTest extends TestCase
      */
     public function update_redirects()
     {
-        $orderDetail = factory(OrderDetail::class)->create();
-        $order_id = $this->faker->randomNumber();
-        $product_variant_id = $this->faker->randomNumber();
-        $quantity = $this->faker->randomNumber();
+        $this->withoutExceptionHandling();
 
-        $response = $this->put(route('order-detail.update', $orderDetail), [
-            'order_id' => $order_id,
-            'product_variant_id' => $product_variant_id,
+        $orderDetail = factory(OrderDetail::class)->create();
+        $order = Order::first();
+        $product_variant = factory(ProductVariant::class)->create();
+        $quantity = 10;
+
+        $response = $this->put(route('order-details.update', $orderDetail), [
+            'product_variant_id' => $product_variant->id,
             'quantity' => $quantity,
         ]);
 
         $orderDetail->refresh();
 
-        $response->assertRedirect(route('orderDetail.index'));
+        $response->assertRedirect(route('order-details.index'));
         $response->assertSessionHas('orderDetail.id', $orderDetail->id);
 
-        $this->assertEquals($order_id, $orderDetail->order_id);
-        $this->assertEquals($product_variant_id, $orderDetail->product_variant_id);
+        $this->assertEquals($order->id, $orderDetail->order_id);
+        $this->assertEquals($product_variant->id, $orderDetail->product_variant_id);
         $this->assertEquals($quantity, $orderDetail->quantity);
     }
 
@@ -158,9 +165,9 @@ class OrderDetailControllerTest extends TestCase
     {
         $orderDetail = factory(OrderDetail::class)->create();
 
-        $response = $this->delete(route('order-detail.destroy', $orderDetail));
+        $response = $this->delete(route('order-details.destroy', $orderDetail));
 
-        $response->assertRedirect(route('orderDetail.index'));
+        $response->assertRedirect(route('order-details.index'));
 
         $this->assertDeleted($orderDetail);
     }

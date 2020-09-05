@@ -3,13 +3,14 @@
 namespace Tests\Feature;
 
 use App\Product;
+use App\ProductVariant;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class ProductTest extends TestCase
+class DeleteProductTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -20,9 +21,10 @@ class ProductTest extends TestCase
      */
     public function test_an_admin_can_delete_products()
     {
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
-        $product = factory(Product::class)->create();
+        $variant = factory(ProductVariant::class)->states('is_master')->create();
+        $product = Product::first();
 
         $response = $this->deleteJson(route('products.destroy', $product));
 
@@ -34,7 +36,7 @@ class ProductTest extends TestCase
             'description' => $product->description,
         ]);
         $this->assertDeleted('product_variants', [
-            'product_id' => $product->id,
+            'product_id' => $variant->product_id,
         ]);
     }
 
@@ -47,7 +49,8 @@ class ProductTest extends TestCase
     {
         $user = factory(User::class)->make();
         $this->actingAs($user);
-        $product = factory(Product::class)->create();
+        $variant = factory(ProductVariant::class)->states('is_master')->create();
+        $product = Product::first();
 
         $response = $this->deleteJson(route('products.destroy', $product));
 
@@ -61,7 +64,8 @@ class ProductTest extends TestCase
      */
     public function test_an_unauthenticated_user_cannot_delete_products()
     {
-        $product = factory(Product::class)->create();
+        $variant = factory(ProductVariant::class)->states('is_master')->create();
+        $product = Product::first();
 
         $response = $this->deleteJson(route('products.destroy', $product));
 

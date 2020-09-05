@@ -20,7 +20,7 @@ class DeleteCategoryTest extends TestCase
      */
     public function test_an_admin_can_delete_categories()
     {
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
         $category = factory(Category::class)->create();
 

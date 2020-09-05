@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Orders;
 
+use App\OrderDetail;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Orders\OrderDetails\OrderDetailStoreRequest;
 use App\Http\Requests\Orders\OrderDetails\OrderDetailUpdateRequest;
-use App\OrderDetail;
 use Illuminate\Http\Request;
 
 class OrderDetailController extends Controller

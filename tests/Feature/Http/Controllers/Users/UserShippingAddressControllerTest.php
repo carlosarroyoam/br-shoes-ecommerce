@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Users;
 
+use App\User;
 use App\UserShippingAddress;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -22,10 +23,10 @@ class UserShippingAddressControllerTest extends TestCase
     {
         $userShippingAddresses = factory(UserShippingAddress::class, 3)->create();
 
-        $response = $this->get(route('user-shipping-address.index'));
+        $response = $this->get(route('user-shipping-addresses.index'));
 
         $response->assertOk();
-        $response->assertViewIs('userShippingAddress.index');
+        $response->assertViewIs('pages.users.shipping-addresses.index');
         $response->assertViewHas('userShippingAddresses');
     }
 
@@ -35,10 +36,10 @@ class UserShippingAddressControllerTest extends TestCase
      */
     public function create_displays_view()
     {
-        $response = $this->get(route('user-shipping-address.create'));
+        $response = $this->get(route('user-shipping-addresses.create'));
 
         $response->assertOk();
-        $response->assertViewIs('userShippingAddress.create');
+        $response->assertViewIs('pages.users.shipping-addresses.create');
     }
 
 
@@ -50,7 +51,7 @@ class UserShippingAddressControllerTest extends TestCase
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Users\UserShippingAddressController::class,
             'store',
-            \App\Http\Requests\Users\UserShippingAddressStoreRequest::class
+            \App\Http\Requests\Users\ShippingAddresses\UserShippingAddressStoreRequest::class
         );
     }
 
@@ -59,15 +60,15 @@ class UserShippingAddressControllerTest extends TestCase
      */
     public function store_saves_and_redirects()
     {
-        $user_id = $this->faker->randomNumber();
+        $user = factory(User::class)->create();
         $address = $this->faker->word;
         $city = $this->faker->city;
         $state = $this->faker->word;
         $zip_code = $this->faker->randomNumber();
         $country = $this->faker->country;
 
-        $response = $this->post(route('user-shipping-address.store'), [
-            'user_id' => $user_id,
+        $response = $this->post(route('user-shipping-addresses.store'), [
+            'user_id' => $user->id,
             'address' => $address,
             'city' => $city,
             'state' => $state,
@@ -76,7 +77,7 @@ class UserShippingAddressControllerTest extends TestCase
         ]);
 
         $userShippingAddresses = UserShippingAddress::query()
-            ->where('user_id', $user_id)
+            ->where('user_id', $user->id)
             ->where('address', $address)
             ->where('city', $city)
             ->where('state', $state)
@@ -86,7 +87,7 @@ class UserShippingAddressControllerTest extends TestCase
         $this->assertCount(1, $userShippingAddresses);
         $userShippingAddress = $userShippingAddresses->first();
 
-        $response->assertRedirect(route('userShippingAddress.index'));
+        $response->assertRedirect(route('user-shipping-addresses.index'));
         $response->assertSessionHas('userShippingAddress.id', $userShippingAddress->id);
     }
 
@@ -98,10 +99,10 @@ class UserShippingAddressControllerTest extends TestCase
     {
         $userShippingAddress = factory(UserShippingAddress::class)->create();
 
-        $response = $this->get(route('user-shipping-address.show', $userShippingAddress));
+        $response = $this->get(route('user-shipping-addresses.show', $userShippingAddress));
 
         $response->assertOk();
-        $response->assertViewIs('userShippingAddress.show');
+        $response->assertViewIs('pages.users.shipping-addresses.show');
         $response->assertViewHas('userShippingAddress');
     }
 
@@ -113,10 +114,10 @@ class UserShippingAddressControllerTest extends TestCase
     {
         $userShippingAddress = factory(UserShippingAddress::class)->create();
 
-        $response = $this->get(route('user-shipping-address.edit', $userShippingAddress));
+        $response = $this->get(route('user-shipping-addresses.edit', $userShippingAddress));
 
         $response->assertOk();
-        $response->assertViewIs('userShippingAddress.edit');
+        $response->assertViewIs('pages.users.shipping-addresses.edit');
         $response->assertViewHas('userShippingAddress');
     }
 
@@ -129,7 +130,7 @@ class UserShippingAddressControllerTest extends TestCase
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Users\UserShippingAddressController::class,
             'update',
-            \App\Http\Requests\Users\UserShippingAddressUpdateRequest::class
+            \App\Http\Requests\Users\ShippingAddresses\UserShippingAddressUpdateRequest::class
         );
     }
 
@@ -146,7 +147,7 @@ class UserShippingAddressControllerTest extends TestCase
         $zip_code = $this->faker->randomNumber();
         $country = $this->faker->country;
 
-        $response = $this->put(route('user-shipping-address.update', $userShippingAddress), [
+        $response = $this->put(route('user-shipping-addresses.update', $userShippingAddress), [
             'user_id' => $user_id,
             'address' => $address,
             'city' => $city,
@@ -157,7 +158,7 @@ class UserShippingAddressControllerTest extends TestCase
 
         $userShippingAddress->refresh();
 
-        $response->assertRedirect(route('userShippingAddress.index'));
+        $response->assertRedirect(route('user-shipping-addresses.index'));
         $response->assertSessionHas('userShippingAddress.id', $userShippingAddress->id);
 
         $this->assertEquals($user_id, $userShippingAddress->user_id);
@@ -176,9 +177,9 @@ class UserShippingAddressControllerTest extends TestCase
     {
         $userShippingAddress = factory(UserShippingAddress::class)->create();
 
-        $response = $this->delete(route('user-shipping-address.destroy', $userShippingAddress));
+        $response = $this->delete(route('user-shipping-addresses.destroy', $userShippingAddress));
 
-        $response->assertRedirect(route('userShippingAddress.index'));
+        $response->assertRedirect(route('user-shipping-addresses.index'));
 
         $this->assertDeleted($userShippingAddress);
     }

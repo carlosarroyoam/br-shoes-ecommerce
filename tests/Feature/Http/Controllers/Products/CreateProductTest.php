@@ -22,7 +22,7 @@ class CreateProductTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
         $expected = [
             'name' => 'Snake Sneakers',
@@ -115,7 +115,7 @@ class CreateProductTest extends TestCase
      */
     public function test_a_product_name_should_not_be_empty()
     {
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
         $expected = [
             'name' => '',
@@ -144,7 +144,7 @@ class CreateProductTest extends TestCase
      */
     public function test_a_product_description_should_not_be_empty()
     {
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
         $expected = [
             'name' => 'Snake Sneakers',
@@ -173,7 +173,7 @@ class CreateProductTest extends TestCase
      */
     public function test_a_product_price_in_cents_should_not_be_empty()
     {
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
         $expected = [
             'name' => 'Snake Sneakers',

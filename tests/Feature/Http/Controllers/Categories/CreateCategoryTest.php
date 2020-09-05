@@ -20,7 +20,7 @@ class CreateCategoryTest extends TestCase
      */
     public function test_an_admin_can_create_categories()
     {
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
         $expected = [
             'name' => 'Snake Sneakers',
@@ -85,7 +85,7 @@ class CreateCategoryTest extends TestCase
      */
     public function test_a_category_name_should_not_be_empty()
     {
-        $user = factory(User::class)->states('admin')->make();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
         $expected = [
             'name' => '',

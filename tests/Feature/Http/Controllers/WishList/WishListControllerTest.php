@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers\WishList;
 
 use App\WishList;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
@@ -32,19 +33,21 @@ class WishListControllerTest extends TestCase
      */
     public function store_saves_and_redirects()
     {
-        $user_id = $this->faker->randomNumber();
+        $this->withoutExceptionHandling();
+
+        $user = factory(User::class)->create();
 
         $response = $this->post(route('wish-list.store'), [
-            'user_id' => $user_id,
+            'user_id' =>  $user->id,
         ]);
 
         $wishLists = WishList::query()
-            ->where('user_id', $user_id)
+            ->where('user_id', $user->id)
             ->get();
         $this->assertCount(1, $wishLists);
         $wishList = $wishLists->first();
 
-        $response->assertRedirect(route('wishList.index'));
+        $response->assertRedirect(route('wish-list.show', $wishList));
         $response->assertSessionHas('wishList.id', $wishList->id);
     }
 
@@ -59,7 +62,7 @@ class WishListControllerTest extends TestCase
         $response = $this->get(route('wish-list.show', $wishList));
 
         $response->assertOk();
-        $response->assertViewIs('wishList.show');
+        $response->assertViewIs('pages.wish-list.show');
         $response->assertViewHas('wishList');
     }
 
@@ -82,18 +85,18 @@ class WishListControllerTest extends TestCase
     public function update_redirects()
     {
         $wishList = factory(WishList::class)->create();
-        $user_id = $this->faker->randomNumber();
+        $user = factory(User::class)->create();
 
         $response = $this->put(route('wish-list.update', $wishList), [
-            'user_id' => $user_id,
+            'user_id' => $user->id,
         ]);
 
         $wishList->refresh();
 
-        $response->assertRedirect(route('wishList.index'));
+        $response->assertRedirect(route('wish-list.show', $wishList));
         $response->assertSessionHas('wishList.id', $wishList->id);
 
-        $this->assertEquals($user_id, $wishList->user_id);
+        $this->assertEquals($user->id, $wishList->user_id);
     }
 
 
@@ -106,7 +109,7 @@ class WishListControllerTest extends TestCase
 
         $response = $this->delete(route('wish-list.destroy', $wishList));
 
-        $response->assertRedirect(route('wishList.index'));
+        $response->assertRedirect(route('wish-list.show', $wishList));
 
         $this->assertDeleted($wishList);
     }

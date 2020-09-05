@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Products\ProductVariantStoreRequest;
-use App\Http\Requests\Products\ProductVariantUpdateRequest;
+use App\Http\Requests\Products\Variants\ProductVariantStoreRequest;
+use App\Http\Requests\Products\Variants\ProductVariantUpdateRequest;
 use App\ProductVariant;
 use Illuminate\Http\Request;
 
