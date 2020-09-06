@@ -15,8 +15,8 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 64);
-            $table->string('slug', 64);
+            $table->string('name', 96);
+            $table->string('slug', 96)->unique();
             $table->text('description', 254);
             $table->boolean('featured')->default(false);
             $table->timestamps();

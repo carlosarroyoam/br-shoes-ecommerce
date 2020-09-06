@@ -16,7 +16,7 @@ class ProductStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string',],
-            'slug' => ['nullable', 'string',],
+            'slug' => ['nullable', 'string', 'max:96', 'unique:categories', ],
             'description' => ['required', 'string',],
             'featured' =>['nullable', 'boolean',],
             'price_in_cents' => ['required', 'numeric',],

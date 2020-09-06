@@ -12,8 +12,8 @@ models:
     country: string default:'México'
 
   Product:
-      name: string:64
-      slug: string:64
+      name: string:96
+      slug: string:96 unique
       description: text:254
       featured: boolean default:false
       relationships:
@@ -47,8 +47,8 @@ models:
 
   Category:
     id: tinyIncrements
-    name: string:64
-    slug: string:64 unique
+    name: string:96
+    slug: string:96 unique
     relationships:
       hasMany: Product
 
