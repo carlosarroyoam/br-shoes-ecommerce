@@ -15,11 +15,11 @@ class ProductStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'slug' => 'nullable|string',
-            'description' => 'required|string',
-            'featured' => 'nullable|boolean',
-            'price_in_cents' => 'required|numeric',
+            'name' => ['required', 'string',],
+            'slug' => ['nullable', 'string',],
+            'description' => ['required', 'string',],
+            'featured' =>['nullable', 'boolean',],
+            'price_in_cents' => ['required', 'numeric',],
         ];
     }
 
@@ -30,8 +30,10 @@ class ProductStoreRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
+        $this->slug ?? Str::slug($this->name);
+
         $this->merge([
-            'slug' => Str::slug($this->name),
+            'slug' => $slug,
         ]);
     }
 }
