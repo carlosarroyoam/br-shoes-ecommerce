@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class DeleteCategoryTest extends TestCase
+class DeleteCategoriesTest extends TestCase
 {
     use RefreshDatabase;
 

@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class ShowCategoryTest extends TestCase
+class ShowCategoriesTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 

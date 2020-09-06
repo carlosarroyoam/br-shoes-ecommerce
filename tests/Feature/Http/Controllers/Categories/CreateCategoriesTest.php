@@ -11,7 +11,7 @@ use JMac\Testing\Traits\AdditionalAssertions;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class CreateCategoryTest extends TestCase
+class CreateCategoriesTest extends TestCase
 {
     use RefreshDatabase, AdditionalAssertions, WithFaker;
 
