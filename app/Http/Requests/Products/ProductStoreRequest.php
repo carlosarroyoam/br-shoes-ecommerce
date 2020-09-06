@@ -30,10 +30,8 @@ class ProductStoreRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        $this->slug ?? Str::slug($this->name);
-
         $this->merge([
-            'slug' => $slug,
+            'slug' => $this->slug ?? Str::slug($this->name),
         ]);
     }
 }

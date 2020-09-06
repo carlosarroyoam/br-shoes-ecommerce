@@ -80,7 +80,9 @@ class ProductController extends Controller
     {
         $product = $this->productService->create($request->validated());
 
-        return redirect()->route('products.show', $product);
+        $request->session()->flash('product.id', $product->id);
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -115,6 +117,8 @@ class ProductController extends Controller
     public function update(ProductUpdateRequest $request, Product $product)
     {
         $updatedProduct = $this->productService->update($request->validated(), $product);
+
+        $request->session()->flash('product.id', $updatedProduct->id);
 
         return redirect()->route('products.index');
     }

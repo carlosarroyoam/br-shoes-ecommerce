@@ -60,6 +60,8 @@ class CategoryController extends Controller
     {
         $category = $this->categoryService->create($request->validated());
 
+        $request->session()->flash('category.id', $category->id);
+
         return redirect()->route('categories.index');
     }
 
@@ -96,6 +98,8 @@ class CategoryController extends Controller
     public function update(CategoryUpdateRequest $request, Category $category)
     {
         $updatedCategory = $this->categoryService->update($request->validated(), $category);
+
+        $request->session()->flash('category.id', $updatedCategory->id);
 
         return redirect()->route('categories.index');
     }

@@ -71,8 +71,13 @@ class CreateCategoryTest extends TestCase
         $response = $this->post(route('categories.store'), [
             'name' => $expected['name']
         ]);
+        $categories = Category::query()
+            ->where('name', $expected['name'])
+            ->get();
+        $category = $categories->first();
 
         $response->assertRedirect(route('categories.index'));
+        $response->assertSessionHas('category.id', $category->id);
         $this->assertDatabaseHas('categories', [
             'name' => $expected['name'],
             'slug' => $expected['slug'],

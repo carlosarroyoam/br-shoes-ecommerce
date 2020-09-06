@@ -72,8 +72,14 @@ class UpdateCategoryTest extends TestCase
         $response = $this->put(route('categories.update', $category), [
             'name' => $expected['name']
         ]);
+        $categories = Category::query()
+            ->where('name', $expected['name'])
+            ->get();
+        $category = $categories->first();
+
 
         $response->assertRedirect(route('categories.index'));
+        $response->assertSessionHas('category.id', $category->id);
         $this->assertDatabaseHas('categories', [
             'name' => $expected['name'],
             'slug' => $expected['slug'],

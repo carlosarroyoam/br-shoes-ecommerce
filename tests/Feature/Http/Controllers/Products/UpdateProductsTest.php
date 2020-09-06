@@ -81,8 +81,10 @@ class UpdateProductsTest extends TestCase
             'featured' => $expected['featured'],
             'price_in_cents' => $expected['variants.price_in_cents'],
         ]);
+        $product = Product::where('slug', $expected['slug'])->first();
 
         $response->assertRedirect(route('products.index'));
+        $response->assertSessionHas('product.id', $product->id);
         $this->assertDatabaseHas('products', [
             'name' => $expected['name'],
             'slug' => $expected['slug'],
