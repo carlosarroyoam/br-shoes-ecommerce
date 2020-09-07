@@ -13,13 +13,15 @@ class CategoryController extends Controller
 {
     /**
      * The category service instance.
+     *
+     * @var \App\Services\CategoryService
      */
     protected $categoryService;
 
     /**
      * Create a new controller instance.
      *
-     * @param  CategoryService  $categoryService
+     * @param  \App\Services\CategoryService  $categoryService
      * @return void
      */
     public function __construct(CategoryService $categoryService)
@@ -85,7 +87,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('pages.categories.edit');
+        return view('pages.categories.edit', compact('category'));
     }
 
     /**

@@ -34,6 +34,7 @@ class UpdateProductsTest extends TestCase
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.products.edit');
+        $response->assertViewHas('product', $product);
     }
 
 

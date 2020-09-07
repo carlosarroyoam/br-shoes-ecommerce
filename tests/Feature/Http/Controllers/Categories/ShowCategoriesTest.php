@@ -27,7 +27,7 @@ class ShowCategoriesTest extends TestCase
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.categories.show');
-        $response->assertViewHas('category');
+        $response->assertViewHas('category', $category);
     }
 
     /**

@@ -2,75 +2,72 @@
 
 namespace Tests\Feature;
 
-use App\Category;
+use App\ProductProperty;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Str;
 use JMac\Testing\Traits\AdditionalAssertions;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class UpdateCategoriesTest extends TestCase
+class CreateProductPropertiesTest extends TestCase
 {
     use RefreshDatabase, AdditionalAssertions, WithFaker;
+
 
     /**
      * The route displays the view.
      *
      * @return void
      */
-    public function test_edit_displays_view()
+    public function test_create_displays_view()
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('is_admin')->create();
+        $user = factory(User::class)->states('is_admin')->make();
         $this->actingAs($user);
-        $category = factory(Category::class)->create();
 
-        $response = $this->get(route('categories.edit', $category));
+        $response = $this->get(route('product-properties.create'));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('pages.categories.edit');
-        $response->assertViewHas('category', $category);
+        $response->assertViewIs('pages.product.properties.create');
     }
 
 
     /**
-     * The update action in the controller uses form request validation.
+     * The store action in the controller uses form request validation.
      *
      * @return void
      */
-    public function test_update_uses_form_request_validation()
+    public function test_store_uses_form_request_validation()
     {
         $this->withoutExceptionHandling();
 
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Categories\CategoryController::class,
-            'update',
-            \App\Http\Requests\Categories\CategoryUpdateRequest::class
+            'store',
+            \App\Http\Requests\Categories\CategoryStoreRequest::class
         );
     }
 
 
     /**
-     * Update action updates and redirects to index for an admin user.
+     * Store action saves and redirects to index for an admin user.
      *
      * @return void
      */
-    public function test_update_updates_and_redirects_for_admin_users()
+    public function test_store_saves_and_redirects_for_admin_users()
     {
         $this->withoutExceptionHandling();
 
         $user = factory(User::class)->states('is_admin')->create();
         $this->actingAs($user);
-        $category = factory(Category::class)->create();
         $expected = [
             'name' => $this->faker->name,
         ];
         $expected['slug'] = Str::slug($expected['name']);
 
-        $response = $this->put(route('categories.update', $category), [
+        $response = $this->post(route('product-properties.store'), [
             'name' => $expected['name']
         ]);
         $categories = Category::query()
@@ -78,8 +75,7 @@ class UpdateCategoriesTest extends TestCase
             ->get();
         $category = $categories->first();
 
-
-        $response->assertRedirect(route('categories.index'));
+        $response->assertRedirect(route('product-properties.index'));
         $response->assertSessionHas('category.id', $category->id);
         $this->assertDatabaseHas('categories', [
             'name' => $expected['name'],
@@ -87,38 +83,38 @@ class UpdateCategoriesTest extends TestCase
         ]);
     }
 
+
     /**
-     * Update action doesn't updates for an authenticated non-admin user.
+     * Store action doesn't save for an authenticated non-admin user.
      *
      * @return void
      */
-    public function test_udpate_doesnt_updates_for_non_admin_users()
+    public function test_store_doesnt_saves_for_non_admin_users()
     {
         $user = factory(User::class)->create();
         $this->actingAs($user);
-        $category = factory(Category::class)->create();
 
-        $response = $this->put(route('categories.update', $category), []);
+        $response = $this->post(route('product-properties.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
+
     /**
-     * Update action doesn't updates for an unauthenticated user.
+     * Store action doesn't save for an unauthenticated user.
      *
      * @return void
      */
-    public function test_update_doesnt_updates_for_non_authenticated_users()
+    public function test_store_doesnt_saves_for_non_authenticated_users()
     {
-        $category = factory(Category::class)->create();
-
-        $response = $this->put(route('categories.update', $category), []);
+        $response = $this->post(route('product-properties.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
+
     /**
-     * On the update action, the attribute name of a category cannot be empty or null.
+     * On the store action, the attribute name of a category cannot be empty or null.
      *
      * @return void
      */
@@ -126,9 +122,8 @@ class UpdateCategoriesTest extends TestCase
     {
         $user = factory(User::class)->states('is_admin')->create();
         $this->actingAs($user);
-        $category = factory(Category::class)->create();
 
-        $response = $this->put(route('categories.update', $category), [
+        $response = $this->post(route('product-properties.store'), [
             'name' => ''
         ]);
 

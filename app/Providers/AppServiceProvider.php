@@ -17,8 +17,20 @@ class AppServiceProvider extends ServiceProvider
             return new \App\Services\ProductService();
         });
 
-        $this->app->singleton('App\Services\CategoryService', function ($app) {
-            return new \App\Services\CategoryService();
+        $this->app->singleton('App\Services\ProductVariantService', function ($app) {
+            return new \App\Services\ProductVariantService();
+        });
+
+        $this->app->singleton('App\Services\ProductPropertyTypeService', function ($app) {
+            return new \App\Services\ProductPropertyTypeService();
+        });
+
+        $this->app->singleton('App\Services\ProductPropertyService', function ($app) {
+            return new \App\Services\ProductPropertyService();
+        });
+
+        $this->app->singleton('App\Services\ProductService', function ($app) {
+            return new \App\Services\ProductService();
         });
     }
 

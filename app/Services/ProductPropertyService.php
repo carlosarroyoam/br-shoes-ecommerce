@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Product;
-use App\ProductVariant;
+use App\ProductProperty;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class ProductService
+class ProductPropertyService
 {
     /**
      * Get a listing of the models.
@@ -16,43 +15,36 @@ class ProductService
      */
     public function getAll()
     {
-        return Product::all();
+        return ProductProperty::all();
     }
 
     /**
      * Get the specified model by its id.
      *
-     * @param $productId
-     * @return \App\Product
+     * @param $productPropertyId
+     * @return \App\ProductProperty
      */
-    public function getById($productId)
+    public function getById($productPropertyId)
     {
-        return Product::where('id', $productId)->firstOrFail();
+        return ProductProperty::where('id', $productPropertyId)->firstOrFail();
     }
 
     /**
      * Create the specified model in storage.
      *
      * @param array $validated
-     * @return \App\Product
+     * @return \App\ProductProperty
      */
     public function create(array $validated)
     {
         DB::beginTransaction();
 
         try {
-            $product = new Product;
-            $productVariantService = resolve('App\Services\ProductVariantService');
-
-            $product->name = $validated['name'];
-            $product->slug = $validated['slug'];
-            $product->description = $validated['description'];
-            $product->featured = $validated['featured'];
-            $product->save();
-
-            $validated['product_id'] = $product->id;
-            $validated['is_master'] = true;
-            $productVariantService->create($validated);
+            $productProperty = new ProductProperty;
+            $productProperty->product_id = $validated['product_id'];
+            $productProperty->property_type_id = $validated['property_type_id'];
+            $productProperty->value = $validated['value'];
+            $productProperty->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -62,30 +54,25 @@ class ProductService
 
         DB::commit();
 
-        return $product;
+        return $productProperty;
     }
 
     /**
       * Update the specified model in storage.
      *
      * @param array $validated
-     * @param \App\Product $product
-     * @return \App\Product
+     * @param \App\ProductProperty $productProperty
+     * @return \App\ProductProperty
      */
-    public function update(array $validated, Product $product)
+    public function update(array $validated, ProductProperty $productProperty)
     {
         DB::beginTransaction();
 
         try {
-            $productVariantService = resolve('App\Services\ProductVariantService');
-
-            $product->name = $validated['name'];
-            $product->slug = $validated['slug'];
-            $product->description = $validated['description'];
-            $product->featured = $validated['featured'];
-
-            $product->save();
-            $productVariantService->update($validated, $product->variants()->where('is_master', true)->first());
+            $productProperty->product_id = $validated['product_id'];
+            $productProperty->property_type_id = $validated['property_type_id'];
+            $productProperty->value = $validated['value'];
+            $productProperty->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -95,21 +82,21 @@ class ProductService
 
         DB::commit();
 
-        return $product;
+        return $productProperty;
     }
 
     /**
      * Delete the specified model from storage.
      *
-     * @param \App\Product $product
+     * @param \App\ProductProperty $productProperty
      * @return void
      */
-    public function delete(Product $product)
+    public function delete(ProductProperty $productProperty)
     {
         DB::beginTransaction();
 
         try {
-            $product->delete();
+            $productProperty->delete();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());

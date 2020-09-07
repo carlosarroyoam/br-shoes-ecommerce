@@ -11,7 +11,7 @@ class CategoryService
     /**
      * Get a listing of the models.
      *
-     * @return Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getAll()
     {
@@ -26,7 +26,7 @@ class CategoryService
      */
     public function getById($categoryId)
     {
-        return $category->where('id', $categoryId)->firstOrFail();
+        return Category::where('id', $categoryId)->firstOrFail();
     }
 
     /**

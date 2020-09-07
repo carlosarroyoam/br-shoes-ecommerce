@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Product;
 use App\ProductVariant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class ProductService
+class ProductVariantService
 {
     /**
      * Get a listing of the models.
@@ -16,43 +15,36 @@ class ProductService
      */
     public function getAll()
     {
-        return Product::all();
+        return ProductVariant::all();
     }
 
     /**
      * Get the specified model by its id.
      *
-     * @param $productId
-     * @return \App\Product
+     * @param $productVariantId
+     * @return \App\ProductVariant
      */
-    public function getById($productId)
+    public function getById($productVariantId)
     {
-        return Product::where('id', $productId)->firstOrFail();
+        return ProductVariant::where('id', $productVariantId)->firstOrFail();
     }
 
     /**
      * Create the specified model in storage.
      *
      * @param array $validated
-     * @return \App\Product
+     * @return \App\ProductVariant
      */
     public function create(array $validated)
     {
         DB::beginTransaction();
 
         try {
-            $product = new Product;
-            $productVariantService = resolve('App\Services\ProductVariantService');
-
-            $product->name = $validated['name'];
-            $product->slug = $validated['slug'];
-            $product->description = $validated['description'];
-            $product->featured = $validated['featured'];
-            $product->save();
-
-            $validated['product_id'] = $product->id;
-            $validated['is_master'] = true;
-            $productVariantService->create($validated);
+            $productVariant = new ProductVariant;
+            $productVariant->product_id = $validated['product_id'];
+            $productVariant->price_in_cents = $validated['price_in_cents'];
+            $productVariant->is_master = $validated['is_master'];
+            $productVariant->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -62,30 +54,23 @@ class ProductService
 
         DB::commit();
 
-        return $product;
+        return $productVariant;
     }
 
     /**
       * Update the specified model in storage.
      *
      * @param array $validated
-     * @param \App\Product $product
-     * @return \App\Product
+     * @param \App\ProductVariant $productVariant
+     * @return \App\ProductVariant
      */
-    public function update(array $validated, Product $product)
+    public function update(array $validated, ProductVariant $productVariant)
     {
         DB::beginTransaction();
 
         try {
-            $productVariantService = resolve('App\Services\ProductVariantService');
-
-            $product->name = $validated['name'];
-            $product->slug = $validated['slug'];
-            $product->description = $validated['description'];
-            $product->featured = $validated['featured'];
-
-            $product->save();
-            $productVariantService->update($validated, $product->variants()->where('is_master', true)->first());
+            $productVariant->price_in_cents = $validated['price_in_cents'];
+            $productVariant->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -95,21 +80,21 @@ class ProductService
 
         DB::commit();
 
-        return $product;
+        return $productVariant;
     }
 
     /**
      * Delete the specified model from storage.
      *
-     * @param \App\Product $product
+     * @param \App\ProductVariant $productVariant
      * @return void
      */
-    public function delete(Product $product)
+    public function delete(ProductVariant $productVariant)
     {
         DB::beginTransaction();
 
         try {
-            $product->delete();
+            $productVariant->delete();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
