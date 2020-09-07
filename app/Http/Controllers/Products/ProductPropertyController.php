@@ -16,7 +16,7 @@ class ProductPropertyController extends Controller
      *
      * @var \App\Services\ProductPropertyService
      */
-    protected $categoryService;
+    protected $productPropertyService;
 
     /**
      * Create a new controller instance.

@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Product;
 use App\ProductProperty;
+use App\ProductPropertyType;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -30,7 +32,7 @@ class CreateProductPropertiesTest extends TestCase
         $response = $this->get(route('product-properties.create'));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('pages.product.properties.create');
+        $response->assertViewIs('pages.products.properties.create');
     }
 
 
@@ -44,9 +46,9 @@ class CreateProductPropertiesTest extends TestCase
         $this->withoutExceptionHandling();
 
         $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\Categories\CategoryController::class,
+            \App\Http\Controllers\Products\ProductPropertyController::class,
             'store',
-            \App\Http\Requests\Categories\CategoryStoreRequest::class
+            \App\Http\Requests\Products\Properties\ProductPropertyStoreRequest::class
         );
     }
 
@@ -62,24 +64,30 @@ class CreateProductPropertiesTest extends TestCase
 
         $user = factory(User::class)->states('is_admin')->create();
         $this->actingAs($user);
+        $product = factory(Product::class)->create();
+        $property_type = factory(ProductPropertyType::class)->create();
         $expected = [
-            'name' => $this->faker->name,
+            'product_id' => $product->id,
+            'property_type_id' => $property_type->id,
+            'value' => $this->faker->name,
         ];
-        $expected['slug'] = Str::slug($expected['name']);
 
         $response = $this->post(route('product-properties.store'), [
-            'name' => $expected['name']
+            'product_id' => $expected['product_id'],
+            'property_type_id' => $expected['property_type_id'],
+            'value' => $expected['value']
         ]);
-        $categories = Category::query()
-            ->where('name', $expected['name'])
+        $productProperties = ProductProperty::query()
+            ->where('value', $expected['value'])
             ->get();
-        $category = $categories->first();
+        $productProperty = $productProperties->first();
 
         $response->assertRedirect(route('product-properties.index'));
-        $response->assertSessionHas('category.id', $category->id);
-        $this->assertDatabaseHas('categories', [
-            'name' => $expected['name'],
-            'slug' => $expected['slug'],
+        $response->assertSessionHas('productProperty.id', $productProperty->id);
+        $this->assertDatabaseHas('product_properties', [
+            'product_id' => $expected['product_id'],
+            'property_type_id' => $expected['property_type_id'],
+            'value' => $expected['value'],
         ]);
     }
 
@@ -114,19 +122,61 @@ class CreateProductPropertiesTest extends TestCase
 
 
     /**
-     * On the store action, the attribute name of a category cannot be empty or null.
+     * On the store action, the attribute product_id of a category cannot be empty or null.
      *
      * @return void
      */
-    public function test_a_category_name_should_not_be_empty_or_null()
+    public function test_a_category_product_id_should_not_be_empty_or_null()
     {
         $user = factory(User::class)->states('is_admin')->create();
         $this->actingAs($user);
 
         $response = $this->post(route('product-properties.store'), [
-            'name' => ''
+            'product_id' => '',
+            'property_type_id' => 1,
+            'value' => $this->faker->name
         ]);
 
-        $response->assertSessionHasErrors(['name']);
+        $response->assertSessionHasErrors(['product_id']);
+    }
+
+
+    /**
+     * On the store action, the attribute property_type_id of a category cannot be empty or null.
+     *
+     * @return void
+     */
+    public function test_a_category_property_type_id_should_not_be_empty_or_null()
+    {
+        $user = factory(User::class)->states('is_admin')->create();
+        $this->actingAs($user);
+
+        $response = $this->post(route('product-properties.store'), [
+            'product_id' => 1,
+            'property_type_id' => '',
+            'value' => $this->faker->name
+        ]);
+
+        $response->assertSessionHasErrors(['property_type_id']);
+    }
+
+
+    /**
+     * On the store action, the attribute value of a category cannot be empty or null.
+     *
+     * @return void
+     */
+    public function test_a_category_value_should_not_be_empty_or_null()
+    {
+        $user = factory(User::class)->states('is_admin')->create();
+        $this->actingAs($user);
+
+        $response = $this->post(route('product-properties.store'), [
+            'product_id' => 1,
+            'property_type_id' => 1,
+            'value' => ''
+        ]);
+
+        $response->assertSessionHasErrors(['value']);
     }
 }
