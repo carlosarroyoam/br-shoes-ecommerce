@@ -1,16 +1,32 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Category;
+use App\Models\Category;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Faker\Generator as Faker;
 
-$factory->define(Category::class, function (Faker $faker) {
-    $name = $faker->name;
+class CategoryFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Category::class;
 
-    return [
-        'name' => $name,
-        'slug' => Str::slug($name),
-    ];
-});
+    /**
+        * Define the model's default state.
+        *
+        * @return array
+        */
+    public function definition()
+    {
+        $name = $this->faker->name;
+
+        return [
+            'name' => $name,
+            'slug' => Str::slug($name),
+        ];
+    }
+}

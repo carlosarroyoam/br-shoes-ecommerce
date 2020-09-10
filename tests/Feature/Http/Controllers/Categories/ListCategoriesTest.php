@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +20,7 @@ class ListCategoriesTest extends TestCase
      */
     public function test_index_displays_view()
     {
-        $categories = factory(Category::class, 3)->create();
+        $categories = Category::factory()->count(5)->create();
 
         $response = $this->get(route('categories.index'));
 

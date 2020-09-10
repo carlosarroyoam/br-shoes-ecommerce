@@ -1,14 +1,31 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Photo;
-use Faker\Generator as Faker;
+use App\Models\Photo;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-$factory->define(Photo::class, function (Faker $faker) {
-    return [
-        'url' => $faker->url,
-        'photoable_id' => $faker->randomNumber(),
-        'photoable_type' => $faker->word,
-    ];
-});
+class PhotoFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Photo::class;
+
+    /**
+        * Define the model's default state.
+        *
+        * @return array
+        */
+    public function definition()
+    {
+        return [
+            'url' => $this->faker->url,
+            'photoable_id' => $this->faker->randomNumber(),
+            'photoable_type' => $this->faker->word,
+        ];
+    }
+}

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\WishList;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\WishList\WishListStoreRequest;
 use App\Http\Requests\WishList\WishListUpdateRequest;
-use App\WishList;
+use App\Models\WishList;
 use Illuminate\Http\Request;
 
 class WishListController extends Controller

@@ -1,6 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Categories\CategoryController;
+use App\Http\Controllers\Orders\OrderController;
+use App\Http\Controllers\Orders\OrderDetailController;
+use App\Http\Controllers\Products\ProductController;
+use App\Http\Controllers\Products\ProductPropertyController;
+use App\Http\Controllers\Products\ProductPropertyTypeController;
+use App\Http\Controllers\Products\ProductVariantController;
+use App\Http\Controllers\Shippments\ShipmentController;
+use App\Http\Controllers\ShoppingBag\ShoppingBagController;
+use App\Http\Controllers\Users\UserAccountController;
+use App\Http\Controllers\Users\UserContactDetailController;
+use App\Http\Controllers\Users\UserController;
+use App\Http\Controllers\Users\UserProfileController;
+use App\Http\Controllers\Users\UserShippingAddressController;
+use App\Http\Controllers\WihsList\WihsListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,36 +28,37 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Auth::routes();
-
 Route::view('', 'pages.home')->name('home');
 Route::view('tank-you', 'pages.home')->name('tank-you');
 Route::view('sizes-guide', 'pages.home')->name('sizes-guide');
 Route::view('how-to-buy', 'pages.home')->name('how-to-buy');
 Route::view('faq', 'pages.home')->name('faq');
 
-Route::get('profile', 'Users\UserProfileController@show')->name('users.profile');
-Route::get('account-settings', 'Users\UserAccountController@show')->name('users.account-settings');
-Route::get('products/newest', 'Products\ProductController@newest')->name('products.newest');
-Route::get('products/offers', 'Products\ProductController@offers')->name('products.offers');
+Route::get('profile', [UserProfileController::class, 'show'])->name('users.profile');
+Route::get('account-settings', [UserAccountController::class, 'show'])->name('users.account-settings');
+Route::get('products/newest', [ProductController::class, 'newest'])->name('products.newest');
+Route::get('products/offers', [ProductController::class, 'offers'])->name('products.offers');
 
-Route::resource('users', 'Users\UserController')->except('create', 'store');
-Route::resource('shopping-bag', 'ShoppingBag\ShoppingBagController')->except('index', 'create', 'edit');
-Route::resource('wish-list', 'WishList\WishListController')->except('index', 'create', 'edit');
+Route::resource('users', UserController::class)->except('create', 'store');
+Route::resource('shopping-bag', ShoppingBagController::class)->except('index', 'create', 'edit');
+Route::resource('wish-list', WishListController::class)->except('index', 'create', 'edit');
 Route::resources([
-    'user-contact-details' => 'Users\UserContactDetailController',
-    'user-shipping-addresses' => 'Users\UserShippingAddressController',
-    'products' =>'Products\ProductController',
-    'product-variants' => 'Products\ProductVariantController',
-    'product-properties' => 'Products\ProductPropertyController',
-    'product-property-types' => 'Products\ProductPropertyTypeController',
-    'categories' =>'Categories\CategoryController',
-    'orders' => 'Orders\OrderController',
-    'order-details' => 'Orders\OrderDetailController',
-    'shipments' => 'Shipments\ShipmentController',
+    'user-contact-details' => UserContactDetailController::class,
+    'user-shipping-addresses' => UserShippingAddressController::class,
+    'products' => ProductController::class,
+    'product-variants' =>  ProductVariantController::class,
+    'product-properties' =>  ProductPropertyController::class,
+    'product-property-types' =>  ProductPropertyTypeController::class,
+    'categories' => CategoryController::class,
+    'orders' => OrderController::class,
+    'order-details' => OrderDetailController::class,
+    'shipments' => ShipmentController::class,
 ]);
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('', 'Admin\DashboardController@index')->name('admin.dashboard');
+    Route::get('', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

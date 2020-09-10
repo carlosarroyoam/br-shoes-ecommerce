@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Product;
-use App\ProductVariant;
+use App\Models\Product;
+use App\Models\ProductVariant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -77,15 +77,12 @@ class ProductService
         DB::beginTransaction();
 
         try {
-            $productVariantService = resolve('App\Services\ProductVariantService');
-
             $product->name = $validated['name'];
             $product->slug = $validated['slug'];
             $product->description = $validated['description'];
             $product->featured = $validated['featured'];
 
             $product->save();
-            $productVariantService->update($validated, $product->variants()->where('is_master', true)->first());
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());

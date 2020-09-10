@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Product;
-use App\User;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -21,7 +21,7 @@ class ShowProductsTest extends TestCase
      */
     public function test_show_displays_view()
     {
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $response = $this->get(route('products.show', $product->slug));
 

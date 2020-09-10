@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\ProductVariant;
+use App\Models\ProductVariant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 

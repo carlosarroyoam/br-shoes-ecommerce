@@ -1,23 +1,46 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Product;
-use App\ProductVariant;
+use App\Models\Product;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use Faker\Generator as Faker;
 
-$factory->define(Product::class, function (Faker $faker) {
-    $name = $faker->name;
+class ProductFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Product::class;
 
-    return [
-        'name' => $name,
-        'slug' => Str::slug($name),
-        'description' => $faker->text,
-        'featured' => $faker->boolean,
-    ];
-});
+    /**
+        * Define the model's default state.
+        *
+        * @return array
+        */
+    public function definition()
+    {
+        $name = $this->faker->name;
 
-$factory->state(Product::class, 'featured', [
-    'featured' => 1,
-]);
+        return [
+            'name' => $name,
+            'slug' => Str::slug($name),
+            'description' => $this->faker->text,
+            'featured' => $this->faker->boolean,
+        ];
+    }
+
+    /**
+     * Indicate that the product is featured.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function featured()
+    {
+        return $this->state([
+            'featured' => true,
+        ]);
+    }
+}

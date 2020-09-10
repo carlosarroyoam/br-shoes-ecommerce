@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Products;
 
-use App\ProductPropertyType;
+use App\Models\ProductPropertyType;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;

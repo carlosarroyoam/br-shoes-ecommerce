@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Products;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\PropertyTypes\ProductPropertyTypeStoreRequest;
 use App\Http\Requests\Products\PropertyTypes\ProductPropertyTypeUpdateRequest;
-use App\ProductPropertyType;
+use App\Models\ProductPropertyType;
 use Illuminate\Http\Request;
 
 class ProductPropertyTypeController extends Controller

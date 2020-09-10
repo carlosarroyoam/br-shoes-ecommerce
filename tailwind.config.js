@@ -1,5 +1,7 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
-    purge: [],
+    purge: ['./storage/framework/views/*.php', './resources/views/**/*.blade.php'],
     theme: {
         extend: {
             fontFamily: {
@@ -32,9 +34,12 @@ module.exports = {
             }
         },
     },
-    variants: {},
-    plugins: [],
+    variants: {
+        opacity: ['responsive', 'hover', 'focus', 'disabled'],
+    },
+    plugins: [require('@tailwindcss/ui')],
     future: {
         removeDeprecatedGapUtilities: true,
+        purgeLayersByDefault: true,
     },
-}
+};

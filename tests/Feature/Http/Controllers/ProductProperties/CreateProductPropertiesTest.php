@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Product;
-use App\ProductProperty;
-use App\ProductPropertyType;
-use App\User;
+use App\Models\Product;
+use App\Models\ProductProperty;
+use App\Models\ProductPropertyType;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;

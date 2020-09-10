@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Shipments;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Shipments\ShipmentStoreRequest;
 use App\Http\Requests\Shipments\ShipmentUpdateRequest;
-use App\Shipment;
+use App\Models\Shipment;
 use Illuminate\Http\Request;
 
 class ShipmentController extends Controller

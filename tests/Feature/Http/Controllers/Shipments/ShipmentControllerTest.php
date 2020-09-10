@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Http\Controllers\Shipments;
 
-use App\Shipment;
-use App\ShipmentStatus;
+use App\Models\Shipment;
+use App\Models\ShipmentStatus;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;

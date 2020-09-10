@@ -1,12 +1,29 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\ContactDetail;
-use Faker\Generator as Faker;
+use App\Models\ContactDetail;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-$factory->define(ContactDetail::class, function (Faker $faker) {
-    return [
-        //
-    ];
-});
+class ContactDetailFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ContactDetail::class;
+
+    /**
+        * Define the model's default state.
+        *
+        * @return array
+        */
+    public function definition()
+    {
+        return [
+            //
+        ];
+    }
+}

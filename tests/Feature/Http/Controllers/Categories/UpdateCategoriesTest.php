@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -24,9 +24,9 @@ class UpdateCategoriesTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('is_admin')->create();
+        $user = User::factory()->admin()->make();
         $this->actingAs($user);
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $response = $this->get(route('categories.edit', $category));
 
@@ -62,9 +62,9 @@ class UpdateCategoriesTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('is_admin')->create();
+        $user = User::factory()->admin()->make();
         $this->actingAs($user);
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
         $expected = [
             'name' => $this->faker->name,
         ];
@@ -94,9 +94,9 @@ class UpdateCategoriesTest extends TestCase
      */
     public function test_udpate_doesnt_updates_for_non_admin_users()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->make();
         $this->actingAs($user);
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $response = $this->put(route('categories.update', $category), []);
 
@@ -110,7 +110,7 @@ class UpdateCategoriesTest extends TestCase
      */
     public function test_update_doesnt_updates_for_non_authenticated_users()
     {
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $response = $this->put(route('categories.update', $category), []);
 
@@ -124,9 +124,9 @@ class UpdateCategoriesTest extends TestCase
      */
     public function test_a_category_name_should_not_be_empty_or_null()
     {
-        $user = factory(User::class)->states('is_admin')->create();
+        $user = User::factory()->admin()->make();
         $this->actingAs($user);
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $response = $this->put(route('categories.update', $category), [
             'name' => ''

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Products;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\Variants\ProductVariantStoreRequest;
 use App\Http\Requests\Products\Variants\ProductVariantUpdateRequest;
-use App\ProductVariant;
+use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 
 class ProductVariantController extends Controller

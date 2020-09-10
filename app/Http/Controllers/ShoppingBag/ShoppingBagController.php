@@ -5,7 +5,7 @@ namespace App\Http\Controllers\ShoppingBag;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShoppingBag\ShoppingBagStoreRequest;
 use App\Http\Requests\ShoppingBag\ShoppingBagUpdateRequest;
-use App\ShoppingBag;
+use App\Models\ShoppingBag;
 use Illuminate\Http\Request;
 
 class ShoppingBagController extends Controller

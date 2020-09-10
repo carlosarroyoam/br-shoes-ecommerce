@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Http\Controllers\Orders;
 
-use App\Order;
-use App\OrderStatus;
-use App\Shipment;
-use App\User;
+use App\Models\Order;
+use App\Models\OrderStatus;
+use App\Models\Shipment;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;

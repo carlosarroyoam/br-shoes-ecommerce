@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Http\Controllers\Orders;
 
-use App\Order;
-use App\OrderDetail;
-use App\ProductVariant;
+use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\ProductVariant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Users;
 
-use App\UserShippingAddress;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\ShippingAddresses\UserShippingAddressStoreRequest;
 use App\Http\Requests\Users\ShippingAddresses\UserShippingAddressUpdateRequest;
+use App\Models\UserShippingAddress;
 use Illuminate\Http\Request;
 
 class UserShippingAddressController extends Controller

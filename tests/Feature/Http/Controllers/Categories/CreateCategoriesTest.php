@@ -2,13 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use JMac\Testing\Traits\AdditionalAssertions;
 use Symfony\Component\HttpFoundation\Response;
+use Faker\Generator as Faker;
 use Tests\TestCase;
 
 class CreateCategoriesTest extends TestCase
@@ -25,7 +26,7 @@ class CreateCategoriesTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('is_admin')->make();
+        $user = User::factory()->admin()->make();
         $this->actingAs($user);
 
         $response = $this->get(route('categories.create'));
@@ -61,7 +62,7 @@ class CreateCategoriesTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('is_admin')->create();
+        $user = User::factory()->admin()->make();
         $this->actingAs($user);
         $expected = [
             'name' => $this->faker->name,
@@ -92,7 +93,7 @@ class CreateCategoriesTest extends TestCase
      */
     public function test_store_doesnt_saves_for_non_admin_users()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->make();
         $this->actingAs($user);
 
         $response = $this->post(route('categories.store'), []);
@@ -111,23 +112,5 @@ class CreateCategoriesTest extends TestCase
         $response = $this->post(route('categories.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
-    }
-
-
-    /**
-     * On the store action, the attribute name of a category cannot be empty or null.
-     *
-     * @return void
-     */
-    public function test_a_category_name_should_not_be_empty_or_null()
-    {
-        $user = factory(User::class)->states('is_admin')->create();
-        $this->actingAs($user);
-
-        $response = $this->post(route('categories.store'), [
-            'name' => ''
-        ]);
-
-        $response->assertSessionHasErrors(['name']);
     }
 }

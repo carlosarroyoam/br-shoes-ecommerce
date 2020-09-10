@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\ProductProperty;
+use App\Models\ProductProperty;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 

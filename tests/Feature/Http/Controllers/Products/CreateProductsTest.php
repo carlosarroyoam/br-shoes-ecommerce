@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Product;
-use App\User;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -25,7 +25,7 @@ class CreateProductsTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('is_admin')->make();
+        $user = User::factory()->admin()->make();
         $this->actingAs($user);
 
         $response = $this->get(route('products.create'));
@@ -61,7 +61,7 @@ class CreateProductsTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('is_admin')->make();
+        $user = User::factory()->admin()->make();
         $this->actingAs($user);
         $expected = [
             'name' => $this->faker->name,
@@ -78,7 +78,10 @@ class CreateProductsTest extends TestCase
             'featured' => $expected['featured'],
             'price_in_cents' => $expected['variants.price_in_cents'],
         ]);
-        $product = Product::where('slug', $expected['slug'])->first();
+        $products = Product::query()
+        ->where('name', $expected['name'])
+        ->get();
+        $product = $products->first();
 
         $response->assertRedirect(route('products.index'));
         $response->assertSessionHas('product.id', $product->id);
@@ -95,142 +98,32 @@ class CreateProductsTest extends TestCase
         ]);
     }
 
+
     /**
-     * An authenticated non-admin user cannot create products.
+     * Store action doesn't save for an authenticated non-admin user.
      *
      * @return void
      */
-    public function test_a_user_cannot_create_products()
+    public function test_store_doesnt_saves_for_non_admin_users()
     {
-        $user = factory(User::class)->make();
+        $user = User::factory()->make();
         $this->actingAs($user);
-        $expected = [
-            'name' => 'Snake Sneakers',
-            'slug' => 'snake-sneakers',
-            'description' => 'Snake print sneakers.',
-            'featured' => false,
-            'variants.price_in_cents' => 36000,
-            'variants.is_master' => true,
-        ];
 
-        $response = $this->postJson(route('products.store'), [
-            'name' => $expected['name'],
-            'description' => $expected['description'],
-            'featured' => $expected['featured'],
-            'price_in_cents' => $expected['variants.price_in_cents'],
-        ]);
+        $response = $this->post(route('products.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
+
     /**
-     * An unauthenticated user cannot create products.
+     * Store action doesn't save for an unauthenticated user.
      *
      * @return void
      */
-    public function test_an_unauthenticated_user_cannot_create_products()
+    public function test_store_doesnt_saves_for_non_authenticated_users()
     {
-        $expected = [
-            'name' => 'Snake Sneakers',
-            'slug' => 'snake-sneakers',
-            'description' => 'Snake print sneakers.',
-            'featured' => false,
-            'variants.price_in_cents' => 36000,
-            'variants.is_master' => true,
-        ];
-
-        $response = $this->postJson(route('products.store'), [
-            'name' => $expected['name'],
-            'description' => $expected['description'],
-            'featured' => $expected['featured'],
-            'price_in_cents' => $expected['variants.price_in_cents'],
-        ]);
+        $response = $this->post(route('products.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
-    }
-
-    /**
-     * The attribute name of a product cannot be empty.
-     *
-     * @return void
-     */
-    public function test_a_product_name_should_not_be_empty()
-    {
-        $user = factory(User::class)->states('is_admin')->make();
-        $this->actingAs($user);
-        $expected = [
-            'name' => '',
-            'slug' => 'snake-sneakers',
-            'description' => 'Snake print sneakers.',
-            'featured' => false,
-            'variants.price_in_cents' => 36000,
-            'variants.is_master' => true,
-        ];
-
-        $response = $this->postJson(route('products.store'), [
-            'name' => $expected['name'],
-            'description' => $expected['description'],
-            'featured' => $expected['featured'],
-            'price_in_cents' => $expected['variants.price_in_cents'],
-        ]);
-
-        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
-        $response->assertJsonValidationErrors(['name']);
-    }
-
-    /**
-     * The attribute description of a product cannot be empty.
-     *
-     * @return void
-     */
-    public function test_a_product_description_should_not_be_empty()
-    {
-        $user = factory(User::class)->states('is_admin')->make();
-        $this->actingAs($user);
-        $expected = [
-            'name' => 'Snake Sneakers',
-            'slug' => 'snake-sneakers',
-            'description' => '',
-            'featured' => false,
-            'variants.price_in_cents' => 36000,
-            'variants.is_master' => true,
-        ];
-
-        $response = $this->postJson(route('products.store'), [
-            'name' => $expected['name'],
-            'description' => $expected['description'],
-            'featured' => $expected['featured'],
-            'price_in_cents' => $expected['variants.price_in_cents'],
-        ]);
-
-        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
-        $response->assertJsonValidationErrors(['description']);
-    }
-
-    /**
-     * The attribute price_in_cents of a product cannot be empty.
-     *
-     * @return void
-     */
-    public function test_a_product_price_in_cents_should_not_be_empty()
-    {
-        $user = factory(User::class)->states('is_admin')->make();
-        $this->actingAs($user);
-        $expected = [
-            'name' => 'Snake Sneakers',
-            'slug' => 'snake-sneakers',
-            'description' => '',
-            'featured' => false,
-            'variants.is_master' => true,
-        ];
-
-        $response = $this->postJson(route('products.store'), [
-            'name' => $expected['name'],
-            'description' => $expected['description'],
-            'featured' => $expected['featured'],
-        ]);
-
-        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
-        $response->assertJsonValidationErrors(['price_in_cents']);
     }
 }

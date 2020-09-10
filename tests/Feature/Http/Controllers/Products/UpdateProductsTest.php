@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Product;
-use App\ProductVariant;
-use App\User;
+use App\Models\Product;
+use App\Models\ProductVariant;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -26,9 +26,9 @@ class UpdateProductsTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('is_admin')->create();
+        $user = User::factory()->admin()->make();
         $this->actingAs($user);
-        $product = factory(Product::class)->create();
+        $product = Product::factory()->create();
 
         $response = $this->get(route('products.edit', $product));
 
@@ -64,38 +64,29 @@ class UpdateProductsTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('is_admin')->make();
+        $user = User::factory()->admin()->make();
         $this->actingAs($user);
-        $variant = factory(ProductVariant::class)->states('is_master')->create();
+        $variant = ProductVariant::factory()->master()->create();
         $expected = [
             'name' => $this->faker->name,
             'description' => $this->faker->text,
             'featured' => $this->faker->boolean,
-            'variants.price_in_cents' => $this->faker->randomNumber(5),
-            'variants.is_master' => true,
         ];
         $expected['slug'] = Str::slug($expected['name']);
 
-        $response = $this->put(route('products.update', Product::first()), [
+        $response = $this->put(route('products.update', $variant->product), [
             'name' => $expected['name'],
             'description' => $expected['description'],
             'featured' => $expected['featured'],
-            'price_in_cents' => $expected['variants.price_in_cents'],
         ]);
-        $product = Product::where('slug', $expected['slug'])->first();
 
         $response->assertRedirect(route('products.index'));
-        $response->assertSessionHas('product.id', $product->id);
+        $response->assertSessionHas('product.id', $variant->product->id);
         $this->assertDatabaseHas('products', [
             'name' => $expected['name'],
             'slug' => $expected['slug'],
             'description' => $expected['description'],
             'featured' => $expected['featured'],
-        ]);
-        $this->assertDatabaseHas('product_variants', [
-            'product_id' => Product::first()->id,
-            'price_in_cents' => $expected['variants.price_in_cents'],
-            'is_master' => $expected['variants.is_master'],
         ]);
     }
 
@@ -106,11 +97,11 @@ class UpdateProductsTest extends TestCase
      */
     public function test_udpate_doesnt_updates_for_non_admin_users()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->make();
         $this->actingAs($user);
-        $variant = factory(ProductVariant::class)->states('is_master')->create();
+        $variant = ProductVariant::factory()->master()->create();
 
-        $response = $this->put(route('products.update', Product::first()), []);
+        $response = $this->put(route('products.update', $variant->product), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -122,71 +113,10 @@ class UpdateProductsTest extends TestCase
      */
     public function test_update_doesnt_updates_for_non_authenticated_users()
     {
-        $variant = factory(ProductVariant::class)->states('is_master')->create();
+        $variant = ProductVariant::factory()->master()->create();
 
-        $response = $this->put(route('products.update', Product::first()), []);
+        $response = $this->put(route('products.update', $variant->product), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
-    }
-
-    /**
-     * On the update action, the attribute name of a category cannot be empty or null.
-     *
-     * @return void
-     */
-    public function test_a_category_name_should_not_be_empty_or_null()
-    {
-        $user = factory(User::class)->states('is_admin')->make();
-        $this->actingAs($user);
-        factory(ProductVariant::class)->states('is_master')->create();
-
-        $response = $this->put(route('products.update', Product::first()), [
-            'name' => '',
-            'description' => $this->faker->text,
-            'price_in_cents' => $this->faker->randomNumber(5),
-        ]);
-
-        $response->assertSessionHasErrors(['name']);
-    }
-
-    /**
-     * On the update action, the attribute description of a category cannot be empty or null.
-     *
-     * @return void
-     */
-    public function test_a_category_description_should_not_be_empty_or_null()
-    {
-        $user = factory(User::class)->states('is_admin')->make();
-        $this->actingAs($user);
-        factory(ProductVariant::class)->states('is_master')->create();
-
-        $response = $this->put(route('products.update', Product::first()), [
-            'name' => $this->faker->name,
-            'description' => '',
-            'price_in_cents' => $this->faker->randomNumber(5),
-        ]);
-
-        $response->assertSessionHasErrors(['description']);
-    }
-
-
-    /**
-     * On the update action, the attribute price_in_cents of a category cannot be empty or null.
-     *
-     * @return void
-     */
-    public function test_a_category_price_in_cents_should_not_be_empty_or_null()
-    {
-        $user = factory(User::class)->states('is_admin')->make();
-        $this->actingAs($user);
-        factory(ProductVariant::class)->states('is_master')->create();
-
-        $response = $this->put(route('products.update', Product::first()), [
-            'name' => $this->faker->name,
-            'description' => $this->faker->text,
-            'price_in_cents' => '',
-        ]);
-
-        $response->assertSessionHasErrors(['price_in_cents']);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -19,9 +19,9 @@ class DeleteCategoriesTest extends TestCase
      */
     public function test_destroy_deletes_and_redirects_for_admin_users()
     {
-        $user = factory(User::class)->states('is_admin')->create();
+        $user = User::factory()->admin()->make();
         $this->actingAs($user);
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $response = $this->delete(route('categories.destroy', $category));
 
@@ -36,9 +36,9 @@ class DeleteCategoriesTest extends TestCase
      */
     public function test_destroy_dont_deletes_for_non_admin_users()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->make();
         $this->actingAs($user);
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $response = $this->delete(route('categories.destroy', $category));
 
@@ -52,7 +52,7 @@ class DeleteCategoriesTest extends TestCase
      */
     public function test_destroy_dont_deletes_for_non_authenticated_users()
     {
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $response = $this->delete(route('categories.destroy', $category));
 

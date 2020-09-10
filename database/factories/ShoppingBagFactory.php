@@ -1,12 +1,30 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\ShoppingBag;
-use Faker\Generator as Faker;
+use App\Models\ShoppingBag;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-$factory->define(ShoppingBag::class, function (Faker $faker) {
-    return [
-        'user_id' => factory(\App\User::class),
-    ];
-});
+class ShoppingBagFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ShoppingBag::class;
+
+    /**
+        * Define the model's default state.
+        *
+        * @return array
+        */
+    public function definition()
+    {
+        return [
+            'user_id' => User::factory()->create(),
+        ];
+    }
+}

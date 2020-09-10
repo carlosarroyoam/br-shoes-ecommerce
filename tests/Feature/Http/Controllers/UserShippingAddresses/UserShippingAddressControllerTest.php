@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Http\Controllers\Users;
 
-use App\User;
-use App\UserShippingAddress;
+use App\Models\User;
+use App\Models\UserShippingAddress;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;

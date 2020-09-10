@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Products;
 
-use App\ProductProperty;
 use App\Http\Controllers\Controller;
-use App\Services\ProductPropertyService;
 use App\Http\Requests\Products\Properties\ProductPropertyStoreRequest;
 use App\Http\Requests\Products\Properties\ProductPropertyUpdateRequest;
+use App\Models\ProductProperty;
+use App\Services\ProductPropertyService;
 use Illuminate\Http\Request;
 
 class ProductPropertyController extends Controller

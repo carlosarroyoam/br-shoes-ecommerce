@@ -1,13 +1,31 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\VariantOptionType;
-use Faker\Generator as Faker;
+use App\Models\Product;
+use App\Models\VariantOptionType;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-$factory->define(VariantOptionType::class, function (Faker $faker) {
-    return [
-        'product_id' => factory(\App\Product::class),
-        'name' => $faker->name,
-    ];
-});
+class VariantOptionTypeFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = VariantOptionType::class;
+
+    /**
+        * Define the model's default state.
+        *
+        * @return array
+        */
+    public function definition()
+    {
+        return [
+            'product_id' => Product::factory()->create(),
+            'name' => $this->faker->name,
+        ];
+    }
+}

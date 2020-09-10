@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Product;
-use App\User;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +20,7 @@ class ListProductsTest extends TestCase
      */
     public function test_index_displays_view()
     {
-        $products = factory(Product::class, 3)->create();
+        $products = Product::factory()->count(5)->create();
 
         $response = $this->get(route('products.index'));
 

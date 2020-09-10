@@ -1,13 +1,32 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\WishListItem;
-use Faker\Generator as Faker;
+use App\Models\Product;
+use App\Models\WishList;
+use App\Models\WishListItem;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
-$factory->define(WishListItem::class, function (Faker $faker) {
-    return [
-        'wish_list_id' => factory(\App\WishList::class),
-        'product_id' => factory(\App\Product::class),
-    ];
-});
+class WishListItemFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = WishListItem::class;
+
+    /**
+        * Define the model's default state.
+        *
+        * @return array
+        */
+    public function definition()
+    {
+        return [
+            'wish_list_id' => WishList::factory()->create(),
+            'product_id' => Product::factory()->create(),
+        ];
+    }
+}

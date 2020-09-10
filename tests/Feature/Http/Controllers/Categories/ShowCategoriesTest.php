@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Category;
-use App\User;
+use App\Models\Category;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -21,7 +21,7 @@ class ShowCategoriesTest extends TestCase
      */
     public function test_show_displays_view()
     {
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
         $response = $this->get(route('categories.show', $category));
 

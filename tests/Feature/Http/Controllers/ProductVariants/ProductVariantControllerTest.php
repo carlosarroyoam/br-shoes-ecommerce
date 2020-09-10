@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Http\Controllers\Products;
 
-use App\Product;
-use App\ProductVariant;
+use App\Models\Product;
+use App\Models\ProductVariant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
