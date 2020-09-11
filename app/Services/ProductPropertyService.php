@@ -69,8 +69,6 @@ class ProductPropertyService
         DB::beginTransaction();
 
         try {
-            $productProperty->product_id = $validated['product_id'];
-            $productProperty->property_type_id = $validated['property_type_id'];
             $productProperty->value = $validated['value'];
             $productProperty->save();
         } catch (Exception $e) {

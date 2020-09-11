@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Category;
+use App\Models\ProductProperty;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -11,7 +11,7 @@ use JMac\Testing\Traits\AdditionalAssertions;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class UpdateCategoriesTest extends TestCase
+class UpdateProductPropertiesTest extends TestCase
 {
     use RefreshDatabase, AdditionalAssertions, WithFaker;
 
@@ -26,13 +26,13 @@ class UpdateCategoriesTest extends TestCase
 
         $user = User::factory()->admin()->make();
         $this->actingAs($user);
-        $category = Category::factory()->create();
+        $productProperty = ProductProperty::factory()->create();
 
-        $response = $this->get(route('categories.edit', $category));
+        $response = $this->get(route('product-properties.edit', $productProperty));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('pages.categories.edit');
-        $response->assertViewHas('category', $category);
+        $response->assertViewIs('pages.products.properties.edit');
+        $response->assertViewHas('productProperty', $productProperty);
     }
 
 
@@ -46,9 +46,9 @@ class UpdateCategoriesTest extends TestCase
         $this->withoutExceptionHandling();
 
         $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\Categories\CategoryController::class,
+            \App\Http\Controllers\Products\ProductPropertyController::class,
             'update',
-            \App\Http\Requests\Categories\CategoryUpdateRequest::class
+            \App\Http\Requests\Products\Properties\ProductPropertyUpdateRequest::class
         );
     }
 
@@ -64,22 +64,21 @@ class UpdateCategoriesTest extends TestCase
 
         $user = User::factory()->admin()->make();
         $this->actingAs($user);
-        $category = Category::factory()->create();
+        $productProperty = ProductProperty::factory()->create();
         $expected = [
-            'name' => $this->faker->name,
+            'value' => $this->faker->name,
         ];
-        $expected['slug'] = Str::slug($expected['name']);
 
-        $response = $this->put(route('categories.update', $category), [
-            'name' => $expected['name']
+        $response = $this->put(route('product-properties.update', $productProperty), [
+            'value' => $expected['value']
         ]);
-        $category->fresh();
+        $productProperty->fresh();
 
-        $response->assertRedirect(route('categories.index'));
-        $response->assertSessionHas('category.id', $category->id);
-        $this->assertDatabaseHas('categories', [
-            'name' => $expected['name'],
-            'slug' => $expected['slug'],
+
+        $response->assertRedirect(route('product-properties.index'));
+        $response->assertSessionHas('productProperty.id', $productProperty->id);
+        $this->assertDatabaseHas('product_properties', [
+            'value' => $expected['value'],
         ]);
     }
 
@@ -92,9 +91,9 @@ class UpdateCategoriesTest extends TestCase
     {
         $user = User::factory()->make();
         $this->actingAs($user);
-        $category = Category::factory()->create();
+        $productProperty = ProductProperty::factory()->create();
 
-        $response = $this->put(route('categories.update', $category), []);
+        $response = $this->put(route('product-properties.update', $productProperty), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -106,9 +105,9 @@ class UpdateCategoriesTest extends TestCase
      */
     public function test_update_doesnt_updates_for_non_authenticated_users()
     {
-        $category = Category::factory()->create();
+        $productProperty = ProductProperty::factory()->create();
 
-        $response = $this->put(route('categories.update', $category), []);
+        $response = $this->put(route('product-properties.update', $productProperty), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

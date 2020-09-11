@@ -14,8 +14,6 @@ class ProductPropertyUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_id' => ['required', 'integer', 'gt:0'],
-            'property_type_id' => ['required', 'integer', 'gt:0'],
             'value' => ['required', 'string'],
         ];
     }
