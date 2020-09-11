@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Categories\CategoryController;
 use App\Http\Controllers\Orders\OrderController;
 use App\Http\Controllers\Orders\OrderDetailController;
@@ -54,10 +53,6 @@ Route::resources([
     'order-details' => OrderDetailController::class,
     'shipments' => ShipmentController::class,
 ]);
-
-Route::group(['prefix' => 'admin'], function () {
-    Route::get('', [DashboardController::class, 'index'])->name('admin.dashboard');
-});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

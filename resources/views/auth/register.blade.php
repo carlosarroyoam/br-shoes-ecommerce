@@ -12,13 +12,13 @@
             <div>
                 <x-jet-label value="{{ __('first_name') }}" />
                 <x-jet-input class="block w-full mt-1" type="text" name="first_name" :value="old('first_name')" required
-                    autofocus autocomplete="first_name" />
+                    autofocus autocomplete="given-name" />
             </div>
 
             <div class="mt-4">
                 <x-jet-label value="{{ __('last_name') }}" />
                 <x-jet-input class="block w-full mt-1" type="text" name="last_name" :value="old('last_name')" required
-                    autofocus autocomplete="last_name" />
+                    autofocus autocomplete="family-name" />
             </div>
 
             <div class="mt-4">

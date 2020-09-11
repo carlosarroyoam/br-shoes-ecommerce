@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserAccountController extends Controller
 {
@@ -18,6 +19,6 @@ class UserAccountController extends Controller
     {
         $user = Auth::user();
 
-        return view('pages.users.show', compact('user'));
+        return view('pages.users.account', compact('user'));
     }
 }
