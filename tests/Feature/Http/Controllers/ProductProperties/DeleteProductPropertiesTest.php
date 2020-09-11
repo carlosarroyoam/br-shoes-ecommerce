@@ -2,15 +2,16 @@
 
 namespace Tests\Feature;
 
-use App\Models\Category;
+use App\Models\ProductProperty;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class DeleteCategoriesTest extends TestCase
+class DeleteProductPropertiesTest extends TestCase
 {
     use RefreshDatabase;
+
 
     /**
      * Destroy action deletes and redirects to index for an admin user.
@@ -21,12 +22,12 @@ class DeleteCategoriesTest extends TestCase
     {
         $user = User::factory()->admin()->make();
         $this->actingAs($user);
-        $category = Category::factory()->create();
+        $productProperty = ProductProperty::factory()->create();
 
-        $response = $this->delete(route('categories.destroy', $category));
+        $response = $this->delete(route('product-properties.destroy', $productProperty));
 
-        $response->assertRedirect(route('categories.index'));
-        $this->assertDeleted($category);
+        $response->assertRedirect(route('product-properties.index'));
+        $this->assertDeleted($productProperty);
     }
 
 
@@ -39,9 +40,9 @@ class DeleteCategoriesTest extends TestCase
     {
         $user = User::factory()->make();
         $this->actingAs($user);
-        $category = Category::factory()->create();
+        $productProperty = ProductProperty::factory()->create();
 
-        $response = $this->delete(route('categories.destroy', $category));
+        $response = $this->delete(route('product-properties.destroy', $productProperty));
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -54,9 +55,9 @@ class DeleteCategoriesTest extends TestCase
      */
     public function test_destroy_dont_deletes_for_non_authenticated_users()
     {
-        $category = Category::factory()->create();
+        $productProperty = ProductProperty::factory()->create();
 
-        $response = $this->delete(route('categories.destroy', $category));
+        $response = $this->delete(route('product-properties.destroy', $productProperty));
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

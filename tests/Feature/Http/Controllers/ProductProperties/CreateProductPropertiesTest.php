@@ -26,7 +26,7 @@ class CreateProductPropertiesTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('is_admin')->make();
+        $user = User::factory()->admin('is_admin')->make();
         $this->actingAs($user);
 
         $response = $this->get(route('product-properties.create'));
@@ -62,10 +62,10 @@ class CreateProductPropertiesTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $user = factory(User::class)->states('is_admin')->create();
+        $user = User::factory()->admin('is_admin')->make();
         $this->actingAs($user);
-        $product = factory(Product::class)->create();
-        $property_type = factory(ProductPropertyType::class)->create();
+        $product = Product::factory()->create();
+        $property_type = ProductPropertyType::factory()->create();
         $expected = [
             'product_id' => $product->id,
             'property_type_id' => $property_type->id,
@@ -99,7 +99,7 @@ class CreateProductPropertiesTest extends TestCase
      */
     public function test_store_doesnt_saves_for_non_admin_users()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->actingAs($user);
 
         $response = $this->post(route('product-properties.store'), []);
@@ -118,65 +118,5 @@ class CreateProductPropertiesTest extends TestCase
         $response = $this->post(route('product-properties.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
-    }
-
-
-    /**
-     * On the store action, the attribute product_id of a category cannot be empty or null.
-     *
-     * @return void
-     */
-    public function test_a_category_product_id_should_not_be_empty_or_null()
-    {
-        $user = factory(User::class)->states('is_admin')->create();
-        $this->actingAs($user);
-
-        $response = $this->post(route('product-properties.store'), [
-            'product_id' => '',
-            'property_type_id' => 1,
-            'value' => $this->faker->name
-        ]);
-
-        $response->assertSessionHasErrors(['product_id']);
-    }
-
-
-    /**
-     * On the store action, the attribute property_type_id of a category cannot be empty or null.
-     *
-     * @return void
-     */
-    public function test_a_category_property_type_id_should_not_be_empty_or_null()
-    {
-        $user = factory(User::class)->states('is_admin')->create();
-        $this->actingAs($user);
-
-        $response = $this->post(route('product-properties.store'), [
-            'product_id' => 1,
-            'property_type_id' => '',
-            'value' => $this->faker->name
-        ]);
-
-        $response->assertSessionHasErrors(['property_type_id']);
-    }
-
-
-    /**
-     * On the store action, the attribute value of a category cannot be empty or null.
-     *
-     * @return void
-     */
-    public function test_a_category_value_should_not_be_empty_or_null()
-    {
-        $user = factory(User::class)->states('is_admin')->create();
-        $this->actingAs($user);
-
-        $response = $this->post(route('product-properties.store'), [
-            'product_id' => 1,
-            'property_type_id' => 1,
-            'value' => ''
-        ]);
-
-        $response->assertSessionHasErrors(['value']);
     }
 }

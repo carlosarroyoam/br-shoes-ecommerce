@@ -9,14 +9,14 @@ use App\Http\Controllers\Products\ProductController;
 use App\Http\Controllers\Products\ProductPropertyController;
 use App\Http\Controllers\Products\ProductPropertyTypeController;
 use App\Http\Controllers\Products\ProductVariantController;
-use App\Http\Controllers\Shippments\ShipmentController;
+use App\Http\Controllers\Shipments\ShipmentController;
 use App\Http\Controllers\ShoppingBag\ShoppingBagController;
 use App\Http\Controllers\Users\UserAccountController;
 use App\Http\Controllers\Users\UserContactDetailController;
 use App\Http\Controllers\Users\UserController;
 use App\Http\Controllers\Users\UserProfileController;
 use App\Http\Controllers\Users\UserShippingAddressController;
-use App\Http\Controllers\WihsList\WihsListController;
+use App\Http\Controllers\WishList\WishListController;
 
 /*
 |--------------------------------------------------------------------------

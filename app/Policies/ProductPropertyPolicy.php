@@ -81,28 +81,4 @@ class ProductPropertyPolicy
     {
         return false;
     }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\User  $user
-     * @param  \App\ProductProperty  $productProperty
-     * @return mixed
-     */
-    public function restore(User $user, ProductProperty $productProperty)
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\User  $user
-     * @param  \App\ProductProperty  $productProperty
-     * @return mixed
-     */
-    public function forceDelete(User $user, ProductProperty $productProperty)
-    {
-        return false;
-    }
 }

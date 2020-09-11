@@ -26,7 +26,7 @@ class ProductPropertyController extends Controller
      */
     public function __construct(ProductPropertyService $productPropertyService)
     {
-        $this->authorizeResource(ProductProperty::class, 'product-property');
+        $this->authorizeResource(ProductProperty::class, 'product_property');
         $this->productPropertyService = $productPropertyService;
     }
 
