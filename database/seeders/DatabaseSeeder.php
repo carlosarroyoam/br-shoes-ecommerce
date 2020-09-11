@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\ProductPropertySeeder;
+use Database\Seeders\OrderStatusSeeder;
+use Database\Seeders\ShipmentStatusSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +16,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
+        $this->call([
+            ProductPropertySeeder::class,
+            OrderStatusSeeder::class,
+            ShipmentStatusSeeder::class,
+        ]);
     }
 }
