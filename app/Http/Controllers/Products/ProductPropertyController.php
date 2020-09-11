@@ -116,7 +116,7 @@ class ProductPropertyController extends Controller
      * @param \App\ProductProperty $productProperty
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, ProductProperty $productProperty)
+    public function destroy(ProductProperty $productProperty)
     {
         $this->productPropertyService->delete($productProperty);
 
