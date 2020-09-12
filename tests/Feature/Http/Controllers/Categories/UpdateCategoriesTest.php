@@ -2,8 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Admin;
 use App\Models\Category;
-use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -22,10 +23,8 @@ class UpdateCategoriesTest extends TestCase
      */
     public function test_edit_displays_view()
     {
-        $this->withoutExceptionHandling();
-
-        $user = User::factory()->admin()->make();
-        $this->actingAs($user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
         $category = Category::factory()->create();
 
         $response = $this->get(route('categories.edit', $category));
@@ -43,8 +42,6 @@ class UpdateCategoriesTest extends TestCase
      */
     public function test_update_uses_form_request_validation()
     {
-        $this->withoutExceptionHandling();
-
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Categories\CategoryController::class,
             'update',
@@ -60,10 +57,8 @@ class UpdateCategoriesTest extends TestCase
      */
     public function test_update_updates_and_redirects_for_admin_users()
     {
-        $this->withoutExceptionHandling();
-
-        $user = User::factory()->admin()->make();
-        $this->actingAs($user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
         $category = Category::factory()->create();
         $expected = [
             'name' => $this->faker->name,
@@ -90,8 +85,8 @@ class UpdateCategoriesTest extends TestCase
      */
     public function test_udpate_doesnt_updates_for_non_admin_users()
     {
-        $user = User::factory()->make();
-        $this->actingAs($user);
+        $customerUser = Customer::factory()->create();
+        $this->actingAs($customerUser->user);
         $category = Category::factory()->create();
 
         $response = $this->put(route('categories.update', $category), []);

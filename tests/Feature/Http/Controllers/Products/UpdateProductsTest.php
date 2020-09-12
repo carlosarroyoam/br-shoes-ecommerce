@@ -2,9 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Admin;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\ProductVariant;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -24,10 +25,8 @@ class UpdateProductsTest extends TestCase
      */
     public function test_edit_displays_view()
     {
-        $this->withoutExceptionHandling();
-
-        $user = User::factory()->admin()->make();
-        $this->actingAs($user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
         $product = Product::factory()->create();
 
         $response = $this->get(route('products.edit', $product));
@@ -45,8 +44,6 @@ class UpdateProductsTest extends TestCase
      */
     public function test_update_uses_form_request_validation()
     {
-        $this->withoutExceptionHandling();
-
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Products\ProductController::class,
             'update',
@@ -62,10 +59,8 @@ class UpdateProductsTest extends TestCase
      */
     public function test_update_updates_and_redirects_for_admin_users()
     {
-        $this->withoutExceptionHandling();
-
-        $user = User::factory()->admin()->make();
-        $this->actingAs($user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
         $variant = ProductVariant::factory()->master()->create();
         $expected = [
             'name' => $this->faker->name,
@@ -97,8 +92,8 @@ class UpdateProductsTest extends TestCase
      */
     public function test_udpate_doesnt_updates_for_non_admin_users()
     {
-        $user = User::factory()->make();
-        $this->actingAs($user);
+        $customerUser = Customer::factory()->create();
+        $this->actingAs($customerUser->user);
         $variant = ProductVariant::factory()->master()->create();
 
         $response = $this->put(route('products.update', $variant->product), []);

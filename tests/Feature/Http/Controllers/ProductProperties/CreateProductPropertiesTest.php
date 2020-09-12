@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Models\Admin;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\ProductProperty;
 use App\Models\ProductPropertyType;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
@@ -24,10 +25,8 @@ class CreateProductPropertiesTest extends TestCase
      */
     public function test_create_displays_view()
     {
-        $this->withoutExceptionHandling();
-
-        $user = User::factory()->admin('is_admin')->make();
-        $this->actingAs($user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
 
         $response = $this->get(route('product-properties.create'));
 
@@ -43,8 +42,6 @@ class CreateProductPropertiesTest extends TestCase
      */
     public function test_store_uses_form_request_validation()
     {
-        $this->withoutExceptionHandling();
-
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Products\ProductPropertyController::class,
             'store',
@@ -60,21 +57,19 @@ class CreateProductPropertiesTest extends TestCase
      */
     public function test_store_saves_and_redirects_for_admin_users()
     {
-        $this->withoutExceptionHandling();
-
-        $user = User::factory()->admin('is_admin')->make();
-        $this->actingAs($user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
         $product = Product::factory()->create();
         $property_type = ProductPropertyType::factory()->create();
         $expected = [
             'product_id' => $product->id,
-            'property_type_id' => $property_type->id,
+            'product_property_type_id' => $property_type->id,
             'value' => $this->faker->name,
         ];
 
         $response = $this->post(route('product-properties.store'), [
             'product_id' => $expected['product_id'],
-            'property_type_id' => $expected['property_type_id'],
+            'product_property_type_id' => $expected['product_property_type_id'],
             'value' => $expected['value']
         ]);
         $productProperties = ProductProperty::query()
@@ -86,7 +81,7 @@ class CreateProductPropertiesTest extends TestCase
         $response->assertSessionHas('productProperty.id', $productProperty->id);
         $this->assertDatabaseHas('product_properties', [
             'product_id' => $expected['product_id'],
-            'property_type_id' => $expected['property_type_id'],
+            'product_property_type_id' => $expected['product_property_type_id'],
             'value' => $expected['value'],
         ]);
     }
@@ -99,8 +94,8 @@ class CreateProductPropertiesTest extends TestCase
      */
     public function test_store_doesnt_saves_for_non_admin_users()
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        $customer = Customer::factory()->create();
+        $this->actingAs($customer->user);
 
         $response = $this->post(route('product-properties.store'), []);
 

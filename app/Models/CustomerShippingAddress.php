@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $user_id
+ * @property int $customer_id
  * @property string $address
  * @property string $city
  * @property string $state
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class UserShippingAddress extends Model
+class CustomerShippingAddress extends Model
 {
     use HasFactory;
 
@@ -26,7 +26,7 @@ class UserShippingAddress extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
+        'customer_id',
         'address',
         'city',
         'state',
@@ -41,7 +41,7 @@ class UserShippingAddress extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'user_id' => 'integer',
+        'customer_id' => 'integer',
         'zip_code' => 'integer',
     ];
 
@@ -49,8 +49,8 @@ class UserShippingAddress extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function customer()
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo(\App\Models\Customer::class);
     }
 }

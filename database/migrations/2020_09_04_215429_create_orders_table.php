@@ -15,10 +15,8 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('shipment_id');
-            $table->foreign('shipment_id')->references('id')->on('shipments')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('shipment_id')->constrained()->onDelete('cascade');
             $table->unsignedTinyInteger('order_status_id');
             $table->foreign('order_status_id')->references('id')->on('order_statuses')->onDelete('cascade');
             $table->text('comments')->nullable();

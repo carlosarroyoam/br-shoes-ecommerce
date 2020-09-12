@@ -2,9 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Admin;
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\ProductVariant;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,8 +22,8 @@ class DeleteProductsTest extends TestCase
      */
     public function test_destroy_deletes_and_redirects_for_admin_users()
     {
-        $user = User::factory()->admin()->make();
-        $this->actingAs($user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
         $variant = ProductVariant::factory()->master()->create();
         $product = Product::first();
 
@@ -40,8 +41,8 @@ class DeleteProductsTest extends TestCase
      */
     public function test_destroy_dont_deletes_for_non_admin_users()
     {
-        $user = User::factory()->make();
-        $this->actingAs($user);
+        $customerUser = Customer::factory()->create();
+        $this->actingAs($customerUser->user);
         $variant = ProductVariant::factory()->master()->create();
         $product = Product::first();
 

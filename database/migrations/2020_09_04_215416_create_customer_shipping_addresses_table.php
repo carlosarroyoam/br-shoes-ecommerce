@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserShippingAddressesTable extends Migration
+class CreateCustomerShippingAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateUserShippingAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_shipping_addresses', function (Blueprint $table) {
+        Schema::create('customer_shipping_addresses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             $table->string('address');
             $table->string('city');
             $table->string('state');
@@ -33,6 +32,6 @@ class CreateUserShippingAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_shipping_addresses');
+        Schema::dropIfExists('customer_shipping_addresses');
     }
 }

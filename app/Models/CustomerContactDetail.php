@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $user_id
+ * @property int $customer_id
  * @property string $phone_number
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class UserContactDetail extends Model
+class CustomerContactDetail extends Model
 {
     use HasFactory;
 
@@ -22,7 +22,7 @@ class UserContactDetail extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
+        'customer_id',
         'phone_number',
     ];
 
@@ -33,15 +33,15 @@ class UserContactDetail extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'user_id' => 'integer',
+        'customer_id' => 'integer',
     ];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function customer()
     {
-        return $this->belongsTo(\App\Models\User::class);
+        return $this->belongsTo(\App\Models\Customer::class);
     }
 }

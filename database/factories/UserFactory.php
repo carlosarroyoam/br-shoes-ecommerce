@@ -33,14 +33,28 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the user is an admin-user.
+     * Indicate that the user is morph to an admin.
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function admin()
+    public function admin($typeable_id)
     {
         return $this->state([
-            'is_admin' => true,
+            'userable_id' => $typeable_id,
+            'userable_type' => 'App\Models\Admin',
+        ]);
+    }
+
+    /**
+     * Indicate that the user is morph to a customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function customer($typeable_id)
+    {
+        return $this->state([
+            'userable_id' => $typeable_id,
+            'userable_type' => 'App\Models\Customer',
         ]);
     }
 }

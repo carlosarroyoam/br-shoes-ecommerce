@@ -2,8 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Admin;
+use App\Models\Customer;
 use App\Models\ProductPropertyType;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
@@ -22,10 +23,8 @@ class CreateProductPropertyTypesTest extends TestCase
      */
     public function test_create_displays_view()
     {
-        $this->withoutExceptionHandling();
-
-        $user = User::factory()->admin('is_admin')->make();
-        $this->actingAs($user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
 
         $response = $this->get(route('product-property-types.create'));
 
@@ -41,8 +40,6 @@ class CreateProductPropertyTypesTest extends TestCase
      */
     public function test_store_uses_form_request_validation()
     {
-        $this->withoutExceptionHandling();
-
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Products\ProductPropertyTypeController::class,
             'store',
@@ -58,10 +55,8 @@ class CreateProductPropertyTypesTest extends TestCase
      */
     public function test_store_saves_and_redirects_for_admin_users()
     {
-        $this->withoutExceptionHandling();
-
-        $user = User::factory()->admin('is_admin')->make();
-        $this->actingAs($user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
         $expected = [
             'name' => $this->faker->name,
         ];
@@ -89,8 +84,8 @@ class CreateProductPropertyTypesTest extends TestCase
      */
     public function test_store_doesnt_saves_for_non_admin_users()
     {
-        $user = User::factory()->create();
-        $this->actingAs($user);
+        $customerUser = Customer::factory()->create();
+        $this->actingAs($customerUser->user);
 
         $response = $this->post(route('product-property-types.store'), []);
 

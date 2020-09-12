@@ -15,8 +15,7 @@ class CreateProductVariantsTable extends Migration
     {
         Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->unsignedInteger('price_in_cents')->default(0);
             $table->boolean('is_master')->default(false);
             $table->timestamps();

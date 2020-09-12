@@ -15,7 +15,7 @@ class ProductPropertyStoreRequest extends FormRequest
     {
         return [
             'product_id' => ['required', 'integer', 'gt:0'],
-            'property_type_id' => ['required', 'integer', 'gt:0'],
+            'product_property_type_id' => ['required', 'integer', 'gt:0'],
             'value' => ['required', 'string'],
         ];
     }

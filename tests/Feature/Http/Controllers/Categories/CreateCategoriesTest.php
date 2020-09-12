@@ -2,8 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Admin;
 use App\Models\Category;
-use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -24,10 +25,8 @@ class CreateCategoriesTest extends TestCase
      */
     public function test_create_displays_view()
     {
-        $this->withoutExceptionHandling();
-
-        $user = User::factory()->admin()->make();
-        $this->actingAs($user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
 
         $response = $this->get(route('categories.create'));
 
@@ -43,8 +42,6 @@ class CreateCategoriesTest extends TestCase
      */
     public function test_store_uses_form_request_validation()
     {
-        $this->withoutExceptionHandling();
-
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Categories\CategoryController::class,
             'store',
@@ -60,10 +57,8 @@ class CreateCategoriesTest extends TestCase
      */
     public function test_store_saves_and_redirects_for_admin_users()
     {
-        $this->withoutExceptionHandling();
-
-        $user = User::factory()->admin()->make();
-        $this->actingAs($user);
+        $adminUser = Admin::factory()->create();
+        $this->actingAs($adminUser->user);
         $expected = [
             'name' => $this->faker->name,
         ];
@@ -93,8 +88,8 @@ class CreateCategoriesTest extends TestCase
      */
     public function test_store_doesnt_saves_for_non_admin_users()
     {
-        $user = User::factory()->make();
-        $this->actingAs($user);
+        $customerUser = Customer::factory()->create();
+        $this->actingAs($customerUser->user);
 
         $response = $this->post(route('categories.store'), []);
 

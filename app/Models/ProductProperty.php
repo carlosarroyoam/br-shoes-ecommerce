@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $product_id
- * @property int $property_type_id
+ * @property int $product_property_type_id
  * @property string $value
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
@@ -24,7 +24,7 @@ class ProductProperty extends Model
      */
     protected $fillable = [
         'product_id',
-        'property_type_id',
+        'product_property_type_id',
         'value',
     ];
 
@@ -36,7 +36,7 @@ class ProductProperty extends Model
     protected $casts = [
         'id' => 'integer',
         'product_id' => 'integer',
-        'property_type_id' => 'integer',
+        'product_property_type_id' => 'integer',
     ];
 
 

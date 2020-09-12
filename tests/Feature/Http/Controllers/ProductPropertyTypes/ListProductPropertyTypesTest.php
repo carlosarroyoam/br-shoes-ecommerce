@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\ProductPropertyType;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +19,6 @@ class ListProductPropertyTypesTest extends TestCase
      */
     public function test_index_displays_view()
     {
-        $this->withoutExceptionHandling();
         $productPropertyTypes = ProductPropertyType::factory()->count(5)->create();
 
         $response = $this->get(route('product-property-types.index'));

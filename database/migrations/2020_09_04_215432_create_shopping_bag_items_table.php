@@ -15,10 +15,8 @@ class CreateShoppingBagItemsTable extends Migration
     {
         Schema::create('shopping_bag_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('shopping_bag_id')->unique();
-            $table->foreign('shopping_bag_id')->references('id')->on('shopping_bags')->onDelete('cascade');
-            $table->unsignedBigInteger('product_variant_id');
-            $table->foreign('product_variant_id')->references('id')->on('product_variants')->onDelete('cascade');
+            $table->foreignId('shopping_bag_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_variant_id')->constrained()->onDelete('cascade');
             $table->unsignedSmallInteger('quantity');
             $table->timestamps();
         });

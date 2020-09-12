@@ -10,6 +10,22 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $email
+ * @property \Carbon\Carbon $email_verified_at
+ * @property string $password
+ * @property string $remember_token
+ * @property string $current_team_id
+ * @property string $profile_photo_path
+ * @property int $typeable_id
+ * @property string $typeable_type
+ * @property \Carbon\Carbon $delete_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ */
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -29,7 +45,8 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        'is_admin'
+        'userable_id',
+        'userable_type',
     ];
 
     /**
@@ -50,8 +67,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'id' => 'integer',
         'email_verified_at' => 'datetime',
-        'is_admin' => 'boolean',
+        'userable_id' => 'integer',
     ];
 
     /**
@@ -74,34 +92,12 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the addresess records associated with the user.
+     * Get the owning typeable model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function shipmentAddresses()
+    public function userable()
     {
-        return $this->hasMany(\App\Models\UserShipmentAddress::class);
-    }
-
-    /**
-     * Get the contact details record associated with the user.
-     */
-    public function contactDetails()
-    {
-        return $this->hasOne(\App\Models\UserContactDetails::class);
-    }
-
-    /**
-     * Get the addresess records associated with the user.
-     */
-    public function shoppingBag()
-    {
-        return $this->hasOne(\App\Models\ShoppingBag::class);
-    }
-
-    /**
-     * Get the addresess records associated with the user.
-     */
-    public function wishList()
-    {
-        return $this->hasOne(\App\Models\WishList::class);
+        return $this->morphTo();
     }
 }

@@ -6,7 +6,7 @@ use App\Models\ContactDetail;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class ContactDetailFactory extends Factory
+class CustomerContactDetailFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -23,7 +23,7 @@ class ContactDetailFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'customer_id' => Customer::factory()->create(),
         ];
     }
 }

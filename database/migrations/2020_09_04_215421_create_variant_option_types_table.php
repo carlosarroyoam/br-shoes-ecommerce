@@ -15,8 +15,7 @@ class CreateVariantOptionTypesTable extends Migration
     {
         Schema::create('variant_option_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->timestamps();
         });

@@ -2,8 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Admin;
+use App\Models\Customer;
 use App\Models\ProductProperty;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -22,10 +23,8 @@ class UpdateProductPropertiesTest extends TestCase
      */
     public function test_edit_displays_view()
     {
-        $this->withoutExceptionHandling();
-
-        $user = User::factory()->admin()->make();
-        $this->actingAs($user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
         $productProperty = ProductProperty::factory()->create();
 
         $response = $this->get(route('product-properties.edit', $productProperty));
@@ -43,8 +42,6 @@ class UpdateProductPropertiesTest extends TestCase
      */
     public function test_update_uses_form_request_validation()
     {
-        $this->withoutExceptionHandling();
-
         $this->assertActionUsesFormRequest(
             \App\Http\Controllers\Products\ProductPropertyController::class,
             'update',
@@ -60,10 +57,8 @@ class UpdateProductPropertiesTest extends TestCase
      */
     public function test_update_updates_and_redirects_for_admin_users()
     {
-        $this->withoutExceptionHandling();
-
-        $user = User::factory()->admin()->make();
-        $this->actingAs($user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
         $productProperty = ProductProperty::factory()->create();
         $expected = [
             'value' => $this->faker->name,
@@ -89,8 +84,8 @@ class UpdateProductPropertiesTest extends TestCase
      */
     public function test_udpate_doesnt_updates_for_non_admin_users()
     {
-        $user = User::factory()->make();
-        $this->actingAs($user);
+        $customerUser = Customer::factory()->create();
+        $this->actingAs($customerUser->user);
         $productProperty = ProductProperty::factory()->create();
 
         $response = $this->put(route('product-properties.update', $productProperty), []);

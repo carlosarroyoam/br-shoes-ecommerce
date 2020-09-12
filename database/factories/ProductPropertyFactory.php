@@ -26,7 +26,7 @@ class ProductPropertyFactory extends Factory
     {
         return [
             'product_id' => Product::factory()->create(),
-            'property_type_id' => ProductPropertyType::factory()->create(),
+            'product_property_type_id' => ProductPropertyType::factory()->create(),
             'value' => $this->faker->word,
         ];
     }

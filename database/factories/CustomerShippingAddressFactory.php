@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Customer;
 use App\Models\UserShippingAddress;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class UserShippingAddressFactory extends Factory
+class CustomerShippingAddressFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
@@ -24,11 +24,11 @@ class UserShippingAddressFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory()->create(),
+            'customer_id' => Customer::factory()->create(),
             'address' => $this->faker->word,
             'city' => $this->faker->city,
             'state' => $this->faker->word,
-            'zip_code' => $this->faker->randomNumber(),
+            'zip_code' => $this->faker->randomNumber(5),
             'country' => $this->faker->country,
         ];
     }

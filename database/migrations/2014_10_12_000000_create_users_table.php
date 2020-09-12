@@ -20,10 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->string('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
+            $table->unsignedBigInteger('userable_id');
+            $table->string('userable_type');
             $table->softDeletes();
             $table->timestamps();
         });

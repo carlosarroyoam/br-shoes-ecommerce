@@ -42,7 +42,7 @@ class ProductPropertyService
         try {
             $productProperty = new ProductProperty;
             $productProperty->product_id = $validated['product_id'];
-            $productProperty->property_type_id = $validated['property_type_id'];
+            $productProperty->product_property_type_id = $validated['product_property_type_id'];
             $productProperty->value = $validated['value'];
             $productProperty->save();
         } catch (Exception $e) {

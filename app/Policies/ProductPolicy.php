@@ -19,7 +19,7 @@ class ProductPolicy
      */
     public function before(?User $user, $ability)
     {
-        if (optional($user)->is_admin) {
+        if (optional($user)->userable_type  == 'App\Models\Admin') {
             return true;
         }
     }
