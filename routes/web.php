@@ -33,14 +33,11 @@ Route::view('sizes-guide', 'pages.home')->name('sizes-guide');
 Route::view('how-to-buy', 'pages.home')->name('how-to-buy');
 Route::view('faq', 'pages.home')->name('faq');
 
-Route::get('profile', [UserProfileController::class, 'show'])->name('users.profile');
-Route::get('account-settings', [UserAccountController::class, 'show'])->name('users.account-settings');
 Route::get('products/newest', [ProductController::class, 'newest'])->name('products.newest');
 Route::get('products/offers', [ProductController::class, 'offers'])->name('products.offers');
 
 Route::resource('users', UserController::class)->except('create', 'store');
-Route::resource('shopping-bag', ShoppingBagController::class)->except('index', 'create', 'edit');
-Route::resource('wish-list', WishListController::class)->except('index', 'create', 'edit');
+
 Route::resources([
     'user-contact-details' => UserContactDetailController::class,
     'user-shipping-addresses' => UserShippingAddressController::class,
@@ -54,6 +51,13 @@ Route::resources([
     'shipments' => ShipmentController::class,
 ]);
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('profile', [UserProfileController::class, 'show'])->name('users.profile');
+    Route::get('account-settings', [UserAccountController::class, 'show'])->name('users.account-settings');
+    Route::resource('shopping-bag', ShoppingBagController::class)->except('index', 'create', 'edit');
+    Route::resource('wish-list', WishListController::class)->except('index', 'create', 'edit');
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('admin.dashboard');
