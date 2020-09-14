@@ -7,7 +7,7 @@
     <h1 class="text-2xl text-gray-900 uppercase">{{ __('Register') }}</h1>
     <p class="text-base text-body-secondary">Registrate y comienza a comprar tus zapatos favoritos...</p>
 
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('admin.register') }}">
         @csrf
 
         <x-forms.fieldset class="mt-6">

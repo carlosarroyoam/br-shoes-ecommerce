@@ -146,7 +146,7 @@
                         </div>
 
                         <div class="ml-3">
-                            <div class="text-base font-medium text-gray-800">{{ Auth::user()->getFullNameAttribute() }}
+                            <div class="text-base font-medium text-gray-800">{{ Auth::user()->full_name }}
                             </div>
                             <div class="text-sm font-medium text-gray-500">{{ Auth::user()->email }}</div>
                         </div>

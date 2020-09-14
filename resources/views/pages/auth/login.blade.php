@@ -7,7 +7,7 @@
     <h1 class="text-2xl uppercase text-header">{{ __('Login') }}</h1>
     <p class="text-base text-body-secondary">Inicia sesion y comienza a comprar tus zapatos favoritos...</p>
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('admin.login') }}">
         @csrf
 
 

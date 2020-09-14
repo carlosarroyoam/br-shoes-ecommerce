@@ -15,9 +15,9 @@ class RedirectIfNotAdmin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $guard = 'web-admin')
     {
-        if (! Auth::user()->is_admin) {
+        if (! Auth::guard($guard)->check()) {
             abort(403, 'The user doesn\'t have permition to perform this action.');
         }
 
