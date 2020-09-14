@@ -17,5 +17,5 @@ use App\Http\Controllers\Users\UserController;
 Route::resource('users', UserController::class)->except('create', 'store');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return view('pages.admin.index');
 })->name('admin.dashboard');
