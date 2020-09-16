@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
+use App\Models\Admin;
+use App\Models\Customer;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
@@ -23,12 +25,10 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 if (Auth::user()->userable_type === Admin::class) {
-                    return redirect()->route(RouteServiceProvider::HOME_ROUTE_NAME);
-                }
-
-                if (Auth::user()->userable_type === Customer::class) {
                     return redirect()->route(RouteServiceProvider::DASHBOARD_ROUTE_NAME);
                 }
+
+                return redirect()->route(RouteServiceProvider::HOME_ROUTE_NAME);
             }
         }
 
