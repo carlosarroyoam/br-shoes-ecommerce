@@ -1,5 +1,3 @@
-@extends('base.app')
-
-@section('content')
-userContactDetail.edit template
-@endsection
+<x-app-layout>
+    userContactDetail.edit template
+</x-app-layout>

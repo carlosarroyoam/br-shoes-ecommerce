@@ -1,5 +1,3 @@
-@extends('base.app')
-
-@section('content')
-userShippingAddress.index template
-@endsection
+<x-app-layout>
+    userShippingAddress.index template
+</x-app-layout>

@@ -1,5 +1,3 @@
-@extends('base.app')
-
-@section('content')
-userProfilePicture.create template
-@endsection
+<x-app-layout>
+    userProfilePicture.create template
+</x-app-layout>

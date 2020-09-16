@@ -1,5 +1,3 @@
-@extends('base.app')
-
-@section('content')
-orderDetail.edit template
-@endsection
+<x-app-layout>
+    orderDetail.edit template
+</x-app-layout>

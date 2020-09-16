@@ -1,5 +1,3 @@
-@extends('base.app')
-
-@section('content')
-productProperty.index template
-@endsection
+<x-app-layout>
+    productProperty.index template
+</x-app-layout>

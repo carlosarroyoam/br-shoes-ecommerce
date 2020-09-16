@@ -1,5 +1,3 @@
-@extends('base.app')
-
-@section('content')
-productPropertyType.create template
-@endsection
+<x-app-layout>
+    productPropertyType.create template
+</x-app-layout>

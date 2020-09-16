@@ -4,11 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', config('app.name'))</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="BR SHOES, Ama tu estilo">
-    <meta name="keywords" content="Zapatos, Zapateria, BR Shoes, Guanajuato, Calzado, Zapatos de Leon, Hecho en Mexico">
-    <meta name="robots" content="all">
+    <meta name="robots" content="noindex, nofollow, noarchive">
 
     <!-- Favicon/App icons -->
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon" />
@@ -20,15 +18,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" />
 </head>
 
-<body class="flex flex-col min-h-screen antialiased pt-26 theme-light bg-background-secondary text-header">
+<body class="font-sans antialiased">
 
-    <x-layouts.header />
-
-    <x-layouts.main>
-        @yield('content')
-    </x-layouts.main>
-
-    <x-layouts.footer />
+    <!-- Page Content -->
+    <main class="container flex-grow">
+        {{ $slot }}
+    </main>
 
     <livewire:scripts />
     <!-- Scripts -->

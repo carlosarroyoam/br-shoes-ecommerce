@@ -1,5 +1,3 @@
-@extends('base.app')
-
-@section('content')
-productPicture.show template
-@endsection
+<x-app-layout>
+    productPicture.show template
+</x-app-layout>

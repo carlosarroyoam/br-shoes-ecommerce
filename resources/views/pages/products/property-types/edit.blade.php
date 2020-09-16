@@ -1,5 +1,3 @@
-@extends('base.app')
-
-@section('content')
-productPropertyType.edit template
-@endsection
+<x-app-layout>
+    productPropertyType.edit template
+</x-app-layout>
