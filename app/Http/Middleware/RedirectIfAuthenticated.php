@@ -22,10 +22,11 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if(Auth::user()->userable_type === Admin::class){
+                if (Auth::user()->userable_type === Admin::class) {
                     return redirect()->route(RouteServiceProvider::HOME_ROUTE_NAME);
+                }
 
-                if(Auth::user()->userable_type === Customer::class){
+                if (Auth::user()->userable_type === Customer::class) {
                     return redirect()->route(RouteServiceProvider::DASHBOARD_ROUTE_NAME);
                 }
             }
