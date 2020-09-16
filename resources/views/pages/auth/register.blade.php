@@ -10,16 +10,15 @@
                 <x-slot name="legend">{{ __('Personal Information') }}</x-slot>
 
                 <x-forms.text-field class="mt-4" name="first_name"
-                    placeholder="{{ __('input-placeholders.given-name') }}" autocomplete="given-name" autofocus required
-                    withRequiredIndicator>
+                    placeholder="{{ __('input-placeholders.given-name') }}" autocomplete="given-name" autofocus
+                    required>
                     <x-slot name="label">
                         {{ __('First Name') }}
                     </x-slot>
                 </x-forms.text-field>
 
                 <x-forms.text-field class="mt-3" name="last_name"
-                    placeholder="{{ __('input-placeholders.family-name') }}" autocomplete="family-name" required
-                    withRequiredIndicator>
+                    placeholder="{{ __('input-placeholders.family-name') }}" autocomplete="family-name" required>
                     <x-slot name="label">
                         {{ __('Last Name') }}
                     </x-slot>
@@ -31,7 +30,7 @@
                 <x-slot name="legend">{{ __('Account Information') }}</x-slot>
 
                 <x-forms.text-field class="mt-4" name="email" placeholder="{{ __('input-placeholders.email') }}"
-                    autocomplete="email" required withRequiredIndicator>
+                    autocomplete="email">
                     <x-slot name="label">
                         {{ __('E-Mail Address') }}
                     </x-slot>
@@ -39,7 +38,7 @@
 
                 <x-forms.text-field class="mt-3" name="password"
                     placeholder="{{ __('input-placeholders.new-password') }}" type="password"
-                    autocomplete="new-password" required withRequiredIndicator>
+                    autocomplete="new-password">
                     <x-slot name="label">
                         {{ __('Password') }}
                     </x-slot>
@@ -47,7 +46,7 @@
 
                 <x-forms.text-field class="mt-3" name="password_confirmation"
                     placeholder="{{ __('input-placeholders.confirm-password') }}" type="password"
-                    autocomplete="new-password" required withRequiredIndicator>
+                    autocomplete="new-password">
                     <x-slot name="label">
                         {{ __('Confirm Password') }}
                     </x-slot>
@@ -60,11 +59,13 @@
                 </x-slot>
             </x-forms.check-box>
 
-            <x-forms.button class="mt-5" type="submit">
-                <x-slot name="title">
-                    {{ __('Register') }}
-                </x-slot>
-            </x-forms.button>
+            <div class="flex flex-col mt-5">
+                <x-forms.button type="submit">
+                    <x-slot name="title">
+                        {{ __('Register') }}
+                    </x-slot>
+                </x-forms.button>
+            </div>
         </form>
     </article>
 </x-app-layout>

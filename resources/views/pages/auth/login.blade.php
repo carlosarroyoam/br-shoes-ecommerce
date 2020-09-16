@@ -33,11 +33,13 @@
                 </x-slot>
             </x-forms.check-box>
 
-            <x-forms.button class="mt-5" type="submit">
-                <x-slot name="title">
-                    {{ __('Login') }}
-                </x-slot>
-            </x-forms.button>
+            <div class="flex flex-col mt-5">
+                <x-forms.button type="submit">
+                    <x-slot name="title">
+                        {{ __('Login') }}
+                    </x-slot>
+                </x-forms.button>
+            </div>
 
             @if (Route::has('password.request'))
             <div class="flex flex-col">

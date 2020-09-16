@@ -6,7 +6,6 @@
 'autocomplete' => 'off',
 'autofocus' => false,
 'required' => false,
-'withRequiredIndicator' => false,
 ])
 
 <div {{ $attributes }}>
@@ -15,8 +14,8 @@
         <label for="{{ $name }}" class="mb-2 ml-1 text-sm capitalize text-body-secondary">{{ $label }}</label>
         @endif
 
-        @if($required && $withRequiredIndicator)
-        <span class="mb-2 mr-2 text-red-600 capitalize">*</span>
+        @if(! $required)
+        <span class="mb-2 mr-2 text-xs capitalize text-body-secondary">{{ __('Optional') }}</span>
         @endif
     </div>
 
