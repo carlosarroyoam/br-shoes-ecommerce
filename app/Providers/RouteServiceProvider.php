@@ -24,7 +24,14 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME_ROUTE_NAME = 'admin.dashboard';
+    public const HOME_ROUTE_NAME = 'home';
+
+    /**
+     * The route name to the "dashboard" route for your application.
+     *
+     * @var string
+     */
+    public const DASHBOARD_ROUTE_NAME = 'admin.dashboard';
 
     /**
      * If specified, this namespace is automatically applied to your controller routes.
