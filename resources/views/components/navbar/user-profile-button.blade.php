@@ -1,17 +1,18 @@
 <div class="relative" x-data="{ open: false }">
     {{-- User profile button --}}
     <button
-        {{ $attributes->merge(['class' => 'block flex items-center w-8 h-8 overflow-hidden border-2 border-gray-500 rounded-full focus:outline-none focus:border-gray-600 hover:border-gray-600 selected:border-gray-600']) }}
+        {{ $attributes->merge(['class' => 'block flex items-center w-10 h-10 overflow-hidden border-2 border-gray-500 rounded-full focus:outline-none focus:border-gray-600 hover:border-gray-600 selected:border-gray-600']) }}
         type="button" aria-label="toggle profile dropdown" x-on:click="open = true">
-        <img src="https://avatars0.githubusercontent.com/u/43684710?s=460&u=cf39559f8f973dcc3f83966d91bcdcf17624d1c1&v=4"
-            class="object-cover w-full h-full" alt="{{ __('User profile picture') }}">
+        <img src="{{ Auth::user()->profile_photo_url }}"
+            alt="{{  __('profile photo.', ['username' => Auth::user()->full_name]) }}"
+            class="object-cover w-full h-full">
     </button>
 
     {{-- User profile dropdown --}}
     <div class="absolute right-0 w-64 mt-2 overflow-hidden border border-gray-300 rounded-md shadow-md bg-background"
         x-show="open" x-on:click.away="open = false">
         <a href="{{ route('users.profile') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
-            {{ Auth::user()->fullName }}
+            {{ Auth::user()->full_name }}
         </a>
         {{-- <a href="{{ route('shopping-bag.show', Auth::user()->shoppingBag()->get()) }}"
         class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">

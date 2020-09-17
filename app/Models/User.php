@@ -92,6 +92,17 @@ class User extends Authenticatable
     }
 
     /**
+    * Get the user's full name. Used in order to bring back default profile photo when
+    * no profile photo has been uploaded.
+    *
+    * @return string
+    */
+    public function getNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    /**
      * Get the owning typeable model.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
