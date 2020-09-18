@@ -65,8 +65,21 @@
                         </x-slot>
                     </x-navbar.nav-item>
                 </ul>
+                @endguest
+
                 {{-- Authentication Links --}}
-                @else
+                @admin
+                <div class="flex items-center mt-4 md:mt-0">
+
+                    <x-navbar.nav-item route="admin.dashboard" class="-mr-4">
+                        <x-slot name="title">
+                            {{ __('Dashboard') }}
+                        </x-slot>
+                    </x-navbar.nav-item>
+                </div>
+                @endadmin
+
+                @customer
                 <div class="flex items-center mt-4 md:mt-0">
                     <livewire:navbar.notifications-button />
 
@@ -74,7 +87,7 @@
 
                     <x-navbar.user-profile-button />
                 </div>
-                @endauth
+                @endcustomer
             </div>
         </nav>
     </div>
