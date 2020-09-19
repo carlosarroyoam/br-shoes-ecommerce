@@ -53,16 +53,20 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::middleware('web')
-                ->group(base_path('routes/admin/web.php'));
+            ->domain('http://admin.' . env('APP_URL'))
+            ->group(base_path('routes/admin/web.php'));
 
             Route::middleware('web')
-                ->group(base_path('routes/customer/web.php'));
+            ->domain('http://' . env('APP_URL'))
+            ->group(base_path('routes/customer/web.php'));
 
             Route::middleware('web')
+                ->domain('http://' . env('APP_URL'))
                 ->group(base_path('routes/web.php'));
 
-            Route::prefix('api')
+            Route::prefix('api/v1/')
                 ->middleware('api')
+                ->domain('http://api.' . env('APP_URL'))
                 ->group(base_path('routes/api.php'));
         });
     }
