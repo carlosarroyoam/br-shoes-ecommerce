@@ -14,4 +14,10 @@ use App\Http\Controllers\Users\UserController;
 |
 */
 
-Route::resource('users', UserController::class)->except('create', 'store');
+Route::get('', function () {
+    return redirect()->route('admin.dashboard');
+});
+
+Route::middleware(['auth:sanctum', 'verified', 'auth.admin'])->get('/dashboard', function () {
+    return view('pages.admin.index');
+})->name('admin.dashboard');

@@ -177,6 +177,12 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
 
+        /*
+         * Application Service Providers...
+         */
+        Modules\Dashboard\Providers\DashboardServiceProvider::class,
+        Modules\Dashboard\Providers\RouteServiceProvider::class,
+
     ],
 
     /*
