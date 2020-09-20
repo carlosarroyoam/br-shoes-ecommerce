@@ -15,7 +15,7 @@ class DashboardServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Blade::component('dashboard-layout', \Modules\Dashboard\View\Components\DashboardLayout::class);
     }
 
     /**
@@ -25,6 +25,6 @@ class DashboardServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->loadViewsFrom(base_path('modules/dashboard/Resources/Views'), 'dashboard');
     }
 }

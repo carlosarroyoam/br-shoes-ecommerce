@@ -1,4 +1,4 @@
-<x-admin-layout>
+<x-dashboard-layout>
     <h1 class="text-2xl uppercase text-header">{{ __('Dashboard') }}</h1>
     <p class="text-base text-header-secondary">
         {{ __('messages.welcome_back', [ 'name' => Auth::user()->fullName]) }}
@@ -11,4 +11,4 @@
     <form class="d-none" id="logout-form" action="{{ route('logout') }}" method="POST">
         @csrf
     </form>
-</x-admin-layout>
+</x-dashboard-layout>

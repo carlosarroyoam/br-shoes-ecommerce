@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components;
+namespace Modules\Dashboard\View\Components;
 
 use Illuminate\View\Component;
 
-class AdminLayout extends Component
+class DashboardLayout extends Component
 {
     /**
      * Get the view / contents that represents the component.
@@ -13,6 +13,6 @@ class AdminLayout extends Component
      */
     public function render()
     {
-        return view('layouts.admin');
+        return view('dashboard::layouts.dashboard');
     }
 }
