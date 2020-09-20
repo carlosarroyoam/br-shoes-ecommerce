@@ -52,7 +52,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
-            Route::middleware('web')
+            Route::middleware('web', 'auth:sanctum')
             ->domain('http://' . env('APP_URL'))
             ->group(base_path('routes/customer/web.php'));
 

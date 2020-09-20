@@ -4,11 +4,12 @@ namespace App\Providers;
 
 use App\Models\Admin;
 use App\Models\Customer;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 
-class AppServiceProvider extends ServiceProvider
+class AppServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Register any application services.
@@ -52,5 +53,21 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('customer', function () {
             return Auth::check() && Auth::user()->userable_type === Customer::class;
         });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [
+            ProductService::class,
+            ProductVariantService::class,
+            ProductPropertyTypeService::class,
+            ProductPropertyService::class,
+            ProductService::class,
+        ];
     }
 }

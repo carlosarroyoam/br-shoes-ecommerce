@@ -22,7 +22,6 @@ use App\Http\Controllers\WishList\WishListController;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function () {
     Route::get('profile', [UserProfileController::class, 'show'])->name('users.profile');
     Route::get('account-settings', [UserAccountController::class, 'show'])->name('users.account-settings');
     Route::resource('shopping-bag', ShoppingBagController::class)->except('index', 'create', 'edit');
@@ -36,4 +35,3 @@ Route::middleware('auth:sanctum')->group(function () {
         'order-details' => OrderDetailController::class,
         'shipments' => ShipmentController::class,
     ]);
-});
