@@ -2,11 +2,10 @@
 
 namespace Modules\Admin\Providers;
 
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
-class AdminServiceProvider extends ServiceProvider implements DeferrableProvider
+class AdminServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -26,17 +25,5 @@ class AdminServiceProvider extends ServiceProvider implements DeferrableProvider
     public function boot()
     {
         $this->loadViewsFrom(base_path('modules/admin/Resources/Views'), 'admin');
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [
-            // DashboardLayout::class
-        ];
     }
 }

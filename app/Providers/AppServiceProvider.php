@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Models\Admin;
 use App\Models\Customer;
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
