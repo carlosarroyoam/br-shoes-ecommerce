@@ -8,7 +8,7 @@
         @foreach ($products as $product)
         <a href="{{ route('home') }}"
             class="relative flex flex-col w-full overflow-hidden rounded-sm shadow md-w-1/2 bg-background">
-            <img class="w-full bg-cover" src="{{ asset('/img/product.jpg') }}" alt="">
+            <img class="w-full bg-cover" src="https://via.placeholder.com/720" alt="">
             <div class="p-4 ">
                 <p class="text-xs uppercase text-header-secondary">BR SHOES</p>
                 <h3 class="text-header">Sneaker Snake</h3>
