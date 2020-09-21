@@ -17,25 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('App\Services\ProductService', function ($app) {
-            return new \App\Services\ProductService();
-        });
-
-        $this->app->singleton('App\Services\ProductVariantService', function ($app) {
-            return new \App\Services\ProductVariantService();
-        });
-
-        $this->app->singleton('App\Services\ProductPropertyTypeService', function ($app) {
-            return new \App\Services\ProductPropertyTypeService();
-        });
-
-        $this->app->singleton('App\Services\ProductPropertyService', function ($app) {
-            return new \App\Services\ProductPropertyService();
-        });
-
-        $this->app->singleton('App\Services\ProductService', function ($app) {
-            return new \App\Services\ProductService();
-        });
+        //
     }
 
     /**
@@ -52,21 +34,5 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('customer', function () {
             return Auth::check() && Auth::user()->userable_type === Customer::class;
         });
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function providesasd()
-    {
-        return [
-            ProductService::class,
-            ProductVariantService::class,
-            ProductPropertyTypeService::class,
-            ProductPropertyService::class,
-            ProductService::class,
-        ];
     }
 }
