@@ -1,13 +1,12 @@
 <?php
 
-namespace Modules\Dashboard\Providers;
+namespace Modules\Admin\Providers;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 
-class DashboardServiceProvider extends ServiceProvider implements DeferrableProvider
+class AdminServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Register any application services.
@@ -16,7 +15,7 @@ class DashboardServiceProvider extends ServiceProvider implements DeferrableProv
      */
     public function register()
     {
-        Blade::component('dashboard-layout', \Modules\Dashboard\View\Components\DashboardLayout::class);
+        Blade::component('dashboard-layout', \Modules\Admin\View\Components\DashboardLayout::class);
     }
 
     /**
@@ -26,7 +25,7 @@ class DashboardServiceProvider extends ServiceProvider implements DeferrableProv
      */
     public function boot()
     {
-        $this->loadViewsFrom(base_path('modules/dashboard/Resources/Views'), 'dashboard');
+        $this->loadViewsFrom(base_path('modules/admin/Resources/Views'), 'admin');
     }
 
     /**

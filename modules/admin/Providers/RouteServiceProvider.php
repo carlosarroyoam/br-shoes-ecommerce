@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Dashboard\Providers;
+namespace Modules\Admin\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -20,7 +20,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::middleware('web')
             ->domain('http://admin.' . env('APP_URL'))
-            ->group(base_path('modules/dashboard/routes/web.php'));
+            ->group(base_path('modules/admin/routes/web.php'));
         });
     }
 }

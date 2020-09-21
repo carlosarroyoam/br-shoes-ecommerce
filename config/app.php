@@ -180,8 +180,8 @@ return [
         /*
          * Application Service Providers...
          */
-        Modules\Dashboard\Providers\DashboardServiceProvider::class,
-        Modules\Dashboard\Providers\RouteServiceProvider::class,
+        Modules\Admin\Providers\AdminServiceProvider::class,
+        Modules\Admin\Providers\RouteServiceProvider::class,
 
     ],
 

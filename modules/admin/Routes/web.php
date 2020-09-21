@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Users\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +18,5 @@ Route::get('', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified', 'auth.admin'])->get('/dashboard', function () {
-    return view('dashboard::pages.dashboard.index');
+    return view('admin::pages.dashboard.index');
 })->name('admin.dashboard');
