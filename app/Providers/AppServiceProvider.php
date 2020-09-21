@@ -9,7 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 
-class AppServiceProvider extends ServiceProvider implements DeferrableProvider
+class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -60,7 +60,7 @@ class AppServiceProvider extends ServiceProvider implements DeferrableProvider
      *
      * @return array
      */
-    public function provides()
+    public function providesasd()
     {
         return [
             ProductService::class,

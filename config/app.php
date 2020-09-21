@@ -178,11 +178,10 @@ return [
         App\Providers\JetstreamServiceProvider::class,
 
         /*
-         * Application Service Providers...
+         * Application Modules Service Providers...
          */
         Modules\Admin\Providers\AdminServiceProvider::class,
         Modules\Admin\Providers\RouteServiceProvider::class,
-
     ],
 
     /*

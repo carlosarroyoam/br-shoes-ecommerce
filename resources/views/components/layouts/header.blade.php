@@ -70,7 +70,6 @@
                 {{-- Authentication Links --}}
                 @admin
                 <div class="flex items-center mt-4 md:mt-0">
-
                     <x-navbar.nav-item route="admin.dashboard" class="-mr-4">
                         <x-slot name="title">
                             {{ __('Dashboard') }}

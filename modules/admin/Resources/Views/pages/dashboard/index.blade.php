@@ -1,7 +1,7 @@
 <x-dashboard-layout>
     <h1 class="text-2xl uppercase text-header">{{ __('Dashboard') }}</h1>
     <p class="text-base text-header-secondary">
-        {{ __('messages.welcome_back', [ 'name' => Auth::user()->fullName]) }}
+        {{ __('messages.welcome_back', [ 'name' => Auth::user()->full_name]) }}
     </p>
 
     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
