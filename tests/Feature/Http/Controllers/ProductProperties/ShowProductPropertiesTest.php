@@ -36,9 +36,9 @@ class ShowProductPropertiesTest extends TestCase
      */
     public function test_show_doesnt_display_view_if_resource_doesnt_exist()
     {
-        $nonExistingSlug = Str::slug($this->faker->name);
+        $nonExistingName = $this->faker->name;
 
-        $response = $this->get(route('categories.show', $nonExistingSlug));
+        $response = $this->get(route('product-properties.show', $nonExistingName));
 
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }

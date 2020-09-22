@@ -41,9 +41,7 @@ class ProductPropertyService
 
         try {
             $productProperty = new ProductProperty;
-            $productProperty->product_id = $validated['product_id'];
-            $productProperty->product_property_type_id = $validated['product_property_type_id'];
-            $productProperty->value = $validated['value'];
+            $productProperty->name = $validated['name'];
             $productProperty->save();
         } catch (Exception $e) {
             DB::rollBack();
@@ -69,7 +67,7 @@ class ProductPropertyService
         DB::beginTransaction();
 
         try {
-            $productProperty->value = $validated['value'];
+            $productProperty->name = $validated['name'];
             $productProperty->save();
         } catch (Exception $e) {
             DB::rollBack();

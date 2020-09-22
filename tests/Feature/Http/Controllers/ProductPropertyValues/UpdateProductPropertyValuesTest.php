@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Admin;
 use App\Models\Customer;
-use App\Models\ProductPropertyType;
+use App\Models\ProductPropertyValue;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -12,7 +12,7 @@ use JMac\Testing\Traits\AdditionalAssertions;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class UpdateProductPropertyTypesTest extends TestCase
+class UpdateProductPropertyValuesTest extends TestCase
 {
     use RefreshDatabase, AdditionalAssertions, WithFaker;
 
@@ -25,13 +25,13 @@ class UpdateProductPropertyTypesTest extends TestCase
     {
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
-        $productPropertyType = ProductPropertyType::factory()->create();
+        $productPropertyValue = ProductPropertyValue::factory()->create();
 
-        $response = $this->get(route('product-property-types.edit', $productPropertyType));
+        $response = $this->get(route('product-property-values.edit', $productPropertyValue));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('pages.products.property-types.edit');
-        $response->assertViewHas('productPropertyType', $productPropertyType);
+        $response->assertViewIs('pages.products.property-values.edit');
+        $response->assertViewHas('productPropertyValue', $productPropertyValue);
     }
 
 
@@ -43,9 +43,9 @@ class UpdateProductPropertyTypesTest extends TestCase
     public function test_update_uses_form_request_validation()
     {
         $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\Products\ProductPropertyTypeController::class,
+            \App\Http\Controllers\Products\ProductPropertyValueController::class,
             'update',
-            \App\Http\Requests\Products\PropertyTypes\ProductPropertyTypeUpdateRequest::class
+            \App\Http\Requests\Products\PropertyValues\ProductPropertyValueUpdateRequest::class
         );
     }
 
@@ -59,20 +59,21 @@ class UpdateProductPropertyTypesTest extends TestCase
     {
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
-        $productPropertyType = ProductPropertyType::factory()->create();
+        $productPropertyValue = ProductPropertyValue::factory()->create();
         $expected = [
-            'name' => $this->faker->name,
+            'value' => $this->faker->name,
         ];
 
-        $response = $this->put(route('product-property-types.update', $productPropertyType), [
-            'name' => $expected['name']
+        $response = $this->put(route('product-property-values.update', $productPropertyValue), [
+            'value' => $expected['value']
         ]);
-        $productPropertyType->fresh();
+        $productPropertyValue->fresh();
 
-        $response->assertRedirect(route('product-property-types.index'));
-        $response->assertSessionHas('productPropertyType.id', $productPropertyType->id);
-        $this->assertDatabaseHas('product_property_types', [
-            'name' => $expected['name'],
+
+        $response->assertRedirect(route('product-property-values.index'));
+        $response->assertSessionHas('productPropertyValue.id', $productPropertyValue->id);
+        $this->assertDatabaseHas('product_property_values', [
+            'value' => $expected['value'],
         ]);
     }
 
@@ -85,9 +86,9 @@ class UpdateProductPropertyTypesTest extends TestCase
     {
         $customerUser = Customer::factory()->create();
         $this->actingAs($customerUser->user);
-        $productPropertyType = ProductPropertyType::factory()->create();
+        $productProperty = ProductPropertyValue::factory()->create();
 
-        $response = $this->put(route('product-property-types.update', $productPropertyType), []);
+        $response = $this->put(route('product-property-values.update', $productProperty), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -99,9 +100,9 @@ class UpdateProductPropertyTypesTest extends TestCase
      */
     public function test_update_doesnt_updates_for_non_authenticated_users()
     {
-        $productPropertyType = ProductPropertyType::factory()->create();
+        $productProperty = ProductPropertyValue::factory()->create();
 
-        $response = $this->put(route('product-property-types.update', $productPropertyType), []);
+        $response = $this->put(route('product-property-values.update', $productProperty), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

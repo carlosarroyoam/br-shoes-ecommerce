@@ -15,9 +15,11 @@ class CreateVariantOptionValuesTable extends Migration
     {
         Schema::create('variant_option_values', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('variant_option_type_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_variant_id')->constrained()->onDelete('cascade');
+            $table->foreignId('variant_option_id')->constrained()->onDelete('cascade');
             $table->string('value');
             $table->timestamps();
+            $table->unique(['product_variant_id', 'variant_option_id', 'value'], 'variant_option_values_variant_option_value_unique');
         });
     }
 

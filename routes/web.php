@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Categories\CategoryController;
 use App\Http\Controllers\Products\ProductController;
 use App\Http\Controllers\Products\ProductPropertyController;
-use App\Http\Controllers\Products\ProductPropertyTypeController;
+use App\Http\Controllers\Products\ProductPropertyValueController;
 use App\Http\Controllers\Products\ProductVariantController;
 use App\Http\Controllers\Users\UserController;
 
@@ -32,7 +32,7 @@ Route::resources([
     'products' => ProductController::class,
     'product-variants' =>  ProductVariantController::class,
     'product-properties' =>  ProductPropertyController::class,
-    'product-property-types' =>  ProductPropertyTypeController::class,
+    'product-property-values' =>  ProductPropertyValueController::class,
     'categories' => CategoryController::class,
 ]);
 Route::resource('users', UserController::class)->except('create', 'store');

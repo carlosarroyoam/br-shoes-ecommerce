@@ -31,8 +31,6 @@ class ProductPropertyController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
@@ -44,8 +42,6 @@ class ProductPropertyController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
@@ -55,8 +51,6 @@ class ProductPropertyController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
      * @param \App\Http\Requests\Products\ProductPropertyStoreRequest $request
      * @return \Illuminate\Http\Response
      */
@@ -70,8 +64,6 @@ class ProductPropertyController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param \Illuminate\Http\Request $request
      * @param \App\ProductProperty $productProperty
      * @return \Illuminate\Http\Response
@@ -82,8 +74,6 @@ class ProductPropertyController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
      * @param \Illuminate\Http\Request $request
      * @param \App\ProductProperty $productProperty
      * @return \Illuminate\Http\Response
@@ -94,8 +84,6 @@ class ProductPropertyController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
      * @param \App\Http\Requests\Products\ProductPropertyUpdateRequest $request
      * @param \App\ProductProperty $productProperty
      * @return \Illuminate\Http\Response
@@ -110,8 +98,6 @@ class ProductPropertyController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
      * @param \Illuminate\Http\Request $request
      * @param \App\ProductProperty $productProperty
      * @return \Illuminate\Http\Response

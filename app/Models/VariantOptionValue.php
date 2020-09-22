@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $option_type_id
- * @property string $value
+ * @property int $variant_option_id
+ * @property int $product_variant_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
@@ -22,8 +22,8 @@ class VariantOptionValue extends Model
      * @var array
      */
     protected $fillable = [
-        'option_type_id',
-        'value',
+        'variant_option_id',
+        'product_variant_id',
     ];
 
     /**
@@ -33,15 +33,24 @@ class VariantOptionValue extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'option_type_id' => 'integer',
+        'variant_option_id' => 'integer',
+        'product_variant_id' => 'integer',
     ];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function optionType()
+    public function variantOptionValue()
     {
-        return $this->belongsTo(\App\Models\VariantOptionType::class);
+        return $this->belongsTo(\App\Models\VariantOptionValue::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function productVariant()
+    {
+        return $this->belongsTo(\App\Models\ProductVariant::class);
     }
 }

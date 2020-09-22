@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $product_id
- * @property string $name
+ * @property int $product_property_id
+ * @property string $value
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class VariantOptionType extends Model
+class ProductPropertyValue extends Model
 {
     use HasFactory;
 
@@ -23,7 +24,8 @@ class VariantOptionType extends Model
      */
     protected $fillable = [
         'product_id',
-        'name',
+        'product_property_id',
+        'value',
     ];
 
     /**
@@ -34,6 +36,7 @@ class VariantOptionType extends Model
     protected $casts = [
         'id' => 'integer',
         'product_id' => 'integer',
+        'product_property_id' => 'integer',
     ];
 
 
@@ -43,5 +46,13 @@ class VariantOptionType extends Model
     public function product()
     {
         return $this->belongsTo(\App\Models\Product::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function propertyType()
+    {
+        return $this->belongsTo(\App\Models\ProductPropertyType::class);
     }
 }

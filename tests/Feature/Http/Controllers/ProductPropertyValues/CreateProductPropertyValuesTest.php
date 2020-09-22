@@ -4,14 +4,16 @@ namespace Tests\Feature;
 
 use App\Models\Admin;
 use App\Models\Customer;
+use App\Models\Product;
 use App\Models\ProductProperty;
+use App\Models\ProductPropertyValue;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use JMac\Testing\Traits\AdditionalAssertions;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class CreateProductPropertiesTest extends TestCase
+class CreateProductPropertyValuesTest extends TestCase
 {
     use RefreshDatabase, AdditionalAssertions, WithFaker;
 
@@ -26,10 +28,10 @@ class CreateProductPropertiesTest extends TestCase
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
 
-        $response = $this->get(route('product-properties.create'));
+        $response = $this->get(route('product-property-values.create'));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('pages.products.properties.create');
+        $response->assertViewIs('pages.products.property-values.create');
     }
 
 
@@ -41,9 +43,9 @@ class CreateProductPropertiesTest extends TestCase
     public function test_store_uses_form_request_validation()
     {
         $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\Products\ProductPropertyController::class,
+            \App\Http\Controllers\Products\ProductPropertyValueController::class,
             'store',
-            \App\Http\Requests\Products\Properties\ProductPropertyStoreRequest::class
+            \App\Http\Requests\Products\PropertyValues\ProductPropertyValueStoreRequest::class
         );
     }
 
@@ -57,22 +59,30 @@ class CreateProductPropertiesTest extends TestCase
     {
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
+        $product = Product::factory()->create();
+        $productProperty = ProductProperty::factory()->create();
         $expected = [
-            'name' => $this->faker->name,
+            'product_id' => $product->id,
+            'product_property_id' => $productProperty->id,
+            'value' => $this->faker->name,
         ];
 
-        $response = $this->post(route('product-properties.store'), [
-            'name' => $expected['name']
+        $response = $this->post(route('product-property-values.store'), [
+            'product_id' => $expected['product_id'],
+            'product_property_id' => $expected['product_property_id'],
+            'value' => $expected['value']
         ]);
-        $productProperties = ProductProperty::query()
-            ->where('name', $expected['name'])
+        $productPropertiesValues = ProductPropertyValue::query()
+            ->where('value', $expected['value'])
             ->get();
-        $productProperty = $productProperties->first();
+        $productPropertyValue = $productPropertiesValues->first();
 
-        $response->assertRedirect(route('product-properties.index'));
-        $response->assertSessionHas('productProperty.id', $productProperty->id);
-        $this->assertDatabaseHas('product_properties', [
-            'name' => $expected['name'],
+        $response->assertRedirect(route('product-property-values.index'));
+        $response->assertSessionHas('productPropertyValue.id', $productPropertyValue->id);
+        $this->assertDatabaseHas('product_property_values', [
+            'product_id' => $expected['product_id'],
+            'product_property_id' => $expected['product_property_id'],
+            'value' => $expected['value'],
         ]);
     }
 
@@ -84,10 +94,10 @@ class CreateProductPropertiesTest extends TestCase
      */
     public function test_store_doesnt_saves_for_non_admin_users()
     {
-        $customerUser = Customer::factory()->create();
-        $this->actingAs($customerUser->user);
+        $customer = Customer::factory()->create();
+        $this->actingAs($customer->user);
 
-        $response = $this->post(route('product-properties.store'), []);
+        $response = $this->post(route('product-property-values.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -100,7 +110,7 @@ class CreateProductPropertiesTest extends TestCase
      */
     public function test_store_doesnt_saves_for_non_authenticated_users()
     {
-        $response = $this->post(route('product-properties.store'), []);
+        $response = $this->post(route('product-property-values.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

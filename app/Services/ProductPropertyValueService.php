@@ -2,11 +2,11 @@
 
 namespace App\Services;
 
-use App\Models\ProductPropertyType;
+use App\Models\ProductPropertyValue;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class ProductPropertyTypeService
+class ProductPropertyValueService
 {
     /**
      * Get a listing of the models.
@@ -15,34 +15,36 @@ class ProductPropertyTypeService
      */
     public function getAll()
     {
-        return ProductPropertyType::all();
+        return ProductPropertyValue::all();
     }
 
     /**
      * Get the specified model by its id.
      *
-     * @param $productPropertyTypeId
-     * @return \App\ProductPropertyType
+     * @param $productPropertyValueId
+     * @return \App\ProductPropertyValue
      */
-    public function getById($productPropertyTypeId)
+    public function getById($productPropertyValueId)
     {
-        return ProductPropertyType::where('id', $productPropertyTypeId)->firstOrFail();
+        return ProductPropertyValue::where('id', $productPropertyValueId)->firstOrFail();
     }
 
     /**
      * Create the specified model in storage.
      *
      * @param array $validated
-     * @return \App\ProductPropertyType
+     * @return \App\ProductPropertyValue
      */
     public function create(array $validated)
     {
         DB::beginTransaction();
 
         try {
-            $productPropertyType = new ProductPropertyType;
-            $productPropertyType->name = $validated['name'];
-            $productPropertyType->save();
+            $productPropertyValue = new ProductPropertyValue;
+            $productPropertyValue->product_id = $validated['product_id'];
+            $productPropertyValue->product_property_id = $validated['product_property_id'];
+            $productPropertyValue->value = $validated['value'];
+            $productPropertyValue->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -52,23 +54,23 @@ class ProductPropertyTypeService
 
         DB::commit();
 
-        return $productPropertyType;
+        return $productPropertyValue;
     }
 
     /**
       * Update the specified model in storage.
      *
      * @param array $validated
-     * @param \App\ProductPropertyType $productPropertyType
-     * @return \App\ProductPropertyType
+     * @param \App\ProductPropertyValue $productPropertyValue
+     * @return \App\ProductPropertyValue
      */
-    public function update(array $validated, ProductPropertyType $productPropertyType)
+    public function update(array $validated, ProductPropertyValue $productPropertyValue)
     {
         DB::beginTransaction();
 
         try {
-            $productPropertyType->name = $validated['name'];
-            $productPropertyType->save();
+            $productPropertyValue->value = $validated['value'];
+            $productPropertyValue->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -78,21 +80,21 @@ class ProductPropertyTypeService
 
         DB::commit();
 
-        return $productPropertyType;
+        return $productPropertyValue;
     }
 
     /**
      * Delete the specified model from storage.
      *
-     * @param \App\ProductPropertyType $productPropertyType
+     * @param \App\ProductPropertyValue $productPropertyValue
      * @return void
      */
-    public function delete(ProductPropertyType $productPropertyType)
+    public function delete(ProductPropertyValue $productPropertyValue)
     {
         DB::beginTransaction();
 
         try {
-            $productPropertyType->delete();
+            $productPropertyValue->delete();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());

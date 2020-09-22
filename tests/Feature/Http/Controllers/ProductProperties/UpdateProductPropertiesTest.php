@@ -61,19 +61,18 @@ class UpdateProductPropertiesTest extends TestCase
         $this->actingAs($admin->user);
         $productProperty = ProductProperty::factory()->create();
         $expected = [
-            'value' => $this->faker->name,
+            'name' => $this->faker->name,
         ];
 
         $response = $this->put(route('product-properties.update', $productProperty), [
-            'value' => $expected['value']
+            'name' => $expected['name']
         ]);
         $productProperty->fresh();
-
 
         $response->assertRedirect(route('product-properties.index'));
         $response->assertSessionHas('productProperty.id', $productProperty->id);
         $this->assertDatabaseHas('product_properties', [
-            'value' => $expected['value'],
+            'name' => $expected['name'],
         ]);
     }
 

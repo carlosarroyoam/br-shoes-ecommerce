@@ -2,18 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Models\ProductPropertyType;
+use App\Models\Product;
+use App\Models\ProductProperty;
+use App\Models\ProductPropertyValue;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class ProductPropertyTypeFactory extends Factory
+class ProductPropertyValueFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = ProductPropertyType::class;
+    protected $model = ProductPropertyValue::class;
 
     /**
         * Define the model's default state.
@@ -23,7 +25,9 @@ class ProductPropertyTypeFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'product_id' => Product::factory()->create(),
+            'product_property_id' => ProductProperty::factory()->create(),
+            'value' => $this->faker->name,
         ];
     }
 }

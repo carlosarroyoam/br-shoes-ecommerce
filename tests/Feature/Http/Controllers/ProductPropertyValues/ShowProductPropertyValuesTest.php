@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Models\ProductPropertyType;
+use App\Models\ProductPropertyValue;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class ShowProductPropertyTypesTest extends TestCase
+class ShowProductPropertyValuesTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -20,13 +20,13 @@ class ShowProductPropertyTypesTest extends TestCase
      */
     public function test_show_displays_view()
     {
-        $productPropertyType = ProductPropertyType::factory()->create();
+        $productPropertyValue = ProductPropertyValue::factory()->create();
 
-        $response = $this->get(route('product-property-types.show', $productPropertyType));
+        $response = $this->get(route('product-property-values.show', $productPropertyValue));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('pages.products.property-types.show');
-        $response->assertViewHas('productPropertyType', $productPropertyType);
+        $response->assertViewIs('pages.products.property-values.show');
+        $response->assertViewHas('productPropertyValue', $productPropertyValue);
     }
 
     /**
@@ -36,9 +36,9 @@ class ShowProductPropertyTypesTest extends TestCase
      */
     public function test_show_doesnt_display_view_if_resource_doesnt_exist()
     {
-        $nonExistingName = $this->faker->name;
+        $nonExistingSlug = Str::slug($this->faker->name);
 
-        $response = $this->get(route('product-property-types.show', $nonExistingName));
+        $response = $this->get(route('product-property-values.show', $nonExistingSlug));
 
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }

@@ -2,24 +2,25 @@
 
 namespace App\Policies;
 
+use App\Models\Admin;
 use App\Models\User;
-use App\Models\ProductPropertyType;
+use App\Models\ProductPropertyValue;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProductPropertyTypePolicy
+class ProductPropertyValuePolicy
 {
     use HandlesAuthorization;
 
     /**
      * Determine when the user can perform any action.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\User  $user
      * @param  $ability
      * @return bool
      */
     public function before(?User $user, $ability)
     {
-        if (optional($user)->userable_type  == 'App\Models\Admin') {
+        if (optional($user)->userable_type  === Admin::class) {
             return true;
         }
     }
@@ -27,7 +28,7 @@ class ProductPropertyTypePolicy
     /**
      * Determine whether the user can view any model.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\User  $user
      * @return bool
      */
     public function viewAny(?User $user)
@@ -38,11 +39,11 @@ class ProductPropertyTypePolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\ProductPropertyType  $productPropertyType
+     * @param  \App\User  $user
+     * @param  \App\ProductPropertyValue  $productPropertyValue
      * @return bool
      */
-    public function view(?User $user, ProductPropertyType $productPropertyType)
+    public function view(?User $user, ProductPropertyValue $productPropertyValue)
     {
         return true;
     }
@@ -50,7 +51,7 @@ class ProductPropertyTypePolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\User  $user
      * @return mixed
      */
     public function create(User $user)
@@ -61,11 +62,11 @@ class ProductPropertyTypePolicy
     /**
      * Determine if the given model can be updated by the user.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\ProductPropertyType  $productPropertyType
+     * @param  \App\User  $user
+     * @param  \App\ProductPropertyValue  $productPropertyValue
      * @return bool
      */
-    public function update(User $user, ProductPropertyType $productPropertyType)
+    public function update(User $user, ProductPropertyValue $productPropertyValue)
     {
         return false;
     }
@@ -73,11 +74,11 @@ class ProductPropertyTypePolicy
     /**
      * Determine if the given model can be deleted by the user.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\ProductPropertyType  $productPropertyType
+     * @param  \App\User  $user
+     * @param  \App\ProductPropertyValue  $productPropertyValue
      * @return bool
      */
-    public function delete(User $user, ProductPropertyType $productPropertyType)
+    public function delete(User $user, ProductPropertyValue $productPropertyValue)
     {
         return false;
     }

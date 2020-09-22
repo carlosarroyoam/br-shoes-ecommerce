@@ -14,7 +14,7 @@ class ProductPropertyUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'value' => ['required', 'string'],
+            'name' => ['required', 'string', 'unique:product_properties,name'],
         ];
     }
 }

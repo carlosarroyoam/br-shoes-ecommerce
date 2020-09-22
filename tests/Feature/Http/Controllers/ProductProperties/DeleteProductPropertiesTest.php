@@ -13,7 +13,6 @@ class DeleteProductPropertiesTest extends TestCase
 {
     use RefreshDatabase;
 
-
     /**
      * Destroy action deletes and redirects to index for an admin user.
      *

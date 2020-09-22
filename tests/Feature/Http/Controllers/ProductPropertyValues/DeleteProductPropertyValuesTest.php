@@ -4,14 +4,15 @@ namespace Tests\Feature;
 
 use App\Models\Admin;
 use App\Models\Customer;
-use App\Models\ProductPropertyType;
+use App\Models\ProductPropertyValue;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class DeleteProductPropertyTypesTest extends TestCase
+class DeleteProductPropertyValuesTest extends TestCase
 {
     use RefreshDatabase;
+
 
     /**
      * Destroy action deletes and redirects to index for an admin user.
@@ -20,14 +21,15 @@ class DeleteProductPropertyTypesTest extends TestCase
      */
     public function test_destroy_deletes_and_redirects_for_admin_users()
     {
+        $this->withoutExceptionHandling();
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
-        $productPropertyType = ProductPropertyType::factory()->create();
+        $productPropertyValue = ProductPropertyValue::factory()->create();
 
-        $response = $this->delete(route('product-property-types.destroy', $productPropertyType));
+        $response = $this->delete(route('product-property-values.destroy', $productPropertyValue));
 
-        $response->assertRedirect(route('product-property-types.index'));
-        $this->assertDeleted($productPropertyType);
+        $response->assertRedirect(route('product-property-values.index'));
+        $this->assertDeleted($productPropertyValue);
     }
 
 
@@ -40,9 +42,9 @@ class DeleteProductPropertyTypesTest extends TestCase
     {
         $customerUser = Customer::factory()->create();
         $this->actingAs($customerUser->user);
-        $productPropertyType = ProductPropertyType::factory()->create();
+        $productPropertyValue = ProductPropertyValue::factory()->create();
 
-        $response = $this->delete(route('product-property-types.destroy', $productPropertyType));
+        $response = $this->delete(route('product-property-values.destroy', $productPropertyValue));
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -55,9 +57,9 @@ class DeleteProductPropertyTypesTest extends TestCase
      */
     public function test_destroy_dont_deletes_for_non_authenticated_users()
     {
-        $productPropertyType = ProductPropertyType::factory()->create();
+        $productPropertyValue = ProductPropertyValue::factory()->create();
 
-        $response = $this->delete(route('product-property-types.destroy', $productPropertyType));
+        $response = $this->delete(route('product-property-values.destroy', $productPropertyValue));
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

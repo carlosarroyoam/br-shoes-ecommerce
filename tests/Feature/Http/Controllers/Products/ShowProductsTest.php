@@ -26,7 +26,7 @@ class ShowProductsTest extends TestCase
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.products.show');
-        $response->assertViewHas('product', $product);
+        $response->assertViewHas('product');
     }
 
     /**

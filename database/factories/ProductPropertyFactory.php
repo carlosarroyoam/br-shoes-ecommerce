@@ -2,9 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Product;
 use App\Models\ProductProperty;
-use App\Models\ProductPropertyType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -25,9 +23,7 @@ class ProductPropertyFactory extends Factory
     public function definition()
     {
         return [
-            'product_id' => Product::factory()->create(),
-            'product_property_type_id' => ProductPropertyType::factory()->create(),
-            'value' => $this->faker->word,
+            'name' => $this->faker->name,
         ];
     }
 }

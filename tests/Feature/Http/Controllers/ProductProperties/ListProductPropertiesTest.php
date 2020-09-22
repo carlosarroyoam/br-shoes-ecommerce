@@ -19,7 +19,7 @@ class ListProductPropertiesTest extends TestCase
      */
     public function test_index_displays_view()
     {
-        $categories = ProductProperty::factory()->count(5)->create();
+        $productProperties = ProductProperty::factory()->count(5)->create();
 
         $response = $this->get(route('product-properties.index'));
 

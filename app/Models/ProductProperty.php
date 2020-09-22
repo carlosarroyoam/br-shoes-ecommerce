@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
- * @property int $product_id
- * @property int $product_property_type_id
- * @property string $value
+ * @property string $name
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
@@ -23,9 +21,7 @@ class ProductProperty extends Model
      * @var array
      */
     protected $fillable = [
-        'product_id',
-        'product_property_type_id',
-        'value',
+        'name',
     ];
 
     /**
@@ -35,24 +31,15 @@ class ProductProperty extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'product_id' => 'integer',
-        'product_property_type_id' => 'integer',
     ];
 
-
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Get the route key for the model.
+     *
+     * @return string
      */
-    public function product()
+    public function getRouteKeyName()
     {
-        return $this->belongsTo(\App\Models\Product::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function propertyType()
-    {
-        return $this->belongsTo(\App\Models\ProductPropertyType::class);
+        return 'name';
     }
 }

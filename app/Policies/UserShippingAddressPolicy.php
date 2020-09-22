@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Admin;
 use App\Models\User;
 use App\Models\UserShippingAddress;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -19,7 +20,7 @@ class UserShippingAddressPolicy
      */
     public function before(?User $user, $ability)
     {
-        if (optional($user)->userable_type  == 'App\Models\Admin') {
+        if (optional($user)->userable_type  === Admin::class) {
             return false;
         }
     }
