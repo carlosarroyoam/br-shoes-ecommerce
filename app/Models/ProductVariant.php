@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $product_id
- * @property bool $is_master
  * @property int $price
  * @property int $comparte_at_price
  * @property int $cost_per_item
@@ -27,7 +26,6 @@ class ProductVariant extends Model
      */
     protected $fillable = [
         'product_id',
-        'is_master',
         'price',
         'comparte_at_price',
         'cost_per_item',
@@ -42,7 +40,6 @@ class ProductVariant extends Model
     protected $casts = [
         'id' => 'integer',
         'product_id' => 'integer',
-        'is_master' => 'boolean',
         'price' => 'integer',
         'comparte_at_price'=> 'integer',
         'cost_per_item'=> 'integer',
