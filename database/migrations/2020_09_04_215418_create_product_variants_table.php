@@ -16,8 +16,10 @@ class CreateProductVariantsTable extends Migration
         Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->unsignedInteger('price_in_cents')->default(0);
             $table->boolean('is_master')->default(false);
+            $table->unsignedInteger('price')->default(0);
+            $table->unsignedInteger('comparte_at_price')->default(0);
+            $table->unsignedInteger('cost_per_item')->default(0);
             $table->unsignedSmallInteger('quantity_on_stock')->default(0);
             $table->timestamps();
         });

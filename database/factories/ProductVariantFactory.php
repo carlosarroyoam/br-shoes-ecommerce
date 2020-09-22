@@ -23,10 +23,14 @@ class ProductVariantFactory extends Factory
         */
     public function definition()
     {
+        $price = $this->faker->randomNumber();
         return [
             'product_id' => Product::factory()->create(),
-            'price_in_cents' => $this->faker->randomNumber(),
             'is_master' => $this->faker->boolean,
+            'price' => $price,
+            'compare_at_price' => $price + 15000,
+            'cost_per_item' => $this->faker->randomNumber(),
+            'quantity_on_stock' => $this->faker->randomNumber(),
         ];
     }
 

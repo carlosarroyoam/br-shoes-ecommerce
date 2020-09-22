@@ -8,8 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property int $product_id
- * @property int $price_in_cents
  * @property bool $is_master
+ * @property int $price
+ * @property int $comparte_at_price
+ * @property int $cost_per_item
+ * @property int $quantity_on_stock
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
@@ -24,8 +27,11 @@ class ProductVariant extends Model
      */
     protected $fillable = [
         'product_id',
-        'price_in_cents',
         'is_master',
+        'price',
+        'comparte_at_price',
+        'cost_per_item',
+        'quantity_on_stock',
     ];
 
     /**
@@ -36,8 +42,11 @@ class ProductVariant extends Model
     protected $casts = [
         'id' => 'integer',
         'product_id' => 'integer',
-        'price_in_cents' => 'integer',
         'is_master' => 'boolean',
+        'price' => 'integer',
+        'comparte_at_price'=> 'integer',
+        'cost_per_item'=> 'integer',
+        'quantity_on_stock'=> 'integer',
     ];
 
 
