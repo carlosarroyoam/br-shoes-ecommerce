@@ -6,6 +6,7 @@ use App\Http\Controllers\Products\ProductController;
 use App\Http\Controllers\Products\ProductPropertyController;
 use App\Http\Controllers\Products\ProductPropertyTypeController;
 use App\Http\Controllers\Products\ProductVariantController;
+use App\Http\Controllers\Users\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,4 @@ Route::resources([
     'product-property-types' =>  ProductPropertyTypeController::class,
     'categories' => CategoryController::class,
 ]);
+Route::resource('users', UserController::class)->except('create', 'store');
