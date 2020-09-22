@@ -9,8 +9,8 @@ use App\Actions\Jetstream\DeleteUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Jetstream\Jetstream;
 use Laravel\Fortify\Fortify;
+use Laravel\Jetstream\Jetstream;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
