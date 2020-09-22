@@ -182,6 +182,8 @@ return [
          */
         Modules\Admin\Providers\AdminServiceProvider::class,
         Modules\Admin\Providers\RouteServiceProvider::class,
+        Modules\Customer\Providers\CustomerServiceProvider::class,
+        Modules\Customer\Providers\RouteServiceProvider::class,
     ],
 
     /*

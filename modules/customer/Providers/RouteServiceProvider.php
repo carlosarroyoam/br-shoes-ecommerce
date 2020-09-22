@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Admin\Providers;
+namespace Modules\Customer\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -16,8 +16,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->routes(function () {
             Route::middleware('web')
-            ->domain('http://admin.' . env('APP_URL'))
-            ->group(base_path('modules/admin/routes/web.php'));
+            ->group(base_path('modules/customer/routes/web.php'));
         });
     }
 }
