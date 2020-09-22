@@ -42,7 +42,10 @@ class ProductVariantService
         try {
             $productVariant = new ProductVariant;
             $productVariant->product_id = $validated['product_id'];
-            $productVariant->price_in_cents = $validated['price_in_cents'];
+            $productVariant->price = $validated['price'];
+            $productVariant->comparte_at_price = $validated['comparte_at_price'];
+            $productVariant->cost_per_item = $validated['cost_per_item'];
+            $productVariant->quantity_on_stock = $validated['quantity_on_stock'];
             $productVariant->is_master = $validated['is_master'];
             $productVariant->save();
         } catch (Exception $e) {
@@ -69,7 +72,10 @@ class ProductVariantService
         DB::beginTransaction();
 
         try {
-            $productVariant->price_in_cents = $validated['price_in_cents'];
+            $productVariant->price = $validated['price'];
+            $productVariant->comparte_at_price = $validated['comparte_at_price'];
+            $productVariant->cost_per_item = $validated['cost_per_item'];
+            $productVariant->quantity_on_stock = $validated['quantity_on_stock'];
             $productVariant->save();
         } catch (Exception $e) {
             DB::rollBack();

@@ -42,17 +42,12 @@ class ProductService
 
         try {
             $product = new Product;
-            $productVariantService = resolve('App\Services\ProductVariantService');
 
             $product->name = $validated['name'];
             $product->slug = $validated['slug'];
             $product->description = $validated['description'];
             $product->featured = $validated['featured'];
             $product->save();
-
-            $validated['product_id'] = $product->id;
-            $validated['is_master'] = true;
-            $productVariantService->create($validated);
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -81,7 +76,6 @@ class ProductService
             $product->slug = $validated['slug'];
             $product->description = $validated['description'];
             $product->featured = $validated['featured'];
-
             $product->save();
         } catch (Exception $e) {
             DB::rollBack();

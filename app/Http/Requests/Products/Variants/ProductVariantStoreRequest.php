@@ -7,16 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class ProductVariantStoreRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -25,8 +15,11 @@ class ProductVariantStoreRequest extends FormRequest
     {
         return [
             'product_id' => ['required', 'integer', 'gt:0'],
-            'price_in_cents' => ['required', 'integer', 'gt:0'],
-            'is_master' => ['required'],
+            'is_master' => ['nullable'],
+            'price' => ['nullable', 'integer'],
+            'comparte_at_price' => ['nullable', 'integer'],
+            'cost_per_item' => ['nullable', 'integer'],
+            'quantity_on_stock' => ['nullable', 'integer'],
         ];
     }
 }

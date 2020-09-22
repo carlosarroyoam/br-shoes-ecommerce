@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\Admin;
 use App\Models\Customer;
 use App\Models\Product;
-use App\Models\ProductVariant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -61,7 +60,7 @@ class UpdateProductsTest extends TestCase
     {
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
-        $variant = ProductVariant::factory()->master()->create();
+        $product = Product::factory()->create();
         $expected = [
             'name' => $this->faker->name,
             'description' => $this->faker->text,
@@ -69,14 +68,14 @@ class UpdateProductsTest extends TestCase
         ];
         $expected['slug'] = Str::slug($expected['name']);
 
-        $response = $this->put(route('products.update', $variant->product), [
+        $response = $this->put(route('products.update', $product), [
             'name' => $expected['name'],
             'description' => $expected['description'],
             'featured' => $expected['featured'],
         ]);
 
         $response->assertRedirect(route('products.index'));
-        $response->assertSessionHas('product.id', $variant->product->id);
+        $response->assertSessionHas('product.id', $product->id);
         $this->assertDatabaseHas('products', [
             'name' => $expected['name'],
             'slug' => $expected['slug'],
@@ -94,9 +93,9 @@ class UpdateProductsTest extends TestCase
     {
         $customerUser = Customer::factory()->create();
         $this->actingAs($customerUser->user);
-        $variant = ProductVariant::factory()->master()->create();
+        $product = Product::factory()->create();
 
-        $response = $this->put(route('products.update', $variant->product), []);
+        $response = $this->put(route('products.update', $product), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -108,9 +107,9 @@ class UpdateProductsTest extends TestCase
      */
     public function test_update_doesnt_updates_for_non_authenticated_users()
     {
-        $variant = ProductVariant::factory()->master()->create();
+        $product = Product::factory()->create();
 
-        $response = $this->put(route('products.update', $variant->product), []);
+        $response = $this->put(route('products.update', $product), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

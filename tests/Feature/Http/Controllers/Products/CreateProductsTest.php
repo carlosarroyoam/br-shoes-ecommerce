@@ -56,14 +56,13 @@ class CreateProductsTest extends TestCase
      */
     public function test_store_saves_and_redirects_for_admin_users()
     {
+        $this->withoutExceptionHandling();
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
         $expected = [
             'name' => $this->faker->name,
             'description' => $this->faker->text,
             'featured' => $this->faker->boolean,
-            'variants.price_in_cents' => $this->faker->randomNumber(5),
-            'variants.is_master' => true,
         ];
         $expected['slug'] = Str::slug($expected['name']);
 
@@ -71,7 +70,6 @@ class CreateProductsTest extends TestCase
             'name' => $expected['name'],
             'description' => $expected['description'],
             'featured' => $expected['featured'],
-            'price_in_cents' => $expected['variants.price_in_cents'],
         ]);
         $products = Product::query()
         ->where('name', $expected['name'])
@@ -85,11 +83,6 @@ class CreateProductsTest extends TestCase
             'slug' => $expected['slug'],
             'description' => $expected['description'],
             'featured' => $expected['featured'],
-        ]);
-        $this->assertDatabaseHas('product_variants', [
-            'product_id' => Product::first()->id,
-            'price_in_cents' => $expected['variants.price_in_cents'],
-            'is_master' => $expected['variants.is_master'],
         ]);
     }
 
