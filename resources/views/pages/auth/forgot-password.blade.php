@@ -1,35 +1,30 @@
 <x-app-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+    <div class="mb-4 text-sm text-gray-600">
+        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+    </div>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-        </div>
+    @if (session('status'))
+    <div class="mb-4 text-sm font-medium text-green-600">
+        {{ session('status') }}
+    </div>
+    @endif
 
-        @if (session('status'))
-        <div class="mb-4 text-sm font-medium text-green-600">
-            {{ session('status') }}
-        </div>
-        @endif
+    <form method="POST" action="/forgot-password">
+        @csrf
 
-        <x-jet-validation-errors class="mb-4" />
+        <x-forms.text-field class="mt-5" name="email" type="email" placeholder="{{ __('input-placeholders.email') }}"
+            autocomplete="email" autofocus required>
+            <x-slot name="label">
+                {{ __('E-Mail Address') }}
+            </x-slot>
+        </x-forms.text-field>
 
-        <form method="POST" action="/forgot-password">
-            @csrf
-
-            <div class="block">
-                <x-jet-label value="Email" />
-                <x-jet-input class="block w-full mt-1" type="email" name="email" :value="old('email')" required
-                    autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
+        <div class="flex flex-col mt-5">
+            <x-forms.button type="submit">
+                <x-slot name="title">
                     {{ __('Email Password Reset Link') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
+                </x-slot>
+            </x-forms.button>
+        </div>
+    </form>
 </x-app-layout>
