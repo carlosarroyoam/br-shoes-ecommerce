@@ -33,9 +33,11 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
+     *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $categories = $this->categoryService->getAll();
 
@@ -45,9 +47,10 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('pages.categories.create');
     }
@@ -55,7 +58,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Categories\CategoryStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryStoreRequest $request)
@@ -70,10 +73,11 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param \Illuminate\Http\Request $request
      * @param  App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Request $request, Category $category)
     {
         // $categoryById = $this->categoryService->getById($category);
         return view('pages.categories.show', compact('category'));
@@ -85,7 +89,7 @@ class CategoryController extends Controller
      * @param  App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Request $request, Category $category)
     {
         return view('pages.categories.edit', compact('category'));
     }
@@ -93,7 +97,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Categories\CategoryUpdateRequest  $request
      * @param  App\Category  $category
      * @return \Illuminate\Http\Response
      */
@@ -109,10 +113,11 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param \Illuminate\Http\Request $request
      * @param  App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Request $request, Category $category)
     {
         $this->categoryService->delete($category);
 
