@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Admin;
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -41,7 +43,7 @@ class UserFactory extends Factory
     {
         return $this->state([
             'userable_id' => $typeable_id,
-            'userable_type' => 'App\Models\Admin',
+            'userable_type' => Admin::class,
         ]);
     }
 
@@ -54,7 +56,7 @@ class UserFactory extends Factory
     {
         return $this->state([
             'userable_id' => $typeable_id,
-            'userable_type' => 'App\Models\Customer',
+            'userable_type' => Customer::class,
         ]);
     }
 }
