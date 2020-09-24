@@ -7,13 +7,10 @@ use App\Http\Requests\Products\ProductStoreRequest;
 use App\Http\Requests\Products\ProductUpdateRequest;
 use App\Models\Product;
 use App\Services\ProductService;
-use Artesaos\SEOTools\Traits\SEOTools as SEOToolsTrait;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    use SEOToolsTrait;
-
     /**
      * The product service instance.
      */
