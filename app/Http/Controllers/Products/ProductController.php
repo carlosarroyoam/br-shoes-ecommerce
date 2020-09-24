@@ -7,10 +7,13 @@ use App\Http\Requests\Products\ProductStoreRequest;
 use App\Http\Requests\Products\ProductUpdateRequest;
 use App\Models\Product;
 use App\Services\ProductService;
+use Artesaos\SEOTools\Traits\SEOTools as SEOToolsTrait;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    use SEOToolsTrait;
+
     /**
      * The product service instance.
      */
@@ -35,6 +38,8 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $this->seo()->setTitle(__('navigation.products'));
+
         $products = $this->productService->getAll();
 
         return view('pages.products.index', compact('products'));
@@ -47,6 +52,8 @@ class ProductController extends Controller
      */
     public function newest()
     {
+        $this->seo()->setTitle(__('navigation.newest'));
+
         return view('pages.products.index', ['name' => __('navigation.newest')]);
     }
 
@@ -57,6 +64,8 @@ class ProductController extends Controller
      */
     public function offers()
     {
+        $this->seo()->setTitle(__('navigation.offers'));
+
         return view('pages.products.index', ['name' => __('navigation.offers')]);
     }
 
@@ -93,6 +102,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $this->seo()->setTitle($product->name);
+        $this->seo()->setDescription($product->description);
+
         return view('pages.products.show', compact('product'));
     }
 

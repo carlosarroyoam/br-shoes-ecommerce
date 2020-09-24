@@ -19,11 +19,30 @@ use App\Http\Controllers\Users\UserController;
 |
 */
 
-Route::view('', 'pages.home')->name('home');
-Route::view('tank-you', 'pages.home')->name('tank-you');
-Route::view('sizes-guide', 'pages.home')->name('sizes-guide');
-Route::view('how-to-buy', 'pages.home')->name('how-to-buy');
-Route::view('faq', 'pages.home')->name('faq');
+Route::get('', function () {
+    SEOMeta::setTitle(__('navigation.home'));
+    return view('pages.home');
+})->name('home');
+
+Route::view('tank-you', function () {
+    SEOMeta::setTitle(__('navigation.tank-you'));
+    return view('pages.home');
+})->name('tank-you');
+
+Route::view('sizes-guide', function () {
+    SEOMeta::setTitle(__('navigation.sizes-guide'));
+    return view('pages.home');
+})->name('sizes-guide');
+
+Route::view('how-to-buy', function () {
+    SEOMeta::setTitle(__('navigation.how-to-buy'));
+    return view('pages.home');
+})->name('how-to-buy');
+
+Route::view('faq', function () {
+    SEOMeta::setTitle(__('navigation.home'));
+    return view('pages.home');
+})->name('faq');
 
 Route::get('products/newest', [ProductController::class, 'newest'])->name('products.newest');
 Route::get('products/offers', [ProductController::class, 'offers'])->name('products.offers');
