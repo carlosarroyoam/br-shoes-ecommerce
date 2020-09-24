@@ -1,58 +1,53 @@
 <footer class="text-gray-700 bg-background footer">
     {{-- Upper footer section --}}
-    <div class="container flex flex-wrap order-first py-16 text-center md:text-left">
-        {{-- Categories section --}}
+    <div class="container flex flex-wrap order-first pt-16">
+        {{-- Operative info section --}}
         <div class="w-full lg:w-1/4 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">CATEGORIES</h2>
-            <nav class="mb-10 list-none lg:mb-0">
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">First Link</a>
-                </li>
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Second Link</a>
-                </li>
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Third Link</a>
-                </li>
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Fourth Link</a>
-                </li>
-            </nav>
-        </div>
-
-        {{-- Navigation section --}}
-        <div class="w-full lg:w-1/4 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">Navigation</h2>
-            <nav class="mb-10 list-none lg:mb-0">
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">First Link</a>
-                </li>
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Second Link</a>
-                </li>
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Third Link</a>
-                </li>
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Fourth Link</a>
-                </li>
-            </nav>
-        </div>
-
-        {{-- Categories section --}}
-        <div class="w-full lg:w-1/4 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">CATEGORIES</h2>
+            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">INFORMACIÓN OPERATIVA</h2>
             <nav class="mb-10 list-none md:mb-0">
                 <li>
                     <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Envíos</a>
+                </li>
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Medios de
+                        pago</a>
+                </li>
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Horario</a>
+                </li>
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Garantía</a>
+                </li>
+            </nav>
+        </div>
+
+        {{-- Legal info section --}}
+        <div class="w-full lg:w-1/4 md:w-1/2">
+            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">INFORMACIÓN LEGAL</h2>
+            <nav class="mb-10 list-none lg:mb-0">
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Términos y
+                        Condiciones</a>
+                </li>
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Política de
+                        protección de datos</a>
+                </li>
+            </nav>
+        </div>
+
+        {{-- Categories section --}}
+        <div class="w-full lg:w-1/4 md:w-1/2">
+            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">CATEGORIES</h2>
+            <nav class="mb-10 list-none lg:mb-0">
+                <li>
+                    <a href="{{ route('home') }}"
                         class="text-body-secondary hover:text-body focus:outline-none focus:text-body">First Link</a>
                 </li>
                 <li>
@@ -70,28 +65,66 @@
             </nav>
         </div>
 
+
+        {{-- Collections section --}}
+        <div class="w-full lg:w-1/4 md:w-1/2">
+            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">Colletctions</h2>
+            <nav class="mb-10 list-none lg:mb-0">
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">First Link</a>
+                </li>
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Second Link</a>
+                </li>
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Third Link</a>
+                </li>
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Fourth Link</a>
+                </li>
+            </nav>
+        </div>
+
+    </div>
+
+    {{-- Middle footer section --}}
+    <div class="container flex flex-wrap order-first pb-16 lg:pt-8">
+        {{-- About section --}}
+        <div class="w-full lg:w-2/4 md:w-1/2">
+            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">SOBRE
+            </h2>
+            <p class="mb-10 text-body-secondary md:pr-6 md:mb-0">Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Quo enim
+                iusto
+                delectus ad, facilis nemo odit voluptate expedita repudiandae ducimus sint cumque, modi impedit. Beatae
+                temporibus quasi id quod amet!</p>
+        </div>
+
         {{-- Newsletter section --}}
-        <div class="w-full lg:w-1/4 lg:-ml-16 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest text-header">SUBSCRIBE</h2>
-            <form method="POST" action="{{ route('login') }}"
-                class="flex flex-wrap justify-center xl:flex-no-wrap md:flex-no-wrap lg:flex-wrap md:justify-start">
+        <div class="w-full lg:w-1/4 md:w-1/2">
+            <h2 class="mb-3 text-sm font-medium tracking-widest text-header">BOLETÍN DE NOTICIAS</h2>
+            <form method="POST" action="{{ route('login') }}" class="flex flex-row md:justify-start">
                 @csrf
 
-                <x-forms.text-field class="mr-2 xl:mr-4 lg:mr-0 sm:mr-4 lg:w-full xl:w-auto"
-                    name="newsletter-subscribe-mail" type="email" placeholder="{{ __('input-placeholders.email') }}"
-                    autocomplete="email" required />
+                <x-forms.text-field class="mr-2 xl:mr-4 lg:mr-0 sm:mr-4 " name="newsletter-subscribe-mail" type="email"
+                    placeholder="{{ __('input-placeholders.email') }}" autocomplete="email" required />
 
-                <x-forms.button type="submit" class="mt-0 lg:w-full lg:mt-2 xl:mt-0">
+                <x-forms.button type="submit" class="ml-4">
                     <x-slot name="title">
-                        SUBSCRIBE
+                        Suscribir
                     </x-slot>
                 </x-forms.button>
             </form>
-            <p class="mt-2 text-sm text-center text-body-secondary md:text-left">Bitters chicharrones fanny pack
-                <br class="hidden xl:block">waistcoat green juice
+            <p class="mt-2 mb-10 text-sm text-body-secondary lg:mb-0">Suscríbase a nuestro
+                boletín de
+                noticias para estar informado de las últimas novedades y de las llegadas de mercancía a nuestra bodega
+                <br class="hidden xl:block">
             </p>
         </div>
-
     </div>
 
     {{-- Lower footer section --}}
