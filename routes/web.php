@@ -1,12 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Categories\CategoryController;
 use App\Http\Controllers\Products\ProductController;
 use App\Http\Controllers\Products\ProductPropertyController;
 use App\Http\Controllers\Products\ProductPropertyValueController;
 use App\Http\Controllers\Products\ProductVariantController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\Users\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +25,6 @@ Route::get('', function () {
     return view('pages.home');
 })->name('home');
 
-Route::view('tank-you', function () {
-    SEOMeta::setTitle(__('navigation.tank-you'));
-    return view('pages.home');
-})->name('tank-you');
-
 Route::view('sizes-guide', function () {
     SEOMeta::setTitle(__('navigation.sizes-guide'));
     return view('pages.home');
@@ -43,6 +39,18 @@ Route::view('faq', function () {
     SEOMeta::setTitle(__('navigation.home'));
     return view('pages.home');
 })->name('faq');
+
+Route::view('tank-you', function () {
+    SEOMeta::setTitle(__('navigation.tank-you'));
+    return view('pages.home');
+})->name('tank-you');
+
+/* Sitemap Routes */
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.xml');
+Route::get('/sitemap.xml/page', [SitemapController::class, 'pages']);
+Route::get('/sitemap.xml/product', [SitemapController::class, 'products']);
+Route::get('/sitemap.xml/category', [SitemapController::class, 'categories']);
+Route::get('/sitemap.xml/collection', [SitemapController::class, 'collections']);
 
 Route::get('products/newest', [ProductController::class, 'newest'])->name('products.newest');
 Route::get('products/offers', [ProductController::class, 'offers'])->name('products.offers');
