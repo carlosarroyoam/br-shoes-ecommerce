@@ -5,6 +5,5 @@ BR SHOES e-commerce app
 
 ## Requeriments
 
-
 ## License
-This project is built with the Laravel framework which is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is built by Carlos Alberto Arroyo Martinez with the Laravel framework which is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
