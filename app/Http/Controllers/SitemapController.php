@@ -64,7 +64,7 @@ class SitemapController extends Controller
 
         $products = DB::table('products')->orderBy('created_at', 'desc')->get();
         foreach ($products as $product) {
-            $productsSitemap->add($product->slug, $product->updated_at);
+            $productsSitemap->add(URL::to(route('products.show', $product->slug)), $product->updated_at);
         }
 
         return $productsSitemap->render('xml');
@@ -83,7 +83,7 @@ class SitemapController extends Controller
 
         $categories = DB::table('categories')->orderBy('created_at', 'desc')->get();
         foreach ($categories as $category) {
-            $categoriesSitemap->add($category->slug, $category->updated_at);
+            $categoriesSitemap->add(URL::to(route('cargories.show', $category->slug)), $category->updated_at);
         }
 
         return $categoriesSitemap->render('xml');
@@ -103,7 +103,7 @@ class SitemapController extends Controller
 
         $collections = DB::table('collections')->orderBy('created_at', 'desc')->get();
         foreach ($collections as $collection) {
-            $collectionsSitemap->add($collection->slug, $collection->updated_at);
+            $collectionsSitemap->add(URL::to(route('collections.show', $collection->slug)), $collection->updated_at);
         }
 
         return $collectionsSitemap->render('xml');
