@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Categories;
+namespace Modules\Admin\Http\Requests\Categories;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class CategoryStoreRequest extends FormRequest
+class CategoryUpdateRequest extends FormRequest
 {
 
     /**

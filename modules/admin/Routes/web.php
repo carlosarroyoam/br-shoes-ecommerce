@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\Categories\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +21,10 @@ Route::get('', function () {
 
 Route::middleware(['auth:sanctum', 'verified', 'auth.admin'])->get('/dashboard', function () {
     return view('admin::pages.dashboard.index');
-})->name('admin.dashboard');
+})->name('dashboard');
+
+Route::resources([
+    'categories' => CategoryController::class,
+]);
+
+Route::resource('users', UserController::class)->except('create', 'store');

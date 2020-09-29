@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Categories;
+namespace Modules\Admin\Http\Controllers\Categories;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Categories\CategoryStoreRequest;
-use App\Http\Requests\Categories\CategoryUpdateRequest;
 use App\Models\Category;
-use App\Services\CategoryService;
 use Illuminate\Http\Request;
+use Modules\Admin\Http\Requests\Categories\CategoryStoreRequest;
+use Modules\Admin\Http\Requests\Categories\CategoryUpdateRequest;
+use Modules\Admin\Services\CategoryService;
 
 class CategoryController extends Controller
 {
@@ -21,7 +21,7 @@ class CategoryController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  \App\Services\CategoryService  $categoryService
+     * @param  \App\Models\Services\CategoryService  $categoryService
      * @return void
      */
     public function __construct(CategoryService $categoryService)
@@ -58,7 +58,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Categories\CategoryStoreRequest  $request
+     * @param  \App\Models\Http\Requests\Categories\CategoryStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryStoreRequest $request)
@@ -67,14 +67,14 @@ class CategoryController extends Controller
 
         $request->session()->flash('category.id', $category->id);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('admin.categories.index');
     }
 
     /**
      * Display the specified resource.
      *
      * @param \Illuminate\Http\Request $request
-     * @param  App\Category  $category
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, Category $category)
@@ -86,7 +86,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  App\Category  $category
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, Category $category)
@@ -97,8 +97,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Categories\CategoryUpdateRequest  $request
-     * @param  App\Category  $category
+     * @param  \App\Models\Http\Requests\Categories\CategoryUpdateRequest  $request
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function update(CategoryUpdateRequest $request, Category $category)
@@ -107,20 +107,20 @@ class CategoryController extends Controller
 
         $request->session()->flash('category.id', $updatedCategory->id);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('admin.categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param  App\Category  $category
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, Category $category)
     {
         $this->categoryService->delete($category);
 
-        return redirect()->route('categories.index');
+        return redirect()->route('admin.categories.index');
     }
 }

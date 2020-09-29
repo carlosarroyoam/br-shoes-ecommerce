@@ -19,7 +19,7 @@ class SitemapController extends Controller
     public function index(Request $request)
     {
         $sitemap = App::make("sitemap");
-        // $sitemap->setCache('br-shoes.sitemap-index', 3600);
+        $sitemap->setCache('br-shoes.sitemap-index', 3600);
 
         $sitemap->addSitemap(URL::to('/sitemap.xml/pages'));
         $sitemap->addSitemap(URL::to('/sitemap.xml/product'));

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace Modules\Admin\Services;
 
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;

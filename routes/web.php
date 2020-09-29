@@ -45,6 +45,9 @@ Route::view('tank-you', function () {
     return view('pages.home');
 })->name('tank-you');
 
+Route::get('products/newest', [ProductController::class, 'newest'])->name('products.newest');
+Route::get('products/offers', [ProductController::class, 'offers'])->name('products.offers');
+
 /* Sitemap Routes */
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.xml');
 Route::get('/sitemap.xml/page', [SitemapController::class, 'pages']);
@@ -52,14 +55,9 @@ Route::get('/sitemap.xml/product', [SitemapController::class, 'products']);
 Route::get('/sitemap.xml/category', [SitemapController::class, 'categories']);
 Route::get('/sitemap.xml/collection', [SitemapController::class, 'collections']);
 
-Route::get('products/newest', [ProductController::class, 'newest'])->name('products.newest');
-Route::get('products/offers', [ProductController::class, 'offers'])->name('products.offers');
-
 Route::resources([
     'products' => ProductController::class,
     'product-variants' =>  ProductVariantController::class,
     'product-properties' =>  ProductPropertyController::class,
     'product-property-values' =>  ProductPropertyValueController::class,
-    'categories' => CategoryController::class,
 ]);
-Route::resource('users', UserController::class)->except('create', 'store');

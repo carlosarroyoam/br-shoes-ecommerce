@@ -28,7 +28,7 @@ class CreateCategoriesTest extends TestCase
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
 
-        $response = $this->get(route('categories.create'));
+        $response = $this->get(route('admin.categories.create'));
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.categories.create');
@@ -43,9 +43,9 @@ class CreateCategoriesTest extends TestCase
     public function test_store_uses_form_request_validation()
     {
         $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\Categories\CategoryController::class,
+            \Modules\Admin\Http\Controllers\Categories\CategoryController::class,
             'store',
-            \App\Http\Requests\Categories\CategoryStoreRequest::class
+            \Modules\Admin\Http\Requests\Categories\CategoryStoreRequest::class
         );
     }
 
@@ -57,6 +57,7 @@ class CreateCategoriesTest extends TestCase
      */
     public function test_store_saves_and_redirects_for_admin_users()
     {
+        $this->withoutExceptionHandling();
         $adminUser = Admin::factory()->create();
         $this->actingAs($adminUser->user);
         $expected = [
@@ -64,7 +65,7 @@ class CreateCategoriesTest extends TestCase
         ];
         $expected['slug'] = Str::slug($expected['name']);
 
-        $response = $this->post(route('categories.store'), [
+        $response = $this->post(route('admin.categories.store'), [
             'name' => $expected['name']
         ]);
         $categories = Category::query()
@@ -72,7 +73,7 @@ class CreateCategoriesTest extends TestCase
             ->get();
         $category = $categories->first();
 
-        $response->assertRedirect(route('categories.index'));
+        $response->assertRedirect(route('admin.categories.index'));
         $response->assertSessionHas('category.id', $category->id);
         $this->assertDatabaseHas('categories', [
             'name' => $expected['name'],
@@ -91,7 +92,7 @@ class CreateCategoriesTest extends TestCase
         $customerUser = Customer::factory()->create();
         $this->actingAs($customerUser->user);
 
-        $response = $this->post(route('categories.store'), []);
+        $response = $this->post(route('admin.categories.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -104,7 +105,7 @@ class CreateCategoriesTest extends TestCase
      */
     public function test_store_doesnt_saves_for_non_authenticated_users()
     {
-        $response = $this->post(route('categories.store'), []);
+        $response = $this->post(route('admin.categories.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
