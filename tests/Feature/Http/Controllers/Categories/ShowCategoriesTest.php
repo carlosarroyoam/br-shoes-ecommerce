@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Modules\Admin\Feature;
+namespace Tests\Feature;
 
 use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,7 +22,7 @@ class ShowCategoriesTest extends TestCase
     {
         $category = Category::factory()->create();
 
-        $response = $this->get(route('admin.categories.show', $category));
+        $response = $this->get(route('categories.show', $category));
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.categories.show');
@@ -38,7 +38,7 @@ class ShowCategoriesTest extends TestCase
     {
         $nonExistingSlug = Str::slug($this->faker->name);
 
-        $response = $this->get(route('admin.categories.show', $nonExistingSlug));
+        $response = $this->get(route('categories.show', $nonExistingSlug));
 
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }

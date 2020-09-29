@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Modules\Admin\Feature;
+namespace Tests\Feature;
 
 use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -21,7 +21,7 @@ class ListCategoriesTest extends TestCase
     {
         $categories = Category::factory()->count(5)->create();
 
-        $response = $this->get(route('admin.categories.index'));
+        $response = $this->get(route('categories.index'));
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.categories.index');

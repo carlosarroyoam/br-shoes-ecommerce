@@ -11,7 +11,7 @@
         <testsuite name="AdminModuleUnit">
             <directory suffix="Test.php">./tests/Modules/Admin/Unit</directory>
         </testsuite>
-        <testsuite name="AdminModuleUnit">
+        <testsuite name="CustomerModuleUnit">
             <directory suffix="Test.php">./tests/Modules/Customer/Unit</directory>
         </testsuite>
         <testsuite name="Feature">
@@ -20,7 +20,7 @@
         <testsuite name="AdminModuleFeature">
             <directory suffix="Test.php">./tests/Modules/Admin/Feature</directory>
         </testsuite>
-        <testsuite name="AdminModuleFeature">
+        <testsuite name="CustomerModuleFeature">
             <directory suffix="Test.php">./tests/Modules/Customer/Feature</directory>
         </testsuite>
     </testsuites>

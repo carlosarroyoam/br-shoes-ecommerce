@@ -61,3 +61,7 @@ Route::resources([
     'product-properties' =>  ProductPropertyController::class,
     'product-property-values' =>  ProductPropertyValueController::class,
 ]);
+
+Route::resource('categories', CategoryController::class)->only([
+    'index', 'show'
+]);
