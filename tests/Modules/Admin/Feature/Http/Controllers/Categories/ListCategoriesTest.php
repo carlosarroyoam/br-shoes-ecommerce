@@ -21,7 +21,7 @@ class ListCategoriesTest extends TestCase
     {
         $categories = Category::factory()->count(5)->create();
 
-        $response = $this->get(route('categories.index'));
+        $response = $this->get(route('admin.categories.index'));
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.categories.index');

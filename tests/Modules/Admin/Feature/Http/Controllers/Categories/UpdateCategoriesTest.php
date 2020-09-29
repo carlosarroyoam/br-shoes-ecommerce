@@ -27,7 +27,7 @@ class UpdateCategoriesTest extends TestCase
         $this->actingAs($admin->user);
         $category = Category::factory()->create();
 
-        $response = $this->get(route('categories.edit', $category));
+        $response = $this->get(route('admin.categories.edit', $category));
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertViewIs('pages.categories.edit');
@@ -43,9 +43,9 @@ class UpdateCategoriesTest extends TestCase
     public function test_update_uses_form_request_validation()
     {
         $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\Categories\CategoryController::class,
+            \Modules\Admin\Http\Controllers\Categories\CategoryController::class,
             'update',
-            \App\Http\Requests\Categories\CategoryUpdateRequest::class
+            \Modules\Admin\Http\Requests\Categories\CategoryUpdateRequest::class
         );
     }
 
@@ -65,12 +65,12 @@ class UpdateCategoriesTest extends TestCase
         ];
         $expected['slug'] = Str::slug($expected['name']);
 
-        $response = $this->put(route('categories.update', $category), [
+        $response = $this->put(route('admin.categories.update', $category), [
             'name' => $expected['name']
         ]);
         $category->fresh();
 
-        $response->assertRedirect(route('categories.index'));
+        $response->assertRedirect(route('admin.categories.index'));
         $response->assertSessionHas('category.id', $category->id);
         $this->assertDatabaseHas('categories', [
             'name' => $expected['name'],
@@ -89,7 +89,7 @@ class UpdateCategoriesTest extends TestCase
         $this->actingAs($customerUser->user);
         $category = Category::factory()->create();
 
-        $response = $this->put(route('categories.update', $category), []);
+        $response = $this->put(route('admin.categories.update', $category), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -103,7 +103,7 @@ class UpdateCategoriesTest extends TestCase
     {
         $category = Category::factory()->create();
 
-        $response = $this->put(route('categories.update', $category), []);
+        $response = $this->put(route('admin.categories.update', $category), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

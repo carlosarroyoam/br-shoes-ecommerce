@@ -24,9 +24,9 @@ class DeleteCategoriesTest extends TestCase
         $this->actingAs($admin->user);
         $category = Category::factory()->create();
 
-        $response = $this->delete(route('categories.destroy', $category));
+        $response = $this->delete(route('admin.categories.destroy', $category));
 
-        $response->assertRedirect(route('categories.index'));
+        $response->assertRedirect(route('admin.categories.index'));
         $this->assertDeleted($category);
     }
 
@@ -42,7 +42,7 @@ class DeleteCategoriesTest extends TestCase
         $this->actingAs($customer->user);
         $category = Category::factory()->create();
 
-        $response = $this->delete(route('categories.destroy', $category));
+        $response = $this->delete(route('admin.categories.destroy', $category));
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -57,7 +57,7 @@ class DeleteCategoriesTest extends TestCase
     {
         $category = Category::factory()->create();
 
-        $response = $this->delete(route('categories.destroy', $category));
+        $response = $this->delete(route('admin.categories.destroy', $category));
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

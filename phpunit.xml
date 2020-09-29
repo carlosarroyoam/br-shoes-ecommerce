@@ -8,8 +8,20 @@
         <testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
         </testsuite>
+        <testsuite name="AdminModuleUnit">
+            <directory suffix="Test.php">./tests/Modules/Admin/Unit</directory>
+        </testsuite>
+        <testsuite name="AdminModuleUnit">
+            <directory suffix="Test.php">./tests/Modules/Customer/Unit</directory>
+        </testsuite>
         <testsuite name="Feature">
             <directory suffix="Test.php">./tests/Feature</directory>
+        </testsuite>
+        <testsuite name="AdminModuleFeature">
+            <directory suffix="Test.php">./tests/Modules/Admin/Feature</directory>
+        </testsuite>
+        <testsuite name="AdminModuleFeature">
+            <directory suffix="Test.php">./tests/Modules/Customer/Feature</directory>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
