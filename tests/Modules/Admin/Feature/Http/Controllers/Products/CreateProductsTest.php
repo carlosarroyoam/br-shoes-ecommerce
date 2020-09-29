@@ -3,17 +3,16 @@
 namespace Tests\Modules\Admin\Feature;
 
 use App\Models\Admin;
-use App\Models\Category;
 use App\Models\Customer;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use JMac\Testing\Traits\AdditionalAssertions;
 use Symfony\Component\HttpFoundation\Response;
-use Faker\Generator as Faker;
 use Tests\TestCase;
 
-class CreateCategoriesTest extends TestCase
+class CreateProductsTest extends TestCase
 {
     use RefreshDatabase, AdditionalAssertions, WithFaker;
 
@@ -28,10 +27,10 @@ class CreateCategoriesTest extends TestCase
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
 
-        $response = $this->get(route('admin.categories.create'));
+        $response = $this->get(route('admin.products.create'));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('admin::pages.categories.create');
+        $response->assertViewIs('admin::pages.products.create');
     }
 
 
@@ -43,9 +42,9 @@ class CreateCategoriesTest extends TestCase
     public function test_store_uses_form_request_validation()
     {
         $this->assertActionUsesFormRequest(
-            \Modules\Admin\Http\Controllers\Categories\CategoryController::class,
+            \Modules\Admin\Http\Controllers\Products\ProductController::class,
             'store',
-            \Modules\Admin\Http\Requests\Categories\CategoryStoreRequest::class
+            \Modules\Admin\Http\Requests\Products\ProductStoreRequest::class
         );
     }
 
@@ -58,26 +57,32 @@ class CreateCategoriesTest extends TestCase
     public function test_store_saves_and_redirects_for_admin_users()
     {
         $this->withoutExceptionHandling();
-        $adminUser = Admin::factory()->create();
-        $this->actingAs($adminUser->user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
         $expected = [
             'name' => $this->faker->name,
+            'description' => $this->faker->text,
+            'featured' => $this->faker->boolean,
         ];
         $expected['slug'] = Str::slug($expected['name']);
 
-        $response = $this->post(route('admin.categories.store'), [
-            'name' => $expected['name']
+        $response = $this->post(route('admin.products.store'), [
+            'name' => $expected['name'],
+            'description' => $expected['description'],
+            'featured' => $expected['featured'],
         ]);
-        $categories = Category::query()
-            ->where('name', $expected['name'])
-            ->get();
-        $category = $categories->first();
+        $products = Product::query()
+        ->where('name', $expected['name'])
+        ->get();
+        $product = $products->first();
 
-        $response->assertRedirect(route('admin.categories.index'));
-        $response->assertSessionHas('category.id', $category->id);
-        $this->assertDatabaseHas('categories', [
+        $response->assertRedirect(route('admin.products.index'));
+        $response->assertSessionHas('product.id', $product->id);
+        $this->assertDatabaseHas('products', [
             'name' => $expected['name'],
             'slug' => $expected['slug'],
+            'description' => $expected['description'],
+            'featured' => $expected['featured'],
         ]);
     }
 
@@ -92,7 +97,7 @@ class CreateCategoriesTest extends TestCase
         $customerUser = Customer::factory()->create();
         $this->actingAs($customerUser->user);
 
-        $response = $this->post(route('admin.categories.store'), []);
+        $response = $this->post(route('admin.products.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -105,7 +110,7 @@ class CreateCategoriesTest extends TestCase
      */
     public function test_store_doesnt_saves_for_non_authenticated_users()
     {
-        $response = $this->post(route('admin.categories.store'), []);
+        $response = $this->post(route('admin.products.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

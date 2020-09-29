@@ -2,14 +2,14 @@
 
 namespace Tests\Modules\Admin\Feature;
 
-use App\Models\Category;
+use App\Models\ProductPropertyValue;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class ShowCategoriesTest extends TestCase
+class ShowProductPropertyValuesTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -20,13 +20,13 @@ class ShowCategoriesTest extends TestCase
      */
     public function test_show_displays_view()
     {
-        $category = Category::factory()->create();
+        $productPropertyValue = ProductPropertyValue::factory()->create();
 
-        $response = $this->get(route('admin.categories.show', $category));
+        $response = $this->get(route('admin.product-property-values.show', $productPropertyValue));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('admin::pages.categories.show');
-        $response->assertViewHas('category', $category);
+        $response->assertViewIs('admin::pages.products.property-values.show');
+        $response->assertViewHas('productPropertyValue', $productPropertyValue);
     }
 
     /**
@@ -38,7 +38,7 @@ class ShowCategoriesTest extends TestCase
     {
         $nonExistingSlug = Str::slug($this->faker->name);
 
-        $response = $this->get(route('admin.categories.show', $nonExistingSlug));
+        $response = $this->get(route('admin.product-property-values.show', $nonExistingSlug));
 
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }

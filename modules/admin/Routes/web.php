@@ -3,6 +3,10 @@
 use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\Categories\CategoryController;
+use Modules\Admin\Http\Controllers\Products\ProductController;
+use Modules\Admin\Http\Controllers\Products\ProductPropertyController;
+use Modules\Admin\Http\Controllers\Products\ProductPropertyValueController;
+use Modules\Admin\Http\Controllers\Products\ProductVariantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +29,10 @@ Route::middleware(['auth:sanctum', 'verified', 'auth.admin'])->get('/dashboard',
 
 Route::resources([
     'categories' => CategoryController::class,
+    'products' => ProductController::class,
+    'product-variants' =>  ProductVariantController::class,
+    'product-properties' =>  ProductPropertyController::class,
+    'product-property-values' =>  ProductPropertyValueController::class,
 ]);
 
 Route::resource('users', UserController::class)->except('create', 'store');

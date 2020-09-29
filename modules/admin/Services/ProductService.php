@@ -2,11 +2,12 @@
 
 namespace Modules\Admin\Services;
 
-use App\Models\Category;
+use App\Models\Product;
+use App\Models\ProductVariant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class CategoryService
+class ProductService
 {
     /**
      * Get a listing of the models.
@@ -15,35 +16,38 @@ class CategoryService
      */
     public function getAll()
     {
-        return Category::all();
+        return Product::all();
     }
 
     /**
      * Get the specified model by its id.
      *
-     * @param int $categoryId
-     * @return \App\Models\Category
+     * @param int $productId
+     * @return \App\Models\Product
      */
-    public function getById($categoryId)
+    public function getById($productId)
     {
-        return Category::where('id', $categoryId)->firstOrFail();
+        return Product::where('id', $productId)->firstOrFail();
     }
 
     /**
      * Create the specified model in storage.
      *
      * @param array $validated
-     * @return \App\Models\Category
+     * @return \App\Models\Product
      */
     public function create(array $validated)
     {
         DB::beginTransaction();
 
         try {
-            $category = new Category;
-            $category->name = $validated['name'];
-            $category->slug = $validated['slug'];
-            $category->save();
+            $product = new Product;
+
+            $product->name = $validated['name'];
+            $product->slug = $validated['slug'];
+            $product->description = $validated['description'];
+            $product->featured = $validated['featured'];
+            $product->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -53,24 +57,26 @@ class CategoryService
 
         DB::commit();
 
-        return $category;
+        return $product;
     }
 
     /**
       * Update the specified model in storage.
      *
      * @param array $validated
-     * @param \App\Models\Category $category
-     * @return \App\Models\Category
+     * @param \App\Models\Product $product
+     * @return \App\Models\Product
      */
-    public function update(array $validated, Category $category)
+    public function update(array $validated, Product $product)
     {
         DB::beginTransaction();
 
         try {
-            $category->name = $validated['name'];
-            $category->slug = $validated['slug'];
-            $category->save();
+            $product->name = $validated['name'];
+            $product->slug = $validated['slug'];
+            $product->description = $validated['description'];
+            $product->featured = $validated['featured'];
+            $product->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -80,21 +86,21 @@ class CategoryService
 
         DB::commit();
 
-        return $category;
+        return $product;
     }
 
     /**
      * Delete the specified model from storage.
      *
-     * @param \App\Models\Category $category
+     * @param \App\Models\Product $product
      * @return void
      */
-    public function delete(Category $category)
+    public function delete(Product $product)
     {
         DB::beginTransaction();
 
         try {
-            $category->delete();
+            $product->delete();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());

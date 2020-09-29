@@ -3,8 +3,8 @@
 namespace Tests\Modules\Admin\Feature;
 
 use App\Models\Admin;
-use App\Models\Category;
 use App\Models\Customer;
+use App\Models\ProductPropertyValue;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -12,7 +12,7 @@ use JMac\Testing\Traits\AdditionalAssertions;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class UpdateCategoriesTest extends TestCase
+class UpdateProductPropertyValuesTest extends TestCase
 {
     use RefreshDatabase, AdditionalAssertions, WithFaker;
 
@@ -25,13 +25,13 @@ class UpdateCategoriesTest extends TestCase
     {
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
-        $category = Category::factory()->create();
+        $productPropertyValue = ProductPropertyValue::factory()->create();
 
-        $response = $this->get(route('admin.categories.edit', $category));
+        $response = $this->get(route('admin.product-property-values.edit', $productPropertyValue));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('admin::pages.categories.edit');
-        $response->assertViewHas('category', $category);
+        $response->assertViewIs('admin::pages.products.property-values.edit');
+        $response->assertViewHas('productPropertyValue', $productPropertyValue);
     }
 
 
@@ -43,9 +43,9 @@ class UpdateCategoriesTest extends TestCase
     public function test_update_uses_form_request_validation()
     {
         $this->assertActionUsesFormRequest(
-            \Modules\Admin\Http\Controllers\Categories\CategoryController::class,
+            \Modules\Admin\Http\Controllers\Products\ProductPropertyValueController::class,
             'update',
-            \Modules\Admin\Http\Requests\Categories\CategoryUpdateRequest::class
+            \Modules\Admin\Http\Requests\Products\PropertyValues\ProductPropertyValueUpdateRequest::class
         );
     }
 
@@ -59,22 +59,21 @@ class UpdateCategoriesTest extends TestCase
     {
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
-        $category = Category::factory()->create();
+        $productPropertyValue = ProductPropertyValue::factory()->create();
         $expected = [
-            'name' => $this->faker->name,
+            'value' => $this->faker->name,
         ];
-        $expected['slug'] = Str::slug($expected['name']);
 
-        $response = $this->put(route('admin.categories.update', $category), [
-            'name' => $expected['name']
+        $response = $this->put(route('admin.product-property-values.update', $productPropertyValue), [
+            'value' => $expected['value']
         ]);
-        $category->fresh();
+        $productPropertyValue->fresh();
 
-        $response->assertRedirect(route('admin.categories.index'));
-        $response->assertSessionHas('category.id', $category->id);
-        $this->assertDatabaseHas('categories', [
-            'name' => $expected['name'],
-            'slug' => $expected['slug'],
+
+        $response->assertRedirect(route('admin.product-property-values.index'));
+        $response->assertSessionHas('productPropertyValue.id', $productPropertyValue->id);
+        $this->assertDatabaseHas('product_property_values', [
+            'value' => $expected['value'],
         ]);
     }
 
@@ -87,9 +86,9 @@ class UpdateCategoriesTest extends TestCase
     {
         $customerUser = Customer::factory()->create();
         $this->actingAs($customerUser->user);
-        $category = Category::factory()->create();
+        $productProperty = ProductPropertyValue::factory()->create();
 
-        $response = $this->put(route('admin.categories.update', $category), []);
+        $response = $this->put(route('admin.product-property-values.update', $productProperty), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -101,9 +100,9 @@ class UpdateCategoriesTest extends TestCase
      */
     public function test_update_doesnt_updates_for_non_authenticated_users()
     {
-        $category = Category::factory()->create();
+        $productProperty = ProductPropertyValue::factory()->create();
 
-        $response = $this->put(route('admin.categories.update', $category), []);
+        $response = $this->put(route('admin.product-property-values.update', $productProperty), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

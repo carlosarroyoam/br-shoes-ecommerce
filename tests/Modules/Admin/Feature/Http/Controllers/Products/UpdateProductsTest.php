@@ -3,8 +3,8 @@
 namespace Tests\Modules\Admin\Feature;
 
 use App\Models\Admin;
-use App\Models\Category;
 use App\Models\Customer;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
@@ -12,9 +12,10 @@ use JMac\Testing\Traits\AdditionalAssertions;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class UpdateCategoriesTest extends TestCase
+class UpdateProductsTest extends TestCase
 {
     use RefreshDatabase, AdditionalAssertions, WithFaker;
+
 
     /**
      * The route displays the view.
@@ -25,13 +26,13 @@ class UpdateCategoriesTest extends TestCase
     {
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
-        $category = Category::factory()->create();
+        $product = Product::factory()->create();
 
-        $response = $this->get(route('admin.categories.edit', $category));
+        $response = $this->get(route('admin.products.edit', $product));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('admin::pages.categories.edit');
-        $response->assertViewHas('category', $category);
+        $response->assertViewIs('admin::pages.products.edit');
+        $response->assertViewHas('product');
     }
 
 
@@ -43,9 +44,9 @@ class UpdateCategoriesTest extends TestCase
     public function test_update_uses_form_request_validation()
     {
         $this->assertActionUsesFormRequest(
-            \Modules\Admin\Http\Controllers\Categories\CategoryController::class,
+            \Modules\Admin\Http\Controllers\Products\ProductController::class,
             'update',
-            \Modules\Admin\Http\Requests\Categories\CategoryUpdateRequest::class
+            \Modules\Admin\Http\Requests\Products\ProductUpdateRequest::class
         );
     }
 
@@ -59,24 +60,30 @@ class UpdateCategoriesTest extends TestCase
     {
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
-        $category = Category::factory()->create();
+        $product = Product::factory()->create();
         $expected = [
             'name' => $this->faker->name,
+            'description' => $this->faker->text,
+            'featured' => $this->faker->boolean,
         ];
         $expected['slug'] = Str::slug($expected['name']);
 
-        $response = $this->put(route('admin.categories.update', $category), [
-            'name' => $expected['name']
+        $response = $this->put(route('admin.products.update', $product), [
+            'name' => $expected['name'],
+            'description' => $expected['description'],
+            'featured' => $expected['featured'],
         ]);
-        $category->fresh();
 
-        $response->assertRedirect(route('admin.categories.index'));
-        $response->assertSessionHas('category.id', $category->id);
-        $this->assertDatabaseHas('categories', [
+        $response->assertRedirect(route('admin.products.index'));
+        $response->assertSessionHas('product.id', $product->id);
+        $this->assertDatabaseHas('products', [
             'name' => $expected['name'],
             'slug' => $expected['slug'],
+            'description' => $expected['description'],
+            'featured' => $expected['featured'],
         ]);
     }
+
 
     /**
      * Update action doesn't updates for an authenticated non-admin user.
@@ -87,12 +94,13 @@ class UpdateCategoriesTest extends TestCase
     {
         $customerUser = Customer::factory()->create();
         $this->actingAs($customerUser->user);
-        $category = Category::factory()->create();
+        $product = Product::factory()->create();
 
-        $response = $this->put(route('admin.categories.update', $category), []);
+        $response = $this->put(route('admin.products.update', $product), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
+
 
     /**
      * Update action doesn't updates for an unauthenticated user.
@@ -101,9 +109,9 @@ class UpdateCategoriesTest extends TestCase
      */
     public function test_update_doesnt_updates_for_non_authenticated_users()
     {
-        $category = Category::factory()->create();
+        $product = Product::factory()->create();
 
-        $response = $this->put(route('admin.categories.update', $category), []);
+        $response = $this->put(route('admin.products.update', $product), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

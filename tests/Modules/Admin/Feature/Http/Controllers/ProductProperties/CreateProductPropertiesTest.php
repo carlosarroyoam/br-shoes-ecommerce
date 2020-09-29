@@ -3,17 +3,15 @@
 namespace Tests\Modules\Admin\Feature;
 
 use App\Models\Admin;
-use App\Models\Category;
 use App\Models\Customer;
+use App\Models\ProductProperty;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Str;
 use JMac\Testing\Traits\AdditionalAssertions;
 use Symfony\Component\HttpFoundation\Response;
-use Faker\Generator as Faker;
 use Tests\TestCase;
 
-class CreateCategoriesTest extends TestCase
+class CreateProductPropertiesTest extends TestCase
 {
     use RefreshDatabase, AdditionalAssertions, WithFaker;
 
@@ -28,10 +26,10 @@ class CreateCategoriesTest extends TestCase
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
 
-        $response = $this->get(route('admin.categories.create'));
+        $response = $this->get(route('admin.product-properties.create'));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('admin::pages.categories.create');
+        $response->assertViewIs('admin::pages.products.properties.create');
     }
 
 
@@ -43,9 +41,9 @@ class CreateCategoriesTest extends TestCase
     public function test_store_uses_form_request_validation()
     {
         $this->assertActionUsesFormRequest(
-            \Modules\Admin\Http\Controllers\Categories\CategoryController::class,
+            \Modules\Admin\Http\Controllers\Products\ProductPropertyController::class,
             'store',
-            \Modules\Admin\Http\Requests\Categories\CategoryStoreRequest::class
+            \Modules\Admin\Http\Requests\Products\Properties\ProductPropertyStoreRequest::class
         );
     }
 
@@ -57,27 +55,24 @@ class CreateCategoriesTest extends TestCase
      */
     public function test_store_saves_and_redirects_for_admin_users()
     {
-        $this->withoutExceptionHandling();
-        $adminUser = Admin::factory()->create();
-        $this->actingAs($adminUser->user);
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
         $expected = [
             'name' => $this->faker->name,
         ];
-        $expected['slug'] = Str::slug($expected['name']);
 
-        $response = $this->post(route('admin.categories.store'), [
+        $response = $this->post(route('admin.product-properties.store'), [
             'name' => $expected['name']
         ]);
-        $categories = Category::query()
+        $productProperties = ProductProperty::query()
             ->where('name', $expected['name'])
             ->get();
-        $category = $categories->first();
+        $productProperty = $productProperties->first();
 
-        $response->assertRedirect(route('admin.categories.index'));
-        $response->assertSessionHas('category.id', $category->id);
-        $this->assertDatabaseHas('categories', [
+        $response->assertRedirect(route('admin.product-properties.index'));
+        $response->assertSessionHas('productProperty.id', $productProperty->id);
+        $this->assertDatabaseHas('product_properties', [
             'name' => $expected['name'],
-            'slug' => $expected['slug'],
         ]);
     }
 
@@ -92,7 +87,7 @@ class CreateCategoriesTest extends TestCase
         $customerUser = Customer::factory()->create();
         $this->actingAs($customerUser->user);
 
-        $response = $this->post(route('admin.categories.store'), []);
+        $response = $this->post(route('admin.product-properties.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
@@ -105,7 +100,7 @@ class CreateCategoriesTest extends TestCase
      */
     public function test_store_doesnt_saves_for_non_authenticated_users()
     {
-        $response = $this->post(route('admin.categories.store'), []);
+        $response = $this->post(route('admin.product-properties.store'), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

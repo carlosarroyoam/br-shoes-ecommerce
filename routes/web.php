@@ -55,13 +55,10 @@ Route::get('/sitemap.xml/product', [SitemapController::class, 'products']);
 Route::get('/sitemap.xml/category', [SitemapController::class, 'categories']);
 Route::get('/sitemap.xml/collection', [SitemapController::class, 'collections']);
 
-Route::resources([
-    'products' => ProductController::class,
-    'product-variants' =>  ProductVariantController::class,
-    'product-properties' =>  ProductPropertyController::class,
-    'product-property-values' =>  ProductPropertyValueController::class,
+Route::resource('categories', CategoryController::class)->only([
+    'index', 'show'
 ]);
 
-Route::resource('categories', CategoryController::class)->only([
+Route::resource('products', ProductController::class)->only([
     'index', 'show'
 ]);

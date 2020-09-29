@@ -41,7 +41,7 @@ class CategoryController extends Controller
     {
         $categories = $this->categoryService->getAll();
 
-        return view('pages.categories.index', compact('categories'));
+        return view('admin::pages.categories.index', compact('categories'));
     }
 
     /**
@@ -52,7 +52,7 @@ class CategoryController extends Controller
      */
     public function create(Request $request)
     {
-        return view('pages.categories.create');
+        return view('admin::pages.categories.create');
     }
 
     /**
@@ -80,7 +80,7 @@ class CategoryController extends Controller
     public function show(Request $request, Category $category)
     {
         // $categoryById = $this->categoryService->getById($category);
-        return view('pages.categories.show', compact('category'));
+        return view('admin::pages.categories.show', compact('category'));
     }
 
     /**
@@ -91,7 +91,7 @@ class CategoryController extends Controller
      */
     public function edit(Request $request, Category $category)
     {
-        return view('pages.categories.edit', compact('category'));
+        return view('admin::pages.categories.edit', compact('category'));
     }
 
     /**

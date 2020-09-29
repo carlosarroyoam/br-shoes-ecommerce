@@ -2,11 +2,11 @@
 
 namespace Modules\Admin\Services;
 
-use App\Models\Category;
+use App\Models\ProductVariant;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class CategoryService
+class ProductVariantService
 {
     /**
      * Get a listing of the models.
@@ -15,35 +15,39 @@ class CategoryService
      */
     public function getAll()
     {
-        return Category::all();
+        return ProductVariant::all();
     }
 
     /**
      * Get the specified model by its id.
      *
-     * @param int $categoryId
-     * @return \App\Models\Category
+     * @param int $productVariantId
+     * @return \App\Models\ProductVariant
      */
-    public function getById($categoryId)
+    public function getById($productVariantId)
     {
-        return Category::where('id', $categoryId)->firstOrFail();
+        return ProductVariant::where('id', $productVariantId)->firstOrFail();
     }
 
     /**
      * Create the specified model in storage.
      *
      * @param array $validated
-     * @return \App\Models\Category
+     * @return \App\Models\ProductVariant
      */
     public function create(array $validated)
     {
         DB::beginTransaction();
 
         try {
-            $category = new Category;
-            $category->name = $validated['name'];
-            $category->slug = $validated['slug'];
-            $category->save();
+            $productVariant = new ProductVariant;
+            $productVariant->product_id = $validated['product_id'];
+            $productVariant->price = $validated['price'];
+            $productVariant->comparte_at_price = $validated['comparte_at_price'];
+            $productVariant->cost_per_item = $validated['cost_per_item'];
+            $productVariant->quantity_on_stock = $validated['quantity_on_stock'];
+            $productVariant->is_master = $validated['is_master'];
+            $productVariant->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -53,24 +57,26 @@ class CategoryService
 
         DB::commit();
 
-        return $category;
+        return $productVariant;
     }
 
     /**
       * Update the specified model in storage.
      *
      * @param array $validated
-     * @param \App\Models\Category $category
-     * @return \App\Models\Category
+     * @param \App\Models\ProductVariant $productVariant
+     * @return \App\Models\ProductVariant
      */
-    public function update(array $validated, Category $category)
+    public function update(array $validated, ProductVariant $productVariant)
     {
         DB::beginTransaction();
 
         try {
-            $category->name = $validated['name'];
-            $category->slug = $validated['slug'];
-            $category->save();
+            $productVariant->price = $validated['price'];
+            $productVariant->comparte_at_price = $validated['comparte_at_price'];
+            $productVariant->cost_per_item = $validated['cost_per_item'];
+            $productVariant->quantity_on_stock = $validated['quantity_on_stock'];
+            $productVariant->save();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -80,21 +86,21 @@ class CategoryService
 
         DB::commit();
 
-        return $category;
+        return $productVariant;
     }
 
     /**
      * Delete the specified model from storage.
      *
-     * @param \App\Models\Category $category
+     * @param \App\Models\ProductVariant $productVariant
      * @return void
      */
-    public function delete(Category $category)
+    public function delete(ProductVariant $productVariant)
     {
         DB::beginTransaction();
 
         try {
-            $category->delete();
+            $productVariant->delete();
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());

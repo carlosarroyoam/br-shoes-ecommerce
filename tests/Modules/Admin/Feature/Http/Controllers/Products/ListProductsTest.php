@@ -2,13 +2,13 @@
 
 namespace Tests\Modules\Admin\Feature;
 
-use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class ListCategoriesTest extends TestCase
+class ListProductsTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -19,12 +19,12 @@ class ListCategoriesTest extends TestCase
      */
     public function test_index_displays_view()
     {
-        $categories = Category::factory()->count(5)->create();
+        $products = Product::factory()->count(5)->create();
 
-        $response = $this->get(route('admin.categories.index'));
+        $response = $this->get(route('admin.products.index'));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('admin::pages.categories.index');
-        $response->assertViewHas('categories');
+        $response->assertViewIs('admin::pages.products.index');
+        $response->assertViewHas('products');
     }
 }

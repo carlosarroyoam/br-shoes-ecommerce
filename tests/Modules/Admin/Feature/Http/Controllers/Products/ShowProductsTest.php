@@ -2,14 +2,14 @@
 
 namespace Tests\Modules\Admin\Feature;
 
-use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class ShowCategoriesTest extends TestCase
+class ShowProductsTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
@@ -20,13 +20,13 @@ class ShowCategoriesTest extends TestCase
      */
     public function test_show_displays_view()
     {
-        $category = Category::factory()->create();
+        $product = Product::factory()->create();
 
-        $response = $this->get(route('admin.categories.show', $category));
+        $response = $this->get(route('admin.products.show', $product->slug));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('admin::pages.categories.show');
-        $response->assertViewHas('category', $category);
+        $response->assertViewIs('admin::pages.products.show');
+        $response->assertViewHas('product');
     }
 
     /**
@@ -34,11 +34,11 @@ class ShowCategoriesTest extends TestCase
      *
      * @return void
      */
-    public function test_show_doesnt_display_view_if_resource_doesnt_exist()
+    public function test_a_user_cannot_get_a_product_if_doesnt_exists()
     {
         $nonExistingSlug = Str::slug($this->faker->name);
 
-        $response = $this->get(route('admin.categories.show', $nonExistingSlug));
+        $response = $this->get(route('products.show', $nonExistingSlug));
 
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }
