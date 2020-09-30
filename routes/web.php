@@ -23,7 +23,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('', function () {
     SEOMeta::setTitle(__('navigation.home'));
-    Log::error('test error from laravel');
     return view('pages.home');
 })->name('home');
 
