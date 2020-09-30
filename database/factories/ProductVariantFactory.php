@@ -23,13 +23,14 @@ class ProductVariantFactory extends Factory
         */
     public function definition()
     {
-        $price = $this->faker->randomNumber();
+        $price = $this->faker->numberBetween(1000, 999999);
+
         return [
             'product_id' => Product::factory()->create(),
             'price' => $price,
-            'compare_at_price' => $price + 15000,
-            'cost_per_item' => $this->faker->randomNumber(),
-            'quantity_on_stock' => $this->faker->randomNumber(),
+            'compared_at_price' => $price + 15000,
+            'cost_per_item' => $price - 100,
+            'quantity_on_stock' => $this->faker->numberBetween(1, 999),
         ];
     }
 }

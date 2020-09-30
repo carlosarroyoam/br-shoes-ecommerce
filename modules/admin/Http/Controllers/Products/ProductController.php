@@ -35,35 +35,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $this->seo()->setTitle(__('navigation.products'));
-
         $products = $this->productService->getAll();
 
         return view('admin::pages.products.index', compact('products'));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function newest()
-    {
-        $this->seo()->setTitle(__('navigation.newest'));
-
-        return view('admin::pages.products.index', ['name' => __('navigation.newest')]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function offers()
-    {
-        $this->seo()->setTitle(__('navigation.offers'));
-
-        return view('admin::pages.products.index', ['name' => __('navigation.offers')]);
     }
 
     /**
@@ -99,9 +73,6 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $this->seo()->setTitle($product->name);
-        $this->seo()->setDescription($product->description);
-
         return view('admin::pages.products.show', compact('product'));
     }
 

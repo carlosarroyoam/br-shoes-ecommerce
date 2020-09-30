@@ -17,7 +17,7 @@ class CreateProductVariantsTable extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->unsignedInteger('price')->default(0);
-            $table->unsignedInteger('comparte_at_price')->default(0);
+            $table->unsignedInteger('compared_at_price')->default(0);
             $table->unsignedInteger('cost_per_item')->default(0);
             $table->unsignedSmallInteger('quantity_on_stock')->default(0);
             $table->timestamps();

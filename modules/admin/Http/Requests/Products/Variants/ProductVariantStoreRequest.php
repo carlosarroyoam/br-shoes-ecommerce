@@ -15,9 +15,8 @@ class ProductVariantStoreRequest extends FormRequest
     {
         return [
             'product_id' => ['required', 'integer', 'gt:0'],
-            'is_master' => ['nullable'],
             'price' => ['nullable', 'integer'],
-            'comparte_at_price' => ['nullable', 'integer'],
+            'compared_at_price' => ['nullable', 'integer'],
             'cost_per_item' => ['nullable', 'integer'],
             'quantity_on_stock' => ['nullable', 'integer'],
         ];

@@ -7,16 +7,34 @@ use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 use Modules\Admin\Http\Requests\Products\Variants\ProductVariantStoreRequest;
 use Modules\Admin\Http\Requests\Products\Variants\ProductVariantUpdateRequest;
+use Modules\Admin\Services\ProductVariantService;
 
 class ProductVariantController extends Controller
 {
+    /**
+     * The product variant service instance.
+     */
+    protected $productVariantService;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @param  \Modules\Admin\Services\ProductVariantService  $productVariantService
+     * @return void
+     */
+    public function __construct(ProductVariantService $productVariantService)
+    {
+        $this->authorizeResource(ProductVariant::class, 'product_variant');
+        $this->productVariantService = $productVariantService;
+    }
+
     /**
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $productVariants = ProductVariant::all();
+        $productsVariants = $this->productVariantService->getAll();
 
         return view('admin::pages.products.variants.index', compact('productVariants'));
     }
@@ -31,12 +49,12 @@ class ProductVariantController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\Products\ProductVariantStoreRequest $request
+     * @param \App\Models\Http\Requests\Products\ProductVariantStoreRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(ProductVariantStoreRequest $request)
     {
-        $productVariant = ProductVariant::create($request->validated());
+        $productVariant = $this->productVariantService->create($request->validated());
 
         $request->session()->flash('productVariant.id', $productVariant->id);
 
@@ -45,7 +63,7 @@ class ProductVariantController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\ProductVariant $productVariant
+     * @param \App\Models\ProductVariant $productVariant
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, ProductVariant $productVariant)
@@ -55,7 +73,7 @@ class ProductVariantController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\ProductVariant $productVariant
+     * @param \App\Models\ProductVariant $productVariant
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, ProductVariant $productVariant)
@@ -64,27 +82,27 @@ class ProductVariantController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\Products\ProductVariantUpdateRequest $request
-     * @param \App\ProductVariant $productVariant
+     * @param \App\Models\Http\Requests\Products\ProductVariantUpdateRequest $request
+     * @param \App\Models\ProductVariant $productVariant
      * @return \Illuminate\Http\Response
      */
     public function update(ProductVariantUpdateRequest $request, ProductVariant $productVariant)
     {
-        $productVariant->update($request->validated());
+        $udpatedProductVariant = $this->productVariantService->udpate($request->validated(), $productVariant);
 
-        $request->session()->flash('productVariant.id', $productVariant->id);
+        $request->session()->flash('productVariant.id', $udpatedProductVariant->id);
 
         return redirect()->route('admin.product-variants.index');
     }
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @param \App\ProductVariant $productVariant
+     * @param \App\Models\ProductVariant $productVariant
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, ProductVariant $productVariant)
     {
-        $productVariant->delete();
+        $this->productVariantService->delete($productVariant);
 
         return redirect()->route('admin.product-variants.index');
     }
