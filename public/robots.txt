@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://br-shoes.com.mx/sitemap.xml
