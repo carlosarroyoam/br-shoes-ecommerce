@@ -2,7 +2,7 @@
     <div class="container lg:flex lg:items-center lg:justify-between" x-data="{ open: false }">
         <div class="flex items-center justify-between ">
             <a href=" {{ route('home') }}"
-                class="px-4 py-2 text-xl font-medium uppercase rounded-sm text-header-secondary hover:text-header focus:outline-none focus:shadow-outline focus:text-body md:text-2xl">
+                class="py-2 pr-4 text-xl font-medium uppercase rounded-sm text-header-secondary hover:text-header focus:outline-none focus:shadow-outline focus:text-body md:text-2xl">
                 {{ config('global_constants.app_name', 'BR Shoes') }}
             </a>
 

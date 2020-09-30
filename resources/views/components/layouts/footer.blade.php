@@ -1,46 +1,6 @@
 <footer class="text-gray-700 bg-background footer">
     {{-- Upper footer section --}}
     <div class="container flex flex-wrap order-first pt-16">
-        {{-- Operative info section --}}
-        <div class="w-full lg:w-1/4 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">INFORMACIÓN OPERATIVA</h2>
-            <nav class="mb-10 list-none md:mb-0">
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Envíos</a>
-                </li>
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Medios de
-                        pago</a>
-                </li>
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Horario</a>
-                </li>
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Garantía</a>
-                </li>
-            </nav>
-        </div>
-
-        {{-- Legal info section --}}
-        <div class="w-full lg:w-1/4 md:w-1/2">
-            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">INFORMACIÓN LEGAL</h2>
-            <nav class="mb-10 list-none lg:mb-0">
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Términos y
-                        Condiciones</a>
-                </li>
-                <li>
-                    <a href="{{ route('home') }}"
-                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Política de
-                        protección de datos</a>
-                </li>
-            </nav>
-        </div>
 
         {{-- Categories section --}}
         <div class="w-full lg:w-1/4 md:w-1/2">
@@ -89,6 +49,46 @@
             </nav>
         </div>
 
+        {{-- Operative info section --}}
+        <div class="w-full lg:w-1/4 md:w-1/2">
+            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">INFORMACIÓN OPERATIVA</h2>
+            <nav class="mb-10 list-none md:mb-0">
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Envíos</a>
+                </li>
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Medios de
+                        pago</a>
+                </li>
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Horario</a>
+                </li>
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Garantía</a>
+                </li>
+            </nav>
+        </div>
+
+        {{-- Legal info section --}}
+        <div class="w-full lg:w-1/4 md:w-1/2">
+            <h2 class="mb-3 text-sm font-medium tracking-widest uppercase text-header">INFORMACIÓN LEGAL</h2>
+            <nav class="mb-10 list-none lg:mb-0">
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Términos y
+                        Condiciones</a>
+                </li>
+                <li>
+                    <a href="{{ route('home') }}"
+                        class="text-body-secondary hover:text-body focus:outline-none focus:text-body">Política de
+                        protección de datos</a>
+                </li>
+            </nav>
+        </div>
     </div>
 
     {{-- Middle footer section --}}
