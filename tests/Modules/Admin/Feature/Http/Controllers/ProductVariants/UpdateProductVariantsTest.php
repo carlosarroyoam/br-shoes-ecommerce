@@ -3,84 +3,80 @@
 namespace Tests\Modules\Admin\Feature;
 
 use App\Models\Admin;
-use App\Models\Product;
-use App\Models\ProductVariant;
 use App\Models\Customer;
+use App\Models\ProductVariant;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use JMac\Testing\Traits\AdditionalAssertions;
 use Symfony\Component\HttpFoundation\Response;
-use Faker\Generator as Faker;
 use Tests\TestCase;
 
-class CreateProductVariantsTest extends TestCase
+class UpdateProductVariantsTest extends TestCase
 {
     use RefreshDatabase, AdditionalAssertions, WithFaker;
-
 
     /**
      * The route displays the view.
      *
      * @return void
      */
-    public function test_create_displays_view()
+    public function test_edit_displays_view()
     {
         $admin = Admin::factory()->create();
         $this->actingAs($admin->user);
+        $productVariant = ProductVariant::factory()->create();
 
-        $response = $this->get(route('admin.product-variants.create'));
+        $response = $this->get(route('admin.product-variants.edit', $productVariant));
 
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertViewIs('admin::pages.products.variants.create');
+        $response->assertViewIs('admin::pages.products.variants.edit');
+        $response->assertViewHas('productVariant', $productVariant);
     }
 
 
     /**
-     * The store action in the controller uses form request validation.
+     * The update action in the controller uses form request validation.
      *
      * @return void
      */
-    public function test_store_uses_form_request_validation()
+    public function test_update_uses_form_request_validation()
     {
         $this->assertActionUsesFormRequest(
             \Modules\Admin\Http\Controllers\Products\ProductVariantController::class,
-            'store',
-            \Modules\Admin\Http\Requests\Products\Variants\ProductVariantStoreRequest::class
+            'update',
+            \Modules\Admin\Http\Requests\Products\Variants\ProductVariantUpdateRequest::class
         );
     }
 
 
     /**
-     * Store action saves and redirects to index for an admin user.
+     * Update action updates and redirects to index for an admin user.
      *
      * @return void
      */
-    public function test_store_saves_and_redirects_for_admin_users()
+    public function test_update_updates_and_redirects_for_admin_users()
     {
-        $adminUser = Admin::factory()->create();
-        $this->actingAs($adminUser->user);
-        $product = Product::factory()->create();
+        $admin = Admin::factory()->create();
+        $this->actingAs($admin->user);
+        $productVariant = ProductVariant::factory()->create();
         $price = $this->faker->numberBetween(1000, 999999);
         $expected = [
-            'product_id' => $product->id,
+            'product_id' => $productVariant->product->id,
             'price' => $price,
             'compared_at_price' => $price + 15000,
             'cost_per_item' => $price - 100,
             'quantity_on_stock' => $this->faker->numberBetween(1, 999),
         ];
 
-        $response = $this->post(route('admin.product-variants.store'), [
+        $response = $this->put(route('admin.product-variants.update', $productVariant), [
             'product_id' => $expected['product_id'],
             'price' => $expected['price'],
             'compared_at_price' => $expected['compared_at_price'],
             'cost_per_item' => $expected['cost_per_item'],
             'quantity_on_stock' => $expected['quantity_on_stock'],
         ]);
-        $productVariants = ProductVariant::query()
-            ->where('product_id', $expected['product_id'])
-            ->get();
-        $productVariant = $productVariants->first();
+        $productVariant->fresh();
 
         $response->assertRedirect(route('admin.product-variants.index'));
         $response->assertSessionHas('productVariant.id', $productVariant->id);
@@ -93,31 +89,32 @@ class CreateProductVariantsTest extends TestCase
         ]);
     }
 
-
     /**
-     * Store action doesn't save for an authenticated non-admin user.
+     * Update action doesn't updates for an authenticated non-admin user.
      *
      * @return void
      */
-    public function test_store_doesnt_saves_for_non_admin_users()
+    public function test_udpate_doesnt_updates_for_non_admin_users()
     {
         $customerUser = Customer::factory()->create();
         $this->actingAs($customerUser->user);
+        $productVariant = ProductVariant::factory()->create();
 
-        $response = $this->post(route('admin.product-variants.store'), []);
+        $response = $this->put(route('admin.product-variants.update', $productVariant), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
-
     /**
-     * Store action doesn't save for an unauthenticated user.
+     * Update action doesn't updates for an unauthenticated user.
      *
      * @return void
      */
-    public function test_store_doesnt_saves_for_non_authenticated_users()
+    public function test_update_doesnt_updates_for_non_authenticated_users()
     {
-        $response = $this->post(route('admin.product-variants.store'), []);
+        $productVariant = ProductVariant::factory()->create();
+
+        $response = $this->put(route('admin.product-variants.update', $productVariant), []);
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }

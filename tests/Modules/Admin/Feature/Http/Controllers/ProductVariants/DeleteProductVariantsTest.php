@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class DeleteProductVariantTest extends TestCase
+class DeleteProductVariantsTest extends TestCase
 {
     use RefreshDatabase;
 

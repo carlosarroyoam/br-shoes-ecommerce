@@ -34,7 +34,7 @@ class ProductVariantController extends Controller
      */
     public function index(Request $request)
     {
-        $productsVariants = $this->productVariantService->getAll();
+        $productVariants = $this->productVariantService->getAll();
 
         return view('admin::pages.products.variants.index', compact('productVariants'));
     }
@@ -49,7 +49,7 @@ class ProductVariantController extends Controller
     }
 
     /**
-     * @param \App\Models\Http\Requests\Products\ProductVariantStoreRequest $request
+     * @param \App\Models\Http\Requests\Products\Variants\ProductVariantStoreRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(ProductVariantStoreRequest $request)
@@ -82,13 +82,13 @@ class ProductVariantController extends Controller
     }
 
     /**
-     * @param \App\Models\Http\Requests\Products\ProductVariantUpdateRequest $request
+     * @param \App\Models\Http\Requests\Products\Variants\ProductVariantUpdateRequest $request
      * @param \App\Models\ProductVariant $productVariant
      * @return \Illuminate\Http\Response
      */
     public function update(ProductVariantUpdateRequest $request, ProductVariant $productVariant)
     {
-        $udpatedProductVariant = $this->productVariantService->udpate($request->validated(), $productVariant);
+        $udpatedProductVariant = $this->productVariantService->update($request->validated(), $productVariant);
 
         $request->session()->flash('productVariant.id', $udpatedProductVariant->id);
 
