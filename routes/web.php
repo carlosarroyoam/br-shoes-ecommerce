@@ -7,6 +7,7 @@ use App\Http\Controllers\Products\ProductPropertyValueController;
 use App\Http\Controllers\Products\ProductVariantController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\Users\UserController;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('', function () {
     SEOMeta::setTitle(__('navigation.home'));
+    Log::error('test error from laravel');
     return view('pages.home');
 })->name('home');
 
