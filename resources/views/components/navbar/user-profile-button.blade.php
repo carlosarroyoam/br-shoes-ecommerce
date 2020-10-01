@@ -3,7 +3,7 @@
     <button
         {{ $attributes->merge(['class' => 'block flex items-center w-10 h-10 overflow-hidden border-2 border-gray-500 rounded-full focus:outline-none focus:border-gray-600 hover:border-gray-600 selected:border-gray-600']) }}
         type="button" aria-label="toggle profile dropdown" x-on:click="open = true">
-        <img src="{{ Auth::user()->profile_photo_url }}"
+        <img src="{{ Auth::user()->profile_photo_path }}"
             alt="{{  __('profile photo.', ['username' => Auth::user()->full_name]) }}"
             class="object-cover w-full h-full">
     </button>

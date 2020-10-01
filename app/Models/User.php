@@ -81,6 +81,26 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the user's full name.
+     *
+     * @return string
+     */
+    public function getProfilePhotoPathAttribute()
+    {
+        return $this->profile_photo_path ?? $this->defaultProfilePhotoUrl();
+    }
+
+    /**
+     * Get the default profile photo URL if no profile photo has been uploaded.
+     *
+     * @return string
+     */
+    protected function defaultProfilePhotoUrl()
+    {
+        return 'https://ui-avatars.com/api/?name='.urlencode($this->full_name).'&background=0f536e&color=fff&format=svg';
+    }
+
+    /**
      * Get the owning typeable model.
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
