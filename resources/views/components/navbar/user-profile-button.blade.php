@@ -9,8 +9,8 @@
     </button>
 
     {{-- User profile dropdown --}}
-    <div class="absolute right-0 w-64 mt-2 overflow-hidden border border-gray-300 rounded-md shadow-md bg-background"
-        x-show="open" x-on:click.away="open = false">
+    <div class="absolute right-0 hidden w-64 mt-2 overflow-hidden border border-gray-300 rounded-md shadow-md bg-background"
+        x-bind:class="{ 'block': open, 'hidden': !open }" x-on:click.away="open = false">
         <a href="{{ route('users.profile') }}" class="block p-4 text-sm hover:text-gray-100 hover:bg-primary">
             {{ Auth::user()->full_name }}
         </a>

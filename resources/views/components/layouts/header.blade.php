@@ -20,8 +20,8 @@
         </div>
 
         {{-- Mobile Menu open: "block", Menu closed: "hidden" --}}
-        <nav class="flex-1 lg:flex lg:items-center lg:justify-between" x-bind:class="{ 'block': open, 'hidden': !open }"
-            x-on:click.away="open = false">
+        <nav class="flex-1 hidden lg:flex lg:items-center lg:justify-between"
+            x-bind:class="{ 'block': open, 'hidden': !open }" x-on:click.away="open = false">
             {{-- Navigation Links --}}
             <ul class="flex flex-col list-none lg:ml-10 lg:flex lg:flex-row lg:items-center">
                 <x-navbar.categories-dropdown>
