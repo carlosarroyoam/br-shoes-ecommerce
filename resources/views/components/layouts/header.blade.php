@@ -1,15 +1,15 @@
-<header class="fixed top-0 z-50 w-full py-3 border-b-2 shadow bg-background border-primary">
+<header class="fixed top-0 z-50 w-full py-3 border-b-2 shadow bg-surface border-primary">
     <div class="container lg:flex lg:items-center lg:justify-between" x-data="{ open: false }">
         <div class="flex items-center justify-between ">
             <a href=" {{ route('home') }}"
-                class="py-2 pr-4 text-xl font-medium uppercase rounded-sm text-header-secondary hover:text-header focus:outline-none focus:shadow-outline focus:text-body md:text-2xl">
+                class="py-2 pr-4 font-serif text-xl font-medium uppercase rounded-sm focus:outline-none focus:shadow-outline focus:text-body md:text-2xl">
                 {{ config('global_constants.app_name', 'BR Shoes') }}
             </a>
 
             {{-- Mobile menu button --}}
             <div class="flex lg:hidden">
-                <button type="button" class="text-body-secondary hover:text-body focus:outline-none focus:text-body"
-                    aria-label="toggle menu" x-on:click="open = true">
+                <button type="button" class="focus:outline-none focus:text-body" aria-label="toggle menu"
+                    x-on:click="open = true">
                     <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
                         <path fill-rule="evenodd"
                             d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">

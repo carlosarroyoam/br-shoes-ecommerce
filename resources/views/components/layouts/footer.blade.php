@@ -1,4 +1,4 @@
-<footer class="text-gray-700 bg-background footer">
+<footer class="text-gray-700 bg-surface">
     {{-- Upper footer section --}}
     <div class="container flex flex-wrap order-first pt-16">
 
@@ -128,11 +128,10 @@
     </div>
 
     {{-- Lower footer section --}}
-    <div class="bg-background-secondary">
+    <div class="bg-surface-secondary">
         <div class="container flex flex-col items-center py-6 sm:flex-row">
             <a href="{{ route('home') }}" class="flex flex-col items-start justify-center uppercase md:justify-start">
-                <span
-                    class="text-xl font-medium text-header-secondary hover:text-header focus:outline-none focus:text-body">
+                <span class="font-serif text-xl font-medium focus:outline-none focus:text-body">
                     {{ config('global_constants.app_name', 'BR Shoes') }}
                 </span>
                 <span class="text-xs text-body-secondary">
@@ -140,7 +139,7 @@
                 </span>
             </a>
 
-            <p class="mt-4 text-sm text-body-secondary sm:ml-8 sm:mt-0">
+            <p class="mt-4 text-sm sm:ml-8 sm:mt-0">
                 © {{ now()->year }}
                 {{ config('global_constants.app_name', 'BR Shoes') }}
                 —

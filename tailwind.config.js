@@ -1,45 +1,36 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+// tailwind.config.js
+const colors = require('tailwindcss/colors');
 
 module.exports = {
-    purge: ['./storage/framework/views/*.php', './resources/views/**/*.blade.php'],
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: [
-                    'Montserrat',
-                    'Open Sans',
-                ],
-            },
-            colors: {
-                background: 'var(--color-background)',
-                'background-secondary': 'var(--color-background-secondary)',
-                primary: 'var(--color-primary)',
-                'primary-hover': 'var(--color-primary-hover)',
-                'primary-disabled': 'var(--color-primary-disabled)',
-                secondary: 'var(--color-secondary)',
-                'secondary-hover': 'var(--color-secondary-hover)',
-                'secondary-disabled': 'var(--color-secondary-disabled)',
-                header: 'var(--color-text-header)',
-                'header-secondary': 'var(--color-text-header-secondary)',
-                body: 'var(--color-text-body)',
-                'body-secondary': 'var(--color-text-body-secondary)',
-            },
-            spacing: {
-                '22': '5.5rem',
-                '26': '7rem',
-            },
-            container: {
-                center: true,
-                padding: '1rem',
-            }
-        },
-    },
-    variants: {
-        opacity: ['responsive', 'hover', 'focus', 'disabled'],
-    },
-    plugins: [require('@tailwindcss/ui')],
-    future: {
-        removeDeprecatedGapUtilities: true,
-        purgeLayersByDefault: true,
-    },
+	purge: [
+		'./storage/framework/views/*.php',
+		'./resources/views/**/*.blade.php'
+	],
+	darkMode: false, // or 'media' or 'class'
+	theme: {
+		extend: {
+			fontFamily: {
+				serif: ['Prata', 'ui-serif', 'serif'],
+				sans: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif']
+			},
+			colors: {
+				primary: {
+					DEFAULT: '#013347',
+					hover: '#012b3b'
+				},
+				secondary: {
+					DEFAULT: ''
+				},
+				background: colors.gray[50],
+				surface: {
+					DEFAULT: colors.gray[100],
+					secondary: colors.gray[200]
+				}
+			},
+			container: {
+				center: true,
+				padding: '1rem'
+			}
+		}
+	}
 };

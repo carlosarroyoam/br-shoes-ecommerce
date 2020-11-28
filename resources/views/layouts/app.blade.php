@@ -20,13 +20,13 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" />
 </head>
 
-<body class="flex flex-col min-h-screen font-sans antialiased bg-background-secondary pt-26 theme-light">
+<body class="flex flex-col min-h-screen font-sans antialiased bg-background">
 
     <!-- App header -->
     <x-layouts.header />
 
     <!-- Page Content -->
-    <main class="container flex-grow pb-12">
+    <main class="container flex-grow pb-12 pt-28">
         {{ $slot }}
     </main>
 

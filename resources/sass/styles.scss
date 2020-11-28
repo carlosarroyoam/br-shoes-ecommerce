@@ -1,11 +1,7 @@
-// Abstracts
-@import 'abstracts/variables';
-
 // Base
-@import 'base/base';
 @import 'base/typography';
 
 // Vendors
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
